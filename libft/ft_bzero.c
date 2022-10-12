@@ -1,47 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 17:24:56 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/12 12:23:11 by echoukri         ###   ########.fr       */
+/*   Created: 2022/10/12 12:14:56 by echoukri          #+#    #+#             */
+/*   Updated: 2022/10/12 12:35:56 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "ft.h"
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-
-void    *ft_memset(void *b, int c, size_t len)
+void    ft_bzero(void *s, size_t n)
 {
     unsigned int index;
-    unsigned char *ptr;
+    char *ptr;
 
+    ptr=(char *)s;
     index = 0;
-    ptr =  (unsigned char*) b;
-    while (index < len)
+    while (index<n)
     {
-        *(ptr+index) = (unsigned char) c;
+        *(ptr+index)='\0';
         index++;
     }
-    return ptr;
 }
 
 int main()
 {
-    char ptrtostr1[6];
-    char ptrtostr2[6];
+    char *s1 = "lmfao";
+    char *s2 = "ahaha";
 
-    ptrtostr1[5]='\0';
-    ptrtostr2[5]='\0';
-
-
-    printf("memset: %s\n", memset(ptrtostr1, 'a', 5));
-    
-    printf("ft_memset: %s\n", ft_memset(ptrtostr2, 'a', 5));
-
+    ft_bzero(s1, 5);
+    bzero(s2, 5);
+    int index = 0;
+    while (index<5)
+    {
+        printf("%c\n%c",s1+index, s2+index);
+        index++;
+    }
     exit(0);
 }
