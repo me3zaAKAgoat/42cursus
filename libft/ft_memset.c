@@ -6,22 +6,22 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 17:24:56 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/12 12:23:11 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/12 17:14:59 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "ft.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#include "ft.h"
+// #include <stdlib.h>
+// #include <stdio.h>
+// #include <string.h>
 
 void    *ft_memset(void *b, int c, size_t len)
 {
     unsigned int index;
     unsigned char *ptr;
 
-    index = 0;
     ptr =  (unsigned char*) b;
+    index = 0;
     while (index < len)
     {
         *(ptr+index) = (unsigned char) c;
@@ -30,18 +30,18 @@ void    *ft_memset(void *b, int c, size_t len)
     return ptr;
 }
 
-int main()
-{
-    char ptrtostr1[6];
-    char ptrtostr2[6];
+// int main()
+// {
+//     char ptrtostr1[6];
+//     char ptrtostr2[6];
 
-    ptrtostr1[5]='\0';
-    ptrtostr2[5]='\0';
+//     ptrtostr1[5]='\0';
+//     ptrtostr2[5]='\0';
 
 
-    printf("memset: %s\n", memset(ptrtostr1, 'a', 5));
+//     printf("memset: %s\n", memset(ptrtostr1, 'a', 5));
     
-    printf("ft_memset: %s\n", ft_memset(ptrtostr2, 'a', 5));
+//     printf("ft_memset: %s\n", ft_memset(ptrtostr2, 'a', 5));
 
-    exit(0);
-}
+//     exit(0);
+// }
