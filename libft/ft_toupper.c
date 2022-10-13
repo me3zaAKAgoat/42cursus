@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 19:28:09 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/12 19:35:45 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:27:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
-
-int toupper(int c)
+int ft_toupper(int c)
 {
     if (65 <= c && c <= 90)
         return c + 32;

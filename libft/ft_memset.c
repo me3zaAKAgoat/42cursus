@@ -10,21 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
 // #include <stdlib.h>
 // #include <stdio.h>
 // #include <string.h>
 
-void    *ft_memset(void *b, int c, size_t len)
+void *ft_memset(void *b, int c, size_t len)
 {
     unsigned int index;
     unsigned char *ptr;
 
-    ptr =  (unsigned char*) b;
+    ptr = (unsigned char *)b;
     index = 0;
     while (index < len)
     {
-        *(ptr+index) = (unsigned char) c;
+        *(ptr + index) = (unsigned char)c;
         index++;
     }
     return ptr;
@@ -38,9 +37,8 @@ void    *ft_memset(void *b, int c, size_t len)
 //     ptrtostr1[5]='\0';
 //     ptrtostr2[5]='\0';
 
-
 //     printf("memset: %s\n", memset(ptrtostr1, 'a', 5));
-    
+
 //     printf("ft_memset: %s\n", ft_memset(ptrtostr2, 'a', 5));
 
 //     exit(0);

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 19:35:56 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/12 19:36:25 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:27:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "ft.h"
-
-int toupper(int c)
+int ft_tolower(int c)
 {
     if (97 <= c && c <= 122)
         return c - 32;

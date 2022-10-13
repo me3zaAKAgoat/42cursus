@@ -10,34 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
 // #include <stdlib.h>
 // #include <stdio.h>
 // #include <string.h>
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void *ft_memmove(void *dst, const void *src, size_t len)
 {
-	const unsigned char	*srcp;
-    unsigned	char	*dstp;
-    unsigned 	char	*tempp;
-    unsigned	int		index;
+	const unsigned char *srcp;
+	unsigned char *dstp;
+	unsigned char *tempp;
+	unsigned int index;
 
 	srcp = (const unsigned char *)src;
 	dstp = (unsigned char *)dst;
-	tempp = (unsigned char *)malloc(sizeof(unsigned char)*len);
-    if (tempp == NULL)
+	tempp = (unsigned char *)malloc(sizeof(unsigned char) * len);
+	if (tempp == NULL)
 		return NULL;
-    else {    
+	else
+	{
 		index = 0;
 		while (index < len)
-        {
-			*(tempp+index) = *(srcp+index);
+		{
+			*(tempp + index) = *(srcp + index);
 			index++;
 		}
 		index = 0;
 		while (index < len)
 		{
-			*(dstp+index) = *(tempp+index);
+			*(dstp + index) = *(tempp + index);
 			index++;
 		}
 		free(tempp);
