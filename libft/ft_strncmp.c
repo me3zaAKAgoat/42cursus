@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 12:21:20 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/14 13:06:41 by echoukri         ###   ########.fr       */
+/*   Created: 2022/10/14 13:17:48 by echoukri          #+#    #+#             */
+/*   Updated: 2022/10/14 13:20:46 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
-
-size_t	ft_strlcat(char *dst, char *src, size_t size)
-{
+int	ft_strncmp(char *s1, char *s2, unsigned int n)
+{	
 	unsigned int	i;
-	unsigned int	j;
-	unsigned int	returnvalue;
-    unsigned int    dstl;
-    unsigned int    srcl;
 
-    dstl = ft_strlen(dst);
-    srcl = ft_strlen(src); 
-	if (size<dstl)
-        return (size+srcl);
 	i = 0;
-	j = 0;
-    else
-	{
-		while (dst[i])
-			i++;
-		while (src[j] && i <= size - 2)
-			dst[i++] = src[j++];
-		dst[i + 1] = '\0';
-	}
-	return (dstl+srcl);
+	if (n == 0)
+		return (0);
+	while (s1[i] && s1[i] == s2[i] && i < n - 1)
+		i++;
+	return (s1[i] - s2[i]);
 }
