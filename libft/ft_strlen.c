@@ -6,13 +6,13 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 17:21:36 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/11 17:24:22 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/14 12:46:48 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_strlen(const char *s)
+unsigned long ft_strlen(const char *s)
 {
-    int len;
+    unsigned long len;
 
     len = 0;
     while (s[len])

@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 18:32:20 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/14 12:12:21 by echoukri         ###   ########.fr       */
+/*   Created: 2022/10/14 12:21:20 by echoukri          #+#    #+#             */
+/*   Updated: 2022/10/14 12:45:31 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-unsigned long ft_strlcpy(char * restrict dst, const char * restrict src, unsigned long dstsize)
+unsigned long	ft_strlcat(char *dst, char *src, unsigned long size)
 {
-    unsigned int	index;
-	
-	srcl = ft_strlen(src);
-	index = 0;
-	if (dstsize)
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	returnvalue;
+    unsigned int    dstl;
+    unsigned int    srcl;
+
+    dstl = ft_strlen(dst);
+    srcl = ft_strlen(src); 
+	if (size<dstl)
+        return (size+srcl);
+	i = 0;
+	j = 0;
+    else
 	{
-		while (src[index])
-		{
-			if (index <= dstsize - 2)
-			{
-				dst[index] = src[index];
-				index++;
-			}
-			else
-				break ;
-		}
-		dst[index] = '\0';
+		while (dst[i])
+			i++;
+		while (src[j] && i <= size - 2)
+			dst[i++] = src[j++];
+		dst[i + 1] = '\0';
 	}
-	return (srcl);
+	return (dstl+srcl);
 }
