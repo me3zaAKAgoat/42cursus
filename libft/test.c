@@ -3,10 +3,9 @@
 #include <string.h>
 int main()
 {
-    char str1[] = "lmfao";
-    char str2[]="";
+    long *p;
 
-    printf("%lu", strlcpy(str2, str1, 0));
+    p = malloc(0);
+    printf("%p", p);
     exit(0);
-
 }
