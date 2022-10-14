@@ -6,11 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:17:48 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/14 13:20:46 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:12:57 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strncmp(char *s1, char *s2, unsigned int n)
+int	ft_strncmp(char *s1, char *s2, size_t n)
 {	
 	unsigned int	i;
 

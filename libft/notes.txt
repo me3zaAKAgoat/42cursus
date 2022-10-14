@@ -1,6 +1,2 @@
-strchr
-strrchr
-memchr
-memcmp
 strnstr
 are still undone
