@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 13:23:36 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/16 15:51:11 by echoukri         ###   ########.fr       */
+/*   Created: 2022/10/16 17:59:07 by echoukri          #+#    #+#             */
+/*   Updated: 2022/10/16 18:38:13 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// #include <stdlib.h>
+// #include <stdio.h>
 #include "libft.h"
 
-void	*ft_strjoin(char const *s1, char const *s2)
-{
-	char *ptr;
-	int	i;
-	int	j;
 
-	ptr = malloc(ft_strlen(s1)+ft_strlen(s2)+1);
-	if (!ptr)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i])
-	{
-		ptr[i]=s1[i];
-		i++;
-	}
-	while (s2[j])
-		ptr[i++] = s2[j++];
-	ptr[i] = '\0';
-	return (ptr);
+char *ft_substr(char const *s, unsigned int start, size_t len)
+{
+    char *ptr;
+    char const *s_start;
+
+    ptr = malloc(len*sizeof(char)+1);
+    if (!ptr)
+        return NULL;
+    s_start = s+start;
+    printf("%s\n", s_start);
+    ft_strlcpy(ptr, s_start, len+1);
+    return (ptr);
 }
+
+// int main()
+// {
+//     printf("%s\n", ft_substr("KOGMAWF??", 3, 3));
+//     exit(0);
+// }

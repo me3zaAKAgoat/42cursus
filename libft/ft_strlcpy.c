@@ -6,15 +6,17 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:20 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/14 13:07:37 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/16 17:55:21 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "libft.h"
+
 
 size_t ft_strlcpy(char * restrict dst, const char * restrict src, size_t dstsize)
 {
     unsigned int	index;
+	int srcl;
 	
 	srcl = ft_strlen(src);
 	index = 0;

@@ -6,11 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:21:20 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/14 13:06:41 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/16 15:51:13 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "libft.h"
 
 size_t	ft_strlcat(char *dst, char *src, size_t size)
 {

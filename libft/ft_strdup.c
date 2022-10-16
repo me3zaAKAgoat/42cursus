@@ -6,11 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:49:22 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/14 13:12:40 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/16 15:51:15 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "libft.h"
 
 char	*ft_strdup(char *src)
 {

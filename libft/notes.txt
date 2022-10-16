@@ -1,2 +1,0 @@
-strnstr
-are still undone
