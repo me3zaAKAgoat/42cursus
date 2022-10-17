@@ -36,4 +36,4 @@
 - re read the reddit comment about linking and compilation again.
 - Learn about shared and static libraries and how they work in detail.
 - read more about implicit rules of a makefile.
-- read more about align requirement
+- read more about alignement requirement.
