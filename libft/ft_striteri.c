@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 19:28:09 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/17 14:53:56 by echoukri         ###   ########.fr       */
+/*   Created: 2022/10/17 14:04:30 by echoukri          #+#    #+#             */
+/*   Updated: 2022/10/17 14:10:27 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_toupper(int c)
+void ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-    if (97 <= c && c <= 122)
-        return c - 32;
-    else
-        return c;
+    int index;
+
+    while (s[index])
+    {
+        f(index, s+index);
+        index++;
+    }
+    return;
 }

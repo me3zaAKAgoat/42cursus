@@ -15,6 +15,7 @@
 #define LIBFT_H
 
 #include <stdlib.h>
+#include <unistd.h>
 extern int	ft_atoi(char *str);
 extern void	ft_bzero(void *s, size_t n);
 extern void    *ft_calloc(size_t count, size_t size);
