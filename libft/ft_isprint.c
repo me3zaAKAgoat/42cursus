@@ -6,11 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 17:18:30 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/11 17:19:50 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/17 18:36:26 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_isprint(int c)
+int	ft_isprint(int c)
 {
-    return ((32 <= c && c <= 126));
+	return ((32 <= c && c <= 126));
 }

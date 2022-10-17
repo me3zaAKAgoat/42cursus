@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:45:48 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/17 17:16:36 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/17 18:53:04 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 // #include <stdlib.h>
 // #include <stdio.h>
 
-int	count(char const *s, char c)
+static int	count(char const *s, char c)
 {
 	int	count_of_c;
 	int	index;
@@ -30,45 +30,47 @@ int	count(char const *s, char c)
 	return (count_of_c);
 }
 
+/*malloc : 
+-get the size of the whole initial string
+-subsctract the number of occurences of the spliting character
+-then add the number of null pointers added to the end of each word
+-plus the final Null terminator of the resulting pointer to strings
+
+algorithm : 
+-look for non c character that marks the start of a word
+-start counting till a c character is found which marks the end of a word
+-knowing the starting and ending indexes we allocate enough space 
+for the new word and add it to the array
+-keep going till the end of the initial string
+-null terminate the array*/
 char	**ft_split(char const *s, char c)
 {
-	int		i;
-	int		j;
-	int		k;
+	int		iterators[3] = {0};
 	int		index;
 	char	**ptr;
 	char	*word;
 
 	index = 0;
-	i = 0;
-	//get the size of the whole initial string
-	//subsctract the number of occurences of the spliting character
-	//then add the number of null pointers added to the end of each word
-	//plus the final Null terminator of the resulting pointer to strings
 	ptr = malloc((count(s, c) + 1) * sizeof(char *) + 1);
 	if (!ptr)
 		return (NULL);
-	//look for non c character that marks the start of a word
-	//start counting till a c character is found which marks the end of a word
-	//knowing the starting and ending indexes we allocate enough space for the new word and add it to the array
-	//keep going till the end of the initial string
-	//null terminate the array
-	while (s[i])
+	while (s[iterators[0]])
 	{
-		if (s[i] != c)
+		if (s[iterators[0]] != c)
 		{
-			j = i;
-			k = i;
-			while (s[j] && s[j] != c)
-				j++;
-			word = malloc((j - k) * sizeof(char) + 1);
-			ft_strlcpy(word, (s + k), (j - k) + 1);
+			iterators[1] = iterators[0];
+			iterators[2] = iterators[0];
+			while (s[iterators[1]] && s[iterators[1]] != c)
+				iterators[1]++;
+			word = malloc((iterators[1] - iterators[2]) * sizeof(char) + 1);
+			ft_strlcpy(word, (s + iterators[2]),
+			(iterators[1] - iterators[2]) + 1);
 			ptr[index] = word;
 			index++;
-			i = j;
+			iterators[0] = iterators[1];
 		}
 		else
-			i++;
+			iterators[0]++;
 	}
 	ptr[index] = NULL;
 	return (ptr);

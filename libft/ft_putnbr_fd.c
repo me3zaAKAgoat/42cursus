@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 19:28:09 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/17 17:21:16 by echoukri         ###   ########.fr       */
+/*   Created: 2022/10/17 18:07:02 by echoukri          #+#    #+#             */
+/*   Updated: 2022/10/17 18:11:37 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
+void	ft_putnbr_fd(int n, int fd)
 {
-	if (97 <= c && c <= 122)
-		return (c - 32);
-	else
-		return (c);
+    char str[];
+
+    str="0123456789";
+	if (n == -2147483648)
+	{
+		ft_putnbr_fd(n / 10);
+		ft_putnbr_fd(-(n % 10));
+	}
+	else if (0 <= n && n < 10)
+		write(fd, &str[n], 1);
+	else if (n >= 10)
+	{
+		ft_putnbr_fd(n / 10);
+		ft_putnbr_fd(n % 10);
+	}
+	else if (n < 0)
+	{
+		write(fd, "-", 1);
+		ft_putnbr_fd(-n);
+	}
 }

@@ -6,11 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 17:14:39 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/11 17:15:37 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/17 18:36:23 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
-    return ((48 <= c && c <= 57));
+	return ((48 <= c && c <= 57));
 }
