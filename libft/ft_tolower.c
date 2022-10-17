@@ -6,14 +6,14 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 19:35:56 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/17 14:53:18 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/17 17:17:30 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_tolower(int c)
+int	ft_tolower(int c)
 {
-    if (65 <= c && c <= 90)
-        return c + 32;
-    else
-        return c;
+	if (65 <= c && c <= 90)
+		return (c + 32);
+	else
+		return (c);
 }

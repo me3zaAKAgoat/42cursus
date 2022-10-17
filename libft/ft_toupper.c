@@ -6,14 +6,14 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 19:28:09 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/17 14:53:56 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/17 17:17:33 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_toupper(int c)
+int	ft_toupper(int c)
 {
-    if (97 <= c && c <= 122)
-        return c - 32;
-    else
-        return c;
+	if (97 <= c && c <= 122)
+		return (c - 32);
+	else
+		return (c);
 }

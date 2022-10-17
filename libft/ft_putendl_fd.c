@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:04:30 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/17 17:16:48 by echoukri         ###   ########.fr       */
+/*   Created: 2022/10/17 16:49:07 by echoukri          #+#    #+#             */
+/*   Updated: 2022/10/17 16:49:07 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+void ft_putendl_fd(char *s, int fd)
 {
-	int index;
-
-	while (s[index])
-	{
-		f(index, s + index);
-		index++;
-	}
-	return ;
+    char buf[sizeof]
 }

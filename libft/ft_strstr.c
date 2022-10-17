@@ -6,15 +6,15 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:41:06 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/14 16:44:09 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/17 17:17:22 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strstr(char *haystack, char *needle)
 {
-	int	i;
-	int	j;
-	int	k;
+	int i;
+	int j;
+	int k;
 
 	i = 0;
 	j = 0;

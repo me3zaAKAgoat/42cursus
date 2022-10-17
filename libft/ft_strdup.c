@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:49:22 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/16 15:51:15 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/17 17:16:43 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 char	*ft_strdup(char *src)
 {
 	char	*ptr;
-	int i;
+	int		i;
 
 	ptr = malloc(sizeof(char) * (ft_strlen(src) + 1));
-    if (!ptr)
-        return (NULL);
+	if (!ptr)
+		return (NULL);
 	i = 0;
 	while (i < ft_strlen(src))
 	{

@@ -6,11 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:42:25 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/17 14:04:11 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/17 17:17:24 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char    *ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-// ??
+	// ??
 }

@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 17:24:56 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/12 17:14:59 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/17 17:16:22 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 // #include <stdio.h>
 // #include <string.h>
 
-void *ft_memset(void *b, int c, size_t len)
+void	*ft_memset(void *b, int c, size_t len)
 {
-    unsigned int index;
-    unsigned char *ptr;
+	unsigned int	index;
+	unsigned char	*ptr;
 
-    ptr = (unsigned char *)b;
-    index = 0;
-    while (index < len)
-    {
-        *(ptr + index) = (unsigned char)c;
-        index++;
-    }
-    return ptr;
+	ptr = (unsigned char *)b;
+	index = 0;
+	while (index < len)
+	{
+		*(ptr + index) = (unsigned char)c;
+		index++;
+	}
+	return (ptr);
 }
 
 // int main()

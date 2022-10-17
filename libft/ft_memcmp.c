@@ -6,12 +6,12 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:06:17 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/14 16:14:26 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/17 17:15:41 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_memcmp(char *s1, char *s2)
-{	
+{
 	unsigned int	i;
 
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:59:07 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/16 18:38:13 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/17 17:17:27 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,18 @@
 // #include <stdio.h>
 #include "libft.h"
 
-
-char *ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-    char *ptr;
-    char const *s_start;
+	char		*ptr;
+	char const	*s_start;
 
-    ptr = malloc(len*sizeof(char)+1);
-    if (!ptr)
-        return NULL;
-    s_start = s+start;
-    printf("%s\n", s_start);
-    ft_strlcpy(ptr, s_start, len+1);
-    return (ptr);
+	ptr = malloc(len * sizeof(char) + 1);
+	if (!ptr)
+		return (NULL);
+	s_start = s + start;
+	printf("%s\n", s_start);
+	ft_strlcpy(ptr, s_start, len + 1);
+	return (ptr);
 }
 
 // int main()

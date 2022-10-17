@@ -6,28 +6,27 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:12:48 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/12 15:16:02 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/17 17:16:17 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include <stdio.h>
 
-void *ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 {
-    unsigned int index;
-    unsigned char *restrict dstp;
-    const unsigned char *restrict srcp;
+	unsigned int	index;
+	unsigned char *restrict dstp;
+	const unsigned char *restrict srcp;
 
-    dstp = dst;
-    srcp = src;
-    index = 0;
-    while (index < n)
-    {
-        *(dstp + index) = *(srcp + index);
-        index++;
-    }
-
-    return (dst);
+	dstp = dst;
+	srcp = src;
+	index = 0;
+	while (index < n)
+	{
+		*(dstp + index) = *(srcp + index);
+		index++;
+	}
+	return (dst);
 }
 
 // int main()
