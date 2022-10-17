@@ -29,5 +29,3 @@
 - re read the reddit comment about linking and compilation again.
 - Learn about shared and static libraries and how they work in detail.
 - read more about implicit rules of a makefile.
-- seek and file position.
-- download the [c formatter](https://github.com/dawnbeen/c_formatter_42) (norminetter)
