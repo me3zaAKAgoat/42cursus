@@ -13,8 +13,8 @@
 
 ## Dealing With Files
 **Notes**: 
->-the f that prefixes file handling functions usually refers to the function being a high level routine as opposed to a low level routine.
->-low level routines do not use buffering but take up to one minute before data can be physically written to teh disc (can use fsync to ensure that all data is written to the file).
+>- the f that prefixes file handling functions usually refers to the function being a high level routine as opposed to a low level routine.
+>- low level routines do not use buffering but take up to one minute before data can be physically written to teh disc (can use fsync to ensure that all data is written to the file).
 - ### **Streams**
     - A stream is a flow of from a source to a destination within a GNU system (mostly used in high level routines).
     - Streams are represented by the type FILE*.
