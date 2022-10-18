@@ -6,11 +6,12 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:15:06 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/18 16:41:31 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/18 18:48:20 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+// #include "libft.h"
+#include <stdio.h>
 
 void	*ft_strchr(const char *s, int c)
 {
@@ -28,4 +29,10 @@ void	*ft_strchr(const char *s, int c)
 		index++;
 	}
 	return (NULL);
+}
+
+int main()
+{
+	printf("%s", ft_strchr("trololo", 'l'));
+	return 0;
 }
