@@ -6,11 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:39:25 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/17 18:36:29 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/18 16:16:34 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_putnbr(int nb, int pos, char *ptr)
+static void	ft_putnbr(int nb, int pos, char *ptr)
 {
 	char	*str;
 

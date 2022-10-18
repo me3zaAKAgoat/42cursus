@@ -6,13 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 17:24:56 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/17 17:16:22 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/18 16:32:10 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdlib.h>
-// #include <stdio.h>
-// #include <string.h>
+#include "libft.h"
 
 void	*ft_memset(void *b, int c, size_t len)
 {

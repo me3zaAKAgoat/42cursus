@@ -6,9 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:54:23 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/17 18:37:40 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/18 16:31:34 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {

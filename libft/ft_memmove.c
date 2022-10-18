@@ -6,13 +6,14 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:47:38 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/17 17:16:07 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/18 16:14:15 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include <stdlib.h>
 // #include <stdio.h>
 // #include <string.h>
+#include "libft.h"
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
