@@ -8,14 +8,13 @@
 - ##### SEGMENTATION FAULT
   Segmentation fault occurs when the program tries to access an area of memory that it is not allowed to access.
 - ##### BUS ERROR
-  Bus error occurs when the program gives a processor instruction with an addres that does not satisfyt its <mark>alignement requirements</mark>.
+  Bus error occurs when the program gives a processor instruction with an addres that does not satisfy its `alignement requirements`.
 
 ### What is ERRNO?
 
 - _ERRNO_ is an integer variable that is set by system calls and some library functions to indicate the specifics of an error in the event that one occurs.
 
 ## **Dealing With Files**
-
 
 - The f that prefixes file handling functions usually refers to the function being a high level routine as opposed to a low level routine function.
 - low level routines do not use buffering but can take up to one minute before data is physically written to the disc (we can use **fsync** to ensure that all data is written to the file).
@@ -28,24 +27,32 @@
 - #### **File Descriptors**
   - A file decscriptor is an integer that represents the connection opened between a source and a destination (mostly used in low level routines).
 
-
 ## **Makefile**
-> **Important resource**: 
->- [makefiletutorial.com](https://makefiletutorial.com)
+
+> **Important resource**:
+>
+> - [makefiletutorial.com](https://makefiletutorial.com)
+
 - We can use variables in a makefile using the conventional assignement operator and then calling the variable's value using $(variable).
-- If a command isn't indented with a tabulation (specifically using tab and not spaces) the command will not work. 
+- If a command isn't indented with a tabulation (specifically using tab and not spaces) the command will not work.
 - Targets are file names.
-- The target gets recompiled if teh target dosen't exist or the prerequisite's timestamp have changed since target was last compiled. 
+- The target gets recompiled if teh target dosen't exist or the prerequisite's timestamp have changed since target was last compiled.
 - Assignement is done either using := or =.
 - Variable calling is done either using \${} or $().
-- Make has a huge list of implicit rules that will run by default unless you override them. 
+- Make has a huge list of implicit rules that will run by default unless you override them.
+
+## **Miscellaneous**
+
 ## **Reminders**
 
-- need to examine the declarations and the conflics between them and the definitons.
+- `need to examine the declarations and the conflics between them and the definitons.`
+- `Still need strnstr, strmapi and strtrim.`
 - re read the reddit comment about linking and compilation again.
 - Learn about shared and static libraries and how they work in detail.
 - read more about implicit rules of a makefile.
 - read more about alignement requirement.
 - Why should I use all in my libft makefile?
-- What does \* "Wildcard" do? 
+- What does \* "Wildcard" do?
 - Learn about regex, patterns, wildcard meaning and what stem means.
+- Split ft_split into two halves so I can fix the length and assignement problem with the norminette.
+- Fix compilation problems of ft_itoa.

@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:39:25 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/18 16:16:34 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/19 01:10:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 static void	ft_putnbr(int nb, int pos, char *ptr)
 {
-	char	*str;
+	char	str[10];
 
 	str = "0123456789";
 	if (nb == -2147483648)

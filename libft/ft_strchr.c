@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:15:06 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/18 18:48:20 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/19 00:45:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "libft.h"
-#include <stdio.h>
+#include "libft.h"
 
-void	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	int index;
 	char ci;
@@ -21,18 +20,12 @@ void	*ft_strchr(const char *s, int c)
 	ci = (char)c;
 	index = 0;
 	if (s[index] == ci)
-		return (s + index);
+		return ((char *)(s) + index);
 	while (s[index])
 	{
 		if (s[index + 1] == ci)
-			return (s + index + 1);
+			return ((char *)(s) + index + 1);
 		index++;
 	}
 	return (NULL);
-}
-
-int main()
-{
-	printf("%s", ft_strchr("trololo", 'l'));
-	return 0;
 }
