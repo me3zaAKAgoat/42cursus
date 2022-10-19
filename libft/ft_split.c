@@ -6,13 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:45:48 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/17 18:53:04 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:39:25 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-// #include <stdlib.h>
-// #include <stdio.h>
 
 static int	count(char const *s, char c)
 {

@@ -42,7 +42,7 @@
 - Targets are file names.
 - The target gets recompiled if teh target dosen't exist or the prerequisite's timestamp have changed since target was last compiled.
 - Assignement is done either using := or =.
-- Variable calling is done either using \${} or $().
+- Variable calling is done either using \$\{} or \$\().
 - Make has a huge list of implicit rules that will run by default unless you override them.
 
 ## **Miscellaneous**
@@ -50,7 +50,7 @@
 ## **Reminders**
 
 - `need to examine the declarations and the conflics between them and the definitons.`
-- `Still need strnstr, strmapi and strtrim.`
+- `Still need strtrim.`
 - re read the reddit comment about linking and compilation again.
 - Learn about shared and static libraries and how they work in detail.
 - read more about implicit rules of a makefile.

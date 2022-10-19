@@ -6,13 +6,10 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:47:38 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/18 16:14:15 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:38:34 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdlib.h>
-// #include <stdio.h>
-// #include <string.h>
 #include "libft.h"
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
@@ -45,14 +42,3 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	}
 	return (dstp);
 }
-
-// int main()
-// {
-//     char src[] = "lmfao";
-//     char dst[5];
-
-// 	dst[4]='\0';
-//     printf("\n%s\n%s", dst, src);
-// 	printf("\n%s", ft_memmove(dst, src, 4));
-//     exit(0);
-// }
