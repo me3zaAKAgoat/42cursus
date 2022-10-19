@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:45:48 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/19 17:39:25 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:38:10 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,3 @@ char	**ft_split(char const *s, char c)
 	ptr[index] = NULL;
 	return (ptr);
 }
-
-// int main()
-// {
-//     int index;
-//     char **ptr;
-//     char *s = "wow this test example is so cool :DD";
-//     ptr = ft_split(s, ' ');
-//     index = 0;
-//     while (ptr[index]!=NULL)
-//     {
-//         printf("%p %s\n", &ptr[index],ptr[index]);
-//         index++;
-//     }
-//     exit(0);
-// }
