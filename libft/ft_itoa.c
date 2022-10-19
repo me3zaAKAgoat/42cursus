@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:39:25 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/19 01:10:16 by marvin           ###   ########.fr       */
+/*   Updated: 2022/10/19 11:22:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static void	ft_putnbr(int nb, int pos, char *ptr)
 {
-	char	str[10];
-
-	str = "0123456789";
 	if (nb == -2147483648)
 	{
 		ft_putnbr(nb / 10, pos - 1, ptr);

@@ -16,6 +16,10 @@
 
 ## **Dealing With Files**
 
+> **Important resource**:
+>
+> - [Artice about Processes, Files, and File Descriptors in Linux](https://medium.com/geekculture/developer-diaries-processes-files-and-file-descriptors-in-linux-ebf007fb78f8)
+
 - The f that prefixes file handling functions usually refers to the function being a high level routine as opposed to a low level routine function.
 - low level routines do not use buffering but can take up to one minute before data is physically written to the disc (we can use **fsync** to ensure that all data is written to the file).
 
