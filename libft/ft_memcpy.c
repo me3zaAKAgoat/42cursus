@@ -6,17 +6,17 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:12:48 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/19 19:38:16 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/20 15:31:27 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	unsigned int	index;
-    unsigned char *restrict dstp;
-	const unsigned char *restrict srcp;
+    unsigned char *dstp;
+	const unsigned char *srcp;
 	
     dstp = dst;
 	srcp = src;

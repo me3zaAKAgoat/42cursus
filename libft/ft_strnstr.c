@@ -14,23 +14,21 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	int i;
-	int j;
-	int k;
-	int ilen;
+	unsigned int i;
+	unsigned int j;
+	unsigned int k;
 
-	ilen = (int) len;
 	i = 0;
 	j = 0;
 	k = 0;
 	if (needle[0] == '\0')
 		return ((char *)(haystack));
-	while (haystack[i] && i<ilen)
+	while (haystack[i] && i<len)
 	{
 		k = i;
 		while (haystack[k++] == needle[j++])
 		{
-            if (k>ilen)
+            if (k>len)
                 return NULL;
 			else if (!needle[j])
 				return ((char *)(haystack) + i);

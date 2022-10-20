@@ -6,13 +6,13 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:23:36 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/17 17:16:53 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/20 16:30:24 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char *ptr;
 	int i;

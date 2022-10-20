@@ -22,7 +22,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	ci = (unsigned char)c;
 	converted_s = (unsigned char *)s;
 	index = 0;
-	while (converted_s[index] && index < n)
+	while (index < n)
 	{
 		if (converted_s[index] == ci)
 			return (converted_s + index);

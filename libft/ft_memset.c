@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 17:24:56 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/19 19:38:05 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/20 18:06:33 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	*ft_memset(void *b, int c, size_t len)
 {
-	unsigned int	index;
 	unsigned char	*ptr;
+	unsigned int	index;
 
 	ptr = (unsigned char *)b;
 	index = 0;

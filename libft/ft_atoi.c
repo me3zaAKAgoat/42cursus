@@ -6,11 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:12:33 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/17 17:14:57 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/20 15:42:48 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str)
 {
 	int	return_number;
 	int	i;

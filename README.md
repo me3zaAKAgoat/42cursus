@@ -36,6 +36,7 @@
 > **Important resource**:
 >
 > - [makefiletutorial.com](https://makefiletutorial.com)
+> - [GNU Make](https://www.gnu.org/software/make/manual/make.html)
 
 - We can use variables in a makefile using the conventional assignement operator and then calling the variable's value using $(variable).
 - If a command isn't indented with a tabulation (specifically using tab and not spaces) the command will not work.
@@ -45,7 +46,17 @@
 - Variable calling is done either using \$\{} or \$\().
 - Make has a huge list of implicit rules that will run by default unless you override them.
 
+## **Keywords**
+
+- **restrict** the restrict keyword is a promise from the programmer to the compiler that indicates that no pointer other than restricted pointer will be used to access the object to which it points to. (It used so that the compiler can max out optimization and not worry about pointer overlap, [Reference](https://en.wikipedia.org/wiki/Restrict).)
+- **const** is used to convey that a variabel is "read-only", thus the compiler will throw an error when there's an attempt to modify the const typed variable. (used to help code comprehensibility and allow the compiler further optimization through caching)
+- register
+- volatile
+- extern
+- static
 ## **Miscellaneous**
+
+- **lvalue** is something that can be assigned to. **rvalue** is something that can be assigned.
 
 ## **Reminders**
 
@@ -60,3 +71,4 @@
 - Learn about regex, patterns, wildcard meaning and what stem means.
 - Split ft_split into two halves so I can fix the length and assignement problem with the norminette.
 - Fix compilation problems of ft_itoa.
+- Does assignmenet carry out the type conversion automatically or what happens exactly?
