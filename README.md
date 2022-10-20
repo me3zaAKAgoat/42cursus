@@ -61,7 +61,7 @@
 ## **Reminders**
 
 - `need to examine the declarations and the conflics between them and the definitons.`
-- `Still need strtrim.`
+- `Still need to write strtrim, fix ft_strlcat, ft_substr and ft_calloc.`
 - re read the reddit comment about linking and compilation again.
 - Learn about shared and static libraries and how they work in detail.
 - read more about implicit rules of a makefile.
