@@ -22,6 +22,7 @@
 
 - The f that prefixes file handling functions usually refers to the function being a high level routine as opposed to a low level routine function.
 - low level routines do not use buffering but can take up to one minute before data is physically written to the disc (we can use **fsync** to ensure that all data is written to the file).
+- EOF is a negative integer (thou shall not be assumed, it is usually -1) that indicates that a file position has reached the end of a file :DD. 
 
 - #### **Streams**
   - A **stream** is a flow of data from a source to a destination within a GNU system (mostly used in high level routines).
@@ -68,11 +69,15 @@
 
 - **lvalue** is something that can be assigned to. **rvalue** is something that can be assigned.
 - Include guards only prevent a header file from being included multiple times in the same source file. but they will not protect from a header file showing up in multiple source files.
+- **size_t** is a unsigned type 
+- **SIZE_MAX** is the maximum value that can be contained in a size_t variable
 
 ## **Reminders**
 
 - `need to examine the declarations and the conflics between them and the definitons.`
 - `Still need to write strtrim, fix ft_strlcat, ft_substr and ft_calloc.`
+- `Ar program options (-rc??).`
+- `what is relinking in makefile`
 - re read the reddit comment about linking and compilation again.
 - Learn about shared and static libraries and how they work in detail.
 - read more about implicit rules of a makefile.
