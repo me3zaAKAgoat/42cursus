@@ -41,9 +41,9 @@
 - We can use variables in a makefile using the conventional assignement operator and then calling the variable's value using $(variable).
 - If a command isn't indented with a tabulation (specifically using tab and not spaces) the command will not work.
 - Targets are file names.
-- The target gets recompiled if teh target dosen't exist or the prerequisite's timestamp have changed since target was last compiled.
+- The target gets recompiled if the target dosen't exist or the prerequisite's timestamp have changed since target was last compiled.
 - Assignement is done either using := or =.
-- Variable calling is done either using \$\{} or \$\().
+- Variable calling is done either using \'$'\{} or \'$'\().
 - Make has a huge list of implicit rules that will run by default unless you override them.
 
 ## **Keywords**
