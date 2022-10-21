@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echoukri <echoukri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 18:07:02 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/19 11:25:12 by echoukri           ###   ########.fr       */
+/*   Updated: 2022/10/21 21:11:48 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-    char *str="0123456789";
+	char	*str;
 
+	str = "0123456789";
 	if (n == -2147483648)
 	{
 		ft_putnbr_fd(n / 10, fd);

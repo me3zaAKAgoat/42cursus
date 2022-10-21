@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:12:33 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/20 20:46:52 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/21 20:49:50 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_atoi(const char *str)
 		sign *= -1;
 		i++;
 	}
-	else if (str[i]=='+')
+	else if (str[i] == '+')
 	{
 		i++;
 	}

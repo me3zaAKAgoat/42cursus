@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echoukri <echoukri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:15:06 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/19 00:45:49 by echoukri           ###   ########.fr       */
+/*   Updated: 2022/10/21 21:12:55 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int index;
-	char ci;
+	int		index;
+	char	ci;
 
 	ci = (char)c;
 	index = 0;

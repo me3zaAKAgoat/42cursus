@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 17:21:36 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/18 16:33:23 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/21 21:14:03 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	while (s[len])

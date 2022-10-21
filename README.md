@@ -69,13 +69,13 @@
 
 - **lvalue** is something that can be assigned to. **rvalue** is something that can be assigned.
 - Include guards only prevent a header file from being included multiple times in the same source file. but they will not protect from a header file showing up in multiple source files.
-- **size_t** is a unsigned type 
+- **size_t** is a unsigned type that is the result of sizeof() operator, it is also the maximum size any c object can hold.
 - **SIZE_MAX** is the maximum value that can be contained in a size_t variable
 
 ## **Reminders**
 
 - `need to examine the declarations and the conflics between them and the definitons.`
-- `Still need to write strtrim, fix ft_strlcat, ft_substr and ft_calloc.`
+- `Still need to write fix ft_memmove (norminette), ft_strlcat (edge cases), ft_substr (memory leaks) and ft_split (norminette) .`
 - `Ar program options (-rc??).`
 - `what is relinking in makefile`
 - re read the reddit comment about linking and compilation again.

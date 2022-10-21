@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:12:48 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/20 15:31:27 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/21 20:52:31 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	unsigned int	index;
-    unsigned char *dstp;
-	const unsigned char *srcp;
-	
-    dstp = dst;
+	unsigned int		index;
+	unsigned char		*dstp;
+	const unsigned char	*srcp;
+
+	dstp = dst;
 	srcp = src;
 	index = 0;
 	while (index < n)

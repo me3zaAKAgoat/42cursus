@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echoukri <echoukri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:32:16 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/19 00:49:07 by echoukri           ###   ########.fr       */
+/*   Updated: 2022/10/21 21:16:05 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int index;
-	char ci;
-	unsigned int sl;
+	int				index;
+	char			ci;
+	unsigned int	sl;
 
 	sl = ft_strlen(s);
 	ci = (char)c;

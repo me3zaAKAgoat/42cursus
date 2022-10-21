@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echoukri <echoukri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:49:22 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/19 01:08:04 by echoukri           ###   ########.fr       */
+/*   Updated: 2022/10/21 21:13:11 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strdup(char *src)
 {
-	char	*ptr;
-	unsigned long		i;
+	char			*ptr;
+	unsigned long	i;
 
 	ptr = malloc(sizeof(char) * (ft_strlen(src) + 1));
 	if (!ptr)
