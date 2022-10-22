@@ -20,15 +20,14 @@
 >
 > - [Artice about Processes, Files, and File Descriptors in Linux](https://medium.com/geekculture/developer-diaries-processes-files-and-file-descriptors-in-linux-ebf007fb78f8)
 
-- The f that prefixes file handling functions usually refers to the function being a high level routine as opposed to a low level routine function.
+- The 'f' that prefixes file handling functions usually refers to the function being a high level routine as opposed to a low level routine function.
 - low level routines do not use buffering but can take up to one minute before data is physically written to the disc (we can use **fsync** to ensure that all data is written to the file).
-- EOF is a negative integer (thou shall not be assumed, it is usually -1) that indicates that a file position has reached the end of a file :DD. 
+- EOF is a flag that holds a negative integer value (though one should assume the value, it is usually -1) that indicates that a file position has reached the end of a file.
+- File position is a character count in the opened file that starts at 0. for example, File position 40 means that the character that is currently being read from or written to is the 41th character in the file. (**ftell** is a high level function that takes in a stream as input and outputs an integer representing the file position).
 
 - #### **Streams**
   - A **stream** is a flow of data from a source to a destination within a GNU system (mostly used in high level routines).
   - Streams are represented by the type FILE\*.
-  - File position is a character count in the opened file that starts at 0. for example, File position 40 means that the character that is currently being read from or written to is the 41th character in the file. (**ftell** is a high level function that takes in a stream as input and outputs an integer representing the file position).
-  - EOF is a flag indicating that the current file position is the end of a the file.
 - #### **File Descriptors**
   - A file decscriptor is an integer that represents the connection opened between a source and a destination (mostly used in low level routines).
 
@@ -44,21 +43,18 @@
 - Targets are file names.
 - The target gets recompiled if the target dosen't exist or the prerequisite's timestamp have changed since target was last compiled.
 - Assignement is done either using := or =.
-- Variable calling is done either using \'$'\{} or \'$'\().
+- Variable calling is done either using \$\{\} or \$\(\).
 - Make has a huge list of implicit rules that will run by default unless you override them.
 
 ## **Keywords**
 
-- **restrict** the restrict keyword is a promise from the programmer to the compiler that indicates that no pointer other than restricted pointer will be used to access the object to which it points to. (It used so that the compiler can max out optimization and not worry about pointer overlap, [Reference](https://en.wikipedia.org/wiki/Restrict).)
-- **const** is used to convey that a variabel is "read-only", thus the compiler will throw an error when there's an attempt to modify the const typed variable. (used to help code comprehensibility and allow the compiler further optimization through caching)
+- the **restrict** keyword is a promise from the programmer to the compiler that indicates that no pointer other than restricted pointer will be used to access the object to which it points to. (It is used so that the compiler can max out optimization and not worry about pointer overlap, [Reference](https://en.wikipedia.org/wiki/Restrict).)
+- **const** is used to convey that a variabel is "read-only", thus the compiler will throw an error when there's an attempt to modify the const declared variable. (used to help code comprehensibility/readability and also allow the compiler further optimization through caching)
 - **register** suggests to the compiler storing the variable in a cpu register (and not RAM) for faster access later.
-- **volatile** prevents the compiler from making further optimization knowing the variable will be read and write further ahead (not sure + so uselss anyways).
-- **extern**, the keyword when appiled for functions tells the compiler that data is defined somewhere else (which is the default)
+- **volatile** prevents the compiler from making unnecessary optimization knowing the variable will be read and write further ahead (I don't have a concrete understanding of this keyword yet but it's so uselss anyways).
+- the **extern** keyword will tell the compiler that the data is defined somewhere else and will be connected through the linker (which is the default assumption the compiler makes)
 
-  - **For example:
-    if we have two files with a variable that has the same name, both source files will have seperate copies of that variable, but when the variable is declared with the extern keyword in both files, they will both point to the same variable.**
-
-    Reference : [Second Answer](https://stackoverflow.com/questions/496448/how-to-correctly-use-the-extern-keyword-in-c)
+  - e.g: if we have two files with a variable that has the same name, both source files will have seperate copies of that variable, but when the variable is declared with the extern keyword in both files, they will both point to the same variable. [Scroll to the second answer in this link](https://stackoverflow.com/questions/496448/how-to-correctly-use-the-extern-keyword-in-c)
 
 - **static** is used with global variables and functions to set their scope to the containing file
 
@@ -70,7 +66,8 @@
 - **lvalue** is something that can be assigned to. **rvalue** is something that can be assigned.
 - Include guards only prevent a header file from being included multiple times in the same source file. but they will not protect from a header file showing up in multiple source files.
 - **size_t** is a unsigned type that is the result of sizeof() operator, it is also the maximum size any c object can hold.
-- **SIZE_MAX** is the maximum value that can be contained in a size_t variable
+  - **SIZE_MAX** is a macro defined in stddef.h that represents the maximum value of size_t.
+- Implicit type conversion in C happens automatically when a value is copied to its compatible data type.
 
 ## **Reminders**
 
@@ -83,8 +80,7 @@
 - read more about implicit rules of a makefile.
 - read more about alignement requirement.
 - Why should I use all in my libft makefile?
-- What does \* "Wildcard" do?
-- Learn about regex, patterns, wildcard meaning and what stem means.
+- What does '\*' Wildcard do?
+- Learn about regex, patterns, wildcard meaning and what stem means in makefile.
 - Split ft_split into two halves so I can fix the length and assignement problem with the norminette.
 - Fix compilation problems of ft_itoa.
-- Does assignmenet carry out the type conversion automatically or what happens exactly?

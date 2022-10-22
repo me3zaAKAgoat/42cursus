@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:47:38 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/21 20:52:34 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/22 01:20:15 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 
 	srcp = (const unsigned char *)src;
 	dstp = (unsigned char *)dst;
-	tempp = (unsigned char *)malloc(sizeof(unsigned char) * len);
+	tempp = malloc(sizeof(unsigned char) * len);
 	if (tempp == NULL)
 		return (NULL);
 	else
