@@ -72,7 +72,7 @@
 ## **Reminders**
 
 - `need to examine the declarations and the conflics between them and the definitons.`
-- `Still need to write fix ft_memmove (norminette), ft_strlcat (edge cases), ft_substr (memory leaks) and ft_split (norminette) .`
+- `Still need to write fix ft_memmove (norminette), ft_strlcat (edge cases),ft_substr (memory leaks) and ft_split (memory leaks) .`
 - `Ar program options (-rc??).`
 - `what is relinking in makefile`
 - re read the reddit comment about linking and compilation again.
@@ -84,3 +84,4 @@
 - Learn about regex, patterns, wildcard meaning and what stem means in makefile.
 - Split ft_split into two halves so I can fix the length and assignement problem with the norminette.
 - Fix compilation problems of ft_itoa.
+- What happens when you allocate 0 size_t.

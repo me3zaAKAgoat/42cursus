@@ -6,10 +6,23 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:45:48 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/22 15:03:16 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/22 21:00:25 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*malloc : 
+-get the size of the whole initial string
+-subsctract the number of occurences of the spliting character
+-then add the number of null pointers added to the end of each word
+-plus the final Null terminator of the resulting pointer to strings
+
+algorithm : 
+-look for non c character that marks the start of a word
+-start counting till a c character is found which marks the end of a word
+-knowing the starting and ending indexes we allocate enough space 
+for the new word and add it to the array
+-keep going till the end of the initial string
+-null terminate the array*/
 #include "libft.h"
 
 static int	count(char const *s, char c)
@@ -27,20 +40,6 @@ static int	count(char const *s, char c)
 	}
 	return (count_of_c);
 }
-
-/*malloc : 
--get the size of the whole initial string
--subsctract the number of occurences of the spliting character
--then add the number of null pointers added to the end of each word
--plus the final Null terminator of the resulting pointer to strings
-
-algorithm : 
--look for non c character that marks the start of a word
--start counting till a c character is found which marks the end of a word
--knowing the starting and ending indexes we allocate enough space 
-for the new word and add it to the array
--keep going till the end of the initial string
--null terminate the array*/
 
 static char	*make_word(char const *s, int end, char c)
 {
