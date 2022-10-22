@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:12:42 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/21 21:06:55 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/22 14:37:39 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_putchar_fd(char c, int fd)
 	buf[0] = c;
 	buf[1] = '\0';
 	write(fd, buf, 2);
-	return ;
 }
 
 // int main()

@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:45:48 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/19 19:38:10 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/22 15:03:16 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,34 +41,41 @@ algorithm :
 for the new word and add it to the array
 -keep going till the end of the initial string
 -null terminate the array*/
-char	**ft_split(char const *s, char c)
+
+static char	*make_word(char const *s, int end, char c)
 {
-	int		iterators[3] = {0};
-	int		index;
-	char	**ptr;
+	int		start;
 	char	*word;
 
+	start = end;
+	while (s[end] && s[end] != c)
+		end++;
+	word = ft_substr(s, start, end - start + 1);
+	word[end - start] = '\0';
+	return (word);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	int		i;
+	int		index;
+	char	**ptr;
+
+	i = 0;
 	index = 0;
 	ptr = malloc((count(s, c) + 1) * sizeof(char *) + 1);
 	if (!ptr)
 		return (NULL);
-	while (s[iterators[0]])
+	while (s[i])
 	{
-		if (s[iterators[0]] != c)
+		if (s[i] != c)
 		{
-			iterators[1] = iterators[0];
-			iterators[2] = iterators[0];
-			while (s[iterators[1]] && s[iterators[1]] != c)
-				iterators[1]++;
-			word = malloc((iterators[1] - iterators[2]) * sizeof(char) + 1);
-			ft_strlcpy(word, (s + iterators[2]),
-			(iterators[1] - iterators[2]) + 1);
-			ptr[index] = word;
+			ptr[index] = make_word(s, i, c);
+			i += ft_strlen(ptr[index]);
 			index++;
-			iterators[0] = iterators[1];
 		}
 		else
-			iterators[0]++;
+			i++;
 	}
 	ptr[index] = NULL;
 	return (ptr);
