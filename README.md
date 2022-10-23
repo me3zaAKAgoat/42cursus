@@ -1,6 +1,24 @@
 <h1 align="center" ><strong>42cursus</strong></h1>
 <p align="center" >Notes for my journey of learning C.</p>
 
+## **Reminders**
+
+- `need to examine the declarations and the conflics between them and the definitons.`
+- `Still need to write fix ft_memmove (norminette), ft_strlcat (edge cases),ft_substr (memory leaks) and ft_split (memory leaks) .`
+- `Ar program options (-rc??).`
+- `what is relinking in makefile`
+- re read the reddit comment about linking and compilation again.
+- Learn about shared and static libraries and how they work in detail.
+- read more about implicit rules of a makefile.
+- read more about alignement requirement.
+- Why should I use all in my libft makefile?
+- What does '\*' Wildcard do?
+- Learn about regex, patterns, wildcard meaning and what stem means in makefile.
+- Split ft_split into two halves so I can fix the length and assignement problem with the norminette.
+- Fix compilation problems of ft_itoa.
+- What happens when you allocate 0 size_t.
+- Read this link [what exactly is memory](https://stackoverflow.com/questions/62917281/what-exactly-is-memory-in-c-programming)
+
 ## **Index**
 
 - [Different Types Of Errors](https://github.com/me3zaAKAgoat/42cursus#different-types-of-errors)
@@ -10,6 +28,7 @@
 - [Miscellaneous](https://github.com/me3zaAKAgoat/42cursus#miscellaneous)
 - [Reminders](https://github.com/me3zaAKAgoat/42cursus#reminders)
 
+## **Memory**
 
 ## **Different Types Of Errors**
 
@@ -83,19 +102,3 @@
   - the minimum argument malloc can take is 0 and behaviour will be implentation specific, malloc will either return NULL or a unique pointer value. 
 
 
-## **Reminders**
-
-- `need to examine the declarations and the conflics between them and the definitons.`
-- `Still need to write fix ft_memmove (norminette), ft_strlcat (edge cases),ft_substr (memory leaks) and ft_split (memory leaks) .`
-- `Ar program options (-rc??).`
-- `what is relinking in makefile`
-- re read the reddit comment about linking and compilation again.
-- Learn about shared and static libraries and how they work in detail.
-- read more about implicit rules of a makefile.
-- read more about alignement requirement.
-- Why should I use all in my libft makefile?
-- What does '\*' Wildcard do?
-- Learn about regex, patterns, wildcard meaning and what stem means in makefile.
-- Split ft_split into two halves so I can fix the length and assignement problem with the norminette.
-- Fix compilation problems of ft_itoa.
-- What happens when you allocate 0 size_t.
