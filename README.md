@@ -68,6 +68,10 @@
 - **size_t** is a unsigned type that is the result of sizeof() operator, it is also the maximum size any c object can hold.
   - **SIZE_MAX** is a macro defined in stddef.h that represents the maximum value of size_t.
 - Implicit type conversion in C happens automatically when a value is copied to its compatible data type.
+- **malloc**'s arguments:
+  - the maximum argument malloc can take is implementation specific and will exceed SIZE_MAX on for example OS X.
+  - the minimum argument malloc can take is 0 and behaviour will be implentation specific, malloc will either return NULL or a unique pointer value. 
+
 
 ## **Reminders**
 
