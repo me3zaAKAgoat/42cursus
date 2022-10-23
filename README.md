@@ -1,6 +1,16 @@
 <h1 align="center" ><strong>42cursus</strong></h1>
 <p align="center" >Notes for my journey of learning C.</p>
 
+## **Index**
+
+- [Different Types Of Errors](https://github.com/me3zaAKAgoat/42cursus#different-types-of-errors)
+- [Dealing With Files](https://github.com/me3zaAKAgoat/42cursus#dealing-with-files)
+- [Makefile](https://github.com/me3zaAKAgoat/42cursus#makefile)
+- [Keywords](https://github.com/me3zaAKAgoat/42cursus#keywords)
+- [Miscellaneous](https://github.com/me3zaAKAgoat/42cursus#miscellaneous)
+- [Reminders](https://github.com/me3zaAKAgoat/42cursus#reminders)
+
+
 ## **Different Types Of Errors**
 
 ### Runtime Errors
