@@ -4,7 +4,14 @@
 ## **Reminders**
 
 - `need to examine the declarations and the conflics between them and the definitons.`
-- `Still need to write fix ft_memmove (norminette), ft_strlcat (edge cases),ft_substr (memory leaks) and ft_split (memory leaks) .`
+- ```
+  Still need to write fix 
+  - ft_memmove (norminette)
+  - ft_strlcat (edge cases)
+  - ft_substr (memory leaks)
+  - ft_split (memory leaks)
+  - ft_strchr (do i cast unsigned)
+  ```
 - `Ar program options (-rc??).`
 - `what is relinking in makefile`
 - re read the reddit comment about linking and compilation again.
@@ -17,10 +24,10 @@
 - Split ft_split into two halves so I can fix the length and assignement problem with the norminette.
 - Fix compilation problems of ft_itoa.
 - What happens when you allocate 0 size_t.
-- Read this link [what exactly is memory](https://stackoverflow.com/questions/62917281/what-exactly-is-memory-in-c-programming)
+- read about virtual memory.
 
 ## **Index**
-
+- [Memory](https://github.com/me3zaAKAgoat/42cursus#memory)
 - [Different Types Of Errors](https://github.com/me3zaAKAgoat/42cursus#different-types-of-errors)
 - [Dealing With Files](https://github.com/me3zaAKAgoat/42cursus#dealing-with-files)
 - [Makefile](https://github.com/me3zaAKAgoat/42cursus#makefile)
@@ -29,6 +36,14 @@
 - [Reminders](https://github.com/me3zaAKAgoat/42cursus#reminders)
 
 ## **Memory**
+- the memory is a piece of hardware that stores data in slots of 1 byte, each slot has it's own address, conventionally represented in hexadecimal and makes it available for the CPU operations on demand.
+- the 0x in addresses is but a prefix that indicates the base that represents the slot.
+- Pages are 4k bytes chunks.
+- A program is either allowed to acess an entire page or none of it.
+- A CPU cache is a little bit of memory that the CPU uses so it dosen't have to keep asking the RAM
+  - when the CPU wants to read from a certain address, it checks if it's in the cache first
+  - the cache stores in chunks of 64 bytes called cache lines.
+- the relevant memory is usually virtual memory, meaning that the addresses read are not actual RAM addresses.
 
 ## **Different Types Of Errors**
 
