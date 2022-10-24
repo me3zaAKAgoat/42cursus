@@ -8,6 +8,7 @@
   - ft_strlcat (edge cases)
   - ft_substr (memory leaks)
   - ft_split (memory leaks)
+  - fix strnstr (why k > len)
   - need to examine the declarations and the conflics between them and the definitons.
   ```
 - `Ar program options (-rc??).`
@@ -20,7 +21,7 @@
 - What does '\*' Wildcard do?
 - Learn about regex, patterns, wildcard meaning and what stem means in makefile.
 - read about virtual memory.
-
+- Look up endianness.
 ## **Index**
 - [Memory](https://github.com/me3zaAKAgoat/42cursus#memory)
 - [Different Types Of Errors](https://github.com/me3zaAKAgoat/42cursus#different-types-of-errors)

@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:12:33 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/24 14:38:11 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:21:12 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_atoi(const char *str)
 
 int main()
 {
-	printf("atoi: %d\n", atoi("-9223372036854775807"));
-	printf("ft_atoi: %d\n", ft_atoi("-9223372036854775807"));
+	printf("atoi: %d\n", atoi("-2147483648"));
+	printf("ft_atoi: %d\n", ft_atoi("-2147483648"));
 	return 0;
 }
