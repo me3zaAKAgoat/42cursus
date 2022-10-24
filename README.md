@@ -5,11 +5,9 @@
 
 - ```
   Still need to fix
-  - ft_memmove (norminette)
   - ft_strlcat (edge cases)
   - ft_substr (memory leaks)
   - ft_split (memory leaks)
-  - ft_strchr (do i cast unsigned)
   - need to examine the declarations and the conflics between them and the definitons.
   ```
 - `Ar program options (-rc??).`
@@ -33,14 +31,15 @@
 - [Reminders](https://github.com/me3zaAKAgoat/42cursus#reminders)
 
 ## **Memory**
-- the memory is a piece of hardware that stores data in slots of 1 byte, each slot has it's own address, conventionally represented in hexadecimal and makes it available for the CPU operations on demand.
-- the 0x in addresses is but a prefix that indicates the base that represents the slot.
-- Pages are 4k bytes chunks.
+- the RAM is a piece of hardware that stores data for it's uptime, the data is stored in slots of 1 byte and each slot has it's own address.
+- Addresses are conventionally represented in hexadecimal, the 0x in addresses is but a prefix that indicates the base that represents the slot.
+- The RAM makes data available for the CPU operations on demand.
+- the OS partitions the RAM into Pages, these Pages are chunks of 4k Bytes.
 - A program is either allowed to acess an entire page or none of it.
-- A CPU cache is a little bit of memory that the CPU uses so it dosen't have to keep asking the RAM
-  - when the CPU wants to read from a certain address, it checks if it's in the cache first
-  - the cache stores in chunks of 64 bytes called cache lines.
-- the relevant memory is usually virtual memory, meaning that the addresses read are not actual RAM addresses.
+- A CPU cache is a small part of memory within the CPU that it uses so it dosen't have to keep asking the RAM for everything.
+  - when the CPU wants to read from a certain address, it checks if it's in the cache first.
+  - the cache stores in chunks of 64 bytes called *cache lines*.
+- the memory we interact with as programmers is usually virtual memory, meaning that the addresses read are not actual RAM addresses.
 
 ## **Different Types Of Errors**
 
@@ -53,7 +52,7 @@
 
 ### What is ERRNO?
 
-- _ERRNO_ is an integer variable that is set by system calls and some library functions to indicate the specifics of an error in the event that one occurs.
+- *ERRNO* is an integer variable that is set by system calls and some library functions to indicate the specifics of an error in the event that one occurs.
 
 ## **Dealing With Files**
 
@@ -111,6 +110,7 @@
 - Implicit type conversion in C happens automatically when a value is copied to its compatible data type.
 - **malloc**'s arguments:
   - the maximum argument malloc can take is implementation specific and will exceed SIZE_MAX on for example OS X.
-  - the minimum argument malloc can take is 0 and behaviour will be implentation specific, malloc will either return NULL or a unique pointer value. 
+  - the minimum argument malloc can take is 0 and behaviour will be implentation specific, malloc will either return NULL or a unique pointer value.
+  - if the programmer tries to convert from a type that can represent more values to a type that can represent less values (say from long to short) a truncation happens in an implementation defined manner.
 
 
