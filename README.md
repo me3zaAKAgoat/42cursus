@@ -3,14 +3,14 @@
 
 ## **Reminders**
 
-- `need to examine the declarations and the conflics between them and the definitons.`
 - ```
-  Still need to write fix 
+  Still need to fix
   - ft_memmove (norminette)
   - ft_strlcat (edge cases)
   - ft_substr (memory leaks)
   - ft_split (memory leaks)
   - ft_strchr (do i cast unsigned)
+  - need to examine the declarations and the conflics between them and the definitons.
   ```
 - `Ar program options (-rc??).`
 - `what is relinking in makefile`
@@ -21,9 +21,6 @@
 - Why should I use all in my libft makefile?
 - What does '\*' Wildcard do?
 - Learn about regex, patterns, wildcard meaning and what stem means in makefile.
-- Split ft_split into two halves so I can fix the length and assignement problem with the norminette.
-- Fix compilation problems of ft_itoa.
-- What happens when you allocate 0 size_t.
 - read about virtual memory.
 
 ## **Index**
