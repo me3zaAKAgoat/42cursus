@@ -12,7 +12,7 @@ implementations = ft_isalpha.o ft_isdigit.o ft_isalnum.o ft_isascii.o ft_isprint
 all : $(NAME)
 
 $(NAME) : $(implementations) libft.h
-	ar -rsc $(NAME) $(implementations)
+	ar -c $(NAME) $(implementations)
 
 clean :
 	rm *.o

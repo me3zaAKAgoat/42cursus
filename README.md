@@ -9,10 +9,11 @@
   - ft_substr (memory leaks)
   - ft_split (memory leaks)
   - fix strnstr (why k > len)
+  - protect part 2 functions
   - need to examine the declarations and the conflics between them and the definitons.
   ```
 - `Ar program options (-rc??).`
-- `what is relinking in makefile`
+- `what is relinking in makefile` [relinking](https://stackoverflow.com/c/42network/questions/476/478#478)
 - re read the reddit comment about linking and compilation again.
 - Learn about shared and static libraries and how they work in detail.
 - read more about implicit rules of a makefile.
@@ -41,6 +42,7 @@
   - when the CPU wants to read from a certain address, it checks if it's in the cache first.
   - the cache stores in chunks of 64 bytes called *cache lines*.
 - the memory we interact with as programmers is usually virtual memory, meaning that the addresses read are not actual RAM addresses.
+- [Endianness Wiki artice](https://en.wikipedia.org/wiki/Endianness)
 
 ## **Different Types Of Errors**
 
@@ -86,7 +88,12 @@
 - Assignement is done either using := or =.
 - Variable calling is done either using \$\{\} or \$\(\).
 - Make has a huge list of implicit rules that will run by default unless you override them.
-
+- ar is a progarm that makes static libraries out of object files
+  - the -c option tells ar to create the library if it dosen't already exist.
+  - the -r option replaces older object files with newer object files.
+  - the -s option calls ranlib.
+  - ranlib generates an index file within the archive which identifies the symbols (functions and variables) with the object files defining them that exist within the archive.
+  - indexing makes linking significantlly faster by allowing routines to call each other without regard to the placement, meaning that the linker only has to look for definitions of symbols from the index and wouldn't have to read every object file in the archive to resolve a symbol.
 ## **Keywords**
 
 - the **restrict** keyword is a promise from the programmer to the compiler that indicates that no pointer other than restricted pointer will be used to access the object to which it points to. (It is used so that the compiler can max out optimization and not worry about pointer overlap, [Reference](https://en.wikipedia.org/wiki/Restrict).)
@@ -113,5 +120,7 @@
   - the maximum argument malloc can take is implementation specific and will exceed SIZE_MAX on for example OS X.
   - the minimum argument malloc can take is 0 and behaviour will be implentation specific, malloc will either return NULL or a unique pointer value.
   - if the programmer tries to convert from a type that can represent more values to a type that can represent less values (say from long to short) a truncation happens in an implementation defined manner.
+  - Symbols are functions and variables
+  - In a nutshell, an archive is a single file that contains a collection of other files and/or directories. Archive files are typically used for a transfer (locally or over the internet) or make a backup copy of a collection of files and directories which allow you to work with only one file (if compressed, it has a lower size than the sum of all files within it) instead of many. Likewise, archives are used for software application packaging. This single file can be easily compressed for ease of transfer while the files in the archive retain the structure and permissions of the original files.
 
 

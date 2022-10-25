@@ -18,8 +18,40 @@
 // dst dosent have enough room
 // srcl = 0
 // dstl = 0
+/*
+increment to the end of dst string 
+while simultaneously decrementing the size of dst buffer
+if the size drops to 0 it means that there's no space to perform
+the concatenation so the return must be the size what was gonna be the full concatenation dstl + srcl
+iterate over the characters of the src for what is left of the size of dst buffer then null terminate
+return the size or what was concatenated meaning the length of dst plus how many characters were added from the src = strlen(new dst) 
+*/
 
-// size_t	ft_strlcat(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	dstl;
+	unsigned int	srcl;
+
+	dstl = ft_strlen(dst);
+	srcl = ft_strlen(src);
+	i = 0;
+	j = 0;
+	while (dst[i])
+	{
+		i++;
+	}
+	if (size <= dstl)
+		return (dstl + srcl);
+	else
+	{	
+		while (src[j] && i <= size - 2)
+			dst[i++] = src[j++];
+		dst[i + 1] = '\0';
+	}
+	return (dstl + srcl);
+}
 // {
 // 	char *d = dst;
 // 	const char *s = src;
@@ -44,28 +76,4 @@
 // 	*d = '\0';
 
 // 	return(dlen + (s - src));	/* count does not include NUL */
-// }
-// {
-	// unsigned int	i;
-	// unsigned int	j;
-	// unsigned int	dstl;
-	// unsigned int	srcl;
-
-	// dstl = ft_strlen(dst);
-	// srcl = ft_strlen(src);
-	// i = 0;
-	// j = 0;
-	// if (size == 0)
-	// 	return (srcl);
-	// if (size <= dstl)
-	// 	return (dstl + srcl);
-	// else
-	// {	
-	// 	while (dst[i])
-	// 		i++;
-	// 	while (src[j] && i <= size - 2)
-	// 		dst[i++] = src[j++];
-	// 	dst[i + 1] = '\0';
-	// }
-	// return (dstl + srcl);
 // }
