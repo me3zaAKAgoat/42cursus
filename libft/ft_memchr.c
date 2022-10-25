@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:59:07 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/21 20:51:31 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:53:12 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	unsigned char	ci;
 	unsigned char	*converted_s;
 
-	ci = (unsigned char)c;
+	ci = c;
 	converted_s = (unsigned char *)s;
 	index = 0;
 	while (index < n)

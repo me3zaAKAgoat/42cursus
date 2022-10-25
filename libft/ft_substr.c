@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:59:07 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/25 18:29:19 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/25 18:58:43 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (start >= slen)
 	{
 		ptr = malloc(1);
+		if (!ptr)
+			return (NULL);
 		*ptr = '\0';
 	}
 	else
