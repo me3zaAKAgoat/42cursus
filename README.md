@@ -1,6 +1,15 @@
 <h1 align="center" ><strong>42cursus</strong></h1>
 <p align="center" >Notes for my journey of learning C.</p>
 
+## **Index**
+- [Reminders](https://github.com/me3zaAKAgoat/42cursus#reminders)
+- [Memory](https://github.com/me3zaAKAgoat/42cursus#memory)
+- [Different Types Of Errors](https://github.com/me3zaAKAgoat/42cursus#different-types-of-errors)
+- [Dealing With Files](https://github.com/me3zaAKAgoat/42cursus#dealing-with-files)
+- [Makefile](https://github.com/me3zaAKAgoat/42cursus#makefile)
+- [Keywords](https://github.com/me3zaAKAgoat/42cursus#keywords)
+- [Miscellaneous](https://github.com/me3zaAKAgoat/42cursus#miscellaneous)
+
 ## **Reminders**
 
 - ```
@@ -23,14 +32,6 @@
 - Learn about regex, patterns, wildcard meaning and what stem means in makefile.
 - read about virtual memory.
 - Look up endianness.
-## **Index**
-- [Memory](https://github.com/me3zaAKAgoat/42cursus#memory)
-- [Different Types Of Errors](https://github.com/me3zaAKAgoat/42cursus#different-types-of-errors)
-- [Dealing With Files](https://github.com/me3zaAKAgoat/42cursus#dealing-with-files)
-- [Makefile](https://github.com/me3zaAKAgoat/42cursus#makefile)
-- [Keywords](https://github.com/me3zaAKAgoat/42cursus#keywords)
-- [Miscellaneous](https://github.com/me3zaAKAgoat/42cursus#miscellaneous)
-- [Reminders](https://github.com/me3zaAKAgoat/42cursus#reminders)
 
 ## **Memory**
 - the RAM is a piece of hardware that stores data for it's uptime, the data is stored in slots of 1 byte and each slot has it's own address.
