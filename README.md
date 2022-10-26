@@ -88,7 +88,7 @@
 - Targets are file names.
 - The target gets recompiled if the target dosen't exist or the prerequisite's timestamp have changed since target was last compiled.
 - Assignement is done either using := or =.
-- Variable calling is done either using \$\{\} or \$\(\).
+- Variable calling is done either using '${}' or '$()'.
 - Make has a huge list of implicit rules that will run by default unless you override them.
 - ar is a progarm that makes static libraries out of object files
   - the -c option tells ar to create the library if it dosen't already exist.
