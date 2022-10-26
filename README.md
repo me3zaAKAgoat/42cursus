@@ -12,12 +12,7 @@
 
 ## **Reminders**
 
-- ```
-  Still need to fix
-  - need to examine the declarations and the conflics between them and the definitons.
-  ```
-- `Ar program options (-rc??).`
-- read more about alignement requirement.
+- need to examine the declarations and the conflics between them and the definitons.
 - Look up endianness.
 - What does '\*' Wildcard do?
 - Learn about regex, patterns, wildcard meaning and what stem means in makefile.
