@@ -14,24 +14,14 @@
 
 - ```
   Still need to fix
-  - ft_strlcat (edge cases)
-  - ft_substr (memory leaks)
-  - ft_split (memory leaks)
-  - fix strnstr (why k > len)
-  - protect part 2 functions
   - need to examine the declarations and the conflics between them and the definitons.
   ```
 - `Ar program options (-rc??).`
-- `what is relinking in makefile` [relinking](https://stackoverflow.com/c/42network/questions/476/478#478)
-- re read the reddit comment about linking and compilation again.
-- Learn about shared and static libraries and how they work in detail.
-- read more about implicit rules of a makefile.
 - read more about alignement requirement.
-- Why should I use all in my libft makefile?
+- Look up endianness.
 - What does '\*' Wildcard do?
 - Learn about regex, patterns, wildcard meaning and what stem means in makefile.
 - read about virtual memory.
-- Look up endianness.
 
 ## **Memory**
 - the RAM is a piece of hardware that stores data for it's uptime, the data is stored in slots of 1 byte and each slot has it's own address.
@@ -43,6 +33,22 @@
   - when the CPU wants to read from a certain address, it checks if it's in the cache first.
   - the cache stores in chunks of 64 bytes called *cache lines*.
 - the memory we interact with as programmers is usually virtual memory, meaning that the addresses read are not actual RAM addresses.
+- **Alignment Requirement:**
+
+  All processors have instructions that need to read n bytes from the memory, these processors take the data needed for the instruction from the RAM in blocks of n bytes and put each block in a cache line.
+  
+  ![memory blocks](/READMEcontent/alignmentMemory.jpg)
+
+  Data Structure Alignment is needed because it leads to efficient use of cache lines. 
+
+  As per the illustration we have a 32 bit processor that reads 4 byte blocks and puts them into cache lines.
+  
+  E.g In the case of the red 4 byte-long data structure, in order for the processor to execute the instruction it will need to read two blocks thus will use up two cache lines to store what could've just used only one cache line if it were stored at a proper address in the memory.
+  The blue stored value respects the alignment requirement and will only use one cache line as needed.
+
+  **Important:** Data Structure Alignment is respected when the address at which an n-byte value is stored is divisible by n.
+
+  [Video Explanation](https://youtu.be/zyGMyV955Rw)
 - [Endianness Wiki artice](https://en.wikipedia.org/wiki/Endianness)
 
 ## **Different Types Of Errors**
