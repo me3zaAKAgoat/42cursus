@@ -1,5 +1,5 @@
 <h1 align="center" ><strong>42cursus</strong></h1>
-<p align="center" >Notes for my journey of learning C.</p>
+<p align="center" >Notes I have taken on my journey of learning C.</p>
 
 ## **Index**
 - [Reminders](https://github.com/me3zaAKAgoat/42cursus#reminders)
