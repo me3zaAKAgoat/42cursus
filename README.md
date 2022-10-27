@@ -17,6 +17,12 @@
 - What does '\*' Wildcard do?
 - Learn about regex, patterns, wildcard meaning and what stem means in makefile.
 - read about virtual memory.
+- read more about struct and typedef.
+- read more about function derefrencing eg ft_striteri.
+- why does writing to standard error print on the console?
+- refractor putchar fd.
+- type cast for the check in memmove funciton (unsigned or signed?).
+- should we define undefined behaviour in libft project.
 
 ## **Memory**
 - the RAM is a piece of hardware that stores data for it's uptime, the data is stored in slots of 1 byte and each slot has it's own address.

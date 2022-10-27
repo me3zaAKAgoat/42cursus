@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:37:11 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/25 19:25:29 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/27 09:00:34 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	if (!s)
-		return ;
-	write(fd, s, ft_strlen(s)+1);
+	if (s)
+		write(fd, s, ft_strlen(s));
 }

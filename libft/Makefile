@@ -2,6 +2,9 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
 
+bonus_implementations = ft_lstadd_back.o ft_lstadd_front.o ft_lstclear.o ft_lstdelone.o\
+ ft_lstiter.o ft_lstlast.o ft_lstnew.o ft_lstsize.o ft_lstnew.o
+
 implementations = ft_isalpha.o ft_isdigit.o ft_isalnum.o ft_isascii.o ft_isprint.o ft_itoa.o\
  ft_strlen.o ft_memset.o ft_bzero.o ft_memcpy.o ft_memmove.o ft_strlcpy.o ft_strlcat.o\
  ft_toupper.o ft_tolower.o ft_strchr.o ft_strrchr.o ft_strncmp.o ft_memchr.o ft_strmapi.o\
@@ -13,6 +16,9 @@ all : $(NAME)
 
 $(NAME) : $(implementations) libft.h
 	ar -rsc $(NAME) $(implementations)
+
+bonus : $(bonus_implementations) libft.h
+	ar -rsc $(NAME) $(bonus_implementations)
 
 clean :
 	rm *.o

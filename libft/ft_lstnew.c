@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 16:49:07 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/27 08:58:40 by echoukri         ###   ########.fr       */
+/*   Created: 2022/10/27 00:16:43 by echoukri          #+#    #+#             */
+/*   Updated: 2022/10/27 08:43:41 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+t_list	*ft_lstnew(void *content)
 {
-	int		slen;	
+	t_list	*new_node;
 
-	if (s)
-	{
-		slen = ft_strlen(s);
-		write(fd, s, slen);
-		write(fd, "\n", 1);
-	}
+	new_node = malloc(sizeof(t_list));
+	if (!new_node)
+		return (NULL);
+	new_node->content = content;
+	new_node->next = NULL;
+	return (new_node);
 }

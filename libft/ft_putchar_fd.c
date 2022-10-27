@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:12:42 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/24 14:43:31 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/27 08:57:25 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,5 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
-	char	buf[1];
-
-	buf[0] = c;
-	write(fd, buf, 1);
+	write(fd, &c, 1);
 }
-
-// int main()
-// {
-//     ft_putchar_fd('M', 1);
-//     return (0);
-// }
