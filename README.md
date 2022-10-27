@@ -5,24 +5,17 @@
 - [Reminders](https://github.com/me3zaAKAgoat/42cursus#reminders)
 - [Memory](https://github.com/me3zaAKAgoat/42cursus#memory)
 - [Different Types Of Errors](https://github.com/me3zaAKAgoat/42cursus#different-types-of-errors)
-- [Dealing With Files](https://github.com/me3zaAKAgoat/42cursus#dealing-with-files)
+- [File Management In Unix](https://github.com/me3zaAKAgoat/42cursus#dealing-with-files)
 - [Makefile](https://github.com/me3zaAKAgoat/42cursus#makefile)
 - [Keywords](https://github.com/me3zaAKAgoat/42cursus#keywords)
 - [Miscellaneous](https://github.com/me3zaAKAgoat/42cursus#miscellaneous)
 
 ## **Reminders**
 
-- need to examine the declarations and the conflics between them and the definitons.
-- Look up endianness.
-- What does '\*' Wildcard do?
+- Need to examine the declarations and the conflicts between them and the definitons.
+- What does '*' Wildcard do?
 - Learn about regex, patterns, wildcard meaning and what stem means in makefile.
-- read about virtual memory.
-- read more about struct and typedef.
-- read more about function derefrencing eg ft_striteri.
-- why does writing to standard error print on the console?
-- refractor putchar fd.
-- type cast for the check in memmove funciton (unsigned or signed?).
-- should we define undefined behaviour in libft project.
+- Read about virtual memory.
 
 ## **Memory**
 - the RAM is a piece of hardware that stores data for it's uptime, the data is stored in slots of 1 byte and each slot has it's own address.
@@ -50,7 +43,8 @@
   **Important:** Data Structure Alignment is respected when the address at which an n-byte value is stored is divisible by n.
 
   [Video Explanation](https://youtu.be/zyGMyV955Rw)
-- [Endianness Wiki artice](https://en.wikipedia.org/wiki/Endianness)
+- **Endianness** refers the the order bytes are stored in memory. A big-endian system stores the most significant byte of a word at the smallest memory address and the least significant byte at the largest. A little-endian system, in contrast, stores the least-significant byte at the smallest address.
+[Endianness Wiki artice](https://en.wikipedia.org/wiki/Endianness)
 
 ## **Different Types Of Errors**
 
@@ -65,7 +59,7 @@
 
 - *ERRNO* is an integer variable that is set by system calls and some library functions to indicate the specifics of an error in the event that one occurs.
 
-## **Dealing With Files**
+## **File Management In Unix**
 
 > **Important resource**:
 >
@@ -81,6 +75,9 @@
   - Streams are represented by the type FILE\*.
 - #### **File Descriptors**
   - A file decscriptor is an integer that represents the connection opened between a source and a destination (mostly used in low level routines).
+
+- It is good practice to redirect all error messages to stderr, while directing regular output to stdout. It is beneficial to do this because anything written to stderr is not buffered, i.e., it is immediately written to the screen so that the user can be warned immediately.
+- Stderr is usually the console because it is the programmer tha should be notified when an error occurs.
 
 ## **Makefile**
 
@@ -119,7 +116,7 @@
 
 ## **Miscellaneous**
 
-- **lvalue** is something that can be assigned to. **rvalue** is something that can be assigned.
+- **lvalue** (comes from left hand side of assignment) is something that can be assigned to. **rvalue** (comes from right hand side of assignment) is something that can be assigned.
 - Include guards only prevent a header file from being included multiple times in the same source file. but they will not protect from a header file showing up in multiple source files.
 - **size_t** is a unsigned type that is the result of sizeof() operator, it is also the maximum size any c object can hold.
   - **SIZE_MAX** is a macro defined in stddef.h that represents the maximum value of size_t.
@@ -129,6 +126,7 @@
   - the minimum argument malloc can take is 0 and behaviour will be implentation specific, malloc will either return NULL or a unique pointer value. [Reference: Page 491, 511](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf)
 - if the programmer tries to convert from a type that can represent more values to a type that can represent less values (say from long to short) a truncation happens in an implementation defined manner.
 - Symbols are functions and variables
-- In a nutshell, an archive is a single file that contains a collection of other files and/or directories. Archive files are typically used for a transfer (locally or over the internet) or make a backup copy of a collection of files and directories which allow you to work with only one file (if compressed, it has a lower size than the sum of all files within it) instead of many. Likewise, archives are used for software application packaging. This single file can be easily compressed for ease of transfer while the files in the archive retain the structure and permissions of the original files.
+- An **archive** is a single file that contains a collection of other files and/or directories. Archive files are typically used for a transfer (locally or over the internet) or make a backup copy of a collection of files and directories which allow you to work with only one file instead of many. Likewise, archives are used for software application packaging. This single file can be easily compressed for ease of transfer while the files in the archive retain the structure and permissions of the original files.
+- Dereferencing or taking the address of a function just evaluates to a pointer to that function, and dereferencing a function pointer just evaluates back to the function pointer.
 
 
