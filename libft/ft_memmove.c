@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:47:38 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/24 18:33:21 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/28 00:51:30 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ the copying of characters will be from front to back
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned int	index;
+	size_t	index;
 
 	if (dst < src)
 	{
 		index = 0;
 		while (index < len)
 		{
-			*((unsigned char *)dst + index) = *((unsigned char *)src + index);
+			*((char *)dst + index) = *((char *)src + index);
 			index++;
 		}
 	}
@@ -43,7 +43,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	{
 		while (len)
 		{
-			*((unsigned char *) dst + len - 1) = *((unsigned char *) src
+			*((char *) dst + len - 1) = *((char *) src
 					+ len - 1);
 			len--;
 		}

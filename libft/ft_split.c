@@ -6,10 +6,12 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:45:48 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/25 18:50:40 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/28 00:53:37 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+#include <stdio.h>
 /*
 malloc : 
 -look for non c character that starts a word
@@ -24,8 +26,6 @@ for the new word and add it to the array
 -keep going till the end of the initial string
 -null terminate the array
 */
-#include "libft.h"
-#include <stdio.h>
 
 static void	*failure_clear(char	**arr)
 {
