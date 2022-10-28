@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:59:07 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/25 18:58:43 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/28 16:31:06 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		if (!ptr)
 			return (NULL);
 		else
-			ft_strlcpy(ptr, s + start, len + 1);
+			ft_strlcpy(ptr, s + start, (len <= slen - start) * len
+				+ (slen - start) * (slen - start < len) + 1);
 	}
 	return (ptr);
 }

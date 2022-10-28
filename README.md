@@ -16,6 +16,7 @@
 - What does '*' Wildcard do?
 - Learn about regex, patterns, wildcard meaning and what stem means in makefile.
 - Read about virtual memory.
+- Check why makefile runs 
 
 ## **Memory**
 - the RAM is a piece of hardware that stores data for it's uptime, the data is stored in slots of 1 byte and each slot has it's own address.

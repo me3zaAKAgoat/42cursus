@@ -6,12 +6,12 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:45:48 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/28 12:58:55 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/28 16:39:17 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
+
 /*
 malloc : 
 -look for non c character that starts a word
@@ -74,7 +74,7 @@ static char	*make_word(char const *s, int end, char c)
 	return (word);
 }
 
-char	**split_raw(char const *s, char c)
+static char	**split_raw(char const *s, char c)
 {
 	int		i;
 	int		arr_index;
@@ -82,7 +82,7 @@ char	**split_raw(char const *s, char c)
 
 	i = 0;
 	arr_index = 0;
-	arr = malloc((count(s, c)) * sizeof(char *) + 1);
+	arr = malloc(((count(s, c)) + 1) * sizeof(char *));
 	if (!arr)
 		return (NULL);
 	while (s[i])
