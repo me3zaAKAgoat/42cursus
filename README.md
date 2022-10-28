@@ -53,7 +53,7 @@
 - ##### SEGMENTATION FAULT
   Segmentation fault occurs when the program tries to access an area of memory that it is not allowed to access.
 - ##### BUS ERROR
-  Bus error occurs when the program gives a processor instruction with an addres that does not satisfy its `alignement requirements`.
+  Bus error occurs when the program gives a processor instruction with an addres that does not satisfy its **alignement requirements**.
 
 ### What is ERRNO?
 
@@ -77,7 +77,7 @@
   - A file decscriptor is an integer that represents the connection opened between a source and a destination (mostly used in low level routines).
 
 - It is good practice to redirect all error messages to stderr, while directing regular output to stdout. It is beneficial to do this because anything written to stderr is not buffered, i.e., it is immediately written to the screen so that the user can be warned immediately.
-- Stderr is usually the console because it is the programmer tha should be notified when an error occurs.
+- Stderr is usually the console because it is the programmer that should be notified when an error occurs.
 
 ## **Makefile**
 
