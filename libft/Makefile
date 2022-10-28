@@ -12,19 +12,24 @@ implementations = ft_isalpha.o ft_isdigit.o ft_isalnum.o ft_isascii.o ft_isprint
  ft_striteri.o ft_putchar_fd.o ft_putstr_fd.o ft_putendl_fd.o ft_putnbr_fd.o\
  ft_strnstr.o ft_strtrim.o
 
+sources = $(implementations:.c=.o)
+
 all : $(NAME)
 
-$(NAME) : $(implementations) libft.h
+$(NAME) : $(implementations)
 	ar -rsc $(NAME) $(implementations)
 
-bonus : $(bonus_implementations) libft.h
+bonus : $(bonus_implementations)
 	ar -rsc $(NAME) $(bonus_implementations)
 
+%.o : %.c libft.h
+	$(CC) $(CFLAGS) -c $<
+
 clean :
-	rm *.o
+	rm -f *.o
 
 fclean :
-	rm *.a *.o
+	rm -f *.a *.o
 
 re : fclean all
 
