@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
 
 bonus_implementations = ft_lstadd_back.o ft_lstadd_front.o ft_lstclear.o ft_lstdelone.o\
- ft_lstiter.o ft_lstlast.o ft_lstnew.o ft_lstsize.o ft_lstnew.o
+ ft_lstiter.o ft_lstlast.o ft_lstnew.o ft_lstsize.o ft_lstnew.o ft_lstmap.o
 
 implementations = ft_isalpha.o ft_isdigit.o ft_isalnum.o ft_isascii.o ft_isprint.o ft_itoa.o\
  ft_strlen.o ft_memset.o ft_bzero.o ft_memcpy.o ft_memmove.o ft_strlcpy.o ft_strlcat.o\

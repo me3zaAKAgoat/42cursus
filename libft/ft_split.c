@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:45:48 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/28 00:53:37 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/28 12:58:55 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static char	*make_word(char const *s, int end, char c)
 	return (word);
 }
 
-char	**ft_split(char const *s, char c)
+char	**split_raw(char const *s, char c)
 {
 	int		i;
 	int		arr_index;
@@ -100,4 +100,11 @@ char	**ft_split(char const *s, char c)
 	}
 	arr[arr_index] = NULL;
 	return (arr);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	if (!s)
+		return (NULL);
+	return (split_raw(s, c));
 }

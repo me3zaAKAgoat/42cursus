@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 06:28:28 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/27 08:43:59 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/28 11:41:47 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_lstsize(t_list *lst)
 	int	size;
 
 	size = 0;
-	while (lst->next)
+	while (lst)
 	{
 		lst = lst->next;
 		size++;

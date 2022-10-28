@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:06:17 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/28 00:51:17 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/28 10:58:15 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	unsigned char	*s1byte;
 	unsigned char	*s2byte;
 
-	s1byte = s1;
-	s2byte = s2;
+	s1byte = (unsigned char *)s1;
+	s2byte = (unsigned char *)s2;
 	i = 0;
 	if (n == 0)
 		return (0);

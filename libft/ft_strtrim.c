@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:42:25 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/25 19:24:03 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/28 11:23:49 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		end;
 	char	*ptr;
 
-	start = 0;
-	end = ft_strlen(s1)-1;
 	if (!s1 || !set)
 		return (NULL);
+	start = 0;
+	end = ft_strlen(s1)-1;
 	while (s1[start] && in_set(s1[start], set))
 		start++;
 	while (end >= 0 && in_set(s1[end], set))
