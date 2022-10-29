@@ -6,16 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:01:15 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/28 12:50:01 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/29 00:59:42 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-/*
-handle first pointer seperately so I can return the head afterwards
-then check wether the next node exists
-and apply f to it
-*/
 
 t_list	*ft_lstmap(t_list	*lst, void	*(*f)(void *), void (*del)(void *))
 {
