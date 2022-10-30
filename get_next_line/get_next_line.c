@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 01:08:56 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/30 03:13:53 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/30 17:58:56 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ string variable.
 -set a static variable that keeps the string.
 -keep the read string as long as it's not fully exhausted
 -only when the string is exhausted prompt another read command
+- exhaustion? have a variable that keeps the count of characters that haven't been exhausted
 */
 
 #include "get_next_line.h"
@@ -89,25 +90,45 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (ptr);
 }
 
-// char	*get_next_line(int fd)
-// {
-// 	int			i;
-// 	int			iterator_on_str;
-// 	static char	str[BUFFER_SIZE];
-// 	static int	exhausted;
+char	*get_next_line(int fd)
+{
+	static int	iterator_on_str;
+	static char	str[BUFFER_SIZE];
+	static int	bytes_left;
+	char		*return_str;
 
-// 	i = read(fd, &str, BUFFER_SIZE);
-// }
+	iterator_on_str = 0;
+	if (bytes_left)
+	{
+		while (str[iterator_on_str])
+		{
+			if (str[iterator_on_str] == c || str[iterator_on_str] == '\0')
+			{
+				bytes_left -= iterator_on_str;
+				return_str = ft_substr(str, 0, iterator_on_str);
+				return (return_str);				
+			}
 
-// int main()
-// {
-// 	int	f;
+		}
+		return (ft_substr());
+	}
+	bytes_left = read(fd, str, BUFFER_SIZE);
+	while (bytes_left)
+	{
 
-// 	f = open("get_next_line.c", O_RDONLY);
-// 	printf("%s", get_next_line(f));
-// 	printf("%s", get_next_line(f));
-// 	printf("%s", get_next_line(f));
-// 	printf("%s", get_next_line(f));
-// 	printf("%s", get_next_line(f));
-// 	return (0);
-// }
+	}
+
+}
+
+int main()
+{
+	int	f;
+
+	f = open("get_next_line.c", O_RDONLY);
+	printf("%s", get_next_line(f));
+	printf("%s", get_next_line(f));
+	printf("%s", get_next_line(f));
+	printf("%s", get_next_line(f));
+	printf("%s", get_next_line(f));
+	return (0);
+}
