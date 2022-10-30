@@ -6,14 +6,17 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 01:08:56 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/29 21:31:01 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/30 03:13:53 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
--read buffer size characters from the file descriptor then check for
-a newline character or a nullbyte character
--set a static variable that keeps the file position
+-read buffer size characters from the file descriptor and put it in 
+string variable.
+-check for a newline character or a nullbyte character.
+-set a static variable that keeps the string.
+-keep the read string as long as it's not fully exhausted
+-only when the string is exhausted prompt another read command
 */
 
 #include "get_next_line.h"
@@ -86,27 +89,25 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (ptr);
 }
 
-char	*get_next_line(int fd)
-{
-	int		i;
-	int		iterator_on_str;
-	char	str[BUFFER_SIZE];
+// char	*get_next_line(int fd)
+// {
+// 	int			i;
+// 	int			iterator_on_str;
+// 	static char	str[BUFFER_SIZE];
+// 	static int	exhausted;
 
-	i = read(fd, &str, BUFFER_SIZE);
-	iterator_on_str = 0;
-	if (i == 0)
-		return (ft_substr(str, 0, iterator_on_str + 1)); // how to handle the case where teh end of file is reached
-	while (str[iterator_on_str])
-	{
-		if (str[iterator_on_str] == '\n')
-			return (ft_substr(str, 0, iterator_on_str + 1));
-		str++;
-	}
-	return (ft_substr(str, 0, iterator_on_str + 1));
-}
+// 	i = read(fd, &str, BUFFER_SIZE);
+// }
 
-int main()
-{
-	printf("%s", get_next_line());
-	return (0);
-}
+// int main()
+// {
+// 	int	f;
+
+// 	f = open("get_next_line.c", O_RDONLY);
+// 	printf("%s", get_next_line(f));
+// 	printf("%s", get_next_line(f));
+// 	printf("%s", get_next_line(f));
+// 	printf("%s", get_next_line(f));
+// 	printf("%s", get_next_line(f));
+// 	return (0);
+// }
