@@ -6,14 +6,14 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 06:25:17 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/31 13:09:19 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/02 02:58:21 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	ft_lstadd_front(t_list *head, t_list *new)
 {
 	new->next = *lst;
-	*lst = new;
+	head = new;
 }
