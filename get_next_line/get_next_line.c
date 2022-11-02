@@ -6,18 +6,28 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 01:08:56 by echoukri          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/10/30 17:58:56 by echoukri         ###   ########.fr       */
+=======
+/*   Updated: 2022/10/31 12:24:40 by echoukri         ###   ########.fr       */
+>>>>>>> 38ca8f4 (removed protections from segfaults in functions that would not cause memory leaks and brushed up the algorithm of GNL)
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 -read buffer size characters from the file descriptor and put it in 
 string variable.
+<<<<<<< HEAD
 -check for a newline character or a nullbyte character.
 -set a static variable that keeps the string.
 -keep the read string as long as it's not fully exhausted
 -only when the string is exhausted prompt another read command
 - exhaustion? have a variable that keeps the count of characters that haven't been exhausted
+=======
+-set the bytes read static variable
+-the static string variable should be thought of as a big chain that gets 
+upcoming read strings glued to it and returned strings split from it
+>>>>>>> 38ca8f4 (removed protections from segfaults in functions that would not cause memory leaks and brushed up the algorithm of GNL)
 */
 
 #include "get_next_line.h"
@@ -92,6 +102,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 char	*get_next_line(int fd)
 {
+<<<<<<< HEAD
 	static int	iterator_on_str;
 	static char	str[BUFFER_SIZE];
 	static int	bytes_left;
@@ -124,6 +135,38 @@ int main()
 {
 	int	f;
 
+=======
+	char		str[BUFFER_SIZE];
+	int			i;
+	static char	**lines_arr;
+	static int	list_index;
+	static int	list_length;
+
+	if (list_index >= list_length - 1)
+	{
+		read(fd, str, BUFFER_SIZE);
+		while (str[i])
+		{
+			if (str[i] == '\n')
+				list_length++;
+			i++;
+		}
+		lines_arr = ft_split(str, '\n');
+		list_index = 0;
+		return (lines_arr[list_index]);
+	}
+	else
+	{
+		list_index++;
+		return (lines_arr[list_index]);
+	}
+}
+
+int main()
+{
+	int	f;
+
+>>>>>>> 38ca8f4 (removed protections from segfaults in functions that would not cause memory leaks and brushed up the algorithm of GNL)
 	f = open("get_next_line.c", O_RDONLY);
 	printf("%s", get_next_line(f));
 	printf("%s", get_next_line(f));

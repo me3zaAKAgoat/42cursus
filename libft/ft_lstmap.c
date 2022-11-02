@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:01:15 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/29 00:59:42 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/10/31 13:12:28 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ t_list	*ft_lstmap(t_list	*lst, void	*(*f)(void *), void (*del)(void *))
 	t_list	*head_ptr;
 	t_list	*new_ptr;
 
-	if (!lst || !f || !del)
-		return (NULL);
 	head_ptr = NULL;
 	while (lst)
 	{
