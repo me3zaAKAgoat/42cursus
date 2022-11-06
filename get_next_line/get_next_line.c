@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 01:08:56 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/06 05:35:11 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/06 20:55:35 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,37 @@
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*gnl_join(char *static_str, char *read_str, int bytes_left,
+				int bytes_read)
 {
 	char	*ptr;
 	int		i;
 	int		j;
-
-	if (!s1 && !s2)
+	int		x=0;
+	printf("bytes left: %d, bytes read: %d\n", bytes_left, bytes_read);
+	if (!static_str && !read_str)
 		return (NULL);
-	else if (!s1)
-		return (s2);
-	else if (!s2)
-		return (s1);
-	ptr = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	ptr = malloc(bytes_left + 1);
 	if (!ptr)
 		return (NULL);
 	i = 0;
-	j = 0;
-	while (s1[i])
+	if (static_str != NULL)
 	{
-		ptr[i] = s1[i];
-		i++;
+		while (i < (bytes_left - bytes_read))
+		{
+			ptr[i] = static_str[i];
+			i++;
+		}
 	}
-	while (s2[j])
-		ptr[i++] = s2[j++];
+	free(static_str);
+	j = 0;
+	if (read_str != NULL)
+		while (j < bytes_read)
+			ptr[i++] = read_str[j++];
+	puts("xddopen");
+	while (x<bytes_left)
+		printf("%c", ptr[x++]);
+	puts("\nxddclose");
 	ptr[i] = '\0';
 	return (ptr);
 }
@@ -52,7 +59,7 @@ char	*cut_returned_string(char	**static_str, int *bytes_left,
 
 	str = ft_substr(*static_str, 0, iterator_on_str + 1);
 	*static_str = ft_substr(*static_str, iterator_on_str + 1,
-			*bytes_left - iterator_on_str - 1);
+			*bytes_left - iterator_on_str + 1);
 	*bytes_left -= iterator_on_str;
 	return (str);
 }
@@ -66,13 +73,13 @@ char	*get_next_line(int fd)
 	int				bytes_read;
 
 	bytes_read = read(fd, read_str, BUFFER_SIZE);
-	if (!bytes_read)
-		return ("");
 	bytes_left += bytes_read;
-	static_str = ft_strjoin(static_str, read_str);
+	static_str = gnl_join(static_str, read_str, bytes_left, bytes_read);
 	iterator_on_str = 0;
+	printf("%s\n", static_str);
 	while (iterator_on_str < bytes_left)
 	{
+		printf("%d\n", iterator_on_str);
 		if (static_str[iterator_on_str]
 			== '\n')
 			return (cut_returned_string(&static_str, &bytes_left,
@@ -85,17 +92,13 @@ char	*get_next_line(int fd)
 int main()
 {
 	int	f;
-
+	int i = 0;
 	f = open("get_next_line.c", O_RDONLY);
-	printf("line 1:%s", get_next_line(f));
-	printf("line 2:%s", get_next_line(f));
-	printf("line 3:%s", get_next_line(f));
-	printf("line 4:%s", get_next_line(f));
-	printf("line 5:%s", get_next_line(f));
-	printf("line 6:%s", get_next_line(f));
-	printf("line 7:%s", get_next_line(f));
-	printf("line 8:%s", get_next_line(f));
-	printf("line 9:%s", get_next_line(f));
-	printf("line 10:%s", get_next_line(f));
+
+	while (i < 4)
+	{
+		get_next_line(f);
+		i++;
+	}
 	return (0);
 }

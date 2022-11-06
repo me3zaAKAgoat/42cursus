@@ -6,16 +6,18 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 11:38:30 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/05 21:21:30 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/06 19:26:45 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	gnl_strlen(const char *s)
 {
 	size_t	len;
 
+	if (!s)
+		return (0);
 	len = 0;
 	while (s[len])
 		len++;
@@ -41,7 +43,7 @@ static size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t			srcl;
 
-	srcl = ft_strlen(src);
+	srcl = gnl_strlen(src);
 	if (srcl < size)
 		ft_memcpy(dst, src, srcl + 1);
 	else if (size != 0)
@@ -59,7 +61,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	slen = ft_strlen(s);
+	slen = gnl_strlen(s);
 	if (start >= slen)
 	{
 		ptr = malloc(1);
