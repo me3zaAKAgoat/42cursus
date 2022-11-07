@@ -6,14 +6,17 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 01:08:56 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/07 19:42:14 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/07 19:46:11 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-the idea of get next line is to keep have an elongated string that gets returned lines cut off from it 
-and keeps newly read input as a suffix that will be cut off in the next iterations if a new line is found
+the idea of get next line is to keep have an elongated string that 
+gets returned lines cut off from it 
+and keeps newly read input as a suffix that will be cut off in the
+ next iterations if a new line is found
 */
+
 #include "get_next_line.h"
 
 int	gnl_join(char **pointer_to_ss, char *read_str, int bytes_read)
@@ -68,7 +71,7 @@ char	*get_next_line(int fd)
 	if ((!bytes_read && !bytes_left) || bytes_read == -1)
 		return (NULL);
 	if (gnl_join(&static_str, read_str, bytes_read) == -1)
-		return ("failed xdd");
+		return (NULL);
 	iterator_on_str = 0;
 	while (*(static_str + iterator_on_str))
 	{
