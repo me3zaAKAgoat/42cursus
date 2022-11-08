@@ -6,18 +6,19 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 01:08:56 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/08 15:01:46 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/08 17:12:23 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-the idea of get next line is to keep have an elongated string that 
-gets returned lines cut off from it 
-and keeps newly read input as a suffix that will be cut off in the
- next iterations if a new line is found
 */
-
 #include "get_next_line.h"
+
+char	*leak_protector(char *static_str)
+{
+	free(static_str);
+	return (NULL);
+}
 
 int	gnl_join(char **pointer_to_ss, char *read_str, int bytes_read)
 {
@@ -47,45 +48,48 @@ int	gnl_join(char **pointer_to_ss, char *read_str, int bytes_read)
 	return (0);
 }
 
-char	*gnl_cut(char	**static_str, int iterator_on_str,
-			int *pointer_to_dontread)
+char	*gnl_cut(char	**pointer_to_ss, int iterator_on_str)
 {
 	char	*return_str;
 
-	return_str = ft_substr(*static_str, 0, iterator_on_str + 1);
-	*static_str = ft_substr(*static_str, iterator_on_str + 1,
-			gnl_strlen(*static_str) - iterator_on_str);
-	*pointer_to_dontread = 1;
+	return_str = ft_substr(*pointer_to_ss, 0, iterator_on_str + 1);
+	if (!return_str)
+		return (leak_protector(*pointer_to_ss));
+	*pointer_to_ss = ft_substr(*pointer_to_ss, iterator_on_str + 1,
+			gnl_strlen(*pointer_to_ss) - iterator_on_str);
+	if (!*pointer_to_ss)
+		return (leak_protector(*pointer_to_ss));
 	return (return_str);
 }
+
 
 char	*get_next_line(int fd)
 {
 	static char		*static_str;
-	static int		dont_read;
+	static int		shouldnt_read;
 	char			read_str[BUFFER_SIZE];
 	int				iterator_on_str;
 	int				bytes_read;
 
 	bytes_read = 0;
-	if (!dont_read)
-	{
+	if (!shouldnt_read)
 		bytes_read = read(fd, read_str, BUFFER_SIZE);
-		if ((!bytes_read && !gnl_strlen(static_str)) || bytes_read == -1)
-			return (NULL);
-		if (gnl_join(&static_str, read_str, bytes_read) == -1)
-			return (NULL);
-	}
+	if (!bytes_read && gnl_strlen(static_str))
+		return (static_str);
+	if (bytes_read == -1 || gnl_join(&static_str, read_str, bytes_read) == -1
+		|| (!bytes_read && !gnl_strlen(static_str)))
+		return (leak_protector(static_str));
 	iterator_on_str = 0;
 	while (*(static_str + iterator_on_str))
 	{
 		if (*(static_str + iterator_on_str) == '\n')
 		{
-			return (gnl_cut(&static_str, iterator_on_str, &dont_read));
+			shouldnt_read = 1;
+			return (gnl_cut(&static_str, iterator_on_str));
 		}
 		iterator_on_str++;
 	}
-	dont_read = 0;
+	shouldnt_read = 0;
 	return (get_next_line(fd));
 }
 
@@ -95,7 +99,7 @@ char	*get_next_line(int fd)
 // 	int i = 0;
 
 // 	f = open("get_next_line.c", O_RDONLY);
-// 	while (i < 104)
+// 	while (i < 94)
 // 	{
 // 		printf("LINE %s", get_next_line(f));
 // 		i++;
