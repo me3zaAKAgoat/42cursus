@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 01:08:56 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/07 19:46:11 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/08 15:01:46 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,40 +47,45 @@ int	gnl_join(char **pointer_to_ss, char *read_str, int bytes_read)
 	return (0);
 }
 
-char	*gnl_cut(char	**static_str, int iterator_on_str, int *bytes_left)
+char	*gnl_cut(char	**static_str, int iterator_on_str,
+			int *pointer_to_dontread)
 {
 	char	*return_str;
 
 	return_str = ft_substr(*static_str, 0, iterator_on_str + 1);
 	*static_str = ft_substr(*static_str, iterator_on_str + 1,
 			gnl_strlen(*static_str) - iterator_on_str);
-	*bytes_left -= iterator_on_str;
+	*pointer_to_dontread = 1;
 	return (return_str);
 }
 
 char	*get_next_line(int fd)
 {
 	static char		*static_str;
-	static int		bytes_left;
+	static int		dont_read;
 	char			read_str[BUFFER_SIZE];
 	int				iterator_on_str;
 	int				bytes_read;
 
-	bytes_read = read(fd, read_str, BUFFER_SIZE);
-	bytes_left += bytes_read;
-	if ((!bytes_read && !bytes_left) || bytes_read == -1)
-		return (NULL);
-	if (gnl_join(&static_str, read_str, bytes_read) == -1)
-		return (NULL);
+	bytes_read = 0;
+	if (!dont_read)
+	{
+		bytes_read = read(fd, read_str, BUFFER_SIZE);
+		if ((!bytes_read && !gnl_strlen(static_str)) || bytes_read == -1)
+			return (NULL);
+		if (gnl_join(&static_str, read_str, bytes_read) == -1)
+			return (NULL);
+	}
 	iterator_on_str = 0;
 	while (*(static_str + iterator_on_str))
 	{
 		if (*(static_str + iterator_on_str) == '\n')
 		{
-			return (gnl_cut(&static_str, iterator_on_str, &bytes_left));
+			return (gnl_cut(&static_str, iterator_on_str, &dont_read));
 		}
 		iterator_on_str++;
 	}
+	dont_read = 0;
 	return (get_next_line(fd));
 }
 
@@ -89,8 +94,8 @@ char	*get_next_line(int fd)
 // 	int	f;
 // 	int i = 0;
 
-// 	f = open("xd", O_RDONLY);
-// 	while (i < 94)
+// 	f = open("get_next_line.c", O_RDONLY);
+// 	while (i < 104)
 // 	{
 // 		printf("LINE %s", get_next_line(f));
 // 		i++;
