@@ -5,92 +5,120 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 01:08:56 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/08 17:12:23 by echoukri         ###   ########.fr       */
+/*   Created: 2022/11/08 17:30:23 by echoukri          #+#    #+#             */
+/*   Updated: 2022/11/08 21:17:28 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-*/
 #include "get_next_line.h"
 
-char	*leak_protector(char *static_str)
-{
-	free(static_str);
-	return (NULL);
-}
-
-int	gnl_join(char **pointer_to_ss, char *read_str, int bytes_read)
+/*
+-2 means no reads were done **intentionally**
+*/
+int	gnl_join(char	**ptr_to_staticS, char read_str[BUFFER_SIZE],
+			int bytes_read)
 {
 	char	*ptr;
 	int		i;
 	int		j;
 
-	ptr = malloc(gnl_strlen(*pointer_to_ss) + bytes_read + 1);
+	ptr = malloc(gnl_strlen(*ptr_to_staticS) + bytes_read + 1);
 	if (!ptr)
 		return (-1);
 	i = 0;
-	if ((*pointer_to_ss))
+	j = 0;
+	if (*ptr_to_staticS)
 	{
-		while (*(*pointer_to_ss + i))
+		while (*(*ptr_to_staticS + i))
 		{
-			ptr[i] = *(*pointer_to_ss + i);
-			i++;
+			ptr[i++] = *(*ptr_to_staticS + j++);
 		}
-		free(*pointer_to_ss);
+		free(*ptr_to_staticS);
 	}
 	j = 0;
-	if (read_str)
+	if (bytes_read)
 		while (j < bytes_read)
 			ptr[i++] = read_str[j++];
 	ptr[i] = '\0';
-	*pointer_to_ss = ptr;
+	*ptr_to_staticS = ptr;
 	return (0);
 }
 
-char	*gnl_cut(char	**pointer_to_ss, int iterator_on_str)
+char	*look_for_newline(int fd, char	**ptr_to_staticS, int *ptr_to_nread)
 {
+	int		iterator_on_str;
 	char	*return_str;
 
-	return_str = ft_substr(*pointer_to_ss, 0, iterator_on_str + 1);
-	if (!return_str)
-		return (leak_protector(*pointer_to_ss));
-	*pointer_to_ss = ft_substr(*pointer_to_ss, iterator_on_str + 1,
-			gnl_strlen(*pointer_to_ss) - iterator_on_str);
-	if (!*pointer_to_ss)
-		return (leak_protector(*pointer_to_ss));
-	return (return_str);
-}
-
-
-char	*get_next_line(int fd)
-{
-	static char		*static_str;
-	static int		shouldnt_read;
-	char			read_str[BUFFER_SIZE];
-	int				iterator_on_str;
-	int				bytes_read;
-
-	bytes_read = 0;
-	if (!shouldnt_read)
-		bytes_read = read(fd, read_str, BUFFER_SIZE);
-	if (!bytes_read && gnl_strlen(static_str))
-		return (static_str);
-	if (bytes_read == -1 || gnl_join(&static_str, read_str, bytes_read) == -1
-		|| (!bytes_read && !gnl_strlen(static_str)))
-		return (leak_protector(static_str));
 	iterator_on_str = 0;
-	while (*(static_str + iterator_on_str))
+	while (*(*ptr_to_staticS + iterator_on_str))
 	{
-		if (*(static_str + iterator_on_str) == '\n')
+		if (*(*ptr_to_staticS + iterator_on_str) == '\n')
 		{
-			shouldnt_read = 1;
-			return (gnl_cut(&static_str, iterator_on_str));
+			return_str = ft_substr(*ptr_to_staticS, 0, iterator_on_str + 1);
+			*ptr_to_staticS = ft_substr(*ptr_to_staticS, iterator_on_str + 1,
+					gnl_strlen(*ptr_to_staticS) - iterator_on_str);
+			if (!*ptr_to_staticS || !return_str)
+			{
+				free(*ptr_to_staticS);
+				return (NULL);
+			}
+			return (return_str);
 		}
 		iterator_on_str++;
 	}
-	shouldnt_read = 0;
+	*ptr_to_nread = 0;
 	return (get_next_line(fd));
+}
+
+int	read_file(int fd, char ptr_to_readS[BUFFER_SIZE], int *ptr_to_nread)
+{
+	int			read_status;
+
+	read_status = 0;
+	if (!*ptr_to_nread)
+		read_status = read(fd, ptr_to_readS, BUFFER_SIZE);
+	return (read_status);
+}
+
+char	*flush_last_line(char	**ptr_to_staticS)
+{
+	char		*last_str;
+	int			i;
+
+	last_str = malloc(gnl_strlen(*ptr_to_staticS) + 1);
+	if (!last_str)
+		return (NULL);
+	i = 0;
+	while (*(*ptr_to_staticS + i))
+	{
+		last_str[i] = *(*ptr_to_staticS + i);
+		i++;
+	}
+	last_str[i] = '\0';
+	free(*ptr_to_staticS);
+	*ptr_to_staticS = NULL;
+	return (last_str);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*static_str;
+	static int	shouldnt_read;
+	char		read_str[BUFFER_SIZE];
+	int			bytes_read;
+
+	bytes_read = read_file(fd, read_str, &shouldnt_read);
+	if (bytes_read == -1)
+		return (NULL);
+	if (!bytes_read && !shouldnt_read && !gnl_strlen(static_str))
+		return (NULL);
+	if (!bytes_read && !shouldnt_read && gnl_strlen(static_str))
+		return (flush_last_line(&static_str));
+	if (!shouldnt_read)
+		if (gnl_join(&static_str, read_str, bytes_read) == -1)
+			return (NULL);
+	shouldnt_read = 1;
+	return (look_for_newline(fd, &static_str, &shouldnt_read));
 }
 
 // int main()
@@ -98,10 +126,10 @@ char	*get_next_line(int fd)
 // 	int	f;
 // 	int i = 0;
 
-// 	f = open("get_next_line.c", O_RDONLY);
-// 	while (i < 94)
+// 	f = open("xdd.c", O_RDONLY);
+// 	while (i < 119)
 // 	{
-// 		printf("LINE %s", get_next_line(f));
+// 		printf("LINE %d %s", i + 1, get_next_line(f));
 // 		i++;
 // 	}
 // 	return (0);

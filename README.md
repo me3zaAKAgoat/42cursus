@@ -129,5 +129,9 @@
 - Symbols are functions and variables
 - An **archive** is a single file that contains a collection of other files and/or directories. Archive files are typically used for a transfer (locally or over the internet) or make a backup copy of a collection of files and directories which allow you to work with only one file instead of many. Likewise, archives are used for software application packaging. This single file can be easily compressed for ease of transfer while the files in the archive retain the structure and permissions of the original files.
 - Dereferencing or taking the address of a function just evaluates to a pointer to that function, and dereferencing a function pointer just evaluates back to the function pointer.
+
+
+
+char(*)[3] and char** are fundamentally different and the former cannot decay to the latter. char** is a pointer to something that is a char*, it might be an array of char*, but that's not an array of char of length 3.
 # **NB: YOU NEED NOT PROTECT FROM SEGFAULTS IN FUNCTIONS THAT WOULD NOT LEAD TO MEMORY LEAKS.**
 
