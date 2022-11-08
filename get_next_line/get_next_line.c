@@ -6,13 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 01:08:56 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/07 19:42:14 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/08 15:54:05 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-the idea of get next line is to keep have an elongated string that gets returned lines cut off from it 
-and keeps newly read input as a suffix that will be cut off in the next iterations if a new line is found
 */
 #include "get_next_line.h"
 
