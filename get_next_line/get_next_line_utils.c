@@ -6,11 +6,17 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 11:38:30 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/06 19:26:45 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/10 18:14:04 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	*clear_leaks(char **ptr_to_staticS)
+{
+	free(*ptr_to_staticS);
+	return (NULL);
+}
 
 size_t	gnl_strlen(const char *s)
 {
