@@ -6,15 +6,26 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:30:23 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/10 18:26:37 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/10 21:09:25 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 /*
--2 means no reads were done **intentionally**
+whenever get next line is entered the program shall check wether read 
+returns 0 or more.
+if read is -1 the function shall immediately free static str and 
+return NULL.
+if read returns 0 and static str is a null pointer the function 
+shall return NULL.
+if read returns 0 and static str is not a null pointer 
+the function shall return static str.
+if read isnt 0 the function should concatenate static str and 
+and what was read and  then look for newline character to return 
+the line found and cut static str using substr.
 */
+
 char	*gnl_join(char	**ptr_to_staticS, char read_str[BUFFER_SIZE],
 			int bytes_read)
 {
@@ -22,9 +33,11 @@ char	*gnl_join(char	**ptr_to_staticS, char read_str[BUFFER_SIZE],
 	int		i;
 	int		j;
 
+	if (!*ptr_to_staticS && !bytes_read)
+		return (NULL);
 	ptr = malloc(gnl_strlen(*ptr_to_staticS) + bytes_read + 1);
 	if (!ptr)
-		return (	(ptr_to_staticS));
+		return (clear_leaks(ptr_to_staticS));
 	i = 0;
 	j = 0;
 	if (*ptr_to_staticS)
@@ -44,12 +57,13 @@ char	*gnl_join(char	**ptr_to_staticS, char read_str[BUFFER_SIZE],
 	return (*ptr_to_staticS);
 }
 
-char	*look_for_newline(int fd, char	**ptr_to_staticS, int *ptr_to_nread)
+char	*look_for_newline(char	**ptr_to_staticS, int	*ptr_to_eof)
 {
 	int		iterator_on_str;
 	char	*return_str;
 
 	iterator_on_str = 0;
+	// printf("static str after joins '%c'", **ptr_to_staticS);
 	while (*(*ptr_to_staticS + iterator_on_str))
 	{
 		if (*(*ptr_to_staticS + iterator_on_str) == '\n')
@@ -63,62 +77,46 @@ char	*look_for_newline(int fd, char	**ptr_to_staticS, int *ptr_to_nread)
 		}
 		iterator_on_str++;
 	}
-	*ptr_to_nread = 0;
-	return (get_next_line(fd));
+	*ptr_to_eof = 1;
+	return (*ptr_to_staticS);
 }
 
-int	read_file(int fd, char ptr_to_readS[BUFFER_SIZE], int *ptr_to_nread)
+int	read_file(int fd, char	**ptr_to_staticS)
 {
-	int			read_status;
+	char	read_str[BUFFER_SIZE];
+	int		bytes_read;
 
-	read_status = 0;
-	if (!*ptr_to_nread)
-		read_status = read(fd, ptr_to_readS, BUFFER_SIZE);
-	return (read_status);
-}
-
-char	*flush_last_line(char	**ptr_to_staticS)
-{
-	char		*last_str;
-	int			i;
-
-	last_str = malloc(gnl_strlen(*ptr_to_staticS) + 1);
-	if (!last_str)
-		return (clear_leaks(ptr_to_staticS));
-	i = 0;
-	while (*(*ptr_to_staticS + i))
+	bytes_read = -2;
+	while (bytes_read)
 	{
-		last_str[i] = *(*ptr_to_staticS + i);
-		i++;
+		bytes_read = read(fd, read_str, BUFFER_SIZE);
+		if (bytes_read == -1)
+		{
+			free(*ptr_to_staticS);
+			return (-1);
+		}
+		if (!gnl_join(ptr_to_staticS, read_str, bytes_read))
+			return (-1);
 	}
-	last_str[i] = '\0';
-	free(*ptr_to_staticS);
-	*ptr_to_staticS = NULL;
-	return (last_str);
+	return (bytes_read);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*static_str;
-	static int	shouldnt_read;
-	char		read_str[BUFFER_SIZE];
-	int			bytes_read;
+	static int	eof;
+	int			read_result;
 
-	bytes_read = read_file(fd, read_str, &shouldnt_read);
-	if (bytes_read == -1)
+	if (eof)
 	{
 		free(static_str);
+		static_str = NULL;
 		return (NULL);
 	}
-	if (!bytes_read && !shouldnt_read && !gnl_strlen(static_str))
+	read_result = read_file(fd, &static_str);
+	if (read_result == -1)
 		return (NULL);
-	if (!bytes_read && !shouldnt_read && gnl_strlen(static_str))
-		return (flush_last_line(&static_str));
-	if (!shouldnt_read)
-		if (gnl_join(&static_str, read_str, bytes_read) == NULL)
-			return (NULL);
-	shouldnt_read = 1;
-	return (look_for_newline(fd, &static_str, &shouldnt_read));
+	return (look_for_newline(&static_str, &eof));
 }
 
 // int main()
@@ -127,7 +125,7 @@ char	*get_next_line(int fd)
 // 	int i = 0;
 
 // 	f = open("xdd.c", O_RDONLY);
-// 	while (i < 119)
+// 	while (i < 3)
 // 	{
 // 		printf("LINE %d %s", i + 1, get_next_line(f));
 // 		i++;
