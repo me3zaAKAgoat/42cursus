@@ -6,15 +6,16 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 11:38:30 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/10 18:14:04 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/12 18:46:23 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*clear_leaks(char **ptr_to_staticS)
+void	*clear_leaks(char **ptr_to_str)
 {
-	free(*ptr_to_staticS);
+	if (*ptr_to_str)
+		free(*ptr_to_str);
 	return (NULL);
 }
 
@@ -60,7 +61,7 @@ static size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (srcl);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*gnl_substr(char const *s, unsigned int start, size_t len)
 {
 	char		*ptr;
 	size_t		slen;
