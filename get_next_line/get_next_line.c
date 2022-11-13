@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:30:23 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/12 19:29:31 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/13 17:48:28 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,123 +26,98 @@ and what was read and  then look for newline character to return
 the line found and cut static str using substr.
 */
 
-char	*gnl_join(char	**pto_static_str, char read_str[BUFFER_SIZE])
+char	*gnl_join(char	*static_str, char *read_str)
 {
 	char	*ptr;
 	int		i;
 	int		j;
 
-	ptr = malloc(gnl_strlen(*pto_static_str) + gnl_strlen(read_str) + 1);
+	ptr = malloc(gnl_strlen(static_str) + gnl_strlen(read_str) + 1);
 	if (!ptr)
-		return (clear_leaks(pto_static_str));
+		return (free(static_str), NULL);
 	i = 0;
 	j = 0;
-	if (*pto_static_str)
+	if (static_str)
 	{
-		while (*(*pto_static_str + i))
+		while (*(static_str + i))
 		{
-			ptr[i++] = *(*pto_static_str + j++);
+			ptr[i++] = *(static_str + j++);
 		}
-		free(*pto_static_str);
+		free(static_str);
 	}
 	j = 0;
 	if (read_str)
 		while (read_str[j])
 			ptr[i++] = read_str[j++];
 	ptr[i] = '\0';
-	*pto_static_str = ptr;
-	return (*pto_static_str);
+	return (ptr);
 }
 
-char	*look_for_newline(char	**pto_static_str)
+// look for newline in the last read string/ return 0 if not found / return index if newline if found
+int	look_for_newline(char	*str)
 {
-	int		iterator_on_str;
-	char	*return_str;
-	char	*cut_str;
-
-	iterator_on_str = 0;
-	while (*(*pto_static_str + iterator_on_str))
+	int	index;
+	
+	if (!str)
+		return (0);
+	index = 0;
+	while (str[index])
 	{
-		if (*(*pto_static_str + iterator_on_str) == '\n')
-		{
-			return_str = gnl_substr(*pto_static_str, 0, iterator_on_str + 1);
-			if (!return_str)
-			{
-				free(*pto_static_str);
-				return (clear_leaks(&return_str));
-			}
-			cut_str = gnl_substr(*pto_static_str, iterator_on_str + 1,
-					gnl_strlen(*pto_static_str) - iterator_on_str);
-			if (!cut_str)
-			{
-				free(*pto_static_str);
-				return (clear_leaks(&cut_str));
-			}
-			free(*pto_static_str);
-			*pto_static_str = cut_str;
-			return (return_str);
-		}
-		iterator_on_str++;
-	}
-	return_str = gnl_substr(*pto_static_str, 0, iterator_on_str + 1);
-	if (!return_str)
-	{
-		free(*pto_static_str);
-		return (clear_leaks(&return_str));
-	}
-	cut_str = gnl_substr(*pto_static_str, iterator_on_str + 1,
-			gnl_strlen(*pto_static_str) - iterator_on_str);
-	if (!cut_str)
-	{
-		free(*pto_static_str);
-		return (clear_leaks(&cut_str));
-	}
-	free(*pto_static_str);
-	*pto_static_str = cut_str;
-	return (return_str);
-}
-
-int	read_file(int fd, char	**pto_static_str)
-{
-	char	read_str[BUFFER_SIZE + 1];
-	int		bytes_read;
-
-	bytes_read = -2;
-	while (bytes_read)
-	{
-		bytes_read = read(fd, read_str, BUFFER_SIZE);
-		if (bytes_read == 0)
-			return (0);
-		if (bytes_read == -1)
-		{
-			if (*pto_static_str)
-				free(*pto_static_str);
-			return (-1);
-		}
-		read_str[bytes_read] = 0;
-		if (!gnl_join(pto_static_str, read_str))
-			return (-1);
+		if (str[index] == '\n')
+			return (index);
+		index++;
 	}
 	return (0);
+}
+
+char	*cut_and_return(char **pto_static_str)
+{
+	int	index;
+	char	*return_str;
+	char	*tmp_str;
+
+	index = 0;
+	while (*(*pto_static_str + index))
+	{
+		if (*(*pto_static_str + index) == '\n')
+		{
+			return_str = gnl_substr(*pto_static_str, 0, index + 1);
+			if (!return_str)
+				return (free(*pto_static_str), NULL);
+			tmp_str =  gnl_substr(*pto_static_str, index + 1, gnl_strlen(*pto_static_str) - index);
+			if (!tmp_str)
+				return (free(return_str), free(*pto_static_str), NULL);
+			return (free(*pto_static_str), *pto_static_str = tmp_str, return_str);
+		}
+		index++;
+	}
+	return (NULL);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*static_str;
-	int			read_result;
+	char		*read_str;
+	int			bytes_read;
 
-	read_result = read_file(fd, &static_str);
-	if (read_result == -1)
-		return (NULL);
-	if (!static_str)
-		return (NULL);
-	if (!gnl_strlen(static_str))
+	read_str = malloc(BUFFER_SIZE + 1);
+	while (look_for_newline(static_str) == 0)
 	{
-		free(static_str);
-		static_str = NULL;
-		return (NULL);
+		bytes_read = read(fd, read_str, BUFFER_SIZE);
+		read_str[bytes_read] = 0;
+		// printf("%d\n", bytes_read);
+		if (bytes_read == 0 && gnl_strlen(static_str))
+			break;
+		else if (bytes_read == 0)
+		{
+			if (!static_str)
+				return (free(read_str), NULL);
+			else if (!gnl_strlen(static_str))
+				return (free(read_str), free(static_str), static_str = NULL, NULL);
+		}
+		static_str = gnl_join(static_str, read_str);
 	}
-	return (look_for_newline(&static_str));
+	return (free(read_str), cut_and_return(&static_str));
 }
 
 int main()
