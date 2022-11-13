@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 21:16:21 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/13 20:39:00 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/13 21:43:45 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define GET_NEXT_LINE_BONUS_H
 // # define BUFFER_SIZE 600
 # include <unistd.h>
-# include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 

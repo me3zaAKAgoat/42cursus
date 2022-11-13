@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:30:23 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/13 20:44:00 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/13 21:43:33 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,6 @@ int	look_for_newline(char	*str)
 	return (0);
 }
 
-static char	*only_cut(char **pto_static_str, int index)
-{
-	char	*tmp_str;
-	char	*return_str;
-
-	return_str = gnl_substr(*pto_static_str, 0, index + 1);
-	tmp_str = gnl_substr(*pto_static_str, index + 1,
-			gnl_strlen(*pto_static_str) - index);
-	if (!tmp_str || !return_str)
-		return (free(return_str), free(*pto_static_str), NULL);
-	return (free(*pto_static_str), *pto_static_str = tmp_str, return_str);
-}
-
 /* moves to the newline then makes a cut and returns the first part 
 and saves the second part in the static str
 if no newline is found a cut is made to return the whole string
@@ -79,15 +66,22 @@ and render static as empty string*/
 static char	*cut_and_return(char **pto_static_str)
 {
 	int		index;
+	char	*tmp_str;
+	char	*return_str;
 
 	index = 0;
 	while (*(*pto_static_str + index))
 	{
 		if (*(*pto_static_str + index) == '\n')
-			return (only_cut(pto_static_str, index));
+			break ;
 		index++;
 	}
-	return (only_cut(pto_static_str, index));
+	return_str = gnl_substr(*pto_static_str, 0, index + 1);
+	tmp_str = gnl_substr(*pto_static_str, index + 1,
+			gnl_strlen(*pto_static_str) - index);
+	if (!tmp_str || !return_str)
+		return (free(return_str), free(*pto_static_str), NULL);
+	return (free(*pto_static_str), *pto_static_str = tmp_str, return_str);
 }
 
 /*
@@ -125,6 +119,7 @@ char	*get_next_line(int fd)
 	return (free(read_str), cut_and_return(&static_str[fd]));
 }
 
+// # include <fcntl.h>
 // int main()
 // {
 // 	int	f;
