@@ -6,12 +6,14 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:30:23 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/13 19:03:16 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/13 20:25:06 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+/* concatenates static and last read if one dosen't exist 
+it isn't acccounted for in the concatenation */
 static char	*gnl_join(char	*static_str, char *read_str)
 {
 	char	*ptr;
@@ -39,8 +41,8 @@ static char	*gnl_join(char	*static_str, char *read_str)
 	return (ptr);
 }
 
-// look for newline in the last read string/ return 0 if not found 
-// return index if newline if found
+/* look for newline in the last read string/ return 0 if not found 
+return index if newline if found */
 int	look_for_newline(char	*str)
 {
 	int	index;
@@ -57,21 +59,23 @@ int	look_for_newline(char	*str)
 	return (0);
 }
 
-static char	*cut_helper(char **pto_static_str, int index)
+static char	*only_cut(char **pto_static_str, int index)
 {
 	char	*tmp_str;
 	char	*return_str;
 
 	return_str = gnl_substr(*pto_static_str, 0, index + 1);
-	if (!return_str)
-		return (free(*pto_static_str), NULL);
 	tmp_str = gnl_substr(*pto_static_str, index + 1,
 			gnl_strlen(*pto_static_str) - index);
-	if (!tmp_str)
+	if (!tmp_str || !return_str)
 		return (free(return_str), free(*pto_static_str), NULL);
 	return (free(*pto_static_str), *pto_static_str = tmp_str, return_str);
 }
 
+/* moves to the newline then makes a cut and returns the first part 
+and saves the second part in the static str
+if no newline is found a cut is made to return the whole string
+and render static as empty string*/
 static char	*cut_and_return(char **pto_static_str)
 {
 	int		index;
@@ -80,12 +84,21 @@ static char	*cut_and_return(char **pto_static_str)
 	while (*(*pto_static_str + index))
 	{
 		if (*(*pto_static_str + index) == '\n')
-			return (cut_helper(pto_static_str, index));
+			return (only_cut(pto_static_str, index));
 		index++;
 	}
-	return (cut_helper(pto_static_str, index));
+	return (only_cut(pto_static_str, index));
 }
 
+/*
+-loop, read and concatente into static until a new line character 
+is found in the most recent read portion
+-inside the loop return the whole static if read returned 0
+-inside the loop return NULL if read returned 0 and simultaneously 
+static str length is 0
+or static str dosent exist
+-if a newline character is found exit the loop and cede control to
+cut and return */
 char	*get_next_line(int fd)
 {
 	static char	*static_str;
@@ -96,20 +109,16 @@ char	*get_next_line(int fd)
 	while (look_for_newline(static_str) == 0)
 	{
 		bytes_read = read(fd, read_str, BUFFER_SIZE);
-		if (bytes_read == 0 && gnl_strlen(static_str))
-			break ;
 		if (bytes_read == 0)
 		{
-			if (!static_str)
-				return (free(read_str), NULL);
-			else if (!gnl_strlen(static_str))
+			if (gnl_strlen(static_str))
+				break ;
+			if (!gnl_strlen(static_str))
 				return (free(read_str), free(static_str)
 					, static_str = NULL, NULL);
 		}
-		if (bytes_read == -1 && static_str)
-			return (free(read_str), free(static_str), NULL);
 		if (bytes_read == -1)
-			return (free(read_str), NULL);
+			return (free(read_str), free(static_str), NULL);
 		read_str[bytes_read] = 0;
 		static_str = gnl_join(static_str, read_str);
 	}
