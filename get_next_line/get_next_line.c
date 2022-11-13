@@ -6,27 +6,13 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:30:23 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/13 17:48:28 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/13 19:03:16 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-/*
-whenever get next line is entered the program shall check wether read 
-returns 0 or more.
-if read is -1 the function shall immediately free static str and 
-return NULL.
-if read returns 0 and static str is a null pointer the function 
-shall return NULL.
-if read returns 0 and static str is not a null pointer 
-the function shall return static str.
-if read isnt 0 the function should concatenate static str and 
-and what was read and  then look for newline character to return 
-the line found and cut static str using substr.
-*/
-
-char	*gnl_join(char	*static_str, char *read_str)
+static char	*gnl_join(char	*static_str, char *read_str)
 {
 	char	*ptr;
 	int		i;
@@ -53,11 +39,12 @@ char	*gnl_join(char	*static_str, char *read_str)
 	return (ptr);
 }
 
-// look for newline in the last read string/ return 0 if not found / return index if newline if found
+// look for newline in the last read string/ return 0 if not found 
+// return index if newline if found
 int	look_for_newline(char	*str)
 {
 	int	index;
-	
+
 	if (!str)
 		return (0);
 	index = 0;
@@ -70,28 +57,33 @@ int	look_for_newline(char	*str)
 	return (0);
 }
 
-char	*cut_and_return(char **pto_static_str)
+static char	*cut_helper(char **pto_static_str, int index)
 {
-	int	index;
-	char	*return_str;
 	char	*tmp_str;
+	char	*return_str;
+
+	return_str = gnl_substr(*pto_static_str, 0, index + 1);
+	if (!return_str)
+		return (free(*pto_static_str), NULL);
+	tmp_str = gnl_substr(*pto_static_str, index + 1,
+			gnl_strlen(*pto_static_str) - index);
+	if (!tmp_str)
+		return (free(return_str), free(*pto_static_str), NULL);
+	return (free(*pto_static_str), *pto_static_str = tmp_str, return_str);
+}
+
+static char	*cut_and_return(char **pto_static_str)
+{
+	int		index;
 
 	index = 0;
 	while (*(*pto_static_str + index))
 	{
 		if (*(*pto_static_str + index) == '\n')
-		{
-			return_str = gnl_substr(*pto_static_str, 0, index + 1);
-			if (!return_str)
-				return (free(*pto_static_str), NULL);
-			tmp_str =  gnl_substr(*pto_static_str, index + 1, gnl_strlen(*pto_static_str) - index);
-			if (!tmp_str)
-				return (free(return_str), free(*pto_static_str), NULL);
-			return (free(*pto_static_str), *pto_static_str = tmp_str, return_str);
-		}
+			return (cut_helper(pto_static_str, index));
 		index++;
 	}
-	return (NULL);
+	return (cut_helper(pto_static_str, index));
 }
 
 char	*get_next_line(int fd)
@@ -104,32 +96,36 @@ char	*get_next_line(int fd)
 	while (look_for_newline(static_str) == 0)
 	{
 		bytes_read = read(fd, read_str, BUFFER_SIZE);
-		read_str[bytes_read] = 0;
-		// printf("%d\n", bytes_read);
 		if (bytes_read == 0 && gnl_strlen(static_str))
-			break;
-		else if (bytes_read == 0)
+			break ;
+		if (bytes_read == 0)
 		{
 			if (!static_str)
 				return (free(read_str), NULL);
 			else if (!gnl_strlen(static_str))
-				return (free(read_str), free(static_str), static_str = NULL, NULL);
+				return (free(read_str), free(static_str)
+					, static_str = NULL, NULL);
 		}
+		if (bytes_read == -1 && static_str)
+			return (free(read_str), free(static_str), NULL);
+		if (bytes_read == -1)
+			return (free(read_str), NULL);
+		read_str[bytes_read] = 0;
 		static_str = gnl_join(static_str, read_str);
 	}
 	return (free(read_str), cut_and_return(&static_str));
 }
 
-int main()
-{
-	int	f;
-	int i = 0;
+// int main()
+// {
+// 	int	f;
+// 	int i = 0;
 
-	f = open("xdd", O_RDONLY);
-	while (i < 8)
-	{
-		printf("LINE %d '%s' \n", i + 1, get_next_line(f));
-		i++;
-	}
-	return (0);
-}
+// 	f = open("xdd", O_RDONLY);
+// 	while (i < 8)
+// 	{
+// 		printf("LINE %d '%s' \n", i + 1, get_next_line(-1));
+// 		i++;
+// 	}
+// 	return (0);
+// }
