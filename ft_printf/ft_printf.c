@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:44:20 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/15 17:15:06 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/15 21:18:17 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,31 @@ void	convert_str(char *arg)
 void	convert_ptr(void	*arg)
 {
 	write(1, "0x", 2);
-	ft_putnbr((unsigned long) arg, "0123456789abcdef");
+	ft_putulong((unsigned long) arg, "0123456789abcdef");
+}
+
+void	convert_decimal(int arg)
+{
+	ft_putdecimal(arg, "0123456789");
+}
+
+void	convert_udecimal(unsigned int arg)
+{
+	ft_putulong((unsigned int) arg, "0123456789");
+}
+
+void	conversion_decider(char	format, va_list args)
+{
+	if (format == 'c')
+		convert_char(va_arg(args, int));
+	if (format == 's')
+		convert_str(va_arg(args, char *));
+	if (format == 'p')
+		convert_ptr(va_arg(args, void *));
+	if (format == 'd' || format == 'i')
+		convert_decimal(va_arg(args, int));
+	if (format == 'u')
+		convert_udecimal(va_arg(args, unsigned int));
 }
 
 int	ft_printf(const char *s, ...)
@@ -50,12 +74,7 @@ int	ft_printf(const char *s, ...)
 		if (s[index] == '%')
 		{
 			index++;
-			if (s[index] == 'c')
-				convert_char(va_arg(args, int));
-			if (s[index] == 's')
-				convert_str(va_arg(args, char *));
-			if (s[index] == 'p')
-				convert_ptr(va_arg(args, void *));
+			conversion_decider(s[index], args);
 		}
 		else
 			write(1, &s[index], 1);
@@ -68,8 +87,10 @@ int	ft_printf(const char *s, ...)
 int	main()
 {
 	char *ptr = "trollege";
+	int		i = -53;
+	unsigned int ui = 4294967295;
 
-	printf("character: %c pointer in hexa: %p string pointed to: %s", 'X', ptr, ptr);
-	ft_printf("character: %c pointer in hexa: %p string pointed to: %s", 'X', ptr, ptr);
+	printf("character: %c pointer in hexa: %p string pointed to: %s decimal: %d %i unsigned decimal: %u\n", 'X', ptr, ptr, i, i, ui);
+	ft_printf("character: %c pointer in hexa: %p string pointed to: %s decimal: %d %i unsigned decimal: %u\n", 'X', ptr, ptr, i, i, ui);
 	return 0;
 }
