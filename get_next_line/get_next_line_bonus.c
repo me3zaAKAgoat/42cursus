@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:30:23 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/13 21:43:33 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:15:23 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ or static str dosent exist
 cut and return */
 char	*get_next_line(int fd)
 {
-	static char	*static_str[10240];
+	static char	*static_str[200000];
 	char		*read_str;
 	int			bytes_read;
 
