@@ -6,11 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:30:23 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/15 20:26:01 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/16 21:37:49 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 /* concatenates static and last read if one dosen't exist 
 it isn't acccounted for in the concatenation */
@@ -96,7 +96,7 @@ or static str dosent exist
 cut and return */
 char	*get_next_line(int fd)
 {
-	static char	*static_str[200000];
+	static char	*static_str[12288];
 	char		*read_str;
 	int			bytes_read;
 

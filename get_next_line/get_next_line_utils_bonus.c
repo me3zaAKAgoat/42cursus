@@ -6,11 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 11:38:30 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/13 20:38:38 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/16 21:37:26 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	gnl_strlen(const char *s)
 {

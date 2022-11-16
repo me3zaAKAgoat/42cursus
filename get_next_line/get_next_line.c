@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:30:23 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/15 20:26:22 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/16 19:05:57 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,17 +120,17 @@ char	*get_next_line(int fd)
 	return (free(read_str), cut_and_return(&static_str));
 }
 
-# include <fcntl.h>
-int main()
-{
-	int	fd;
-	int i = 0;
+// # include <fcntl.h>
+// int main()
+// {
+// 	int	fd;
+// 	int i = 0;
 
-	fd = open("xdd", O_RDONLY);
-	while (i < 8)
-	{
-		printf("LINE %d '%s' \n", i + 1, get_next_line(fd));
-		i++;
-	}
-	return (0);
-}
+// 	fd = open("xdd", O_RDONLY);
+// 	while (i < 8)
+// 	{
+// 		printf("LINE %d '%s' \n", i + 1, get_next_line(fd));
+// 		i++;
+// 	}
+// 	return (0);
+// }
