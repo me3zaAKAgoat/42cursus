@@ -6,13 +6,13 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 21:16:21 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/13 21:43:19 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/16 14:20:23 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-// # define BUFFER_SIZE 600
+# define BUFFER_SIZE 300
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
