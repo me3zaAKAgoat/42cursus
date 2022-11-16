@@ -120,17 +120,17 @@ char	*get_next_line(int fd)
 	return (free(read_str), cut_and_return(&static_str));
 }
 
-// # include <fcntl.h>
-// int main()
-// {
-// 	int	f;
-// 	int i = 0;
+# include <fcntl.h>
+int main()
+{
+	int	fd;
+	int i = 0;
 
-// 	f = open("xdd", O_RDONLY);
-// 	while (i < 8)
-// 	{
-// 		printf("LINE %d '%s' \n", i + 1, get_next_line(-1));
-// 		i++;
-// 	}
-// 	return (0);
-// }
+	fd = open("xdd", O_RDONLY);
+	while (i < 8)
+	{
+		printf("LINE %d '%s' \n", i + 1, get_next_line(fd));
+		i++;
+	}
+	return (0);
+}
