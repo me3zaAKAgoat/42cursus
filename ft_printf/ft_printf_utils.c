@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:18:55 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/19 17:38:23 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/21 15:07:07 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	convert_char(int c, int *pto_count)
 	*pto_count += 1;
 }
 
-void	convert_str(char *arg, int *pto_count)
+void	convert_str(const char *arg, int *pto_count)
 {
 	int	index;
 

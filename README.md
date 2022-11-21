@@ -12,11 +12,8 @@
 
 ## **Reminders**
 
-- Need to examine the declarations and the conflicts between them and the definitons.
-- What does '*' Wildcard do?
 - Learn about regex, patterns, wildcard meaning and what stem means in makefile.
 - Read about virtual memory.
-- Check why makefile runs 
 
 ## **Memory**
 - the RAM is a piece of hardware that stores data for it's uptime, the data is stored in slots of 1 byte and each slot has it's own address.
@@ -130,7 +127,11 @@
 - An **archive** is a single file that contains a collection of other files and/or directories. Archive files are typically used for a transfer (locally or over the internet) or make a backup copy of a collection of files and directories which allow you to work with only one file instead of many. Likewise, archives are used for software application packaging. This single file can be easily compressed for ease of transfer while the files in the archive retain the structure and permissions of the original files.
 - Dereferencing or taking the address of a function just evaluates to a pointer to that function, and dereferencing a function pointer just evaluates back to the function pointer.
 - `char(*)[3] and char**` are fundamentally different and the former cannot decay to the latter. char** is a pointer to something that is a char*, it might be an array of char*, but that's not an array of char of length 3.
-- [Variadic functions](https://en.wikipedia.org/wiki/Variadic_function#In_C)
-
+- **Variadic functions** [Reference](https://en.wikipedia.org/wiki/Variadic_function#In_C)
+  - in order to use variadic functions in c, we need to include the stdarg.h standard header that introduces the type *va_list* and multiple other macros.
+  - *va_list* is a list that contains the arguments that were given to the variadic function, we can iterate through the elements of this list by initializing it using *va_start*, and then calling *va_arg*, each subsequent call to *va_arg* scrolls to the next argument.
+  - *va_arg* takes for parameters a *va_list* and a type.
+  - *va_end* serves as a clean up to afford the programmer the ability to reinitialise the *va_list*.
+  
 # **NB: YOU NEED NOT PROTECT FROM SEGFAULTS IN FUNCTIONS THAT WOULD NOT LEAD TO MEMORY LEAKS.**
 
