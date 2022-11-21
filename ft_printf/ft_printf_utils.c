@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:18:55 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/21 15:07:07 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/11/21 15:33:53 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_strlen(char *str)
 	return (i);
 }
 
-void	convert_char(int c, int *pto_count)
+void	convert_char(unsigned char c, int *pto_count)
 {
 	write(1, &c, 1);
 	*pto_count += 1;
