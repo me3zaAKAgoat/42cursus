@@ -6,6 +6,7 @@
 - [Memory](https://github.com/me3zaAKAgoat/42cursus#memory)
 - [Different Types Of Errors](https://github.com/me3zaAKAgoat/42cursus#different-types-of-errors)
 - [File Management In Unix](https://github.com/me3zaAKAgoat/42cursus#dealing-with-files)
+- [Virtual Machines](https://github.com/me3zaAKAgoat/42cursus#virtual-machines)
 - [Makefile](https://github.com/me3zaAKAgoat/42cursus#makefile)
 - [Keywords](https://github.com/me3zaAKAgoat/42cursus#keywords)
 - [Miscellaneous](https://github.com/me3zaAKAgoat/42cursus#miscellaneous)
@@ -77,6 +78,17 @@
 - It is good practice to redirect all error messages to stderr, while directing regular output to stdout. It is beneficial to do this because anything written to stderr is not buffered, i.e., it is immediately written to the screen so that the user can be warned immediately.
 - Stderr is usually the console because it is the programmer that should be notified when an error occurs.
 
+## **Virtual Machines**
+
+- what is a virtual machine?
+- how to make encrypted partitions in a virtual machine using LVM?
+- what is LVM?
+- what is SSH exactely?
+- what is a UFW firewall?
+- differences between Debian and CentOS
+- differences between apt and aptitude?
+- what is SELinux and AppArmor?
+
 ## **Makefile**
 
 > **Important resource**:
@@ -92,7 +104,7 @@
 - Variable calling is done either using '${}' or '$()'.
 - Make has a huge list of implicit rules that will run by default unless you override them.
 - ar is a progarm that makes static libraries out of object files
-  - the -c option tells ar to create the library if it dosen't already exist.
+  - the -c option suppresses a warning where ar requests an update but the archive dosen't already exist, so the archive is created without a warning.
   - the -r option replaces older object files with newer object files.
   - the -s option calls ranlib.
   - ranlib generates an index file within the archive which identifies the symbols (functions and variables) with the object files defining them that exist within the archive.
