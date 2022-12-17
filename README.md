@@ -2,6 +2,7 @@
 <p align="center" >Notes I have taken on my journey of learning C.</p>
 
 ## **Index**
+
 - [Reminders](https://github.com/me3zaAKAgoat/42cursus#reminders)
 - [Memory](https://github.com/me3zaAKAgoat/42cursus#memory)
 - [Different Types Of Errors](https://github.com/me3zaAKAgoat/42cursus#different-types-of-errors)
@@ -17,6 +18,7 @@
 - Read about virtual memory.
 
 ## **Memory**
+
 - the RAM is a piece of hardware that stores data for it's uptime, the data is stored in slots of 1 byte and each slot has it's own address.
 - Addresses are conventionally represented in hexadecimal, the 0x in addresses is but a prefix that indicates the base that represents the slot.
 - The RAM makes data available for the CPU operations on demand.
@@ -24,26 +26,27 @@
 - A program is either allowed to acess an entire page or none of it.
 - A CPU cache is a small part of memory within the CPU that it uses so it dosen't have to keep asking the RAM for everything.
   - when the CPU wants to read from a certain address, it checks if it's in the cache first.
-  - the cache stores in chunks of 64 bytes called *cache lines*.
+  - the cache stores in chunks of 64 bytes called _cache lines_.
 - the memory we interact with as programmers is usually virtual memory, meaning that the addresses read are not actual RAM addresses.
 - **Alignment Requirement:**
 
   All processors have instructions that need to read n bytes from the memory, these processors take the data needed for the instruction from the RAM in blocks of n bytes and put each block in a cache line.
-  
+
   ![memory blocks](/READMEcontent/alignmentMemory.jpg)
 
-  Data Structure Alignment is needed because it leads to efficient use of cache lines. 
+  Data Structure Alignment is needed because it leads to efficient use of cache lines.
 
   As per the illustration we have a 32 bit processor that reads 4 byte blocks and puts them into cache lines.
-  
+
   E.g In the case of the red 4 byte-long data structure, in order for the processor to execute the instruction it will need to read two blocks thus will use up two cache lines to store what could've just used only one cache line if it were stored at a proper address in the memory.
   The blue stored value respects the alignment requirement and will only use one cache line as needed.
 
   **Important:** Data Structure Alignment is respected when the address at which an n-byte value is stored is divisible by n.
 
   [Video Explanation](https://youtu.be/zyGMyV955Rw)
+
 - **Endianness** refers the the order bytes are stored in memory. A big-endian system stores the most significant byte of a word at the smallest memory address and the least significant byte at the largest. A little-endian system, in contrast, stores the least-significant byte at the smallest address.
-[Endianness Wiki artice](https://en.wikipedia.org/wiki/Endianness)
+  [Endianness Wiki artice](https://en.wikipedia.org/wiki/Endianness)
 
 ## **Different Types Of Errors**
 
@@ -56,7 +59,7 @@
 
 ### What is ERRNO?
 
-- *ERRNO* is an integer variable that is set by system calls and some library functions to indicate the specifics of an error in the event that one occurs.
+- _ERRNO_ is an integer variable that is set by system calls and some library functions to indicate the specifics of an error in the event that one occurs.
 
 ## **File Management In Unix**
 
@@ -73,6 +76,7 @@
   - A **stream** is a flow of data from a source to a destination within a GNU system (mostly used in high level routines).
   - Streams are represented by the type FILE\*.
 - #### **File Descriptors**
+
   - A file decscriptor is an integer that represents the connection opened between a source and a destination (mostly used in low level routines).
 
 - It is good practice to redirect all error messages to stderr, while directing regular output to stdout. It is beneficial to do this because anything written to stderr is not buffered, i.e., it is immediately written to the screen so that the user can be warned immediately.
@@ -80,14 +84,54 @@
 
 ## **Virtual Machines**
 
-- what is a virtual machine?
-- how to make encrypted partitions in a virtual machine using LVM?
-- what is LVM?
-- what is SSH exactely?
-- what is a UFW firewall?
-- differences between Debian and CentOS
-- differences between apt and aptitude?
-- what is SELinux and AppArmor?
+### _Virtual Machine?_
+
+> Virtual machines are systems that substitute the need for a real machine, they enable the users to run an entire operating system on top of another pre existing one (host), uses vary from either testing new unsafe software or emulating another system with a different architecture (video game consoles on x64 architectures).
+
+### _LVM?_
+
+> LVM is an abstraction layer that resides between file systems and hardware storage devices that makes many storage decision modifications hassle-free and provides much greater flexibility compared to traditional partitioners.
+> LVM works somewhat like Virtual Memory as in it virtualizes physical storage into a virtual one.
+
+### _SSH?_
+
+> SSH is a security protocol that allows for secure connections using the cryptographic public-private key model, it is mainly used to log into remote machines and execute commands.
+
+### _UFW firewall?_
+
+> UFW is a much simpler substitue to iptables, a firewall is a network security system that controls incoming and outoging packets based on a predetermined security rules.
+
+### _Differences between apt and aptitude?_
+
+> ### _SELinux and AppArmor?_
+>
+> ### _Partioning?_
+>
+> Partitions are isolated sections of a large storage device that behave as their own hard drive independently of one another.
+
+### _Mounting?_
+
+> Mounting is the process of making files of a storage device available to the user through the computers file system.
+
+### _Root?_
+
+> The root is the top most directory a hierarchy, it is the file system on top of which all other file systems are mounted.
+
+### _Swap?_
+
+> The swap partition is the area of the virtual storage volume that virtual memory uses to store pages that are temporarily inactive.
+
+### _extX journaling system?_
+
+> ext2, ext3 and ext4 are extended file systems that provide multiple functionaltites like defragmentation, journaling and time stamping.
+
+### _Journaling?_
+
+> The journal is an on-disk log of metadata, or data about the filesystem, that is kept up-to-date as the filesystem changes. journaling enables fast crash recovery.
+
+### _Packets?_
+
+> packets are chunks of data that form parts of a complete message and contain pertinent address information of the sender and the recipient, packets are seperated into 3 parts, a header, a payload (content) and a trailer (signature).
 
 ## **Makefile**
 
@@ -109,6 +153,7 @@
   - the -s option calls ranlib.
   - ranlib generates an index file within the archive which identifies the symbols (functions and variables) with the object files defining them that exist within the archive.
   - indexing makes linking significantlly faster by allowing routines to call each other without regard to the placement, meaning that the linker only has to look for definitions of symbols from the index and wouldn't have to read every object file in the archive to resolve a symbol.
+
 ## **Keywords**
 
 - the **restrict** keyword is a promise from the programmer to the compiler that indicates that no pointer other than restricted pointer will be used to access the object to which it points to. (It is used so that the compiler can max out optimization and not worry about pointer overlap, [Reference](https://en.wikipedia.org/wiki/Restrict).)
@@ -138,12 +183,11 @@
 - Symbols are functions and variables
 - An **archive** is a single file that contains a collection of other files and/or directories. Archive files are typically used for a transfer (locally or over the internet) or make a backup copy of a collection of files and directories which allow you to work with only one file instead of many. Likewise, archives are used for software application packaging. This single file can be easily compressed for ease of transfer while the files in the archive retain the structure and permissions of the original files.
 - Dereferencing or taking the address of a function just evaluates to a pointer to that function, and dereferencing a function pointer just evaluates back to the function pointer.
-- `char(*)[3] and char**` are fundamentally different and the former cannot decay to the latter. char** is a pointer to something that is a char*, it might be an array of char*, but that's not an array of char of length 3.
+- `char(*)[3] and char**` are fundamentally different and the former cannot decay to the latter. char\*_ is a pointer to something that is a char_, it might be an array of char\*, but that's not an array of char of length 3.
 - **Variadic functions** [Reference](https://en.wikipedia.org/wiki/Variadic_function#In_C)
-  - in order to use variadic functions in c, we need to include the stdarg.h standard header that introduces the type *va_list* and multiple other macros.
-  - *va_list* is a list that contains the arguments that were given to the variadic function, we can iterate through the elements of this list by initializing it using *va_start*, and then calling *va_arg*, each subsequent call to *va_arg* scrolls to the next argument.
-  - *va_arg* takes for parameters a *va_list* and a type.
-  - *va_end* serves as a clean up to afford the programmer the ability to reinitialise the *va_list*.
-  
-# **NB: YOU NEED NOT PROTECT FROM SEGFAULTS IN FUNCTIONS THAT WOULD NOT LEAD TO MEMORY LEAKS.**
+  - in order to use variadic functions in c, we need to include the stdarg.h standard header that introduces the type _va_list_ and multiple other macros.
+  - _va_list_ is a list that contains the arguments that were given to the variadic function, we can iterate through the elements of this list by initializing it using _va_start_, and then calling _va_arg_, each subsequent call to _va_arg_ scrolls to the next argument.
+  - _va_arg_ takes for parameters a _va_list_ and a type.
+  - _va_end_ serves as a clean up to afford the programmer the ability to reinitialise the _va_list_.
 
+# **NB: YOU NEED NOT PROTECT FROM SEGFAULTS IN FUNCTIONS THAT WOULD NOT LEAD TO MEMORY LEAKS.**
