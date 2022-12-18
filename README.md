@@ -95,7 +95,7 @@
 
 ### _SSH?_
 
-> SSH is a security protocol that allows for secure connections using the cryptographic public-private key model, it is mainly used to log into remote machines and execute commands.
+> SSH is a security protocol that allows for secure connections between computers using cryptographic public-private key model, it is mainly used to log into remote machines and execute commands.
 
 ### _UFW firewall?_
 
@@ -132,6 +132,11 @@
 ### _Packets?_
 
 > packets are chunks of data that form parts of a complete message and contain pertinent address information of the sender and the recipient, packets are seperated into 3 parts, a header, a payload (content) and a trailer (signature).
+
+### _TCP and UDP_?
+
+> Transmission Control Protocol is a communication tool used in the internet that ensures that some general properties (size of a packet) promised when sending a message were fullfilled (receiver side) and does some corrections if packets are were missing.
+> User Datagram Protocol is also a communication tool that, contrary to TCP, only sends packets with hopng that they were received (and is faster that TCP for that reason).
 
 ## **Makefile**
 
