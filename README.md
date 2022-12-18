@@ -103,10 +103,10 @@
 
 ### _Differences between apt and aptitude?_
 
-> ### _SELinux and AppArmor?_
->
-> ### _Partioning?_
->
+### _SELinux and AppArmor?_
+
+### _Partioning?_
+
 > Partitions are isolated sections of a large storage device that behave as their own hard drive independently of one another.
 
 ### _Mounting?_
