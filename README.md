@@ -112,7 +112,7 @@
 
 > SELinux is a tool that defines access control for processes and applications, it relies on Access Vector Cache to check wether apps that request access to files should be granted the access, in case of failure to make a decision SELinux sends the request to a security server that then grants or denies the request based on the context of the app/process.
 
-### **Partioning?**
+### **Partitioning?**
 
 > Partitions are isolated sections of a large storage device that behave as their own hard drive independently of one another.
 
