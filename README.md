@@ -12,10 +12,7 @@
 - [Keywords](https://github.com/me3zaAKAgoat/42cursus#keywords)
 - [Miscellaneous](https://github.com/me3zaAKAgoat/42cursus#miscellaneous)
 
-## **Reminders**
-
-- Learn about regex, patterns, wildcard meaning and what stem means in makefile.
-- Read about virtual memory.
+---
 
 ## **Memory**
 
@@ -48,6 +45,8 @@
 - **Endianness** refers the the order bytes are stored in memory. A big-endian system stores the most significant byte of a word at the smallest memory address and the least significant byte at the largest. A little-endian system, in contrast, stores the least-significant byte at the smallest address.
   [Endianness Wiki artice](https://en.wikipedia.org/wiki/Endianness)
 
+---
+
 ## **Different Types Of Errors**
 
 ### Runtime Errors
@@ -60,6 +59,8 @@
 ### What is ERRNO?
 
 - _ERRNO_ is an integer variable that is set by system calls and some library functions to indicate the specifics of an error in the event that one occurs.
+
+---
 
 ## **File Management In Unix**
 
@@ -82,61 +83,86 @@
 - It is good practice to redirect all error messages to stderr, while directing regular output to stdout. It is beneficial to do this because anything written to stderr is not buffered, i.e., it is immediately written to the screen so that the user can be warned immediately.
 - Stderr is usually the console because it is the programmer that should be notified when an error occurs.
 
+---
+
 ## **Virtual Machines**
 
-### _Virtual Machine?_
+### **Virtual Machine?**
 
 > Virtual machines are systems that substitute the need for a real machine, they enable the users to run an entire operating system on top of another pre existing one (host), uses vary from either testing new unsafe software or emulating another system with a different architecture (video game consoles on x64 architectures).
 
-### _LVM?_
+### **LVM?**
 
-> LVM is an abstraction layer that resides between file systems and hardware storage devices that makes many storage decision modifications hassle-free and provides much greater flexibility compared to traditional partitioners.
-> LVM works somewhat like Virtual Memory as in it virtualizes physical storage into a virtual one.
+> LVM is an abstraction layer that resides between file systems and hardware storage devices that makes many obsolete storage decisions' modification hassle-free and provides much greater flexibility compared to traditional partitioners.
+> LVM works somewhat like Virtual Memory as in it virtualizes physical storage into a virtual one and handles the indexing of physical space to virtual space usually through a Memory Management Unit.
 
-### _SSH?_
+### **SSH?**
 
-> SSH is a security protocol that allows for secure connections between computers using cryptographic public-private key model, it is mainly used to log into remote machines and execute commands.
+> SSH is a shell security protocol that allows for secure connections between computers using the cryptographic key-pair model, it is mainly used to log (securely through insecure connections) into remote machines and execute commands.
 
-### _UFW firewall?_
+### **UFW firewall?**
 
-> UFW is a much simpler substitue to iptables, a firewall is a network security system that controls incoming and outoging packets based on a predetermined security rules.
+> UFW is a much simpler substitue to iptables, a firewall is a network security system that controls incoming and outoging packets based on a preset of rules.
 
-### _Differences between apt and aptitude?_
+### **Differences between apt and aptitude?**
 
-### _SELinux and AppArmor?_
+> Aptitude is a high-level package manager as opposed to the low-level PM apt, Aptitude offers a great lot of functionalities as it encapsulates all apt-get apt-cache and apt-mark and more.
 
-### _Partioning?_
+### **SELinux and AppArmor?**
+
+> SELinux is a tool that defines access control for processes and applications, it relies on Access Vector Cache to check wether apps that request access to files should be granted the access, in case of failure to make a decision SELinux sends the request to a security server that then grants or denies the request based on the context of the app/process.
+
+### **Partioning?**
 
 > Partitions are isolated sections of a large storage device that behave as their own hard drive independently of one another.
 
-### _Mounting?_
+### **Mounting?**
 
 > Mounting is the process of making files of a storage device available to the user through the computers file system.
 
-### _Root?_
+### **Root?**
 
 > The root is the top most directory a hierarchy, it is the file system on top of which all other file systems are mounted.
 
-### _Swap?_
+### **Swap?**
 
 > The swap partition is the area of the virtual storage volume that virtual memory uses to store pages that are temporarily inactive.
 
-### _extX journaling system?_
+### **extX journaling system?**
 
 > ext2, ext3 and ext4 are extended file systems that provide multiple functionaltites like defragmentation, journaling and time stamping.
 
-### _Journaling?_
+### **Journaling?**
 
 > The journal is an on-disk log of metadata, or data about the filesystem, that is kept up-to-date as the filesystem changes. journaling enables fast crash recovery.
 
-### _Packets?_
+### **Packets?**
 
 > packets are chunks of data that form parts of a complete message and contain pertinent address information of the sender and the recipient, packets are seperated into 3 parts, a header, a payload (content) and a trailer (signature).
 
-### _TCP and UDP_?
+### **TCP and UDP**?
 
 > Transmission Control Protocol is a communication tool used in the internet that ensures that some general properties (size of a packet) promised when sending a message were fullfilled (receiver side) and does some corrections if packets are were missing.
 > User Datagram Protocol is also a communication tool that, contrary to TCP, only sends packets with hopng that they were received (and is faster that TCP for that reason).
+
+### **Cron**?
+
+> Cron is a command line utility that allows users on Unix-like operating systems to schedule repetetive tasks periodically (runnign a command or a shell script). Tasks are setup in a crontab (config file) with a Cron time and a path to the script to run.
+> Cron time is of the following form :
+>
+> ```
+>  ┌───────────── minute (0 - 59)
+>  │ ┌───────────── hour (0 - 23)
+>  │ │ ┌───────────── day of the month (1 - 31)
+>  │ │ │ ┌───────────── month (1 - 12)
+>  │ │ │ │ ┌───────────── day of the week (0 - 6) (Sunday to Saturday;
+>  │ │ │ │ │                                   7 is also Sunday on some systems)
+>  │ │ │ │ │
+>  │ │ │ │ │
+>  * * * * *
+> ```
+
+---
 
 ## **Makefile**
 
@@ -150,7 +176,7 @@
 - Targets are file names.
 - The target gets recompiled if the target dosen't exist or the prerequisite's timestamp have changed since target was last compiled.
 - Assignement is done either using := or =.
-- Variable calling is done either using '${}' or '$()'.
+- Variable calling is done either using `${}` or `$()`.
 - Make has a huge list of implicit rules that will run by default unless you override them.
 - ar is a progarm that makes static libraries out of object files
   - the -c option suppresses a warning where ar requests an update but the archive dosen't already exist, so the archive is created without a warning.
@@ -158,6 +184,8 @@
   - the -s option calls ranlib.
   - ranlib generates an index file within the archive which identifies the symbols (functions and variables) with the object files defining them that exist within the archive.
   - indexing makes linking significantlly faster by allowing routines to call each other without regard to the placement, meaning that the linker only has to look for definitions of symbols from the index and wouldn't have to read every object file in the archive to resolve a symbol.
+
+---
 
 ## **Keywords**
 
@@ -174,11 +202,13 @@
   - Static defined local variables do not lose their value between function calls. In other words they are global variables, but scoped to the local function they are defined in.
   - Static global variables and static functions are not visible outside of the C file they are defined in.
 
+---
+
 ## **Miscellaneous**
 
 - **lvalue** (comes from left hand side of assignment) is something that can be assigned to. **rvalue** (comes from right hand side of assignment) is something that can be assigned.
 - Include guards only prevent a header file from being included multiple times in the same source file. but they will not protect from a header file showing up in multiple source files.
-- **size_t** is a unsigned type that is the result of sizeof() operator, it is also the maximum size any c object can hold.
+- **size_t** is a unsigned type that is the result of sizeof() operator, it is also the maximum size any C object can hold.
   - **SIZE_MAX** is a macro defined in stddef.h that represents the maximum value of size_t.
 - Implicit type conversion in C happens automatically when a value is copied to its compatible data type.
 - **malloc**'s arguments:
@@ -188,11 +218,9 @@
 - Symbols are functions and variables
 - An **archive** is a single file that contains a collection of other files and/or directories. Archive files are typically used for a transfer (locally or over the internet) or make a backup copy of a collection of files and directories which allow you to work with only one file instead of many. Likewise, archives are used for software application packaging. This single file can be easily compressed for ease of transfer while the files in the archive retain the structure and permissions of the original files.
 - Dereferencing or taking the address of a function just evaluates to a pointer to that function, and dereferencing a function pointer just evaluates back to the function pointer.
-- `char(*)[3] and char**` are fundamentally different and the former cannot decay to the latter. char\*_ is a pointer to something that is a char_, it might be an array of char\*, but that's not an array of char of length 3.
+- `char(*)[3] and char**` are fundamentally different and the former cannot decay to the latter. `char**` is a pointer to a varible of type `char*`, it might be an array of `char*`, but that's not an array of char of length 3.
 - **Variadic functions** [Reference](https://en.wikipedia.org/wiki/Variadic_function#In_C)
-  - in order to use variadic functions in c, we need to include the stdarg.h standard header that introduces the type _va_list_ and multiple other macros.
+  - in order to use variadic functions in C, we need to include the stdarg.h standard header that introduces the type _va_list_ and multiple other macros.
   - _va_list_ is a list that contains the arguments that were given to the variadic function, we can iterate through the elements of this list by initializing it using _va_start_, and then calling _va_arg_, each subsequent call to _va_arg_ scrolls to the next argument.
   - _va_arg_ takes for parameters a _va_list_ and a type.
   - _va_end_ serves as a clean up to afford the programmer the ability to reinitialise the _va_list_.
-
-# **NB: YOU NEED NOT PROTECT FROM SEGFAULTS IN FUNCTIONS THAT WOULD NOT LEAD TO MEMORY LEAKS.**
