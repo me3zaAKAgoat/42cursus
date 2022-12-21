@@ -6,11 +6,11 @@
 - [Reminders](https://github.com/me3zaAKAgoat/42cursus#reminders)
 - [Memory](https://github.com/me3zaAKAgoat/42cursus#memory)
 - [Different Types Of Errors](https://github.com/me3zaAKAgoat/42cursus#different-types-of-errors)
-- [File Management In **Unix**](https://github.com/me3zaAKAgoat/42cursus#dealing-with-files)
+- [File Management In **Unix**](https://github.com/me3zaAKAgoat/42cursus#file-management-in-unix)
 - [Virtual Machines](https://github.com/me3zaAKAgoat/42cursus#virtual-machines)
 - [Makefile](https://github.com/me3zaAKAgoat/42cursus#makefile)
 - [Keywords](https://github.com/me3zaAKAgoat/42cursus#keywords)
-- [**Unix** Shells](https://github.com/me3zaAKAgoat/42cursus#**Unix**-shells)
+- [**Unix** Shells](https://github.com/me3zaAKAgoat/42cursus#unix-shells)
 - [Miscellaneous](https://github.com/me3zaAKAgoat/42cursus#miscellaneous)
 
 ---
@@ -61,6 +61,8 @@
 
 - _ERRNO_ is an integer variable that is set by system calls and some library functions to indicate the specifics of an error in the event that one occurs.
 
+---
+
 ## **File Management In Unix**
 
 > **Important resource**:
@@ -93,6 +95,8 @@ When forking, a child process gets an exact copy of the FDtable of its parent.
 - Pipes have a read end and a write end represented by file descriptors that reside in the File Descriptor Table of each process.
 - Anything that is written to the write end would be available to read from the read end.
 - The C pipe() functions takes an array of ints of size 2 that if ran successfully (returns 0 and not -1 meaning _error_) will be filled with the according file descriptors, fd[0] is the read end of the pipe, while fd[1] is the write end of the pipe.
+
+---
 
 ## **Virtual Machines**
 
@@ -213,6 +217,8 @@ When forking, a child process gets an exact copy of the FDtable of its parent.
   - Static defined local variables do not lose their value between function calls. In other words they are global variables, but scoped to the local function they are defined in.
   - Static global variables and static functions are not visible outside of the C file they are defined in.
 
+---
+
 ## **Unix Shells**
 
 ### here doc/string
@@ -258,6 +264,8 @@ lmfao haha
 - '~' home directory
 - "text > file" and "text >> file" are, respectively, for overwriting file content with text, and for appending text to the contents of file.
 - "<" redirect input.
+
+---
 
 ## **Miscellaneous**
 
