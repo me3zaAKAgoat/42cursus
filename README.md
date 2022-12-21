@@ -61,13 +61,7 @@
 
 - _ERRNO_ is an integer variable that is set by system calls and some library functions to indicate the specifics of an error in the event that one occurs.
 
-<<<<<<< HEAD
----
-
-## **File Management In **Unix\*\*\*\*
-=======
 ## **File Management In Unix**
->>>>>>> 0746b4d (updated notes)
 
 > **Important resource**:
 >
