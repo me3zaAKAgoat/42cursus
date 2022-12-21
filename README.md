@@ -6,10 +6,11 @@
 - [Reminders](https://github.com/me3zaAKAgoat/42cursus#reminders)
 - [Memory](https://github.com/me3zaAKAgoat/42cursus#memory)
 - [Different Types Of Errors](https://github.com/me3zaAKAgoat/42cursus#different-types-of-errors)
-- [File Management In Unix](https://github.com/me3zaAKAgoat/42cursus#dealing-with-files)
+- [File Management In **Unix**](https://github.com/me3zaAKAgoat/42cursus#dealing-with-files)
 - [Virtual Machines](https://github.com/me3zaAKAgoat/42cursus#virtual-machines)
 - [Makefile](https://github.com/me3zaAKAgoat/42cursus#makefile)
 - [Keywords](https://github.com/me3zaAKAgoat/42cursus#keywords)
+- [**Unix** Shells](https://github.com/me3zaAKAgoat/42cursus#**Unix**-shells)
 - [Miscellaneous](https://github.com/me3zaAKAgoat/42cursus#miscellaneous)
 
 ---
@@ -62,7 +63,7 @@
 
 ---
 
-## **File Management In Unix**
+## **File Management In **Unix\*\*\*\*
 
 > **Important resource**:
 >
@@ -83,7 +84,17 @@
 - It is good practice to redirect all error messages to stderr, while directing regular output to stdout. It is beneficial to do this because anything written to stderr is not buffered, i.e., it is immediately written to the screen so that the user can be warned immediately.
 - Stderr is usually the console because it is the programmer that should be notified when an error occurs.
 
----
+### Processes and how they relate to files
+
+In **Unix** everything is a file, (sockets, devices ...), and every process has a File Descriptor table that contains an entry for each file used by the process. Naturally, every process has the first 3 integers set to (by deafult) (stdin, stdout and stderror).
+When forking, a child process gets an exact copy of the FDtable of its parent.
+
+### Pipes
+
+- A pipe in **Unix** is a communciation tool between different processes.
+- Pipes have a read end and a write end represented by file descriptors that reside in the File Descriptor Table of each process.
+- Anything that is written to the write end would be available to read from the read end.
+- The C pipe() functions takes an array of ints of size 2 that if ran successfully (returns 0 and not -1 meaning _error_) will be filled with the according file descriptors, fd[0] is the read end of the pipe, while fd[1] is the write end of the pipe.
 
 ## **Virtual Machines**
 
@@ -102,7 +113,9 @@
 
 ### **UFW firewall?**
 
-> UFW is a much simpler substitue to iptables, a firewall is a network security system that controls incoming and outoging packets based on a preset of rules.
+> SSH is a security protocol that allows for secure connections using the cryptographic public-private key model, it is mainly used to log into remote machines and execute commands.
+>
+> To connect to a remote machine use ssh \<user>@\<ip address> and then use the password.
 
 ### **Differences between apt and aptitude?**
 
@@ -202,7 +215,51 @@
   - Static defined local variables do not lose their value between function calls. In other words they are global variables, but scoped to the local function they are defined in.
   - Static global variables and static functions are not visible outside of the C file they are defined in.
 
----
+## \***\*Unix** Shells\*\*
+
+### here doc/string
+
+- "<<" is a here document where right side of the of the syntax declares a delimiter and the left side declares the input to which to send the document
+
+```shell
+$ cat <<EOF
+> hi
+> there
+> EOF
+hi
+there
+```
+
+- "<<<" is a here string where right side of the of the syntax declares a string and the left side declares the input to which to send the the string
+
+```shell
+$ cat <<< "lmfao haha"
+lmfao haha
+```
+
+> the use of "here doc/str" is not similar to piping, because pipes make single command run in seperate subshells.
+
+### Dollar Sign in **Unix** Shells?
+
+- $1, $2, $3, ... are the positional parameters.
+- "$@" is an array-like construct of all positional parameters, {$1, $2, $3 ...}.
+- "$\*" is the IFS expansion of all positional parameters, $1 $2 $3 ....
+- $# is the number of positional parameters.
+- $- current options set for the shell.
+- $\$ pid of the current shell (not subshell).
+- $\_ most recent parameter (or the abs path of the command to start the current shell immediately after startup).
+- $IFS is the (input) field separator.
+- $? is the most recent foreground pipeline exit status.
+- $! is the PID of the most recent background command.
+- $0 is the name of the shell or shell script.
+
+- $(...) the commands inside the braces are ran in a subshell and their results are then replaced in the initial command. (similar to backticks `` but can be nested)
+
+### Miscellaneous
+
+- '~' home directory
+- "text > file" and "text >> file" are, respectively, for overwriting file content with text, and for appending text to the contents of file.
+- "<" redirect input.
 
 ## **Miscellaneous**
 
