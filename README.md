@@ -61,9 +61,13 @@
 
 - _ERRNO_ is an integer variable that is set by system calls and some library functions to indicate the specifics of an error in the event that one occurs.
 
+<<<<<<< HEAD
 ---
 
 ## **File Management In **Unix\*\*\*\*
+=======
+## **File Management In Unix**
+>>>>>>> 0746b4d (updated notes)
 
 > **Important resource**:
 >
@@ -215,7 +219,7 @@ When forking, a child process gets an exact copy of the FDtable of its parent.
   - Static defined local variables do not lose their value between function calls. In other words they are global variables, but scoped to the local function they are defined in.
   - Static global variables and static functions are not visible outside of the C file they are defined in.
 
-## \***\*Unix** Shells\*\*
+## **Unix Shells**
 
 ### here doc/string
 
