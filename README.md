@@ -287,3 +287,11 @@ lmfao haha
   - _va_list_ is a list that contains the arguments that were given to the variadic function, we can iterate through the elements of this list by initializing it using _va_start_, and then calling _va_arg_, each subsequent call to _va_arg_ scrolls to the next argument.
   - _va_arg_ takes for parameters a _va_list_ and a type.
   - _va_end_ serves as a clean up to afford the programmer the ability to reinitialise the _va_list_.
+
+---
+
+## **Tasks**
+
+- [ ] [Learn about tty](https://www.linusakesson.net/programming/tty/index.php)
+- [ ] figure out why when running monitoring.sh wall behaviour is erratic
+- [ ] snapshot into signature.txt

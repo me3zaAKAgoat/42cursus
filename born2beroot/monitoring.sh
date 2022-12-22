@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 arc=$(uname -a)
 pcpu=$(grep "physical id" /proc/cpuinfo | wc -l)
 vcpu=$(grep "processor" /proc/cpuinfo | wc -l)
@@ -12,8 +12,9 @@ ntcp=$(netstat -an | grep ESTABLISHED | wc -l)
 ulog=$(users | wc -w)
 ip=$(hostname -I)
 mac=$(cat /sys/class/net/enp0s3/address)
-sudo=$(journalctl _COMM=sudo | grep COMMAND | wc -l)
-wall "	#Architecture: $arc
+sudoc=$(journalctl _COMM=sudo | grep COMMAND | wc -l)
+wall "	
+	#Architecture: $arc
 	#CPU physical: $pcpu
 	#vCPU: $vcpu
 	#Memory Usage: $ram
@@ -24,4 +25,5 @@ wall "	#Architecture: $arc
 	#Connexions TCP: $ntcp ESTABLISHED
 	#User log: $ulog
 	#Network: IP $ip ($mac)
-	#Sudo: $sudo cmd"
+	#Sudo: $sudoc cmd
+"
