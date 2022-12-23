@@ -302,5 +302,3 @@ lmfao haha
 - [ ] snapshot into signature.txt
 - [ ] read man of execlp, waitpid
 - [ ] setup APParmor
-- [ ]
-- [ ]
