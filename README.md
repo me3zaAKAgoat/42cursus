@@ -223,7 +223,7 @@ When forking, a child process gets an exact copy of the FDtable of its parent.
 
 ### here doc/string
 
-- "<<" is a here document where right side of the of the syntax declares a delimiter and the left side declares the input to which to send the document.
+- `<<` is a here document where right side of the of the syntax declares a delimiter and the left side declares the input to which to send the document.
 
 ```shell
 $ cat <<EOF
@@ -234,7 +234,7 @@ hi
 there
 ```
 
-- "<<<" is a here string where right side of the of the syntax declares a string and the left side declares the input to which to send the the string.
+- `<<<` is a here string where right side of the of the syntax declares a string and the left side declares the input to which to send the the string.
 
 ```shell
 $ cat <<< "lmfao haha"
