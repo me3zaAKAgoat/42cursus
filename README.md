@@ -246,8 +246,8 @@ lmfao haha
 ### Dollar Sign in **Unix** Shells?
 
 - $1, $2, $3, ... are the positional parameters.
-- "$@" is an array-like construct of all positional parameters, {$1, $2, $3 ...}.
-- "$\*" is the IFS expansion of all positional parameters, $1 $2 $3 ....
+- $@ is an array-like construct of all positional parameters, {$1, $2, $3 ...}.
+- $\* is the IFS expansion of all positional parameters, $1 $2 $3 ....
 - $# is the number of positional parameters.
 - $- current options set for the shell.
 - $\$ pid of the current shell (not subshell).
