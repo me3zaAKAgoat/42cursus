@@ -205,14 +205,14 @@ When forking, a child process gets an exact copy of the FDtable of its parent.
 ## **Keywords**
 
 - the **restrict** keyword is a promise from the programmer to the compiler that indicates that no pointer other than restricted pointer will be used to access the object to which it points to. (It is used so that the compiler can max out optimization and not worry about pointer overlap, [Reference](https://en.wikipedia.org/wiki/Restrict).)
-- **const** is used to convey that a variabel is "read-only", thus the compiler will throw an error when there's an attempt to modify the const declared variable. (used to help code comprehensibility/readability and also allow the compiler further optimization through caching)
+- **const** is used to convey that a variabel is "read-only", thus the compiler will throw an error when there's an attempt to modify the const declared variable. (used to help code comprehensibility/readability and also allow the compiler further optimization through caching).
 - **register** suggests to the compiler storing the variable in a cpu register (and not RAM) for faster access later.
 - **volatile** prevents the compiler from making unnecessary optimization knowing the variable will be read and write further ahead (I don't have a concrete understanding of this keyword yet but it's so uselss anyways).
 - the **extern** keyword will tell the compiler that the data is defined somewhere else and will be connected through the linker (which is the default assumption the compiler makes)
 
   - e.g: if we have two files with a variable that has the same name, both source files will have seperate copies of that variable, but when the variable is declared with the extern keyword in both files, they will both point to the same variable. [Scroll to the second answer in this link](https://stackoverflow.com/questions/496448/how-to-correctly-use-the-extern-keyword-in-c)
 
-- **static** is used with global variables and functions to set their scope to the containing file
+- **static** is used with global variables and functions to set their scope to the containing file.
 
   - Static defined local variables do not lose their value between function calls. In other words they are global variables, but scoped to the local function they are defined in.
   - Static global variables and static functions are not visible outside of the C file they are defined in.
@@ -223,7 +223,7 @@ When forking, a child process gets an exact copy of the FDtable of its parent.
 
 ### here doc/string
 
-- "<<" is a here document where right side of the of the syntax declares a delimiter and the left side declares the input to which to send the document
+- "<<" is a here document where right side of the of the syntax declares a delimiter and the left side declares the input to which to send the document.
 
 ```shell
 $ cat <<EOF
@@ -234,7 +234,7 @@ hi
 there
 ```
 
-- "<<<" is a here string where right side of the of the syntax declares a string and the left side declares the input to which to send the the string
+- "<<<" is a here string where right side of the of the syntax declares a string and the left side declares the input to which to send the the string.
 
 ```shell
 $ cat <<< "lmfao haha"
@@ -257,7 +257,7 @@ lmfao haha
 - $! is the PID of the most recent background command.
 - $0 is the name of the shell or shell script.
 
-- $(...) the commands inside the braces are ran in a subshell and their results are then replaced in the initial command. (similar to backticks `` but can be nested)
+- $(...) the commands inside the braces are ran in a subshell and their results are then replaced in the initial command. (similar to backticks `` but can be nested).
 
 ### Miscellaneous
 
