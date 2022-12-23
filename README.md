@@ -261,9 +261,9 @@ lmfao haha
 
 ### Miscellaneous
 
-- '~' home directory
-- "text > file" and "text >> file" are, respectively, for overwriting file content with text, and for appending text to the contents of file.
-- "<" redirect input.
+- `~` home directory.
+- `text > file` and `text >> file` are, respectively, for overwriting file content with text, and for appending text to the contents of file.
+- `<` redirect input.
 
 ---
 
