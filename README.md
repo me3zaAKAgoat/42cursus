@@ -91,10 +91,11 @@ When forking, a child process gets an exact copy of the FDtable of its parent.
 
 ### Pipes
 
-- A pipe in **Unix** is a communciation tool between different processes.
-- Pipes have a read end and a write end represented by file descriptors that reside in the File Descriptor Table of each process.
+- A pipe in **Unix** is a tool used to communicate between different processes.
+- The C pipe() function takes an array of ints of size 2 that if ran successfully (returns 0 and not -1 meaning _error_) will be filled with the smallest available file descriptors of the FD table, fd[0] is the read end of the pipe, while fd[1] is the write end of the pipe.
 - Anything that is written to the write end would be available to read from the read end.
-- The C pipe() functions takes an array of ints of size 2 that if ran successfully (returns 0 and not -1 meaning _error_) will be filled with the according file descriptors, fd[0] is the read end of the pipe, while fd[1] is the write end of the pipe.
+- Pipes have a read end and a write end represented by file descriptors that reside in the File Descriptor Table of each process.
+- The C dup2(int fd1, int fd2) function makes fd1 and fd2 equivalent, whatever file was opened on fd1 is now open with the same mod and position of the file described by fd2.
 
 ---
 
@@ -102,7 +103,7 @@ When forking, a child process gets an exact copy of the FDtable of its parent.
 
 ### **Virtual Machine?**
 
-> Virtual machines are systems that substitute the need for a real machine, they enable the users to run an entire operating system on top of another pre existing one (host), uses vary from either testing new unsafe software or emulating another system with a different architecture (video game consoles on x64 architectures).
+> Virtual machines are systems that substitute the need for a real machine, and enable the users to run an entire operating system on top of another pre existing one (host) without the need for seperate hardware. The uses for VMs vary from either testing new unsafe software to emulating another system with a completely different architecture (video game consoles on x64 architectures).
 
 ### **LVM?**
 
@@ -111,13 +112,13 @@ When forking, a child process gets an exact copy of the FDtable of its parent.
 
 ### **SSH?**
 
-> SSH is a shell security protocol that allows for secure connections between computers using the cryptographic key-pair model, it is mainly used to log (securely through insecure connections) into remote machines and execute commands.
-
-### **UFW firewall?**
-
 > SSH is a security protocol that allows for secure connections using the cryptographic public-private key model, it is mainly used to log into remote machines and execute commands.
 >
 > To connect to a remote machine use ssh \<user>@\<ip address> and then use the password.
+
+### **UFW firewall?**
+
+> UFW is a tool that allows for simple management of firewalls and was brought on as a substitute for compilcated tools like iptables.
 
 ### **Differences between apt and aptitude?**
 
@@ -177,7 +178,11 @@ When forking, a child process gets an exact copy of the FDtable of its parent.
 >  * * * * *
 > ```
 
----
+### **TTY**?
+
+> in Unix-like oprating systems, TTY is a terminal emulator that allows users to interact with the system through a comand-line interface, when a user logs in to a Unix system they are usually connectected to a TTY device, which enabls them to type in commands and see the outputs of those commands in a terminal window.
+
+[Second answer of this post is the sexiest visualization ever](https://askubuntu.com/questions/506510/what-is-the-difference-between-terminal-console-shell-and-command-line)
 
 ## **Makefile**
 
@@ -223,7 +228,7 @@ When forking, a child process gets an exact copy of the FDtable of its parent.
 
 ### here doc/string
 
-- `<<` is a here document where right side of the of the syntax declares a delimiter and the left side declares the input to which to send the document.
+- `<<` is a here document where right side of the syntax declares a delimiter at which the input should close and the left side declares the input to which to send the document.
 
 ```shell
 $ cat <<EOF
@@ -234,7 +239,7 @@ hi
 there
 ```
 
-- `<<<` is a here string where right side of the of the syntax declares a string and the left side declares the input to which to send the the string.
+- `<<<` is a here string where right side of the syntax declares a string and the left side declares the input to which to send the the string.
 
 ```shell
 $ cat <<< "lmfao haha"
@@ -295,3 +300,7 @@ lmfao haha
 - [ ] [Learn about tty](https://www.linusakesson.net/programming/tty/index.php)
 - [ ] figure out why when running monitoring.sh wall behaviour is erratic
 - [ ] snapshot into signature.txt
+- [ ] read man of execlp, waitpid
+- [ ] setup APParmor
+- [ ]
+- [ ]
