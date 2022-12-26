@@ -298,10 +298,10 @@ lmfao haha
 ## **Tasks**
 
 - [x] [Learn about tty](https://www.linusakesson.net/programming/tty/index.php)
-- [ ] figure out why when running monitoring.sh wall behaviour is erratic
+- [x] figure out why when running monitoring.sh wall behaviour is erratic
 - [ ] read man of execlp, waitpid
-- [ ] sashum the vdi in root repo of the virtual machine and copy it into signature.txt
+- [x] sashum the vdi in root repo of the virtual machine and copy it into signature.txt
 - [x] read about what APParmor does
-- [ ] reconfigure all passwords including root
+- [x] reconfigure all passwords including root
 - [x] check wther user42 group should be literally user42 or \<user>42
 - [x] redo paritions
