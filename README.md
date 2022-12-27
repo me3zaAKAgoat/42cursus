@@ -92,9 +92,9 @@ When forking, a child process gets an exact copy of the FDtable of its parent.
 ### Pipes
 
 - A pipe in **Unix** is a tool used to communicate between different processes.
-- The C pipe() function takes an array of ints of size 2 that if ran successfully (returns 0 and not -1 meaning _error_) will be filled with the smallest available file descriptors of the FD table, fd[0] is the read end of the pipe, while fd[1] is the write end of the pipe.
-- Anything that is written to the write end would be available to read from the read end.
+- The C pipe() function takes an array of ints of size 2 that if ran successfully (returns 0 on success and -1 on _error_) will be filled with the smallest available file descriptors of the FD table, fd[0] is the read end of the pipe, while fd[1] is the write end of the pipe.
 - Pipes have a read end and a write end represented by file descriptors that reside in the File Descriptor Table of each process.
+- Anything that is written to the write end would be available to read from the read end.
 - The C dup2(int fd1, int fd2) function makes fd1 and fd2 equivalent, whatever file was opened on fd1 is now open with the same mod and position of the file described by fd2.
 
 ---
@@ -228,10 +228,10 @@ When forking, a child process gets an exact copy of the FDtable of its parent.
 
 ### here doc/string
 
-- `<<` is a here document where right side of the syntax declares a delimiter at which the input should close and the left side declares the input to which to send the document.
+- `<<` is a here document where right side of the symbol declares a delimiter at which the input should close and the left side declares the input to which to send the document.
 
 ```shell
-$ cat <<EOF
+$ cat << EOF
 > hi
 > there
 > EOF
@@ -239,7 +239,7 @@ hi
 there
 ```
 
-- `<<<` is a here string where right side of the syntax declares a string and the left side declares the input to which to send the the string.
+- `<<<` is a here string where right side of the symbol declares a string and the left side declares the input to which to send the the string.
 
 ```shell
 $ cat <<< "lmfao haha"
