@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:47:32 by echoukri          #+#    #+#             */
-/*   Updated: 2022/12/28 00:55:45 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/12/28 03:26:57 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,21 @@ int	*file_opener(char *fn1, char *fn2)
 }
 
 	// switch STDIN with vpipe[0] then execute 
-void	child_process(int	infiled, int	*vpipe,	char *path)
+void	child_process(int infiled, int *vpipe,	char *cmd, char *envp)
 {
 	char	*cmd;
 
 	dup2(STDIN_FILENO, infiled);
-	execve();
+	cmd = get_cmd(get_paths(envp))
+	execve(cmd, );
 }
 
-void	pipex(int	infiled, int	outfiled, char	*envp)
+void	pipex(int infiled, int outfiled, char *cmd1, char *cmd2 , char *envp)
 {
 	int		vpipe[2];
 	int		pres;
 	pid_t	fres;
-	char	*path;
+	char	*cmd;
 
 	pres = pipe(vpipe);
 	fres = fork();
@@ -55,8 +56,7 @@ void	pipex(int	infiled, int	outfiled, char	*envp)
 		return (perror("errno at fork is:"));
 	else if (fres == 0)
 	{
-		path = get_path(envp);
-		child_process(infiled, vpipe, path);
+		child_process(infiled, vpipe, cmd1, envp);
 	}
 	else if (fres > 0)
 	{
@@ -68,14 +68,14 @@ int	main(int ac, char *argv[], char *envp[])
 {
 	int	infiled;
 	int	outfiled;
-	int	*parsed_arr;
+	int	*descriptors;
 
-	parsed_arr = file_opener(argv[1], argv[4]);
-	infiled = *(parsed_arr);
-	outfiled = *(parsed_arr + 1);
+	descriptors = file_opener(argv[1], argv[4]);
+	infiled = *(descriptors);
+	outfiled = *(descriptors + 1);
 	if (infiled == -1 || outfiled == -1)
 		return (-1);
-	pipex(infiled, outfiled, envp);
+	pipex(infiled, outfiled, argv[2], argv[3], envp);
 	return (0);
 }
 

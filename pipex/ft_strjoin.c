@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd.c                                          :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 00:57:32 by echoukri          #+#    #+#             */
-/*   Updated: 2022/12/28 02:48:05 by echoukri         ###   ########.fr       */
+/*   Created: 2022/12/28 02:32:11 by echoukri          #+#    #+#             */
+/*   Updated: 2022/12/28 02:32:23 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*get_cmd(char	**paths, char	*cmd)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*command;
-	char	*tmp;
+	char	*ptr;
+	int		i;
+	int		j;
 
-	while (*paths)
+	if (!s1 || !s2)
+		return (NULL);
+	ptr = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
 	{
-		tmp = ft_strjoin(*paths, "/");
-		command = ft_strjoin(tmp, cmd);
-		free(tmp);
-		if (access(command, 0) == 0)
-			return (command);
-		free(command);
-		paths++;
+		ptr[i] = s1[i];
+		i++;
 	}
-	return (NULL);
+	while (s2[j])
+		ptr[i++] = s2[j++];
+	ptr[i] = '\0';
+	return (ptr);
 }
