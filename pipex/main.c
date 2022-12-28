@@ -6,12 +6,13 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:47:32 by echoukri          #+#    #+#             */
-/*   Updated: 2022/12/28 03:26:57 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/12/28 05:30:43 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+//handle file opening failure
 int	*file_opener(char *fn1, char *fn2)
 {
 	int	arr[2];
@@ -33,14 +34,18 @@ int	*file_opener(char *fn1, char *fn2)
 	return (arr);
 }
 
-	// switch STDIN with vpipe[0] then execute 
+// switch STDIN with vpipe[0] then execute 
+// check dup2 failure
 void	child_process(int infiled, int *vpipe,	char *cmd, char *envp)
 {
-	char	*cmd;
+	char	*cmd_path;
+	char	*cmd_args;
+	char	*tmp;
 
 	dup2(STDIN_FILENO, infiled);
-	cmd = get_cmd(get_paths(envp))
-	execve(cmd, );
+	tmp = ft_split(cmd, ' ');
+	cmd_path = get_cmd(get_paths(envp), cmd[0]);
+	execve(cmd, cmd_args, envp);
 }
 
 void	pipex(int infiled, int outfiled, char *cmd1, char *cmd2 , char *envp)
@@ -64,6 +69,7 @@ void	pipex(int infiled, int outfiled, char *cmd1, char *cmd2 , char *envp)
 	}
 }
 
+// handle other function failures
 int	main(int ac, char *argv[], char *envp[])
 {
 	int	infiled;

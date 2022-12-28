@@ -1,26 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_pathS.c                                        :+:      :+:    :+:   */
+/*   trsh.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 00:51:18 by echoukri          #+#    #+#             */
-/*   Updated: 2022/12/28 05:31:04 by echoukri         ###   ########.fr       */
+/*   Created: 2022/12/28 01:15:08 by echoukri          #+#    #+#             */
+/*   Updated: 2022/12/28 05:31:26 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "pipex.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
-}
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
@@ -49,8 +40,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	return (NULL);
 }
 
-// check for possibilites of failure
-char	**get_paths(char	*envp[])
+int main(int argc, char *argv[], char *envp[])
 {
 	char	**paths;
 	char	**tmp;
