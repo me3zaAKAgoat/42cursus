@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 01:08:12 by echoukri          #+#    #+#             */
-/*   Updated: 2022/12/28 01:14:47 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/12/29 05:45:47 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,6 @@ thus the formula (len <= slen - start) * len
 				+ (slen - start) * (slen - start < len) + 1
 */
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
-}
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
