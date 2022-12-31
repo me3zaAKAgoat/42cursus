@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:47:32 by echoukri          #+#    #+#             */
-/*   Updated: 2022/12/29 06:39:46 by echoukri         ###   ########.fr       */
+/*   Updated: 2022/12/31 10:19:07 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ void	first_process(int infiled, int *vpipe,	char *cmd, char *envp[])
 	char	*cmd_path;
 	char	**cmd_args;
 
-	// dup2(infiled, STDIN_FILENO);
-	// dup2(vpipe[1], STDOUT_FILENO);
-	// close(vpipe[0]);
+	dup2(infiled, STDIN_FILENO);
+	dup2(vpipe[1], STDOUT_FILENO);
+	close(vpipe[0]);
 	cmd_args = ft_split(cmd, ' ');
 	cmd_path = get_cmd(get_paths(envp), cmd_args[0]);
-	printf("%s\n", cmd_path);
-	execve(cmd, cmd_args, envp);
+	execve(cmd_path, cmd_args, envp);
 }
 
 void	second_process(int outfiled, int *vpipe,	char *cmd, char *envp[])
@@ -34,13 +33,12 @@ void	second_process(int outfiled, int *vpipe,	char *cmd, char *envp[])
 	char	*cmd_path;
 	char	**cmd_args;
 
-	// dup2(outfiled, STDOUT_FILENO);
-	// dup2(vpipe[0], STDIN_FILENO);
-	// close(vpipe[1]);
+	dup2(outfiled, STDOUT_FILENO);
+	dup2(vpipe[0], STDIN_FILENO);
+	close(vpipe[1]);
 	cmd_args = ft_split(cmd, ' ');
 	cmd_path = get_cmd(get_paths(envp), cmd_args[0]);
-	printf("%s\n", cmd_path);
-	execve(cmd, cmd_args, envp);
+	execve(cmd_path, cmd_args, envp);
 }
 
 // handle other function failures
