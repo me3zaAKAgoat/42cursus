@@ -28,4 +28,11 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*get_cmd(char	**paths, char	*cmd);
 
+typedef struct pobj
+{
+	int		infile_d;
+	int		outfile_d;
+	int		pipe[2];
+}	t_pipex_obj;
+
 #endif

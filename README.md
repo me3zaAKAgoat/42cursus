@@ -297,9 +297,6 @@ lmfao haha
 
 ## **Tasks**
 
-- [ ] sudo visudo file preiveliges should be checked.
-- [ ] boradcast message does not say what tty sent the message.
-
 - **pipex**
   - [ ] read man of execve, waitpid.
   - [ ] figure out where leaks could occur aka clear all mallocated space.
@@ -308,5 +305,3 @@ lmfao haha
   - [ ] read about what modes means in access function for example.
   - [ ] restrucutre files in a better way
   - [ ] describe the flow of the whole program deliberately.
-  - [ ] ask mfadil exacetly what he did last night when he bugged the session
-  - [ ] figure out how to handle erros at every stage of the program.
