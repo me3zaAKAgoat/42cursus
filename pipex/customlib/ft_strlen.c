@@ -6,11 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 05:45:55 by echoukri          #+#    #+#             */
-/*   Updated: 2022/12/29 05:46:59 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/03 14:43:29 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 size_t	ft_strlen(const char *s)
 {

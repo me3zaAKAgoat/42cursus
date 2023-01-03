@@ -6,11 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 00:10:54 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/03 11:24:25 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/03 14:43:29 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 /*
 malloc : 
