@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 00:51:18 by echoukri          #+#    #+#             */
-/*   Updated: 2022/12/29 06:26:08 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/03 14:29:33 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ char	**get_paths(char	*envp[])
 		{
 			tmp = ft_split(*envp, '=');
 			paths = ft_split(tmp[1], ':');
+			split_clear(tmp);
 			return (paths);
 		}
 		envp++;
 	}
-	return (0);
+	return (NULL);
 }

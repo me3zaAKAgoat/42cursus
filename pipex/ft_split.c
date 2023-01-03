@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 00:10:54 by echoukri          #+#    #+#             */
-/*   Updated: 2022/12/28 00:57:18 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/03 11:24:25 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ for the new word and add it to the array
 -null terminate the array
 */
 
-static void	*failure_clear(char	**arr)
+void	*split_clear(char	**arr)
 {
 	int	index;
 
@@ -91,7 +91,7 @@ static char	**split_raw(char const *s, char c)
 		{
 			arr[arr_index] = make_word(s, i, c);
 			if (arr[arr_index] == NULL)
-				return (failure_clear(arr));
+				return (split_clear(arr));
 			i += ft_strlen(arr[arr_index]);
 			arr_index++;
 		}

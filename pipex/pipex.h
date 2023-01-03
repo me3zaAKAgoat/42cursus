@@ -26,6 +26,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**get_paths(char	*envp[]);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
+void	*split_clear(char	**arr);
 char	*get_cmd(char	**paths, char	*cmd);
 
 typedef struct pobj
@@ -33,6 +34,9 @@ typedef struct pobj
 	int		infile_d;
 	int		outfile_d;
 	int		pipe[2];
+	char	**program_paths;
 }	t_pipex_obj;
+
+void	clear_pipex_data(t_pipex_obj	*pipex_data);
 
 #endif
