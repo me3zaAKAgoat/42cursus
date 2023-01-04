@@ -20,23 +20,24 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-size_t	ft_strlen(const char *s);
-char	**ft_split(char const *s, char c);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	**get_paths(char	*envp[]);
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
-void	*split_clear(char	**arr);
-char	*get_cmd(char	**paths, char	*cmd);
+extern size_t	ft_strlen(const char *s);
+extern char		**ft_split(char const *s, char c);
+extern char		*ft_substr(char const *s, unsigned int start, size_t len);
+extern char		**get_paths(char	*envp[]);
+extern char		*ft_strnstr(const char *haystack,
+					const char *needle, size_t len);
+extern char		*ft_strjoin(char const *s1, char const *s2);
+extern void		*split_clear(char	**arr);
+extern char		*get_cmd(char	**paths, char	*cmd);
 
 typedef struct pobj
 {
 	int		infile_d;
 	int		outfile_d;
-	int		pipe[2];
+	int		*pipes;
 	char	**program_paths;
 }	t_pipex_obj;
 
-void	clear_pipex_data(t_pipex_obj	*pipex_data);
+void	clear_pipex_data(t_pipex_obj	*pipex_data, int ac);
 
 #endif
