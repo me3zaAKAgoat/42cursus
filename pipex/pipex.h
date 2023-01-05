@@ -38,6 +38,6 @@ typedef struct pobj
 	char	**program_paths;
 }	t_pipex_obj;
 
-void	clear_pipex_data(t_pipex_obj	*pipex_data, int ac);
+extern void		clear_pipex_data(t_pipex_obj	*pipex_data, int ac);
 
 #endif
