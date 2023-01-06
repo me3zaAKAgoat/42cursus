@@ -32,12 +32,12 @@ extern char		*get_cmd(char	**paths, char	*cmd);
 
 typedef struct pobj
 {
-	int		infile_d;
-	int		outfile_d;
 	int		*pipes;
 	char	**program_paths;
 }	t_pipex_obj;
 
-extern void		clear_pipex_data(t_pipex_obj	*pipex_data, int ac);
+;
+extern void		cleanup_nomalloc(t_pipex_obj	*pipex_data);
+extern void		cleanup_all(t_pipex_obj	*pipex_data, int pipe_count);
 
 #endif

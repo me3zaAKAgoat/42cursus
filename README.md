@@ -294,14 +294,3 @@ lmfao haha
   - _va_end_ serves as a clean up to afford the programmer the ability to reinitialise the _va_list_.
 
 ---
-
-## **Tasks**
-
-- **pipex**
-  - [ ] read man of execve, waitpid.
-  - [ ] figure out where leaks could occur aka clear all mallocated space.
-  - [ ] comment every function.
-  - [ ] need a the freeing function that cleans arrays made by ft_split.
-  - [ ] read about what modes means in access function for example.
-  - [ ] restrucutre files in a better way
-  - [ ] describe the flow of the whole program deliberately.

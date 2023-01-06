@@ -6,26 +6,32 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 18:33:03 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/04 13:54:37 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:39:58 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	clear_pipex_data(t_pipex_obj	*pipex_data, int ac)
+/*
+serves as a cleanup function that closes all the file descriptors opened
+and frees mallcoated space for pipes.
+*/
+
+void	cleanup_nomalloc(t_pipex_obj	*pipex_data)
 {
-	size_t		i;
-	size_t		s_arr;
+	split_clear(pipex_data->program_paths);
+}
+
+void	cleanup_all(t_pipex_obj	*pipex_data, int pipe_count)
+{
+	int		i;
 
 	i = 0;
-	s_arr = sizeof(int) * 2 * (ac - 4);
-	while (i < s_arr)
+	while (i < pipe_count)
 	{
 		close(pipex_data->pipes[i]);
 		i++;
 	}
 	free(pipex_data->pipes);
-	close(pipex_data->infile_d);
-	close(pipex_data->outfile_d);
 	split_clear(pipex_data->program_paths);
 }
