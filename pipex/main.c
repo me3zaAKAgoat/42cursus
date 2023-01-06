@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:47:32 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/06 17:31:01 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/06 20:30:31 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ static int	first_process(t_pipex_obj *pipex_data, char *cmd,
 	pid = fork();
 	if (pid == 0)
 	{
-		dup2(infile_d, STDIN_FILENO);
-		dup2(pipex_data->pipes[arr_cursor + 1], STDOUT_FILENO);
-		close(pipex_data->pipes[arr_cursor + 0]);
 		cmd_args = ft_split(cmd, ' ');
 		cmd_path = get_cmd(pipex_data->program_paths, cmd_args[0]);
 		if (cmd_path == NULL)
-			return (127);
+			return (write(2, cmd_args[0], ft_strlen(cmd_args[0])),
+				write(2, ": command not found\n", 20), 127);
+		dup2(infile_d, STDIN_FILENO);
+		dup2(pipex_data->pipes[arr_cursor + 1], STDOUT_FILENO);
+		close(pipex_data->pipes[arr_cursor + 0]);
 		if (execve(cmd_path, cmd_args, envp) == -1)
 			return (-1);
 		split_clear(cmd_args);
@@ -53,14 +54,15 @@ static int	mid_process(t_pipex_obj *pipex_data, char *cmd,
 	pid = fork();
 	if (pid == 0)
 	{
+		cmd_args = ft_split(cmd, ' ');
+		cmd_path = get_cmd(pipex_data->program_paths, cmd_args[0]);
+		if (cmd_path == NULL)
+			return (write(2, cmd_args[0], ft_strlen(cmd_args[0])),
+				write(2, ": command not found\n", 20), 127);
 		dup2(pipex_data->pipes[arr_cursor - 2 + 0], STDIN_FILENO);
 		close(pipex_data->pipes[arr_cursor - 2 + 1]);
 		dup2(pipex_data->pipes[arr_cursor + 1], STDOUT_FILENO);
 		close(pipex_data->pipes[arr_cursor + 0]);
-		cmd_args = ft_split(cmd, ' ');
-		cmd_path = get_cmd(pipex_data->program_paths, cmd_args[0]);
-		if (cmd_path == NULL)
-			return (127);
 		if (execve(cmd_path, cmd_args, envp) == -1)
 			return (-1);
 		split_clear(cmd_args);
@@ -86,15 +88,16 @@ static int	last_process(t_pipex_obj *pipex_data, char *cmd,
 	pid = fork();
 	if (pid == 0)
 	{
-		dup2(outfile_d, STDOUT_FILENO);
-		dup2(pipex_data->pipes[arr_cursor - 2 + 0], STDIN_FILENO);
-		close(pipex_data->pipes[arr_cursor - 2 + 1]);
 		cmd_args = ft_split(cmd, ' ');
 		cmd_path = get_cmd(pipex_data->program_paths, cmd_args[0]);
 		if (cmd_path == NULL)
-			return (127);
+			return (write(2, cmd_args[0], ft_strlen(cmd_args[0])),
+				write(2, ": command not found\n", 20), 127);
+		dup2(outfile_d, STDOUT_FILENO);
+		dup2(pipex_data->pipes[arr_cursor - 2 + 0], STDIN_FILENO);
+		close(pipex_data->pipes[arr_cursor - 2 + 1]);
 		if (execve(cmd_path, cmd_args, envp) == -1)
-			return (-1);
+			return (126);
 		split_clear(cmd_args);
 		free(cmd_path);
 		close(pipex_data->pipes[arr_cursor - 2 + 0]);
@@ -142,5 +145,7 @@ int	main(int ac, char *argv[], char *envp[])
 	}
 	status = last_process(&pipex_data, argv[(ac - 1) - 1],
 			envp, i * 2, argv, ac);
-	return (cleanup_all(&pipex_data, i * 2), status);
+	cleanup_all(&pipex_data, i * 2);
+	printf("%d\n", status);
+	exit(status);
 }

@@ -29,6 +29,8 @@ extern char		*ft_strnstr(const char *haystack,
 extern char		*ft_strjoin(char const *s1, char const *s2);
 extern void		*split_clear(char	**arr);
 extern char		*get_cmd(char	**paths, char	*cmd);
+extern void		*ft_memcpy(void *dst, const void *src, size_t n);
+
 
 typedef struct pobj
 {
