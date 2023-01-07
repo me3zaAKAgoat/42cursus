@@ -36,6 +36,7 @@ typedef struct pobj
 {
 	int		*pipes;
 	char	**program_paths;
+	int		ac;
 }	t_pipex_obj;
 
 ;
