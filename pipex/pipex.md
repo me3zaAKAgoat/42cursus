@@ -13,6 +13,7 @@ The issues with pipex:
 - handle failure of a child process fucking up the last process.
 - theres a MAJOR fucking difference between exit and return in processes [check this](https://stackoverflow.com/questions/66914203/waitpid-hangs-even-though-child-process-is-dead).
 
+[very good unix pipes artice](https://www.rozmichelle.com/pipes-forks-dups/)
 **add argv and argc to pipex object**
 
 ## flow:
