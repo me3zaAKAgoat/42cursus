@@ -4,6 +4,8 @@ Pipex is a program that should mimic/simulate the behaviour of Unix shell's pipe
 
 The issues with pipex:
 
+- check why tests 9 10 23 24 25 timeout now that exit is introduced to mid processes and waitpid is functional in the last part of the main process.
+- change includes to basic "header.h" instead of "../header.h" and add -I option in compilation in makefile.
 - how to run every command.
 - each pipe end opened should be closed when use ends **IMMEDIATELY**.
 - seperate commands are allowed to fail (they should perror and change the status of the main program) and finish the program.
@@ -29,8 +31,6 @@ The issues with pipex:
 - for the intermediate commands a while loop is started at index 1 resembling the second command, and is stopped at ac - 4.
 
   - inside this while loop a pipe is created at i \* 2 (the iterations' corresponding boxes in the heap allocated array).
-
-- check why tests 9 10 23 24 25 timeout now that exit is introduced to mid processes and waitpid is functional in the last part of the main process.
 
 ```python
 
