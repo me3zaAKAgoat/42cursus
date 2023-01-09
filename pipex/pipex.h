@@ -39,8 +39,6 @@ typedef struct pobj
 	int		ac;
 }	t_pipex_obj;
 
-;
-extern void		cleanup_nomalloc(t_pipex_obj	*pipex_data);
 extern void		cleanup_all(t_pipex_obj	*pipex_data, int pipe_count);
 
 #endif

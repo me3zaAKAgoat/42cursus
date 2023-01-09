@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 18:33:03 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/06 15:39:58 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:24:52 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@
 serves as a cleanup function that closes all the file descriptors opened
 and frees mallcoated space for pipes.
 */
-
-void	cleanup_nomalloc(t_pipex_obj	*pipex_data)
-{
-	split_clear(pipex_data->program_paths);
-}
 
 void	cleanup_all(t_pipex_obj	*pipex_data, int pipe_count)
 {

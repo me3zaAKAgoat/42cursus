@@ -2,7 +2,7 @@
 arc=$(uname -a)
 pcpu=$(grep "physical id" /proc/cpuinfo | wc -l)
 vcpu=$(grep "processor" /proc/cpuinfo | wc -l)
-ram=$(	free -m | grep Mem | awk '{printf("%s/%sMB (%.2f%%)", $3, $2, ($3/$2)*100)}')
+ram=$(free -m | grep Mem | awk '{printf("%s/%sMB (%.2f%%)", $3, $2, ($3/$2)*100)}')
 disk=$(df -h --total | grep total | awk '{printf("%.1f/%.fGb (%s)", $3, $2, $5)}')
 cpul=$(top -bn1 | grep Cpu | awk '{printf("%.1f%%", $2 + $4)}')
 lboot=$(uptime -s | awk '{printf("%s %s\n", $1, substr($2, 1, length($2) - 3))}')
