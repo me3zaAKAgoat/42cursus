@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 02:32:11 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/03 14:43:32 by echoukri         ###   ########.fr       */
+/*   Created: 2023/01/02 18:33:03 by echoukri          #+#    #+#             */
+/*   Updated: 2023/01/10 15:43:51 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "pipex.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+/*
+serves as a cleanup function that closes all the file descriptors opened
+and frees mallcoated space for pipes.
+*/
+
+void	cleanup_all(t_pipex_obj	*pipex_data, int pipe_count)
 {
-	char	*ptr;
 	int		i;
-	int		j;
 
-	if (!s1 || !s2)
-		return (NULL);
-	ptr = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!ptr)
-		return (NULL);
 	i = 0;
-	j = 0;
-	while (s1[i])
+	while (i < pipe_count)
 	{
-		ptr[i] = s1[i];
+		close(pipex_data->pipes[i]);
 		i++;
 	}
-	while (s2[j])
-		ptr[i++] = s2[j++];
-	ptr[i] = '\0';
-	return (ptr);
+	free(pipex_data->pipes);
+	split_clear(pipex_data->program_paths);
 }

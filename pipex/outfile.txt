@@ -1,1 +1,5 @@
-       0
+-rw-r--r--  1 echoukri  candidate  3263 Jan 10 21:45 children_core.c
+-rw-r--r--  1 echoukri  candidate  1245 Jan 10 15:43 free.c
+-rw-r--r--  1 echoukri  candidate  2584 Jan 10 15:43 ft_split.c
+-rw-r--r--  1 echoukri  candidate  1219 Jan 10 15:43 get_cmd.c
+-rw-r--r--  1 echoukri  candidate  1224 Jan 10 15:43 get_paths.c

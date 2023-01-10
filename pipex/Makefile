@@ -2,18 +2,23 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = pipex
 
-SOURCE_FILES = main.c ./util/free.c ./util/ft_split.c ./util/get_cmd.c \
- ./util/get_paths.c ./customlib/ft_strjoin.c ./customlib/ft_strlen.c \
- ./customlib/ft_strnstr.c ./customlib/ft_substr.c
+SOURCE_FILES =  ./src/util/children_core.c ./src/util/free.c ./src/util/ft_split.c ./src/util/get_cmd.c \
+ ./src/util/get_paths.c ./src/customlib/ft_strjoin.c ./src/customlib/ft_strlen.c \
+ ./src/customlib/ft_strnstr.c ./src/customlib/ft_substr.c
 
+MANDATORY = ./src/mandatory.c
+
+BONUS = ./src/bonus.c
+
+HEADER = ./includes/pipex.h
 
 all : $(NAME)
 
-$(NAME) : $(SOURCE_FILES)
-	$(CC) $(CFLAGS) -o $(NAME) $(SOURCE_FILES)
+$(NAME) : $(MANDATORY) $(SOURCE_FILES) $(HEADER)
+	$(CC) $(CFLAGS) -I./includes -o $(NAME) $(MANDATORY) $(SOURCE_FILES)
 
-# bonus : $(SOURCE_FILES)
-# 	ar -rsc $(NAME) $(BONUS_IMPLEMENTATIONS)
+bonus : $(BONUS) $(SOURCE_FILES) $(HEADER)
+	$(CC) $(CFLAGS) -I./includes -o $(NAME) $(BONUS) $(SOURCE_FILES)
 
 clean :
 	rm -f $(NAME)

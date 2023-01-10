@@ -20,6 +20,9 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
+# define ERR_EXEC 126
+# define ERR_NOTFOUND 127
+
 extern size_t	ft_strlen(const char *s);
 extern char		**ft_split(char const *s, char c);
 extern char		*ft_substr(char const *s, unsigned int start, size_t len);
@@ -31,14 +34,19 @@ extern void		*split_clear(char	**arr);
 extern char		*get_cmd(char	**paths, char	*cmd);
 extern void		*ft_memcpy(void *dst, const void *src, size_t n);
 
-
 typedef struct pobj
 {
 	int		*pipes;
 	char	**program_paths;
 	int		ac;
+	char	**argv;
+	char	**envp;
 }	t_pipex_obj;
 
+extern int		fp_core(t_pipex_obj *pipex_data, char *cmd, int infile_d);
+extern int		mp_core(t_pipex_obj *pipex_data, char *cmd, int arr_cursor);
+extern int		lp_core(t_pipex_obj *pipex_data, char *cmd,
+					int arr_cursor, int outfile_d);
 extern void		cleanup_all(t_pipex_obj	*pipex_data, int pipe_count);
 
 #endif

@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 18:33:03 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/09 17:24:52 by echoukri         ###   ########.fr       */
+/*   Created: 2022/12/28 01:28:53 by echoukri          #+#    #+#             */
+/*   Updated: 2023/01/10 15:43:47 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "pipex.h"
 
-/*
-serves as a cleanup function that closes all the file descriptors opened
-and frees mallcoated space for pipes.
-*/
-
-void	cleanup_all(t_pipex_obj	*pipex_data, int pipe_count)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	int		i;
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	k;
 
 	i = 0;
-	while (i < pipe_count)
+	j = 0;
+	k = 0;
+	if (needle[0] == '\0')
+		return ((char *)(haystack));
+	while (haystack[i] && i < len)
 	{
-		close(pipex_data->pipes[i]);
+		k = i;
+		while (haystack[k++] == needle[j++])
+		{
+			if (k > len)
+				return (NULL);
+			if (!needle[j])
+				return ((char *)(haystack) + i);
+		}
+		j = 0;
 		i++;
 	}
-	free(pipex_data->pipes);
-	split_clear(pipex_data->program_paths);
+	return (NULL);
 }
