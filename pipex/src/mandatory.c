@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:47:32 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/10 20:18:41 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:59:11 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	fp_wrapper(t_pipex_obj *pipex_data, char *cmd)
 	pid = fork();
 	if (pid == 0)
 		fp_core(pipex_data, cmd, infile_d);
+	waitpid(pid, 0, 0);
 	close(infile_d);
 	close(pipex_data->pipes[0 + 1]);
 	return (0);
@@ -43,7 +44,7 @@ static int	lp_wrapper(t_pipex_obj *pipex_data, char *cmd)
 		lp_core(pipex_data, cmd, 2, outfile_d);
 	close(outfile_d);
 	close(pipex_data->pipes[0 + 0]);
-	waitpid(-1, &status, 0);
+	waitpid(pid, &status, 0);
 	return (WEXITSTATUS(status));
 }
 
