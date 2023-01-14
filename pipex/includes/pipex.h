@@ -43,9 +43,9 @@ typedef struct pobj
 	char	**envp;
 }	t_pipex_obj;
 
-extern int		fp_core(t_pipex_obj *pipex_data, char *cmd, int infile_d);
-extern int		mp_core(t_pipex_obj *pipex_data, char *cmd, int arr_cursor);
-extern int		lp_core(t_pipex_obj *pipex_data, char *cmd,
+extern void		fp_core(t_pipex_obj *pipex_data, char *cmd, int infile_d);
+extern void		mp_core(t_pipex_obj *pipex_data, char *cmd, int arr_cursor);
+extern void		lp_core(t_pipex_obj *pipex_data, char *cmd,
 					int arr_cursor, int outfile_d);
 extern void		cleanup_all(t_pipex_obj	*pipex_data, int pipe_count);
 

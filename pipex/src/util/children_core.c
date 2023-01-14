@@ -6,13 +6,13 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:27:05 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/11 19:56:12 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/14 01:14:46 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	fp_core(t_pipex_obj *pipex_data, char *cmd, int infile_d)
+void	fp_core(t_pipex_obj *pipex_data, char *cmd, int infile_d)
 {
 	char	*cmd_path;
 	char	**cmd_args;
@@ -23,20 +23,18 @@ int	fp_core(t_pipex_obj *pipex_data, char *cmd, int infile_d)
 	if (cmd_path == NULL)
 		return (write(2, cmd_args[0], ft_strlen(cmd_args[0])),
 			write(2, ": command not found\n", 20),
-			exit(ERR_NOTFOUND), ERR_NOTFOUND);
+			exit(ERR_NOTFOUND));
+	close(pipex_data->pipes[0 + 0]);
 	dup2(infile_d, STDIN_FILENO);
 	dup2(pipex_data->pipes[0 + 1], STDOUT_FILENO);
-	close(pipex_data->pipes[0 + 0]);
+	close(pipex_data->pipes[0 + 1]);
 	if (execve(cmd_path, cmd_args, pipex_data->envp) == -1)
 		return (write(2, cmd_args[0], ft_strlen(cmd_args[0])),
 			split_clear(cmd_args), free(cmd_path),
-			perror("command failed:"), exit(ERR_EXEC), ERR_EXEC);
-	split_clear(cmd_args);
-	free(cmd_path);
-	exit(0);
+			perror("command failed:"), exit(ERR_EXEC));
 }
 
-int	mp_core(t_pipex_obj *pipex_data, char *cmd, int arr_cursor)
+void	mp_core(t_pipex_obj *pipex_data, char *cmd, int arr_cursor)
 {
 	char	*cmd_path;
 	char	**cmd_args;
@@ -47,7 +45,7 @@ int	mp_core(t_pipex_obj *pipex_data, char *cmd, int arr_cursor)
 	if (cmd_path == NULL)
 		return (write(2, cmd_args[0], ft_strlen(cmd_args[0])),
 			write(2, ": command not found\n", 20),
-			exit(ERR_NOTFOUND), ERR_NOTFOUND);
+			exit(ERR_NOTFOUND));
 	close(pipex_data->pipes[arr_cursor - 2 + 1]);
 	close(pipex_data->pipes[arr_cursor + 0]);
 	dup2(pipex_data->pipes[arr_cursor - 2 + 0], STDIN_FILENO);
@@ -57,37 +55,27 @@ int	mp_core(t_pipex_obj *pipex_data, char *cmd, int arr_cursor)
 	if (execve(cmd_path, cmd_args, pipex_data->envp) == -1)
 		return (write(2, cmd_args[0], ft_strlen(cmd_args[0])),
 			split_clear(cmd_args), free(cmd_path),
-			perror("command failed:"), exit(ERR_EXEC), ERR_EXEC);
-	split_clear(cmd_args);
-	free(cmd_path);
-	exit(0);
+			perror("command failed:"), exit(ERR_EXEC));
 }
 
-int	lp_core(t_pipex_obj *pipex_data, char *cmd,
+void	lp_core(t_pipex_obj *pipex_data, char *cmd,
 	int arr_cursor, int outfile_d)
 {
 	char	*cmd_path;
 	char	**cmd_args;
-	// char rd[300];	
-	
+
 	puts("lp runs");
 	cmd_args = ft_split(cmd, ' ');
 	cmd_path = get_cmd(pipex_data->program_paths, cmd_args[0]);
 	if (cmd_path == NULL)
 		return (write(2, cmd_args[0], ft_strlen(cmd_args[0])),
-			write(2, ": command not found\n", 20),
-			exit(ERR_NOTFOUND), ERR_NOTFOUND);
-	// printf("%d", arr_cursor);
-	// read(pipex_data->pipes[arr_cursor + 0] , rd, 300);
-	// rd[280] = 0;
-	// write(outfile_d, rd, 281);
+			write(2, ": command not found\n", 20), split_clear(cmd_args),
+			exit(ERR_NOTFOUND));
+	close(pipex_data->pipes[arr_cursor + 1]);
 	dup2(outfile_d, STDOUT_FILENO);
 	dup2(pipex_data->pipes[arr_cursor + 0], STDIN_FILENO);
-	close(pipex_data->pipes[arr_cursor + 1]);
+	close(pipex_data->pipes[arr_cursor + 0]);
 	if (execve(cmd_path, cmd_args, pipex_data->envp) == -1)
 		return (split_clear(cmd_args), free(cmd_path),
-			perror("command failed:"), exit(ERR_EXEC), ERR_EXEC);
-	split_clear(cmd_args);
-	free(cmd_path);
-	exit(0);
+			perror("command failed:"), exit(ERR_EXEC));
 }
