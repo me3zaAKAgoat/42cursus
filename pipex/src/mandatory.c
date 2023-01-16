@@ -6,46 +6,55 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:47:32 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/11 14:59:11 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/16 19:13:08 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static int	fp_wrapper(t_pipex_obj *pipex_data, char *cmd)
+static void	fp_wrapper(t_pipex_obj *pipex_data, char *cmd)
 {
 	pid_t	pid;
 	int		infile_d;
 
 	infile_d = open(pipex_data->argv[1], O_RDONLY);
 	if (infile_d < 0)
-		return (perror("pipex: input"), close(pipex_data->pipes[0 + 1]), 1);
+	{
+		perror("pipex: input");
+		close(pipex_data->pipes[0 + 1]);
+		return ;
+	}
 	pid = fork();
 	if (pid == 0)
 		fp_core(pipex_data, cmd, infile_d);
-	waitpid(pid, 0, 0);
-	close(infile_d);
-	close(pipex_data->pipes[0 + 1]);
-	return (0);
+	else
+	{
+		close(infile_d);
+		close(pipex_data->pipes[0 + 1]);
+	}
 }
 
-static int	lp_wrapper(t_pipex_obj *pipex_data, char *cmd)
+static void	lp_wrapper(t_pipex_obj *pipex_data, char *cmd)
 {
 	int		outfile_d;
 	pid_t	pid;
-	int		status;
 
 	outfile_d = open(pipex_data->argv[pipex_data->ac - 1], O_TRUNC | O_CREAT
 			| O_RDWR, 0000644);
 	if (outfile_d < 0)
-		return (perror("pipex: output:"), 1);
+	{
+		perror("pipex: output:");
+		close(pipex_data->pipes[0 + 0]);
+		return ;
+	}
 	pid = fork();
 	if (pid == 0)
-		lp_core(pipex_data, cmd, 2, outfile_d);
-	close(outfile_d);
-	close(pipex_data->pipes[0 + 0]);
-	waitpid(pid, &status, 0);
-	return (WEXITSTATUS(status));
+		lp_core(pipex_data, cmd, 0, outfile_d);
+	else
+	{
+		close(outfile_d);
+		close(pipex_data->pipes[0 + 0]);
+	}
 }
 
 static int	init(t_pipex_obj *pipex_data, int ac, char *envp[], char *argv[])
@@ -76,9 +85,10 @@ int	main(int ac, char *argv[], char *envp[])
 	int			status;
 
 	if (init(&pipex_data, ac, envp, argv) == -1)
-		exit(1);
+		return (perror("wrong number of arguments"), exit(1), 1);
 	fp_wrapper(&pipex_data, argv[2]);
-	status = lp_wrapper(&pipex_data, argv[(ac - 1) - 1]);
+	lp_wrapper(&pipex_data, argv[(ac - 1) - 1]);
 	cleanup_all(&pipex_data, 2);
-	exit(status);
+	wait(&status);
+	exit(WEXITSTATUS(status));
 }
