@@ -2,23 +2,23 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = pipex
 
-SOURCE_FILES =  ./src/util/children_core.c ./src/util/free.c ./src/util/ft_split.c ./src/util/get_cmd.c \
- ./src/util/get_paths.c ./src/customlib/ft_strjoin.c ./src/customlib/ft_strlen.c \
- ./src/customlib/ft_strnstr.c ./src/customlib/ft_substr.c
+HEADERS = ./includes/pipex.h ./includes/get_next_line.h
 
-MANDATORY = ./src/mandatory.c
+MANDATORY_SOURCES = ./src/mandatory.c
 
-BONUS = ./src/bonus.c
+BONUS_SOURCES = ./src/bonus.c ./src/cursus_functions/gnl/get_next_line.c ./src/cursus_functions/gnl/get_next_line_utils.c
 
-HEADER = ./includes/pipex.h
+SHARED_SOURCES =  ./src/utility/children_core.c ./src/utility/free.c ./src/utility/ft_split.c ./src/utility/get_cmd.c \
+ ./src/utility/get_paths.c ./src/cursus_functions/ft_strjoin.c ./src/cursus_functions/ft_strlen.c \
+ ./src/cursus_functions/ft_strnstr.c ./src/cursus_functions/ft_substr.c
 
 all : $(NAME)
 
-$(NAME) : $(MANDATORY) $(SOURCE_FILES) $(HEADER)
-	$(CC) $(CFLAGS) -I./includes -o $(NAME) $(MANDATORY) $(SOURCE_FILES)
+$(NAME) : $(MANDATORY_SOURCES) $(SHARED_SOURCES) $(HEADERS)
+	$(CC) $(CFLAGS) -I./includes -o $(NAME) $(MANDATORY_SOURCES) $(SHARED_SOURCES)
 
-bonus : $(BONUS) $(SOURCE_FILES) $(HEADER)
-	$(CC) $(CFLAGS) -I./includes -o $(NAME) $(BONUS) $(SOURCE_FILES)
+bonus : $(BONUS_SOURCES) $(SHARED_SOURCES) $(HEADERS)
+	$(CC) $(CFLAGS) -I./includes -o $(NAME) $(BONUS_SOURCES) $(SHARED_SOURCES)
 
 clean :
 	rm -f $(NAME)

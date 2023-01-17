@@ -6,11 +6,18 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:47:32 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/16 19:13:08 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/17 00:33:52 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+/* this function is a hacky way to*/
+
+// static void	cede_control(void)
+// {
+// 	return ;
+// }
 
 static void	fp_wrapper(t_pipex_obj *pipex_data, char *cmd)
 {
@@ -19,14 +26,12 @@ static void	fp_wrapper(t_pipex_obj *pipex_data, char *cmd)
 
 	infile_d = open(pipex_data->argv[1], O_RDONLY);
 	if (infile_d < 0)
-	{
-		perror("pipex: input");
-		close(pipex_data->pipes[0 + 1]);
-		return ;
-	}
+		return (close(pipex_data->pipes[0 + 1]), perror("pipex: input"));
 	pid = fork();
 	if (pid == 0)
 		fp_core(pipex_data, cmd, infile_d);
+	else if (pid < 0)
+		return (perror("fork failed:"), exit(1));
 	else
 	{
 		close(infile_d);
@@ -42,14 +47,12 @@ static void	lp_wrapper(t_pipex_obj *pipex_data, char *cmd)
 	outfile_d = open(pipex_data->argv[pipex_data->ac - 1], O_TRUNC | O_CREAT
 			| O_RDWR, 0000644);
 	if (outfile_d < 0)
-	{
-		perror("pipex: output:");
-		close(pipex_data->pipes[0 + 0]);
-		return ;
-	}
+		return (close(pipex_data->pipes[0 + 0]), perror("pipex: output:"));
 	pid = fork();
 	if (pid == 0)
 		lp_core(pipex_data, cmd, 0, outfile_d);
+	else if (pid < 0)
+		return (perror("fork failed:"), exit(1));
 	else
 	{
 		close(outfile_d);

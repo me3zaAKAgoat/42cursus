@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:47:32 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/16 20:27:37 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/17 00:34:43 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,12 @@ static void	fp_wrapper(t_pipex_obj *pipex_data, char *cmd)
 
 	infile_d = open(pipex_data->argv[1], O_RDONLY);
 	if (infile_d < 0)
-	{
-		perror("pipex: input");
-		close(pipex_data->pipes[0 + 1]);
-		return ;
-	}
+		return (close(pipex_data->pipes[0 + 1]), perror("pipex: input"));
 	pid = fork();
 	if (pid == 0)
 		fp_core(pipex_data, cmd, infile_d);
+	else if (pid < 0)
+		return (perror("fork failed:"), exit(1));
 	else
 	{
 		close(infile_d);
@@ -41,6 +39,8 @@ static void	mp_wrapper(t_pipex_obj *pipex_data, char *cmd, int arr_cursor)
 	pid = fork();
 	if (pid == 0)
 		mp_core(pipex_data, cmd, arr_cursor);
+	else if (pid < 0)
+		return (perror("fork failed:"), exit(1));
 	else
 	{
 		close(pipex_data->pipes[arr_cursor - 2 + 0]);
@@ -56,13 +56,12 @@ static void	lp_wrapper(t_pipex_obj *pipex_data, char *cmd, int arr_cursor)
 	outfile_d = open(pipex_data->argv[pipex_data->ac - 1], O_TRUNC | O_CREAT
 			| O_RDWR, 0000644);
 	if (outfile_d < 0)
-	{
-		perror("pipex: output:");
-		return ;
-	}
+		return (perror("pipex: output:"));
 	pid = fork();
 	if (pid == 0)
 		lp_core(pipex_data, cmd, arr_cursor, outfile_d);
+	else if (pid < 0)
+		return (perror("fork failed:"), exit(1));
 	else
 	{
 		close(outfile_d);
@@ -104,7 +103,6 @@ int	main(int ac, char *argv[], char *envp[])
 
 	if (init(&pipex_data, ac, envp, argv) == -1)
 		exit(1);
-	
 	fp_wrapper(&pipex_data, argv[2]);
 	command_nbr = 1;
 	while (command_nbr < ac - 4)

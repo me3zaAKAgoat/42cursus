@@ -33,6 +33,8 @@ extern char		*ft_strjoin(char const *s1, char const *s2);
 extern void		*split_clear(char	**arr);
 extern char		*get_cmd(char	**paths, char	*cmd);
 extern void		*ft_memcpy(void *dst, const void *src, size_t n);
+extern char		*get_next_line(int fd);
+extern void		here_doc(char *eof);
 
 typedef struct pobj
 {

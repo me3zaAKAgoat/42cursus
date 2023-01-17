@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 21:16:21 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/17 02:05:31 by echoukri         ###   ########.fr       */
+/*   Created: 2023/01/17 15:48:13 by echoukri          #+#    #+#             */
+/*   Updated: 2023/01/17 15:48:27 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 300
-# endif
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
+#include "pipex.h"
 
-size_t	gnl_strlen(const char *s);
-char	*gnl_substr(char const *s, unsigned int start, size_t len);
-char	*get_next_line(int fd);
+void	here_doc(char *eof)
+{
+	int		fd;
+	char	*buf;
 
-#endif
+	fd = open(".tmp.txt", O_TRUNC | O_CREAT | O_RDWR, 0000644);
+	while (1)
+	{
+		write(1, "heredoc>", ft_strlen("heredoc>"));
+		buf = get_next_line(0);
+		if (ft_strnstr(buf, eof, ft_strlen(eof)) > 0)
+			return ;
+		write(fd, buf, ft_strlen(buf));
+	}
+}

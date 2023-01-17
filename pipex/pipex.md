@@ -1,7 +1,5 @@
 <h1 align="center"><strong>Pipex</strong></h1>
 
-# handle fork errors. pid == -1
-
 Pipex is a program that should mimic/simulate the behaviour of Unix shell's pipe command line utility `|` whilst also allowing for input redirection, output redirection and the use of here_doc CLU.
 
 The issues with pipex:
@@ -17,6 +15,7 @@ The issues with pipex:
 - cleanup pipes' heap allocated space (after making sure all pipes ends FD of the parent process were closed) at the very end of the program.
 - handle failure of a child process fucking up the last process.
 - theres a MAJOR fucking difference between exit and return in processes [check this](https://stackoverflow.com/questions/66914203/waitpid-hangs-even-though-child-process-is-dead).
+- add a mode to the pipex data structure that decides how files are opened for input and output
 
 [very good unix pipes artice](https://www.rozmichelle.com/pipes-forks-dups/)
 **add argv and argc to pipex object**
