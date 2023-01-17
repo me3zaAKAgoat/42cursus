@@ -6,13 +6,13 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:27:05 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/16 20:05:14 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/17 21:35:43 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	fp_core(t_pipex_obj *pipex_data, char *cmd, int infile_d)
+void	first_child_core(t_pipex_obj *pipex_data, char *cmd, int infile_d)
 {
 	char	*cmd_path;
 	char	**cmd_args;
@@ -34,7 +34,7 @@ void	fp_core(t_pipex_obj *pipex_data, char *cmd, int infile_d)
 			perror("command failed:"), exit(ERR_EXEC));
 }
 
-void	mp_core(t_pipex_obj *pipex_data, char *cmd, int arr_cursor)
+void	middle_child_core(t_pipex_obj *pipex_data, char *cmd, int arr_cursor)
 {
 	char	*cmd_path;
 	char	**cmd_args;
@@ -56,7 +56,7 @@ void	mp_core(t_pipex_obj *pipex_data, char *cmd, int arr_cursor)
 			perror("command failed:"), exit(ERR_EXEC));
 }
 
-void	lp_core(t_pipex_obj *pipex_data, char *cmd,
+void	last_child_core(t_pipex_obj *pipex_data, char *cmd,
 	int arr_cursor, int outfile_d)
 {
 	char	*cmd_path;

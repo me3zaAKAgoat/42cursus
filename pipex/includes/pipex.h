@@ -34,8 +34,11 @@ extern void		*split_clear(char	**arr);
 extern char		*get_cmd(char	**paths, char	*cmd);
 extern void		*ft_memcpy(void *dst, const void *src, size_t n);
 extern char		*get_next_line(int fd);
-extern void		here_doc(char *eof);
 
+/*
+if heredoc_offset > 0 the program
+shall work as if the infile is a heredoc
+*/
 typedef struct pobj
 {
 	int		*pipes;
@@ -43,11 +46,16 @@ typedef struct pobj
 	int		ac;
 	char	**argv;
 	char	**envp;
+	char	heredoc_offset;	
 }	t_pipex_obj;
 
-extern void		fp_core(t_pipex_obj *pipex_data, char *cmd, int infile_d);
-extern void		mp_core(t_pipex_obj *pipex_data, char *cmd, int arr_cursor);
-extern void		lp_core(t_pipex_obj *pipex_data, char *cmd,
+extern void		here_doc(char *eof);
+extern void		setup_heredoc(t_pipex_obj *pipex_data, char **argv);
+extern void		first_child_core(t_pipex_obj *pipex_data,
+					char *cmd, int infile_d);
+extern void		middle_child_core(t_pipex_obj *pipex_data,
+					char *cmd, int arr_cursor);
+extern void		last_child_core(t_pipex_obj *pipex_data, char *cmd,
 					int arr_cursor, int outfile_d);
 extern void		cleanup_all(t_pipex_obj	*pipex_data, int pipe_count);
 
