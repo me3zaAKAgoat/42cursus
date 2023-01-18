@@ -57,6 +57,6 @@ extern void		middle_child_core(t_pipex_obj *pipex_data,
 					char *cmd, int arr_cursor);
 extern void		last_child_core(t_pipex_obj *pipex_data, char *cmd,
 					int arr_cursor, int outfile_d);
-extern void		cleanup_all(t_pipex_obj	*pipex_data, int pipe_count);
+extern void		cleanup_all(t_pipex_obj	*pipex_data);
 
 #endif
