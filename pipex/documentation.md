@@ -8,15 +8,21 @@ For usage of multiple pipes, the solution I came up with is an array of ints tha
 
 _N.B_: Whenever the following syntax is used:
 
-> pipex_data->pipes[arr_cursor + 0] = file descriptor
+```c
+pipex_data->pipes[arr_cursor + 0] = file descriptor
+```
 
 is equivalent to:
 
-> $\text{PIPE} \small{arr\_ cursor}\text{[0]} $ = file descriptor
+```math
+\text{PIPE} \small{arr\_ cursor}\text{[0]} \text{ = file descriptor}
+```
 
 is also equivalent to:
 
-> the write end of the pipe n° arr_cursor
+```
+the write end of the pipe n° arr_cursor
+```
 
 ---
 
