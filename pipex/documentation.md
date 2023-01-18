@@ -12,7 +12,7 @@ _N.B_: Whenever the following syntax is used:
 
 is equivalent to:
 
-> $PIPE \small arr\_ cursor [0] $ = file descriptor
+> $\text{PIPE} \small{arr\_ cursor}\text{[0]} $ = file descriptor
 
 is also equivalent to:
 
