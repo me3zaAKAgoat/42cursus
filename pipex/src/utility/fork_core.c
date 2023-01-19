@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   children_core.c                                    :+:      :+:    :+:   */
+/*   fork_core.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:27:05 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/17 21:35:43 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/19 04:44:25 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	first_child_core(t_pipex_obj *pipex_data, char *cmd, int infile_d)
 	char	**cmd_args;
 
 	cmd_args = ft_split(cmd, ' ');
-	cmd_path = get_cmd(pipex_data->program_paths, cmd_args[0]);
+	cmd_path = get_cmdpath(pipex_data->program_paths, cmd_args[0]);
 	if (cmd_path == NULL)
 		return (write(2, cmd_args[0], ft_strlen(cmd_args[0])),
 			write(2, ": command not found\n", 20),
@@ -40,7 +40,7 @@ void	middle_child_core(t_pipex_obj *pipex_data, char *cmd, int arr_cursor)
 	char	**cmd_args;
 
 	cmd_args = ft_split(cmd, ' ');
-	cmd_path = get_cmd(pipex_data->program_paths, cmd_args[0]);
+	cmd_path = get_cmdpath(pipex_data->program_paths, cmd_args[0]);
 	if (cmd_path == NULL)
 		return (write(2, cmd_args[0], ft_strlen(cmd_args[0])),
 			write(2, ": command not found\n", 20),
@@ -63,7 +63,7 @@ void	last_child_core(t_pipex_obj *pipex_data, char *cmd,
 	char	**cmd_args;
 
 	cmd_args = ft_split(cmd, ' ');
-	cmd_path = get_cmd(pipex_data->program_paths, cmd_args[0]);
+	cmd_path = get_cmdpath(pipex_data->program_paths, cmd_args[0]);
 	if (cmd_path == NULL)
 		return (write(2, cmd_args[0], ft_strlen(cmd_args[0])),
 			write(2, ": command not found\n", 20), split_clear(cmd_args),

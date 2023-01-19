@@ -6,21 +6,25 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:47:32 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/18 01:37:40 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/19 04:44:09 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+/*
+if heredoc offset > 0
+means we should open the tmp file that the heredoc provides in the working
+directory
+else
+open the infile.
+*/
 static void	first_child(t_pipex_obj *pipex_data, char *cmd)
 {
 	int		infile_d;
 	pid_t	pid;
 
-	if (pipex_data->heredoc_offset > 0)
-		infile_d = open(".tmp.txt", O_RDONLY);
-	else
-		infile_d = open(pipex_data->argv[1], O_RDONLY);
+	infile_d = open_in(pipex_data);
 	if (infile_d < 0)
 		return (close(pipex_data->pipes[0 + 1]), perror("pipex: input"));
 	pid = fork();
@@ -51,17 +55,18 @@ static void	middle_child(t_pipex_obj *pipex_data, char *cmd, int arr_cursor)
 	}
 }
 
+/*
+if heredoc offset > 0
+means we should open outfile in append mode
+else
+open outfile in normal mode
+*/
 static void	last_child(t_pipex_obj *pipex_data, char *cmd, int arr_cursor)
 {
 	int		outfile_d;
 	pid_t	pid;
 
-	if (pipex_data->heredoc_offset > 0)
-		outfile_d = open(pipex_data->argv[pipex_data->ac - 1], O_CREAT
-				| O_RDWR | O_APPEND, 0000644);
-	else
-		outfile_d = open(pipex_data->argv[pipex_data->ac - 1], O_TRUNC | O_CREAT
-				| O_RDWR, 0000644);
+	outfile_d = open_out(pipex_data);
 	if (outfile_d < 0)
 		return (perror("pipex: output:"));
 	pid = fork();
@@ -78,13 +83,14 @@ static void	last_child(t_pipex_obj *pipex_data, char *cmd, int arr_cursor)
 	}
 }
 
-static int	init(t_pipex_obj *pipex_data, int ac, char *envp[], char *argv[])
+static int	init_struct(t_pipex_obj *pipex_data,
+			int ac, char *envp[], char *argv[])
 {
 	int		pipe_number;
 
 	if (ac - pipex_data->heredoc_offset < 5)
 		return (perror("wrong number of arguments"), -1);
-	pipex_data->program_paths = get_paths(envp);
+	pipex_data->program_paths = get_pathenv(envp);
 	if (pipex_data->program_paths == NULL)
 		return (perror("program paths not found"), -1);
 	pipex_data->pipes = malloc(sizeof(int) * 2
@@ -95,7 +101,7 @@ static int	init(t_pipex_obj *pipex_data, int ac, char *envp[], char *argv[])
 	while (pipe_number < ac - pipex_data->heredoc_offset - 4)
 	{
 		if (pipe(pipex_data->pipes + pipe_number * 2) < 0)
-			return (cleanup_all(pipex_data),
+			return (free_struct(pipex_data),
 				perror("making pipes failed"), -1);
 		pipe_number++;
 	}	
@@ -115,7 +121,7 @@ int	main(int ac, char *argv[], char *envp[])
 	int			status;
 
 	setup_heredoc(&pipex_data, argv);
-	if (init(&pipex_data, ac, envp, argv) == -1)
+	if (init_struct(&pipex_data, ac, envp, argv) == -1)
 		exit(1);
 	first_child(&pipex_data, argv[pipex_data.heredoc_offset + 2]);
 	command_nbr = 1;
@@ -125,13 +131,14 @@ int	main(int ac, char *argv[], char *envp[])
 			argv[pipex_data.heredoc_offset + 2 + command_nbr], command_nbr * 2);
 		command_nbr++;
 	}
-	last_child(&pipex_data, argv[(ac - 1) - 1],
-		command_nbr * 2 - 2);
-	cleanup_all(&pipex_data);
+	last_child(&pipex_data, argv[(ac - 1) - 1], command_nbr * 2 - 2);
+	free_struct(&pipex_data);
 	wait(&status);
 	if (WIFEXITED(status))
 		exit(WEXITSTATUS(status));
 	else
-		return (write(2, "fatal signal error",
-				ft_strlen("fatal signal error")), -1);
+	{
+		write(2, "fatal signal error", ft_strlen("fatal signal error"));
+		exit(-1);
+	}
 }

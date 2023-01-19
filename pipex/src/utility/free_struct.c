@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd.c                                          :+:      :+:    :+:   */
+/*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 00:57:32 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/16 19:50:12 by echoukri         ###   ########.fr       */
+/*   Created: 2023/01/02 18:33:03 by echoukri          #+#    #+#             */
+/*   Updated: 2023/01/19 03:43:14 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-// check for possibitleis of failure
-char	*get_cmd(char	**paths, char	*cmd)
-{
-	char	*command;
-	char	*tmp;
+/*
+serves as a cleanup function that frees mallcoated space for pipes.
+*/
 
-	while (*paths)
-	{
-		tmp = ft_strjoin(*paths, "/");
-		command = ft_strjoin(tmp, cmd);
-		free(tmp);
-		if (access(command, F_OK | X_OK) == 0)
-			return (command);
-		free(command);
-		paths++;
-	}
-	return (NULL);
+void	free_struct(t_pipex_obj	*pipex_data)
+{
+	free(pipex_data->pipes);
+	split_clear(pipex_data->program_paths);
 }

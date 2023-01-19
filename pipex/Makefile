@@ -6,10 +6,11 @@ HEADERS = ./includes/pipex.h ./includes/get_next_line.h
 
 MANDATORY_SOURCES = ./src/mandatory.c
 
-BONUS_SOURCES = ./src/bonus.c ./src/cursus_functions/gnl/get_next_line.c ./src/cursus_functions/gnl/get_next_line_utils.c ./src/utility/here_doc.c
+BONUS_SOURCES = ./src/bonus.c ./src/cursus_functions/gnl/get_next_line.c ./src/cursus_functions/gnl/get_next_line_utils.c \
+ ./src/utility/here_doc.c ./src/utility/open_inout.c
 
-SHARED_SOURCES =  ./src/utility/children_core.c ./src/utility/free.c ./src/utility/ft_split.c ./src/utility/get_cmd.c \
- ./src/utility/get_paths.c ./src/cursus_functions/ft_strjoin.c ./src/cursus_functions/ft_strlen.c \
+SHARED_SOURCES =  ./src/utility/fork_core.c ./src/utility/free_struct.c ./src/utility/get_cmdpath.c ./src/utility/get_pathenv.c \
+ ./src/cursus_functions/ft_split.c ./src/cursus_functions/ft_strjoin.c ./src/cursus_functions/ft_strlen.c \
  ./src/cursus_functions/ft_strnstr.c ./src/cursus_functions/ft_substr.c
 
 all : $(NAME)

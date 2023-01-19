@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:47:32 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/18 01:37:31 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/19 04:44:09 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,23 @@ static void	last_child(t_pipex_obj *pipex_data, char *cmd)
 	}
 }
 
-static int	init(t_pipex_obj *pipex_data, int ac, char *envp[], char *argv[])
+static int	init_struct(t_pipex_obj *pipex_data,
+			int ac, char *envp[], char *argv[])
 {
 	if (ac != 5)
 		return (perror("wrong number of arguments"), -1);
-	pipex_data->program_paths = get_paths(envp);
-	if (pipex_data->program_paths == NULL)
-		return (perror("program paths not found"), -1);
 	pipex_data->ac = ac;
 	pipex_data->envp = envp;
 	pipex_data->argv = argv;
+	pipex_data->program_paths = get_pathenv(envp);
+	if (pipex_data->program_paths == NULL)
+		return (perror("program paths not found"), -1);
 	pipex_data->pipes = malloc(sizeof(int) * 2 * (ac - 4));
 	if (pipex_data->pipes == NULL)
 		return (perror("allocation for pipes failed"),
 			split_clear(pipex_data->program_paths), -1);
 	if (pipe(pipex_data->pipes) == -1)
-		return (cleanup_all(pipex_data, 0), perror("first pipe failed"), -1);
+		return (free_struct(pipex_data), perror("first pipe failed"), -1);
 	return (0);
 }
 
@@ -77,15 +78,17 @@ int	main(int ac, char *argv[], char *envp[])
 	t_pipex_obj	pipex_data;
 	int			status;
 
-	if (init(&pipex_data, ac, envp, argv) == -1)
+	if (init_struct(&pipex_data, ac, envp, argv) == -1)
 		exit(1);
 	first_child(&pipex_data, argv[2]);
 	last_child(&pipex_data, argv[(ac - 1) - 1]);
-	cleanup_all(&pipex_data, 2);
+	free_struct(&pipex_data);
 	wait(&status);
 	if (WIFEXITED(status))
 		exit(WEXITSTATUS(status));
 	else
-		return (write(2, "fatal signal error",
-				ft_strlen("fatal signal error")), -1);
+	{
+		write(2, "fatal signal error", ft_strlen("fatal signal error"));
+		exit(-1);
+	}
 }

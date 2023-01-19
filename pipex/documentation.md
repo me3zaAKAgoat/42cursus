@@ -34,16 +34,17 @@ the write end of the pipe n° arr_cursor
 
   _N.B_: **pipex_data.heredoc_offset** is to be added next to ac whenver we want to take arguments from argv.
 
-## **init**
+## **init_struct**
 
-- initialize the structures members pipes, program_paths, ac, argv, envp
+- initialize the structures members pipes, program_paths, ac, argv, envp.
 - this structure makes it easier to pass variables that are "global" to the program to every step of said program.
 
 ## **children**
 
-- child functions are called, these functions do the setup and initiation for the forked child processes (child_process_core functions)
+- child functions are called, these wrapper functions do the setup and initiation for the forked child processes (child_process_core functions).
+- after the fork terminates, the pipes ends that will no longer be in use are immediately closed.
 
-## **cleanup_all**
+## **free_struct**
 
 - frees heap allocated members of the structures.
 

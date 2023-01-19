@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   get_cmdpath.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 18:33:03 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/18 01:08:07 by echoukri         ###   ########.fr       */
+/*   Created: 2022/12/28 00:57:32 by echoukri          #+#    #+#             */
+/*   Updated: 2023/01/19 04:47:19 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-/*
-serves as a cleanup function that frees mallcoated space for pipes.
-*/
-
-void	cleanup_all(t_pipex_obj	*pipex_data)
+char	*get_cmdpath(char	**paths, char	*cmd)
 {
-	free(pipex_data->pipes);
-	split_clear(pipex_data->program_paths);
+	char	*command;
+	char	*tmp;
+
+	while (*paths)
+	{
+		tmp = ft_strjoin(*paths, "/");
+		command = ft_strjoin(tmp, cmd);
+		free(tmp);
+		if (access(command, F_OK | X_OK) == 0)
+			return (command);
+		free(command);
+		paths++;
+	}
+	return (NULL);
 }

@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_paths.c                                        :+:      :+:    :+:   */
+/*   get_pathenv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 00:51:18 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/10 15:43:47 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/19 05:02:11 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-// check for possibilites of failure
-char	**get_paths(char	*envp[])
+char	**get_pathenv(char	*envp[])
 {
 	char	**paths;
 	char	**tmp;
