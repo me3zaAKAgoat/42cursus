@@ -4,8 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define WIDTH 1600
+#define WIDTH 2040
 #define HEIGHT 900
+#define UNIT 100
+
 
 typedef struct	s_data {
 	void	*img;
@@ -14,6 +16,12 @@ typedef struct	s_data {
 	int		line_length;
 	int		endian;
 }				t_data;
+
+typedef struct	point {
+	int	x;
+	int	y;
+	int	z;
+}	point;
 
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -28,11 +36,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-typedef struct	point {
-	int	x;
-	int	y;
-	int	z;
-}	point;
 
 void	apply_matrix(point	*old_point, double	matrix[])
 {
@@ -78,7 +81,6 @@ int	main(void)
 	img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
-	int	unit = 100;
 	int offset_x = WIDTH / 2;
 	int offset_y = HEIGHT / 2;
 	point	a;
@@ -89,38 +91,38 @@ int	main(void)
 	point	f;
 	point	g;
 	point	h;
-	double deg = 0;
-	while (1)
-	{
+	double deg = 3;
+	// while (1)
+	// {
 
 		double matrix_x[] = {1, 0, 0, 0, cos(deg), -sin(deg), 0, sin(deg), cos(deg)};
 		double matrix_y[] = {cos(deg), 0, sin(deg), 0, 1, 0, -sin(deg), 0, cos(deg)};
 		double matrix_z[] = {cos(deg), -sin(deg), 0, sin(deg), cos(deg), 0, 0, 0, 1};
 
-		a.x = -1 * unit;
-		a.y = 1 * unit;
-		a.z = -1 * unit;
-		b.x = 1 * unit;
-		b.y = 1 * unit;
-		b.z = -1 * unit;
-		c.x = 1 * unit;
-		c.y = -1 * unit;
-		c.z = -1 * unit;
-		d.x = -1 * unit;
-		d.y = -1 * unit;
-		d.z = -1 * unit;
-		e.x = -1 * unit;
-		e.y = 1 * unit;
-		e.z = 1 * unit;
-		f.x = 1 * unit;
-		f.y = 1 * unit;
-		f.z = 1 * unit;
-		g.x = 1 * unit;
-		g.y = -1 * unit;
-		g.z = 1 * unit;
-		h.x = -1 * unit;
-		h.y = -1 * unit;
-		h.z = 1 * unit;
+		a.x = -1 * UNIT;
+		a.y = 1 * UNIT;
+		a.z = -1 * UNIT;
+		b.x = 1 * UNIT;
+		b.y = 1 * UNIT;
+		b.z = -1 * UNIT;
+		c.x = 1 * UNIT;
+		c.y = -1 * UNIT;
+		c.z = -1 * UNIT;
+		d.x = -1 * UNIT;
+		d.y = -1 * UNIT;
+		d.z = -1 * UNIT;
+		e.x = -1 * UNIT;
+		e.y = 1 * UNIT;
+		e.z = 1 * UNIT;
+		f.x = 1 * UNIT;
+		f.y = 1 * UNIT;
+		f.z = 1 * UNIT;
+		g.x = 1 * UNIT;
+		g.y = -1 * UNIT;
+		g.z = 1 * UNIT;
+		h.x = -1 * UNIT;
+		h.y = -1 * UNIT;
+		h.z = 1 * UNIT;
 
 
 		//x
@@ -171,10 +173,10 @@ int	main(void)
 		bresenham(&img, c, g, 0x00D115D1, offset_x, offset_y);
 		bresenham(&img, d, h, 0x00D115D1, offset_x, offset_y);
 		mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-		// sleep(1);
-		mlx_destroy_image(mlx, img.img);
-		img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
-		deg += 0.001;
-	}
+	// 	sleep(1);
+	// 	mlx_destroy_image(mlx, img.img);
+	// 	img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	// 	deg += 0.001;
+	// }
 	mlx_loop(mlx);
 }
