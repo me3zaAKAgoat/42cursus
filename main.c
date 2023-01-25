@@ -1,182 +1,112 @@
-#include <mlx.h>
-#include <math.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/25 12:19:10 by echoukri          #+#    #+#             */
+/*   Updated: 2023/01/25 17:36:29 by echoukri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define WIDTH 2040
-#define HEIGHT 900
-#define UNIT 100
+#include "fdf.h"
 
-
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-
-typedef struct	point {
-	int	x;
-	int	y;
-	int	z;
-}	point;
-
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	init_cube(t_meta_data *fdf)
 {
-	char	*dst;
-
-	if (y > HEIGHT || y < 0)
-		y = 0;
-	if (x > WIDTH || x < 0)
-		x = 0;
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	fdf->points[0].x = -1 * fdf->scale_factor;
+	fdf->points[0].y = 1 * fdf->scale_factor;
+	fdf->points[0].z = -1 * fdf->scale_factor;
+	fdf->points[0].color = 0x001d6ef0;
+	fdf->points[1].x = 1 * fdf->scale_factor;
+	fdf->points[1].y = 1 * fdf->scale_factor;
+	fdf->points[1].z = -1 * fdf->scale_factor;
+	fdf->points[1].color = 0x001d6ef0;
+	fdf->points[2].x = 1 * fdf->scale_factor;
+	fdf->points[2].y = -1 * fdf->scale_factor;
+	fdf->points[2].z = -1 * fdf->scale_factor;
+	fdf->points[2].color = 0x00db14cb;
+	fdf->points[3].x = -1 * fdf->scale_factor;
+	fdf->points[3].y = -1 * fdf->scale_factor;
+	fdf->points[3].z = -1 * fdf->scale_factor;
+	fdf->points[3].color = 0x00db14cb;
+	fdf->points[4].x = -1 * fdf->scale_factor;
+	fdf->points[4].y = -1 * fdf->scale_factor;
+	fdf->points[4].z = 1 * fdf->scale_factor;
+	fdf->points[4].color = 0x003cdb14;
+	fdf->points[5].x = 1 * fdf->scale_factor;
+	fdf->points[5].y = -1 * fdf->scale_factor;
+	fdf->points[5].z = 1 * fdf->scale_factor;
+	fdf->points[5].color = 0x003cdb14;
+	fdf->points[6].x = 1 * fdf->scale_factor;
+	fdf->points[6].y = 1 * fdf->scale_factor;
+	fdf->points[6].z = 1 * fdf->scale_factor;
+	fdf->points[6].color = 0x00db1425;
+	fdf->points[7].x = -1 * fdf->scale_factor;
+	fdf->points[7].y = 1 * fdf->scale_factor;
+	fdf->points[7].z = 1 * fdf->scale_factor;
+	fdf->points[7].color = 0x00db1425;
 }
 
-
-void	apply_matrix(point	*old_point, double	matrix[])
+t_point rotated_point(t_meta_data *fdf, t_point point)
 {
-	point	new_point;
+	t_point end_point;
 
-	new_point.x = old_point->x * matrix[0] + old_point->y * matrix[1] + old_point->z * matrix[2];
-	new_point.y = old_point->x * matrix[3] + old_point->y * matrix[4] + old_point->z * matrix[5];
-	new_point.z = old_point->x * matrix[6] + old_point->y * matrix[7] + old_point->z * matrix[8];
-	*old_point = new_point;
+	double matrix_x[] = {1, 0, 0, 0, cos(fdf->deg_rota_about_x), -sin(fdf->deg_rota_about_x), 0, sin(fdf->deg_rota_about_x), cos(fdf->deg_rota_about_x)};
+	double matrix_y[] = {cos(fdf->deg_rota_about_y), 0, sin(fdf->deg_rota_about_y), 0, 1, 0, -sin(fdf->deg_rota_about_y), 0, cos(fdf->deg_rota_about_y)};
+	double matrix_z[] = {cos(fdf->deg_rota_about_z), -sin(fdf->deg_rota_about_z), 0, sin(fdf->deg_rota_about_z), cos(fdf->deg_rota_about_z), 0, 0, 0, 1};
+	end_point =	apply_matrix(point, matrix_x);
+	end_point = apply_matrix(end_point, matrix_y);
+	end_point = apply_matrix(end_point, matrix_z);
+	return (end_point);
 }
 
-void bresenham(t_data*img, point a, point b, int color, int offset_x, int offset_y) {
-	int delta_x = abs(b.x - a.x);
-	int delta_y = abs(b.y - a.y);
-	int sx = a.x < b.x ? 1 : -1;
-	int sy = a.y < b.y ? 1 : -1;
-	int err = delta_x - delta_y;
-
-	while(1) {
-		// draw the current pixel
-		my_mlx_pixel_put(img, offset_x + a.x, offset_y + a.y, color);
-		if (a.x == b.x && a.y == b.y) break;
-		int e2 = 2 * err;
-		if (e2 > -delta_y) {
-			err -= delta_y;
-			a.x += sx;
-		}
-		if (e2 < delta_x) {
-			err += delta_x;
-			a.y += sy;
-		}
+int	handle_key_press(int key, t_meta_data *fdf)
+{	
+	if (key == KEY_LEFT)
+	{	
+		fdf->deg_rota_about_y -= 0.1;
+		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->img.img, 0, 0);
 	}
+	else if (key == KEY_RIGHT)
+	{
+		fdf->deg_rota_about_y += 0.1;
+		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->img.img, 0, 0);
+	}
+	else if (key == KEY_UP)
+	{	
+		fdf->deg_rota_about_x += 0.1;
+		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->img.img, 0, 0);
+	}
+	else if (key == KEY_DOWN)
+	{
+		fdf->deg_rota_about_x -= 0.1;
+		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->img.img, 0, 0);
+	}
+	return 0;
 }
 
-int	main(void)
+
+int main(int ac, char **argv)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
+	t_meta_data fdf;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "Hello world!");
-	img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								&img.endian);
-	int offset_x = WIDTH / 2;
-	int offset_y = HEIGHT / 2;
-	point	a;
-	point	b;
-	point	c;
-	point	d;
-	point	e;
-	point	f;
-	point	g;
-	point	h;
-	double deg = 3;
-	// while (1)
-	// {
-
-		double matrix_x[] = {1, 0, 0, 0, cos(deg), -sin(deg), 0, sin(deg), cos(deg)};
-		double matrix_y[] = {cos(deg), 0, sin(deg), 0, 1, 0, -sin(deg), 0, cos(deg)};
-		double matrix_z[] = {cos(deg), -sin(deg), 0, sin(deg), cos(deg), 0, 0, 0, 1};
-
-		a.x = -1 * UNIT;
-		a.y = 1 * UNIT;
-		a.z = -1 * UNIT;
-		b.x = 1 * UNIT;
-		b.y = 1 * UNIT;
-		b.z = -1 * UNIT;
-		c.x = 1 * UNIT;
-		c.y = -1 * UNIT;
-		c.z = -1 * UNIT;
-		d.x = -1 * UNIT;
-		d.y = -1 * UNIT;
-		d.z = -1 * UNIT;
-		e.x = -1 * UNIT;
-		e.y = 1 * UNIT;
-		e.z = 1 * UNIT;
-		f.x = 1 * UNIT;
-		f.y = 1 * UNIT;
-		f.z = 1 * UNIT;
-		g.x = 1 * UNIT;
-		g.y = -1 * UNIT;
-		g.z = 1 * UNIT;
-		h.x = -1 * UNIT;
-		h.y = -1 * UNIT;
-		h.z = 1 * UNIT;
-
-
-		//x
-		apply_matrix(&a, matrix_x);
-		apply_matrix(&b, matrix_x);
-		apply_matrix(&c, matrix_x);
-		apply_matrix(&d, matrix_x);
-		apply_matrix(&e, matrix_x);
-		apply_matrix(&f, matrix_x);
-		apply_matrix(&g, matrix_x);
-		apply_matrix(&h, matrix_x);
-		//y
-		apply_matrix(&a, matrix_y);
-		apply_matrix(&b, matrix_y);
-		apply_matrix(&c, matrix_y);
-		apply_matrix(&d, matrix_y);
-		apply_matrix(&e, matrix_y);
-		apply_matrix(&f, matrix_y);
-		apply_matrix(&g, matrix_y);
-		apply_matrix(&h, matrix_y);
-		//z
-		apply_matrix(&a, matrix_z);
-		apply_matrix(&b, matrix_z);
-		apply_matrix(&c, matrix_z);
-		apply_matrix(&d, matrix_z);
-		apply_matrix(&e, matrix_z);
-		apply_matrix(&f, matrix_z);
-		apply_matrix(&g, matrix_z);
-		apply_matrix(&h, matrix_z);
-		my_mlx_pixel_put(&img, offset_x + a.x, offset_y + a.y, 0x00FF0000);
-		my_mlx_pixel_put(&img, offset_x + b.x, offset_y + b.y, 0x00FF0000);
-		my_mlx_pixel_put(&img, offset_x + c.x, offset_y + c.y, 0x00FF0000);
-		my_mlx_pixel_put(&img, offset_x + d.x, offset_y + d.y, 0x00FF0000);
-		my_mlx_pixel_put(&img, offset_x + e.x, offset_y + e.y, 0x00FF0000);
-		my_mlx_pixel_put(&img, offset_x + f.x, offset_y + f.y, 0x00FF0000);
-		my_mlx_pixel_put(&img, offset_x + g.x, offset_y + g.y, 0x00FF0000);
-		my_mlx_pixel_put(&img, offset_x + h.x, offset_y + h.y, 0x00FF0000);
-		bresenham(&img, a, b, 0x0000FF00, offset_x, offset_y);
-		bresenham(&img, b, c, 0x0000FF00, offset_x, offset_y);
-		bresenham(&img, c, d, 0x0000FF00, offset_x, offset_y);
-		bresenham(&img, d, a, 0x0000FF00, offset_x, offset_y);
-		bresenham(&img, e, f, 0x00FF0000, offset_x, offset_y);
-		bresenham(&img, f, g, 0x00FF0000, offset_x, offset_y);
-		bresenham(&img, g, h, 0x00FF0000, offset_x, offset_y);
-		bresenham(&img, h, e, 0x00FF0000, offset_x, offset_y);
-		bresenham(&img, a, e, 0x00F0DE1A, offset_x, offset_y);
-		bresenham(&img, b, f, 0x00F0DE1A, offset_x, offset_y);
-		bresenham(&img, c, g, 0x00D115D1, offset_x, offset_y);
-		bresenham(&img, d, h, 0x00D115D1, offset_x, offset_y);
-		mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	// 	sleep(1);
-	// 	mlx_destroy_image(mlx, img.img);
-	// 	img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
-	// 	deg += 0.001;
-	// }
-	mlx_loop(mlx);
+	fdf.mlx = mlx_init();
+	fdf.mlx_win = mlx_new_window(fdf.mlx, WIDTH, HEIGHT, "Fil De Fer");
+	fdf.img.img = mlx_new_image(fdf.mlx, WIDTH, HEIGHT);
+	fdf.img.addr = mlx_get_data_addr(fdf.img.img, &fdf.img.bits_per_pixel, &fdf.img.line_length, &fdf.img.endian);
+	fdf.scale_factor = 50;
+	fdf.points = malloc(8 * sizeof(t_point));
+	fdf.nbr_of_points = 8;
+	fdf.deg_rota_about_x = 0;
+	fdf.deg_rota_about_y = 0;
+	fdf.deg_rota_about_z = 0;
+	read_map(&fdf);
+	mlx_put_image_to_window(fdf.mlx, fdf.mlx_win, fdf.img.img, 0, 0);
+	mlx_key_hook(fdf.mlx_win, handle_key_press, &fdf);
+	mlx_loop(fdf.mlx);
 }
