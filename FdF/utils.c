@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   perspective.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 10:31:34 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/25 13:59:13 by echoukri         ###   ########.fr       */
+/*   Created: 2023/01/25 17:57:53 by echoukri          #+#    #+#             */
+/*   Updated: 2023/01/25 17:58:27 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_point	apply_matrix(t_point	old_point, double	matrix[])
+int	ft_atoi(const char *str)
 {
-	t_point	new_point;
+	int	return_number;
+	int	i;
+	int	sign;
 
-	new_point.x = old_point.x * matrix[0] + old_point.y * matrix[1] + old_point.z * matrix[2];
-	new_point.y = old_point.x * matrix[3] + old_point.y * matrix[4] + old_point.z * matrix[5];
-	new_point.z = old_point.x * matrix[6] + old_point.y * matrix[7] + old_point.z * matrix[8];
-	return (new_point);
+	i = 0;
+	return_number = 0;
+	sign = 1;
+	while ((str[i] <= 13 && 9 <= str[i]) || str[i] == 32)
+		i++;
+	if (str[i] == '-')
+	{
+		sign *= -1;
+		i++;
+	}
+	else if (str[i] == '+')
+		i++;
+	while ('0' <= str[i] && str[i] <= '9')
+		return_number = return_number * 10 + (str[i++] - 48);
+	return (sign * return_number);
 }
