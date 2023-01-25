@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:48:13 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/17 21:54:22 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:52:59 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,12 @@ void	here_doc(char *eof)
 		write(1, "heredoc>", ft_strlen("heredoc>"));
 		buf = get_next_line(0);
 		if (ft_strlen(ft_strnstr(buf, eof, ft_strlen(eof))) > 0)
+		{
+			free(buf);
 			return ;
+		}
 		write(fd, buf, ft_strlen(buf));
+		free(buf);
 	}
 }
 
