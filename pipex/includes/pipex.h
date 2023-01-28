@@ -50,7 +50,8 @@ typedef struct pobj
 }	t_pipex_obj;
 
 extern void		here_doc(char *eof);
-extern void		setup_heredoc(t_pipex_obj *pipex_data, char **argv);
+extern void		setup_heredoc(t_pipex_obj *pipex_data, char **argv, int ac);
+extern void		perr_exit(char *msg);
 extern int		open_in(t_pipex_obj *pipex_data);
 extern int		open_out(t_pipex_obj *pipex_data);
 extern void		first_child_core(t_pipex_obj *pipex_data,

@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:47:32 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/19 04:44:09 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/28 18:46:42 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ static void	first_child(t_pipex_obj *pipex_data, char *cmd)
 	if (pid == 0)
 		first_child_core(pipex_data, cmd, infile_d);
 	else if (pid < 0)
-		return (perror("fork failed:"), exit(1));
+		perr_exit("fork failed:");
 	else
 	{
 		close(infile_d);
 		close(pipex_data->pipes[0 + 1]);
+		if (pipex_data->heredoc_offset > 0)
+			unlink(".tmp.txt");
 	}
 }
 
@@ -47,7 +49,7 @@ static void	middle_child(t_pipex_obj *pipex_data, char *cmd, int arr_cursor)
 	if (pid == 0)
 		middle_child_core(pipex_data, cmd, arr_cursor);
 	else if (pid < 0)
-		return (perror("fork failed:"), exit(1));
+		perr_exit("fork failed:");
 	else
 	{
 		close(pipex_data->pipes[arr_cursor - 2 + 0]);
@@ -73,40 +75,38 @@ static void	last_child(t_pipex_obj *pipex_data, char *cmd, int arr_cursor)
 	if (pid == 0)
 		last_child_core(pipex_data, cmd, arr_cursor, outfile_d);
 	else if (pid < 0)
-		return (perror("fork failed:"), exit(1));
+		perr_exit("fork failed:");
 	else
 	{
 		close(outfile_d);
 		close(pipex_data->pipes[arr_cursor + 0]);
-		if (pipex_data->heredoc_offset > 0)
-			unlink(".tmp.txt");
 	}
 }
 
-static int	init_struct(t_pipex_obj *pipex_data,
+static void	init_struct(t_pipex_obj *pipex_data,
 			int ac, char *envp[], char *argv[])
 {
 	int		pipe_number;
 
-	if (ac - pipex_data->heredoc_offset < 5)
-		return (perror("wrong number of arguments"), -1);
 	pipex_data->program_paths = get_pathenv(envp);
 	if (pipex_data->program_paths == NULL)
-		return (perror("program paths not found"), -1);
+		perr_exit("program paths not found");
 	pipex_data->pipes = malloc(sizeof(int) * 2
 			* (ac - pipex_data->heredoc_offset - 4));
 	if (pipex_data->pipes == NULL)
-		return (perror("allocation for pipes failed"), -1);
+		return (split_clear(pipex_data->program_paths),
+			perr_exit("allocation for pipes failed"));
 	pipe_number = 0;
 	while (pipe_number < ac - pipex_data->heredoc_offset - 4)
 	{
 		if (pipe(pipex_data->pipes + pipe_number * 2) < 0)
 			return (free_struct(pipex_data),
-				perror("making pipes failed"), -1);
+				perr_exit("making pipes failed"));
 		pipe_number++;
 	}	
-	return (pipex_data->ac = ac, pipex_data->envp = envp,
-		pipex_data->argv = argv, 0);
+	pipex_data->ac = ac;
+	pipex_data->envp = envp;
+	pipex_data->argv = argv;
 }
 
 /*
@@ -120,9 +120,10 @@ int	main(int ac, char *argv[], char *envp[])
 	int			command_nbr;
 	int			status;
 
-	setup_heredoc(&pipex_data, argv);
-	if (init_struct(&pipex_data, ac, envp, argv) == -1)
-		exit(1);
+	if (ac < 5)
+		perr_exit("wrong number of arguments");
+	setup_heredoc(&pipex_data, argv, ac);
+	init_struct(&pipex_data, ac, envp, argv);
 	first_child(&pipex_data, argv[pipex_data.heredoc_offset + 2]);
 	command_nbr = 1;
 	while (command_nbr < ac - pipex_data.heredoc_offset - 4)
@@ -137,8 +138,5 @@ int	main(int ac, char *argv[], char *envp[])
 	if (WIFEXITED(status))
 		exit(WEXITSTATUS(status));
 	else
-	{
-		write(2, "fatal signal error", ft_strlen("fatal signal error"));
-		exit(-1);
-	}
+		perr_exit("fatal signal error");
 }
