@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 12:19:10 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/25 17:36:29 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/28 13:50:15 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,24 +67,28 @@ int	handle_key_press(int key, t_meta_data *fdf)
 	{	
 		fdf->deg_rota_about_y -= 0.1;
 		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		/*crust of making the new image*/
 		mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->img.img, 0, 0);
 	}
 	else if (key == KEY_RIGHT)
 	{
 		fdf->deg_rota_about_y += 0.1;
 		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		/*crust of making the new image*/
 		mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->img.img, 0, 0);
 	}
 	else if (key == KEY_UP)
 	{	
 		fdf->deg_rota_about_x += 0.1;
 		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		/*crust of making the new image*/
 		mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->img.img, 0, 0);
 	}
 	else if (key == KEY_DOWN)
 	{
 		fdf->deg_rota_about_x -= 0.1;
 		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		/*crust of making the new image*/
 		mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->img.img, 0, 0);
 	}
 	return 0;

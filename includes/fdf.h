@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:04:26 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/26 18:17:00 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/28 16:01:42 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,15 @@ typedef struct meta_data {
 	void		*mlx_win;
 }	t_meta_data;
 
-
+extern int	ft_strlen(char *str);
 extern t_point	apply_matrix(t_point	old_point, double	matrix[]);
 extern void	my_mlx_pixel_put(t_img_data *data, int x, int y, int color);
 extern void	bresenham(t_img_data *img, t_point a, t_point b, int color);
 extern char	*get_next_line(int fd);
-extern int	ft_atoi(char *str, char *base);
+extern int	ft_atoi_base(char *str, char *base);
+extern char	*ft_substr(char const *s, unsigned int start, size_t len);
 extern char	**ft_split(char const *s, char c);
+extern void	*split_clear(char	**arr);
 
 
 #endif
