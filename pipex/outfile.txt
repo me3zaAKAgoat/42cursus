@@ -1,2 +1,9 @@
        0
        5
+Makefile
+documentation.md
+includes
+infile.txt
+outfile.txt
+pipex
+src

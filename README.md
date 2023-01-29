@@ -4,18 +4,18 @@
 ## **Index**
 
 - [Reminders](https://github.com/me3zaAKAgoat/42cursus#reminders)
-- [Memory](https://github.com/me3zaAKAgoat/42cursus#memory)
+- [Memory (RAM)](https://github.com/me3zaAKAgoat/42cursus#memory)
 - [Different Types Of Errors](https://github.com/me3zaAKAgoat/42cursus#different-types-of-errors)
-- [File Management In **Unix**](https://github.com/me3zaAKAgoat/42cursus#file-management-in-unix)
-- [Virtual Machines](https://github.com/me3zaAKAgoat/42cursus#virtual-machines)
+- [File Management In Unix](https://github.com/me3zaAKAgoat/42cursus#file-management-in-unix)
+- [Virtual Machine Jargon](https://github.com/me3zaAKAgoat/42cursus#virtual-machines)
 - [Makefile](https://github.com/me3zaAKAgoat/42cursus#makefile)
-- [Keywords](https://github.com/me3zaAKAgoat/42cursus#keywords)
-- [**Unix** Shells](https://github.com/me3zaAKAgoat/42cursus#unix-shells)
+- [C Keywords](https://github.com/me3zaAKAgoat/42cursus#keywords)
+- [Unix Shells](https://github.com/me3zaAKAgoat/42cursus#unix-shells)
 - [Miscellaneous](https://github.com/me3zaAKAgoat/42cursus#miscellaneous)
 
 ---
 
-## **Memory**
+## **Memory (RAM)**
 
 - the RAM is a piece of hardware that stores data for it's uptime, the data is stored in slots of 1 byte and each slot has it's own address.
 - Addresses are conventionally represented in hexadecimal, the 0x in addresses is but a prefix that indicates the base that represents the slot.
@@ -26,22 +26,6 @@
   - when the CPU wants to read from a certain address, it checks if it's in the cache first.
   - the cache stores in chunks of 64 bytes called _cache lines_.
 - the memory we interact with as programmers is usually virtual memory, meaning that the addresses read are not actual RAM addresses.
-- **Alignment Requirement:**
-
-  All processors have instructions that need to read n bytes from the memory, these processors take the data needed for the instruction from the RAM in blocks of n bytes and put each block in a cache line.
-
-  ![memory blocks](/READMEcontent/alignmentMemory.jpg)
-
-  Data Structure Alignment is needed because it leads to efficient use of cache lines.
-
-  As per the illustration we have a 32 bit processor that reads 4 byte blocks and puts them into cache lines.
-
-  E.g In the case of the red 4 byte-long data structure, in order for the processor to execute the instruction it will need to read two blocks thus will use up two cache lines to store what could've just used only one cache line if it were stored at a proper address in the memory.
-  The blue stored value respects the alignment requirement and will only use one cache line as needed.
-
-  **Important:** Data Structure Alignment is respected when the address at which an n-byte value is stored is divisible by n.
-
-  [Video Explanation](https://youtu.be/zyGMyV955Rw)
 
 - **Endianness** refers the the order bytes are stored in memory. A big-endian system stores the most significant byte of a word at the smallest memory address and the least significant byte at the largest. A little-endian system, in contrast, stores the least-significant byte at the smallest address.
   [Endianness Wiki artice](https://en.wikipedia.org/wiki/Endianness)
@@ -55,11 +39,29 @@
 - ##### SEGMENTATION FAULT
   Segmentation fault occurs when the program tries to access an area of memory that it is not allowed to access.
 - ##### BUS ERROR
-  Bus error occurs when the program gives a processor instruction with an addres that does not satisfy its **alignement requirements**.
+
+  Bus error occurs when the program gives a processor instruction with an address that does not satisfy its **alignement requirements**.
+
+> **Alignment Requirement:**
+>
+> All processors have instructions that need to read n bytes from the memory, these processors take the data needed for the instruction from the RAM in blocks of n bytes and put each block in a cache line.
+>
+> ![memory blocks](/READMEcontent/alignmentMemory.jpg)
+>
+> Data Structure Alignment is needed because it leads to efficient use of cache lines.
+>
+> As per the illustration we have a 32 bit processor that reads 4 byte blocks and puts them into cache lines.
+>
+> E.g In the case of the red 4 byte-long data structure, in order for the processor to execute the instruction it will need to read two blocks thus will use up two cache lines to store what could've just used only one cache line if it were stored at a proper address in the memory.
+> The blue stored value respects the alignment requirement and will only use one cache line as needed.
+>
+> **Important:** Data Structure Alignment is respected when the address at which an n-byte value is stored is divisible by n.
+>
+> [Video Explanation](https://youtu.be/zyGMyV955Rw)
 
 ### What is ERRNO?
 
-- _ERRNO_ is an integer variable that is set by system calls and some library functions to indicate the specifics of an error in the event that one occurs.
+- _ERRNO_ is an integer variable that is set by system calls and some library functions to indicate the specifics of the last error that occured.
 
 ---
 
@@ -99,7 +101,7 @@ When forking, a child process gets an exact copy of the FDtable of its parent.
 
 ---
 
-## **Virtual Machines**
+## **Virtual Machine Jargon**
 
 ### **Virtual Machine?**
 
@@ -207,7 +209,7 @@ When forking, a child process gets an exact copy of the FDtable of its parent.
 
 ---
 
-## **Keywords**
+## **C Keywords**
 
 - the **restrict** keyword is a promise from the programmer to the compiler that indicates that no pointer other than restricted pointer will be used to access the object to which it points to. (It is used so that the compiler can max out optimization and not worry about pointer overlap, [Reference](https://en.wikipedia.org/wiki/Restrict).)
 - **const** is used to convey that a variable is "read-only", thus the compiler will throw an error when there's an attempt to modify the const declared variable. (used to help code comprehensibility/readability and also allow the compiler further optimization through caching).
@@ -215,7 +217,7 @@ When forking, a child process gets an exact copy of the FDtable of its parent.
 - **volatile** prevents the compiler from making unnecessary optimization knowing the variable will be read and write further ahead (I don't have a concrete understanding of this keyword yet but it's so uselss anyways).
 - the **extern** keyword will tell the compiler that the data is defined somewhere else and will be connected through the linker (which is the default assumption the compiler makes)
 
-  - e.g: if we have two files with a variable that has the same name, both source files will have seperate copies of that variable, but when the variable is declared with the extern keyword in both files, they will both point to the same variable. [Scroll to the second answer in this link](https://stackoverflow.com/questions/496448/how-to-correctly-use-the-extern-keyword-in-c)
+  - e.g: if two files contain variable that has the same name, both source files will have seperate copies of that variable, but when the variable is declared with the extern keyword in both files, they will both point to the same variable. [Scroll to the second answer in this link](https://stackoverflow.com/questions/496448/how-to-correctly-use-the-extern-keyword-in-c)
 
 - **static** is used to set function-scope-limited global variables and set functions to set their scope to the containing file.
 
@@ -264,7 +266,7 @@ lmfao haha
 
 - $(...) the commands inside the braces are ran in a subshell and their results are then replaced in the initial command. (similar to backticks `` but can be nested).
 
-### Miscellaneous
+### Miscellaneous (Unix Shells)
 
 - `~` home directory.
 - `text > file` and `text >> file` are, respectively, for overwriting file content with text, and for appending text to the contents of file.

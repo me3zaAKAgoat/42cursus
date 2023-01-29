@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:47:32 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/28 18:49:46 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/29 13:56:25 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	first_child(t_pipex_obj *pipex_data, char *cmd)
 	if (pid == 0)
 		first_child_core(pipex_data, cmd, infile_d);
 	else if (pid < 0)
-		return (perror("fork failed:"), exit(1));
+		perr_exit("fork failed:");
 	else
 	{
 		close(infile_d);
@@ -45,7 +45,7 @@ static void	last_child(t_pipex_obj *pipex_data, char *cmd)
 	if (pid == 0)
 		last_child_core(pipex_data, cmd, 0, outfile_d);
 	else if (pid < 0)
-		return (perror("fork failed:"), exit(1));
+		perr_exit("fork failed:");
 	else
 	{
 		close(outfile_d);
@@ -85,8 +85,5 @@ int	main(int ac, char *argv[], char *envp[])
 	if (WIFEXITED(status))
 		exit(WEXITSTATUS(status));
 	else
-	{
-		write(2, "fatal signal error", ft_strlen("fatal signal error"));
-		exit(-1);
-	}
+		perr_exit("fatal signal error");
 }
