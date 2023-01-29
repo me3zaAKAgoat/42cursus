@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:04:26 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/28 16:01:42 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/29 18:26:19 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct meta_data {
 	void		*mlx_win;
 }	t_meta_data;
 
+extern int	count_words(char const *s, char c);
 extern int	ft_strlen(char *str);
 extern t_point	apply_matrix(t_point	old_point, double	matrix[]);
 extern void	my_mlx_pixel_put(t_img_data *data, int x, int y, int color);
