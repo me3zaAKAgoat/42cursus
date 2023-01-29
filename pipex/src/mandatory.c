@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:47:32 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/29 13:56:25 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/29 21:42:11 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	init_struct(t_pipex_obj *pipex_data,
 	pipex_data->program_paths = get_pathenv(envp);
 	if (pipex_data->program_paths == NULL)
 		perr_exit("program paths not found");
-	pipex_data->pipes = malloc(sizeof(int) * 2 * (ac - 4));
+	pipex_data->pipes = malloc(sizeof(int) * 2 * (ac - ARGC_PIPE_OFFSET));
 	if (pipex_data->pipes == NULL)
 		return (split_clear(pipex_data->program_paths),
 			perr_exit("allocation for pipes failed"));
@@ -75,7 +75,7 @@ int	main(int ac, char *argv[], char *envp[])
 	t_pipex_obj	pipex_data;
 	int			status;
 
-	if (ac != 5)
+	if (ac != MINIMUM_ARGC)
 		perr_exit("wrong number of arguments");
 	init_struct(&pipex_data, ac, envp, argv);
 	first_child(&pipex_data, argv[2]);

@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:47:32 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/28 18:46:42 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/29 21:42:02 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,12 @@ static void	init_struct(t_pipex_obj *pipex_data,
 	if (pipex_data->program_paths == NULL)
 		perr_exit("program paths not found");
 	pipex_data->pipes = malloc(sizeof(int) * 2
-			* (ac - pipex_data->heredoc_offset - 4));
+			* (ac - pipex_data->heredoc_offset - ARGC_PIPE_OFFSET));
 	if (pipex_data->pipes == NULL)
 		return (split_clear(pipex_data->program_paths),
 			perr_exit("allocation for pipes failed"));
 	pipe_number = 0;
-	while (pipe_number < ac - pipex_data->heredoc_offset - 4)
+	while (pipe_number < ac - pipex_data->heredoc_offset - ARGC_PIPE_OFFSET)
 	{
 		if (pipe(pipex_data->pipes + pipe_number * 2) < 0)
 			return (free_struct(pipex_data),
@@ -120,13 +120,13 @@ int	main(int ac, char *argv[], char *envp[])
 	int			command_nbr;
 	int			status;
 
-	if (ac < 5)
+	if (ac < MINIMUM_ARGC)
 		perr_exit("wrong number of arguments");
 	setup_heredoc(&pipex_data, argv, ac);
 	init_struct(&pipex_data, ac, envp, argv);
 	first_child(&pipex_data, argv[pipex_data.heredoc_offset + 2]);
 	command_nbr = 1;
-	while (command_nbr < ac - pipex_data.heredoc_offset - 4)
+	while (command_nbr < ac - pipex_data.heredoc_offset - ARGC_PIPE_OFFSET)
 	{
 		middle_child(&pipex_data,
 			argv[pipex_data.heredoc_offset + 2 + command_nbr], command_nbr * 2);

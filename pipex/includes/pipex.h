@@ -20,8 +20,11 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-# define ERR_EXEC 126
-# define ERR_NOTFOUND 127
+# define EXEC_FAILURE 126
+# define CMD_NOTFOUND 127
+# define ARGC_PIPE_OFFSET 4
+# define MINIMUM_ARGC 5
+# define MINIMUM_ARGC_HEREDOC 6
 
 extern size_t	ft_strlen(const char *s);
 extern char		**ft_split(char const *s, char c);

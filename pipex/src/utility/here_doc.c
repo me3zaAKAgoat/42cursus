@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:48:13 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/28 18:40:27 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/29 21:42:46 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	setup_heredoc(t_pipex_obj *pipex_data, char **argv, int ac)
 	if (ft_strlen(ft_strnstr(argv[1], "here_doc", ft_strlen("here_doc"))) > 0)
 	{
 		pipex_data->heredoc_offset = 1;
-		if (ac < 6)
+		if (ac < MINIMUM_ARGC_HEREDOC)
 			perr_exit("lack of delimiter might be the issue");
 		here_doc(argv[2]);
 	}
