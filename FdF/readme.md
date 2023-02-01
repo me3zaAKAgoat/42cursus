@@ -6,3 +6,8 @@
 - put all the points on the plane
 - bresenham each point with y = m where m is a constant to the point next to it x = x+1
 - bresenham each point with x = m where m is a constant to the point next to it y = y+1
+- connect dots
+  - loop through the array, record the biggest Y and the biggest X
+  - look in the range 0 to X and 0 to Y
+  - loop through all points and connect those who have the same X
+  - loop through all points and connect those who have the same Y

@@ -46,7 +46,7 @@
 >
 > All processors have instructions that need to read n bytes from the memory, these processors take the data needed for the instruction from the RAM in blocks of n bytes and put each block in a cache line.
 >
-> ![memory blocks](/READMEcontent/alignmentMemory.jpg)
+> ![memory blocks](/assets/alignmentMemory.jpg)
 >
 > Data Structure Alignment is needed because it leads to efficient use of cache lines.
 >
