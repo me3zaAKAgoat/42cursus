@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:04:26 by echoukri          #+#    #+#             */
-/*   Updated: 2023/02/01 02:25:56 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/02/01 18:24:29 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@
 
 # define BASE_SCALE 20
 
-typedef struct	point {
+typedef struct point {
 	int	x;
 	int	y;
 	int	z;
-	int color;
+	int	color;
 }	t_point;
 
 typedef struct img_data {
@@ -67,17 +67,18 @@ typedef struct meta_data {
 	void		*mlx_win;
 }	t_meta_data;
 
-extern int	count_words(char const *s, char c);
+extern void		perr_exit(char *msg);
+extern int		count_words(char const *s, char c);
 extern size_t	ft_strlen(const char *s);
-extern t_point	apply_matrix(t_point	old_point, double	matrix[]);
-extern void	my_mlx_pixel_put(t_img_data *data, int x, int y, int color);
-extern void	bresenham(t_img_data *img, t_point a, t_point b, int color);
-extern char	*get_next_line(int fd);
-extern int	ft_atoi_base(char *str, char *base);
-extern char	*ft_substr(char const *s, unsigned int start, size_t len);
-extern char	**ft_split(char const *s, char c);
-extern void	*split_clear(char	**arr);
-extern void	read_map(t_meta_data *fdf, char *file_name);
-extern char	*ft_strchr(const char *s, int c);
+extern t_point	apply_matrix(t_point old_point, double matrix[]);
+extern void		add_pixel_to_frame(t_img_data *data, int x, int y, int color);
+extern void		bresenham(t_img_data *img, t_point a, t_point b);
+extern char		*get_next_line(int fd);
+extern int		ft_atoi_base(char *str, char *base);
+extern char		*ft_substr(char const *s, unsigned int start, size_t len);
+extern char		**ft_split(char const *s, char c);
+extern void		*split_clear(char	**arr);
+extern void		read_map(t_meta_data *fdf, char *file_name);
+extern char		*ft_strchr(const char *s, int c);
 
 #endif

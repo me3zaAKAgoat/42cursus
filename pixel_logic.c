@@ -6,25 +6,25 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:32:19 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/31 23:46:05 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/02/01 18:35:11 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	my_mlx_pixel_put(t_img_data *data, int x, int y, int color)
+void	add_pixel_to_frame(t_img_data *data, int x, int y, int color)
 {
 	char	*dst;
 
 	x += WIDTH / 2;
 	y += HEIGHT / 2;
 	if ((y > HEIGHT || y < 0) || (x > WIDTH || x < 0))
-		return;
+		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
-void bresenham(t_img_data *img, t_point a, t_point b, int color)
+void bresenham(t_img_data *img, t_point a, t_point b)
 {
 	int delta_x = abs(b.x - a.x);
 	int delta_y = abs(b.y - a.y);
@@ -33,8 +33,7 @@ void bresenham(t_img_data *img, t_point a, t_point b, int color)
 	int err = delta_x - delta_y;
 
 	while(1) {
-		// draw the current pixel
-		my_mlx_pixel_put(img, a.x, a.y, color);
+		add_pixel_to_frame(img, a.x, a.y, a.color);
 		if (a.x == b.x && a.y == b.y) break;
 		int e2 = 2 * err;
 		if (e2 > -delta_y) {

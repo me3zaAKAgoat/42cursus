@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 17:40:49 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/31 21:08:32 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/02/01 15:14:11 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ char	*ft_strchr(const char *s, int c)
 		index++;
 	}
 	return (NULL);
+}
+
+void	perr_exit(char *msg)
+{
+	perror(msg);
+	exit(1);
 }
 
 int	count_words(char const *s, char c)
