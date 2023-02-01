@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:32:19 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/25 16:02:38 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/31 23:46:05 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ void	my_mlx_pixel_put(t_img_data *data, int x, int y, int color)
 
 	x += WIDTH / 2;
 	y += HEIGHT / 2;
-	if (y > HEIGHT || y < 0)
-		y = 0;
-	if (x > WIDTH || x < 0)
-		x = 0;	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	if ((y > HEIGHT || y < 0) || (x > WIDTH || x < 0))
+		return;
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 

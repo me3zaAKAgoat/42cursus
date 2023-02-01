@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 21:16:21 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/25 17:43:49 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/31 16:25:38 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-extern size_t	gnl_strlen(const char *s);
+extern size_t	ft_strlen(const char *s);
 extern char	*gnl_substr(char const *s, unsigned int start, size_t len);
 extern char	*get_next_line(int fd);
 

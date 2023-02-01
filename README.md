@@ -17,15 +17,15 @@
 
 ## **Memory (RAM)**
 
-- the RAM is a piece of hardware that stores data for it's uptime, the data is stored in slots of 1 byte and each slot has it's own address.
-- Addresses are conventionally represented in hexadecimal, the 0x in addresses is but a prefix that indicates the base that represents the slot.
-- The RAM makes data available for the CPU operations on demand.
-- the OS partitions the RAM into Pages, these Pages are chunks of 4k Bytes.
-- A program is either allowed to acess an entire page or none of it.
-- A CPU cache is a small part of memory within the CPU that it uses so it dosen't have to keep asking the RAM for everything.
+- the RAM is a hardware component that stores data during its uptime and then loses it when turned off, the data is stored in slots of 1 byte and each slot has its own address.
+- Addresses are conventionally represented in hexadecimal, the 0x is but a prefix that indicates the base of representation.
+- The RAM provides data for CPU operations on demand.
+- the OS partitions the RAM into chunks of 4k Bytes called pages.
+- A program is either allowed to access an entire page or none of it.
+- A CPU cache is a small part of memory within the CPU that is used to provide data to operations faster than demanding it from the RAM.
   - when the CPU wants to read from a certain address, it checks if it's in the cache first.
   - the cache stores in chunks of 64 bytes called _cache lines_.
-- the memory we interact with as programmers is usually virtual memory, meaning that the addresses read are not actual RAM addresses.
+- the memory we interact with as programmers is usually virtual memory, meaning that the addresses read are not actual physical RAM addresses.
 
 - **Endianness** refers the the order bytes are stored in memory. A big-endian system stores the most significant byte of a word at the smallest memory address and the least significant byte at the largest. A little-endian system, in contrast, stores the least-significant byte at the smallest address.
   [Endianness Wiki artice](https://en.wikipedia.org/wiki/Endianness)
@@ -73,7 +73,7 @@
 
 - The 'f' that prefixes file handling functions usually refers to the function being a high level routine as opposed to a low level routine function.
 - low level routines do not use buffering but can take up to one minute before data is physically written to the disc (we can use **fsync** to ensure that all data is written to the file).
-- EOF is a flag that holds a negative integer value (though one should assume the value, it is usually -1) that indicates that a file position has reached the end of a file.
+- EOF is a flag that holds a negative integer value that indicates that a file position has reached the end of a file. (though it's value should'nt be assumed, it is usually -1)
 - File position is a character count in the opened file that starts at 0. for example, File position 40 means that the character that is currently being read from or written to is the 41th character in the file. (**ftell** is a high level function that takes in a stream as input and outputs an integer representing the file position).
 
 - #### **Streams**
@@ -287,7 +287,7 @@ lmfao haha
 - if the programmer tries to convert from a type that can represent more values to a type that can represent less values (say from long to short) a truncation happens in an implementation defined manner.
 - Symbols are functions and variables
 - An **archive** is a single file that contains a collection of other files and/or directories. Archive files are typically used for a transfer (locally or over the internet) or make a backup copy of a collection of files and directories which allow you to work with only one file instead of many. Likewise, archives are used for software application packaging. This single file can be easily compressed for ease of transfer while the files in the archive retain the structure and permissions of the original files.
-- Dereferencing or taking the address of a function just evaluates to a pointer to that function, and dereferencing a function pointer just evaluates back to the function pointer.
+- trying to get the address of a function just evaluates to a pointer to that function, and dereferencing a function pointer also just evaluates back to the function pointer.
 - `char(*)[3] and char**` are fundamentally different and the former cannot decay to the latter. `char**` is a pointer to a varible of type `char*`, it might be an array of `char*`, but that's not an array of char of length 3.
 - **Variadic functions** [Reference](https://en.wikipedia.org/wiki/Variadic_function#In_C)
   - in order to use variadic functions in C, we need to include the stdarg.h standard header that introduces the type _va_list_ and multiple other macros.
