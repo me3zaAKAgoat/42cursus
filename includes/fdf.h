@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:04:26 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/29 18:26:19 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/02/01 02:25:56 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,25 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1600
+# define HEIGHT 900
 
-# define KEY_LEFT    123
-# define KEY_RIGHT   124
-# define KEY_DOWN    125
-# define KEY_UP      126
+//macos
+// # define KEY_LEFT    123
+// # define KEY_RIGHT   124
+// # define KEY_DOWN    125
+// # define KEY_UP      126
+//ubuntu
+# define KEY_UP      65362
+# define KEY_RIGHT   65363
+# define KEY_DOWN    65364
+# define KEY_LEFT    65361
+
+//mouse events
+# define ZOOM_IN    4
+# define ZOOM_OUT   5
+
+# define BASE_SCALE 20
 
 typedef struct	point {
 	int	x;
@@ -56,7 +68,7 @@ typedef struct meta_data {
 }	t_meta_data;
 
 extern int	count_words(char const *s, char c);
-extern int	ft_strlen(char *str);
+extern size_t	ft_strlen(const char *s);
 extern t_point	apply_matrix(t_point	old_point, double	matrix[]);
 extern void	my_mlx_pixel_put(t_img_data *data, int x, int y, int color);
 extern void	bresenham(t_img_data *img, t_point a, t_point b, int color);
@@ -65,6 +77,7 @@ extern int	ft_atoi_base(char *str, char *base);
 extern char	*ft_substr(char const *s, unsigned int start, size_t len);
 extern char	**ft_split(char const *s, char c);
 extern void	*split_clear(char	**arr);
-
+extern void	read_map(t_meta_data *fdf, char *file_name);
+extern char	*ft_strchr(const char *s, int c);
 
 #endif

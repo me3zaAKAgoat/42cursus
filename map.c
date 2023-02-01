@@ -6,36 +6,36 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:34 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/29 19:27:08 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/02/01 01:57:24 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
-{
-	size_t	index;
+// void	*ft_memmove(void *dst, const void *src, size_t len)
+// {
+// 	size_t	index;
 
-	if (dst < src)
-	{
-		index = 0;
-		while (index < len)
-		{
-			*((char *)dst + index) = *((char *)src + index);
-			index++;
-		}
-	}
-	else if (src < dst)
-	{
-		while (len)
-		{
-			*((char *) dst + len - 1) = *((char *) src
-					+ len - 1);
-			len--;
-		}
-	}
-	return (dst);
-}
+// 	if (dst < src)
+// 	{
+// 		index = 0;
+// 		while (index < len)
+// 		{
+// 			*((char *)dst + index) = *((char *)src + index);
+// 			index++;
+// 		}
+// 	}
+// 	else if (src < dst)
+// 	{
+// 		while (len)
+// 		{
+// 			*((char *) dst + len - 1) = *((char *) src
+// 					+ len - 1);
+// 			len--;
+// 		}
+// 	}
+// 	return (dst);
+// }
 
 
 // void	fill_point_coordinates(t_meta_data *fdf, int line_length)
@@ -46,14 +46,14 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	
 // }
 
-void	alloc_for_points(t_meta_data *fdf)
+void	alloc_for_points(t_meta_data *fdf, char *file_name)
 {
 	int		fd;
 	int		non_spc_nl_count;
 	char	*str;
 
 	non_spc_nl_count = 0;
-	fd = open("./test_maps/42.fdf", O_RDONLY);
+	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		return (perror("cant open map file"), exit(1));
 	while (1)
@@ -76,7 +76,7 @@ void	alloc_for_points(t_meta_data *fdf)
 	close(fd);
 }
 
-void	read_map(t_meta_data *fdf)
+void	read_map(t_meta_data *fdf, char *file_name)
 {
 	int		fd;
 	char	*str;
@@ -85,13 +85,14 @@ void	read_map(t_meta_data *fdf)
 	int		line_length;
 	int		x;
 	int		y;
-
+	char	**z_color;
+	
 	y = 0;
 	fdf->nbr_of_points = 0;
 	fdf->points = NULL;
 	str = NULL;
-	alloc_for_points(&fdf);
-	fd = open("./test_maps/42.fdf", O_RDONLY);
+	alloc_for_points(fdf, file_name);
+	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		return (perror("cant open map file"), exit(1));
 	while (1)
@@ -110,12 +111,18 @@ void	read_map(t_meta_data *fdf)
 			x = 0;
 			while (x < line_length)
 			{
-				// printf("%d\n", fdf->points[fdf->nbr_of_points + x].x);
-				point.x = x;
-				point.y = y;
-				point.z = ft_atoi_base(
-						split_line[x], "0123456789");
-				fdf->points[fdf->nbr_of_points + x] = point;
+				point.x = x * fdf->scale_factor;
+				point.y = y * fdf->scale_factor;
+				point.z = ft_atoi_base(split_line[x], "0123456789") * fdf->scale_factor;
+				if (ft_strchr(split_line[x], ',') != NULL)
+				{
+					z_color = ft_split(split_line[x] , ',');
+					point.color = ft_atoi_base(z_color[1] + 2, "0123456789ABCDEF");
+					split_clear(z_color);
+				}
+				else
+					point.color = 0x00FFFFFF;
+				*(fdf->points + fdf->nbr_of_points + x) = point;
 				x++;
 			}
 			split_clear(split_line);
@@ -123,20 +130,4 @@ void	read_map(t_meta_data *fdf)
 			y += 1;
 		}
 	}
-}
-
-int main()
-{
-	t_meta_data fdf;
-	int i = 0;
-	
-	read_map(&fdf);
-	while (i < fdf.nbr_of_points)
-	{
-		printf("point %d x = %d y = %d z = %d\n", (i), (fdf.points[i]).x,( fdf.points[i]).y,( fdf.points[i]).z);
-		i++;
-	}
-
-	// system("leaks a.out");
-	return (0);
 }

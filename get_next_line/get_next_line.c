@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:30:23 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/16 19:05:57 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/01/31 16:25:38 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*gnl_join(char	*static_str, char *read_str)
 	int		i;
 	int		j;
 
-	ptr = malloc(gnl_strlen(static_str) + gnl_strlen(read_str) + 1);
+	ptr = malloc(ft_strlen(static_str) + ft_strlen(read_str) + 1);
 	if (!ptr)
 		return (NULL);
 	i = 0;
@@ -78,7 +78,7 @@ static char	*cut_and_return(char **pto_static_str)
 	}
 	return_str = gnl_substr(*pto_static_str, 0, index + 1);
 	tmp_str = gnl_substr(*pto_static_str, index + 1,
-			gnl_strlen(*pto_static_str) - index);
+			ft_strlen(*pto_static_str) - index);
 	if (!tmp_str || !return_str)
 		return (free(return_str), free(tmp_str),
 			free(*pto_static_str), NULL);
@@ -106,9 +106,9 @@ char	*get_next_line(int fd)
 	while (look_for_newline(static_str) == -1)
 	{
 		bytes_read = read(fd, read_str, BUFFER_SIZE);
-		if (bytes_read == 0 && gnl_strlen(static_str))
+		if (bytes_read == 0 && ft_strlen(static_str))
 			break ;
-		if (bytes_read == 0 && !gnl_strlen(static_str))
+		if (bytes_read == 0 && !ft_strlen(static_str))
 			return (free(read_str), free(static_str), static_str = NULL, NULL);
 		if (bytes_read == -1)
 			return (free(read_str), NULL);
