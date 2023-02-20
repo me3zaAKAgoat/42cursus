@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:04:26 by echoukri          #+#    #+#             */
-/*   Updated: 2023/02/01 18:24:29 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/02/20 09:44:03 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@
 # define HEIGHT 900
 
 //macos
-// # define KEY_LEFT    123
-// # define KEY_RIGHT   124
-// # define KEY_DOWN    125
-// # define KEY_UP      126
-//ubuntu
-# define KEY_UP      65362
-# define KEY_RIGHT   65363
-# define KEY_DOWN    65364
-# define KEY_LEFT    65361
+# define KEY_LEFT    123
+# define KEY_RIGHT   124
+# define KEY_DOWN    125
+# define KEY_UP      126
+// // ubuntu
+// # define KEY_UP      65362
+// # define KEY_RIGHT   65363
+// # define KEY_DOWN    65364
+// # define KEY_LEFT    65361
 
 //mouse events
 # define ZOOM_IN    4
@@ -65,6 +65,8 @@ typedef struct meta_data {
 	t_img_data	img;
 	void		*mlx;
 	void		*mlx_win;
+	int			map_height;
+	int			map_width;
 }	t_meta_data;
 
 extern void		perr_exit(char *msg);

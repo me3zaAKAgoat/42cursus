@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 12:19:10 by echoukri          #+#    #+#             */
-/*   Updated: 2023/02/01 18:30:09 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/02/20 11:26:29 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,28 @@ t_point	scaled_point(t_meta_data *fdf, t_point point)
 
 void	draw_pts_to_image(t_meta_data *fdf)
 {
-	int	point_index;
+	int	x_loop_point_index;
+	int	y_loop_point_index;
 
 	mlx_destroy_image(fdf->mlx, fdf->img.img);
 	fdf->img.img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
-	point_index = 0;
-	while (point_index < fdf->nbr_of_points)
+	y_loop_point_index = 0;
+	while (y_loop_point_index < fdf->nbr_of_points)
 	{
-		add_pixel_to_frame(&fdf->img,
-			rotated_point(fdf, scaled_point(fdf, fdf->points[point_index])).x,
-			rotated_point(fdf, scaled_point(fdf, fdf->points[point_index])).y,
-			fdf->points[point_index].color);
-		point_index++;
+		if (fdf->points[y_loop_point_index + 1].x == (fdf->points[y_loop_point_index].x + 1))
+			bresenham(&fdf->img,
+				rotated_point(fdf, scaled_point(fdf, fdf->points[y_loop_point_index])),
+				rotated_point(fdf, scaled_point(fdf, fdf->points[y_loop_point_index + 1])));
+		y_loop_point_index++;
+	}
+	x_loop_point_index = 0;
+	while (x_loop_point_index < fdf->nbr_of_points)
+	{
+		if (fdf->points[x_loop_point_index + 1].y == fdf->points[x_loop_point_index].y + 1)
+			bresenham(&fdf->img,
+				rotated_point(fdf, scaled_point(fdf, fdf->points[x_loop_point_index])),
+				rotated_point(fdf, scaled_point(fdf, fdf->points[x_loop_point_index + 1])));
+		x_loop_point_index++;
 	}
 	mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->img.img, 0, 0);
 }
@@ -97,6 +107,8 @@ int	handle_zoom(int key, int x, int y, t_meta_data *fdf)
 
 void	struct_init(t_meta_data *fdf, char **argv)
 {
+	int			i = 0;
+
 	fdf->mlx = mlx_init();
 	fdf->mlx_win = mlx_new_window(fdf->mlx, WIDTH, HEIGHT, "Fil De Fer");
 	fdf->img.img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
@@ -107,26 +119,25 @@ void	struct_init(t_meta_data *fdf, char **argv)
 	fdf->deg_rota_about_y = 0;
 	fdf->deg_rota_about_z = 0;
 	read_map(fdf, argv[1]);
+	fdf->map_width = fdf->points[0].x;
+	fdf->map_height = fdf->points[0].y;
+	while (i < fdf->nbr_of_points)
+	{
+		if (fdf->points[i].x > fdf->map_width)
+			fdf->map_width = fdf->points[i].x;
+		if (fdf->points[i].y > fdf->map_height)
+			fdf->map_height = fdf->points[i].y;
+		i++;
+	}
+	fdf->map_width++;
+	fdf->map_height++;
 }
 
 int	main(int ac, char **argv)
 {
 	t_meta_data	fdf;
-	int			max_y;
-	int			max_x;
-	int			i = 0;
 
 	struct_init(&fdf, argv);
-	max_x = fdf.points[0].x;
-	max_y = fdf.points[0].y;
-	while (i < fdf.nbr_of_points)
-	{
-		if (fdf.points[i].x > max_x)
-			max_x = fdf.points[i].x;
-		if (fdf.points[i].y > max_y)
-			max_y = fdf.points[i].y;
-		i++;
-	}
 	draw_pts_to_image(&fdf);
 	mlx_hook(fdf.mlx_win, 2, 1L, handle_key_press, &fdf);
 	mlx_mouse_hook(fdf.mlx_win, handle_zoom, &fdf);
