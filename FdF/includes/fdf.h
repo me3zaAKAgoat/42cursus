@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:04:26 by echoukri          #+#    #+#             */
-/*   Updated: 2023/02/01 18:24:29 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/02/21 12:54:03 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,19 @@
 # define HEIGHT 900
 
 //macos
-// # define KEY_LEFT    123
-// # define KEY_RIGHT   124
-// # define KEY_DOWN    125
-// # define KEY_UP      126
-//ubuntu
-# define KEY_UP      65362
-# define KEY_RIGHT   65363
-# define KEY_DOWN    65364
-# define KEY_LEFT    65361
+# define KEY_LEFT		123
+# define KEY_RIGHT		124
+# define KEY_DOWN		125
+# define KEY_UP			126
+# define KEY_W			13
+# define KEY_D			2
+# define KEY_S			1
+# define KEY_A			0
+// // ubuntu
+// # define KEY_UP      65362
+// # define KEY_RIGHT   65363
+// # define KEY_DOWN    65364
+// # define KEY_LEFT    65361
 
 //mouse events
 # define ZOOM_IN    4
@@ -65,6 +69,9 @@ typedef struct meta_data {
 	t_img_data	img;
 	void		*mlx;
 	void		*mlx_win;
+	int			*heights;
+	int			x_translation;
+	int			y_translation;
 }	t_meta_data;
 
 extern void		perr_exit(char *msg);
@@ -72,7 +79,7 @@ extern int		count_words(char const *s, char c);
 extern size_t	ft_strlen(const char *s);
 extern t_point	apply_matrix(t_point old_point, double matrix[]);
 extern void		add_pixel_to_frame(t_img_data *data, int x, int y, int color);
-extern void		bresenham(t_img_data *img, t_point a, t_point b);
+extern void		bresenham(t_meta_data *fdf, t_point a, t_point b);
 extern char		*get_next_line(int fd);
 extern int		ft_atoi_base(char *str, char *base);
 extern char		*ft_substr(char const *s, unsigned int start, size_t len);
