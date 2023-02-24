@@ -6,22 +6,20 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:34 by echoukri          #+#    #+#             */
-/*   Updated: 2023/02/22 12:26:48 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/02/24 18:41:14 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	alloc_members(t_meta_data *fdf, char *file_name)
+void	read_file(char *file_name, int *num_lines, int *num_words)
 {
 	int		fd;
-	int		non_spc_nl_count;
 	char	*str;
 	t_point	*points;
-	int		nbr_of_lines;
 
-	non_spc_nl_count = 0;
-	nbr_of_lines = 0;
+	*num_words = 0;
+	*num_lines = 0;
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		perr_exit("cant open map file");
@@ -32,16 +30,24 @@ void	alloc_members(t_meta_data *fdf, char *file_name)
 			break ;
 		else
 		{
-			nbr_of_lines += 1;
-			non_spc_nl_count += count_words(str, ' ') - 1;
+			*num_lines += 1;
+			*num_words += count_words(str, ' ') - 1;
 		}
 		free(str);
 	}
 	close(fd);
-	fdf->points = malloc(non_spc_nl_count * sizeof(t_point));
+}
+
+void	alloc_members(t_meta_data *fdf, char *file_name)
+{
+	int	num_lines;
+	int	num_words;
+
+	read_file(file_name, &num_lines, &num_words);
+	fdf->points = malloc(num_words * sizeof(t_point));
 	if (fdf->points == NULL)
 		perr_exit("couldn't malloc for array of points");
-	fdf->heights = malloc(sizeof(int) * nbr_of_lines);
+	fdf->heights = malloc(sizeof(int) * num_lines);
 	if (fdf->heights == NULL)
 		perr_exit("couldn't malloc for array of heights");
 }
@@ -71,8 +77,6 @@ void	register_line(int y, char *str, t_meta_data *fdf)
 	split_line = ft_split(str, ' ');
 	if (split_line == NULL)
 		perr_exit("error in spliting a seperarte line");
-	free(str);
-	str = NULL;
 	line_length = 0;
 	while (split_line[line_length])
 		line_length++;
@@ -110,7 +114,11 @@ void	read_map(t_meta_data *fdf, char *file_name)
 		if (str == NULL)
 			break ;
 		else
+		{
 			register_line(y, str, fdf);
+			free(str);
+			str = NULL;
+		}
 		y += 1;
 	}
 	puts("read map succesfully");
