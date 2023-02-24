@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:04:26 by echoukri          #+#    #+#             */
-/*   Updated: 2023/02/21 12:54:03 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/02/22 13:02:05 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,25 @@
 # define WIDTH 1600
 # define HEIGHT 900
 
-//macos
-# define KEY_LEFT		123
-# define KEY_RIGHT		124
-# define KEY_DOWN		125
-# define KEY_UP			126
-# define KEY_W			13
-# define KEY_D			2
-# define KEY_S			1
-# define KEY_A			0
-// // ubuntu
-// # define KEY_UP      65362
-// # define KEY_RIGHT   65363
-// # define KEY_DOWN    65364
-// # define KEY_LEFT    65361
+// //macos
+// # define KEY_LEFT		123
+// # define KEY_RIGHT		124
+// # define KEY_DOWN		125
+// # define KEY_UP			126
+// # define KEY_W			13
+// # define KEY_D			2
+// # define KEY_S			1
+// # define KEY_A			0
+// ubuntu
+# define KEY_UP      65362
+# define KEY_RIGHT   65363
+# define KEY_DOWN    65364
+# define KEY_LEFT    65361
+# define KEY_W 122
+# define KEY_D 100
+# define KEY_S 115
+# define KEY_A 113
+# define KEY_ESC 65307
 
 //mouse events
 # define ZOOM_IN    4
