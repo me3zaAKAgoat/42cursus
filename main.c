@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 12:19:10 by echoukri          #+#    #+#             */
-/*   Updated: 2023/02/21 13:02:42 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/02/22 13:04:01 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ int	handle_key_press(int key, t_meta_data *fdf)
 
 	rota_unit = 0.03;
 	translation_unit = 30;
+	if (key == KEY_ESC)
+	{
+		exit(0);
+	}
 	if (key == KEY_LEFT)
 	{	
 		fdf->deg_rota_about_y -= rota_unit;
@@ -92,25 +96,28 @@ int	handle_key_press(int key, t_meta_data *fdf)
 		fdf->deg_rota_about_x -= rota_unit;
 		draw_frame(fdf);
 	}
-	if (key == KEY_W)
+	if (key == KEY_W && (fdf->y_translation - translation_unit > - ( HEIGHT / 2)))
 	{
+
 		fdf->y_translation -= translation_unit;
 		draw_frame(fdf);
 	}
-	if (key == KEY_D)
+	if (key == KEY_D && (fdf->x_translation + translation_unit <= ( WIDTH / 2)))
 	{
+
 		fdf->x_translation += translation_unit;
 		draw_frame(fdf);
 	}
-	if (key == KEY_S)
+	if (key == KEY_S && (fdf->y_translation + translation_unit <= ( HEIGHT / 2)))
 	{
+
 		fdf->y_translation += translation_unit;
 		draw_frame(fdf);
 	}
-	if (key == KEY_A)
+	if (key == KEY_A && (fdf->x_translation - translation_unit > - ( WIDTH / 2)))
 	{
 		fdf->x_translation -= translation_unit;
-		draw_frame(fdf);
+		draw_frame(fdf);	
 	}
 	return (0);
 }
