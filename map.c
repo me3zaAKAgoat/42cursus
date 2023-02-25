@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:34 by echoukri          #+#    #+#             */
-/*   Updated: 2023/02/24 18:41:14 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/02/25 15:12:13 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,26 @@ void	alloc_members(t_meta_data *fdf, char *file_name)
 	fdf->points = malloc(num_words * sizeof(t_point));
 	if (fdf->points == NULL)
 		perr_exit("couldn't malloc for array of points");
-	fdf->heights = malloc(sizeof(int) * num_lines);
-	if (fdf->heights == NULL)
-		perr_exit("couldn't malloc for array of heights");
+	fdf->y_lengths_arr = malloc(sizeof(int) * num_lines);
+	if (fdf->y_lengths_arr == NULL)
+		perr_exit("couldn't malloc for array of y_lengths_arr");
 }
 
-void	set_point_color(char **split_line, t_point *point_to_color, int x)
+void	set_color(t_point *point, char	*str)
 {
-	char	**z_color;
+	char	**tmp;
+	char	*color;
 
-	if (ft_strchr(split_line[x], ',') != NULL)
+	if (ft_strchr(str, ',') != NULL)
 	{
-		z_color = ft_split(split_line[x], ',');
-		(*point_to_color).color = ft_atoi_base(z_color[1] + 2,
+		tmp = ft_split(str, ',');
+		color = tmp[1];
+		(*point).color = ft_atoi_base(color + 2,
 				"0123456789ABCDEF");
-		split_clear(z_color);
+		split_clear(tmp);
 	}
 	else
-		(*point_to_color).color = 0x00FFFFFF;
+		(*point).color = 0x00FFFFFF;
 }
 
 void	register_line(int y, char *str, t_meta_data *fdf)
@@ -80,14 +82,15 @@ void	register_line(int y, char *str, t_meta_data *fdf)
 	line_length = 0;
 	while (split_line[line_length])
 		line_length++;
-	*(fdf->heights + y) = line_length;
+	*(fdf->y_lengths_arr + y) = line_length;
 	x = 0;
 	while (x < line_length)
 	{
 		point.x = x * 1;
 		point.y = y * 1;
 		point.z = ft_atoi_base(split_line[x], "0123456789") * 0.8;
-		set_point_color(split_line, &point, x);
+		set_color(&point, split_line[x]);
+		printf("color %d\n", point.color);
 		*(fdf->points + fdf->nbr_of_points + x) = point;
 		x++;
 	}
