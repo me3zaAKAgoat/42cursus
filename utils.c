@@ -6,11 +6,12 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 17:40:49 by echoukri          #+#    #+#             */
-/*   Updated: 2023/02/21 09:56:25 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:46:31 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <string.h>
 
 size_t	ft_strlen(const char *s)
 {
@@ -67,4 +68,34 @@ int	count_words(char const *s, char c)
 			index++;
 	}
 	return (count_of_c);
+}
+
+char *ft_dtoa(double num, int precision) {
+    char *str = malloc(50 * sizeof(char));
+    if (num < 0) {
+        num = -num;
+        strcpy(str, "-");
+    } else {
+        strcpy(str, "");
+    }
+    int whole = (int) num;
+    double fraction = num - whole;
+    int i = ft_strlen(str);
+    if (whole == 0) {
+        str[i++] = '0';
+    } else {
+        while (whole > 0) {
+            str[i++] = (whole % 10) + '0';
+            whole /= 10;
+        }
+    }
+    str[i++] = '.';
+    while (precision-- > 0) {
+        fraction *= 10;
+        int digit = (int) fraction;
+        str[i++] = digit + '0';
+        fraction -= digit;
+    }
+    str[i] = '\0';
+    return str;
 }
