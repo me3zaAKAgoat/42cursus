@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:34 by echoukri          #+#    #+#             */
-/*   Updated: 2023/02/25 15:12:13 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/02/27 01:34:25 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	set_color(t_point *point, char	*str)
 		split_clear(tmp);
 	}
 	else
-		(*point).color = 0x00FFFFFF;
+		(*point).color = 0xFFFFFF;
 }
 
 void	register_line(int y, char *str, t_meta_data *fdf)
@@ -90,7 +90,6 @@ void	register_line(int y, char *str, t_meta_data *fdf)
 		point.y = y * 1;
 		point.z = ft_atoi_base(split_line[x], "0123456789") * 0.8;
 		set_color(&point, split_line[x]);
-		printf("color %d\n", point.color);
 		*(fdf->points + fdf->nbr_of_points + x) = point;
 		x++;
 	}

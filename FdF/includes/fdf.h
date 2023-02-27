@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:04:26 by echoukri          #+#    #+#             */
-/*   Updated: 2023/02/25 15:48:21 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:43:35 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@
 # define KEY_A 113
 # define KEY_ESC 65307
 # define KEY_ETR 65293
+# define KEY_T 116
+# define KEY_Y 121
 
 //mouse events
 # define ZOOM_IN    4
@@ -69,10 +71,10 @@ typedef struct img_data {
 typedef struct meta_data {
 	t_point		*points;
 	int			nbr_of_points;
-	double		deg_rota_about_x;
-	double		deg_rota_about_y;
-	double		deg_rota_about_z;
-	int			scale_factor;
+	double		alpha;
+	double		beta;
+	int			plane_scale_factor;
+	int			z_scale_factor;
 	t_img_data	img;
 	void		*mlx;
 	void		*mlx_win;
@@ -85,10 +87,11 @@ extern void		perr_exit(char *msg);
 extern int		count_words(char const *s, char c);
 extern size_t	ft_strlen(const char *s);
 extern t_point	apply_matrix(t_point old_point, double matrix[]);
-extern void		add_pixel_to_frame(t_img_data *data, int x, int y, int color);
+extern void		pixel_put_to_img(t_img_data *data, int x, int y, int color);
 extern void		bresenham(t_meta_data *fdf, t_point a, t_point b);
 extern char		*get_next_line(int fd);
 extern char		*ft_itoa(int n);
+extern char		*ft_dtoa(double num, int precision);
 extern int		ft_atoi_base(char *str, char *base);
 extern char		*ft_substr(char const *s, unsigned int start, size_t len);
 extern char		**ft_split(char const *s, char c);
