@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:47:32 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/29 21:42:11 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:48:29 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int	main(int ac, char *argv[], char *envp[])
 	first_child(&pipex_data, argv[2]);
 	last_child(&pipex_data, argv[(ac - 1) - 1]);
 	free_struct(&pipex_data);
-	wait(&status);
+	while (wait(NULL) > 0)
+		continue ;
 	if (WIFEXITED(status))
 		exit(WEXITSTATUS(status));
 	else
