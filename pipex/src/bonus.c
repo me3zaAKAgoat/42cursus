@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:47:32 by echoukri          #+#    #+#             */
-/*   Updated: 2023/01/29 21:42:02 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/01 17:59:29 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,9 +134,10 @@ int	main(int ac, char *argv[], char *envp[])
 	}
 	last_child(&pipex_data, argv[(ac - 1) - 1], command_nbr * 2 - 2);
 	free_struct(&pipex_data);
-	wait(&status);
+	while (wait(&status) > 0)
+		continue ;
 	if (WIFEXITED(status))
 		exit(WEXITSTATUS(status));
 	else
-		perr_exit("fatal signal error");
+		perr_exit("signal error");
 }

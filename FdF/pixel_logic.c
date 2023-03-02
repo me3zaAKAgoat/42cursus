@@ -6,16 +6,13 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:32:19 by echoukri          #+#    #+#             */
-/*   Updated: 2023/02/27 04:35:41 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/01 20:22:23 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-# define MAX(a,b) (((a) > (b)) ? (a) : (b))
-# define MIN(a, b) ((a) < (b) ? (a) : (b))
-
-void	pixel_put_to_img(t_img_data *data, int x, int y, int color)
+void	put_pixel_img(t_img_data *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -25,6 +22,13 @@ void	pixel_put_to_img(t_img_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+int	get_sign(int value) {
+	if (value < 0)
+		return (-1);
+	if (value > 0)
+		return (1);
+	return (0);
+}
 
 void	bresenham(t_meta_data *fdf, t_point a, t_point b)
 {
@@ -42,8 +46,7 @@ void	bresenham(t_meta_data *fdf, t_point a, t_point b)
 	err = delta_x - delta_y;
 	while (1)
 	{
-
-		pixel_put_to_img(&fdf->img, a.x + fdf -> x_translation + WIDTH / 2.5, a.y + fdf-> y_translation + HEIGHT / 4, a.color);
+		put_pixel_img(&fdf->img, a.x + fdf -> x_translation + WIDTH / 2.5, a.y + fdf-> y_translation + HEIGHT / 4, a.color);
 		if (a.x == b.x && a.y == b.y) break;
 		e2 = 2 * err;
 		if (e2 > -delta_y)
