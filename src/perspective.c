@@ -6,22 +6,35 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:31:34 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/01 18:39:51 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:55:51 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_point	apply_matrix(t_point old_point, double matrix[])
+t_point	apply_matrix_alpha(t_point old_point, t_meta_data *fdf)
 {
 	t_point	new_point;
 
-	new_point.x = old_point.x * matrix[0]
-		+ old_point.y * matrix[1] + old_point.z * matrix[2];
-	new_point.y = old_point.x * matrix[3]
-		+ old_point.y * matrix[4] + old_point.z * matrix[5];
-	new_point.z = old_point.x * matrix[6]
-		+ old_point.y * matrix[7] + old_point.z * matrix[8];
+	new_point.x = old_point.x * 1
+		+ old_point.y * 0 + old_point.z * 0;
+	new_point.y = old_point.x * 0
+		+ old_point.y * cos(fdf->alpha) + old_point.z * -sin(fdf->alpha);
+	new_point.z = old_point.x * 0
+		+ old_point.y * sin(fdf->alpha) + old_point.z * cos(fdf->alpha);
+	return (new_point);
+}
+
+t_point	apply_matrix_beta(t_point old_point, t_meta_data *fdf)
+{
+	t_point	new_point;
+
+	new_point.x = old_point.x * cos(fdf->beta)
+		+ old_point.y * 0 + old_point.z * sin(fdf->beta);
+	new_point.y = old_point.x * 0
+		+ old_point.y * 1 + old_point.z * 0;
+	new_point.z = old_point.x * -sin(fdf->beta)
+		+ old_point.y * 0 + old_point.z * cos(fdf->beta);
 	return (new_point);
 }
 
@@ -35,15 +48,12 @@ void	set_base_perspective(t_meta_data *fdf)
 	fdf->y_translation = 0;
 }
 
-
 t_point	rotated_point(t_meta_data *fdf, t_point point)
 {
 	t_point	new_point;
-	double matrix_x[] = {1, 0, 0, 0, cos(fdf->alpha), -sin(fdf->alpha), 0, sin(fdf->alpha), cos(fdf->alpha)};
-	double matrix_y[] = {cos(fdf->beta), 0, sin(fdf->beta), 0, 1, 0, -sin(fdf->beta), 0, cos(fdf->beta)};
 
-	new_point = apply_matrix(point, matrix_x);
-	new_point = apply_matrix(new_point, matrix_y);
+	new_point = apply_matrix_alpha(point, fdf);
+	new_point = apply_matrix_beta(new_point, fdf);
 	new_point.color = point.color;
 	return (new_point);
 }
@@ -58,5 +68,3 @@ t_point	scaled_point(t_meta_data *fdf, t_point point)
 	new_point.color = point.color;
 	return (new_point);
 }
-
-

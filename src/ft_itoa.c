@@ -6,58 +6,9 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 14:01:20 by echoukri          #+#    #+#             */
-/*   Updated: 2023/02/25 14:05:55 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/02 17:14:27 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// #include <stdlib.h>
-
-// static int	get_nbr_len(int n)
-// {
-// 	int	len;
-
-// 	len = 1;
-// 	while (n / 10 != 0)
-// 	{
-// 		n /= 10;
-// 		len++;
-// 	}
-// 	return (len);
-// }
-
-// static char	*fill_str(int n, int sign, int len)
-// {
-// 	char	*str;
-// 	int		i;
-
-// 	str = (char *)malloc(sizeof(char) * (len + 1));
-// 	if (!str)
-// 		return (NULL);
-// 	str[len] = '\0';
-// 	i = len - 1;
-// 	while (n / 10 != 0)
-// 	{
-// 		str[i] = (n % 10) * sign + '0';
-// 		n /= 10;
-// 		i--;
-// 	}
-// 	str[i] = n * sign + '0';
-// 	if (sign == -1)
-// 		str[0] = '-';
-// 	return (str);
-// }
-
-// char		*ft_itoa(int n)
-// {
-// 	char	*str;
-// 	int		sign;
-// 	int		len;
-
-// 	sign = (n < 0) ? -1 : 1;
-// 	len = get_nbr_len(n) + ((sign == -1) ? 1 : 0);
-// 	str = fill_str(n, sign, len);
-// 	return (str);
-// }
 
 #include "fdf.h"
 
