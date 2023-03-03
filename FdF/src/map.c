@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:34 by echoukri          #+#    #+#             */
-/*   Updated: 2023/02/27 01:34:25 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/03 03:51:09 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	read_file(char *file_name, int *num_lines, int *num_words)
 {
 	int		fd;
 	char	*str;
-	t_point	*points;
 
 	*num_words = 0;
 	*num_lines = 0;
@@ -28,11 +27,8 @@ void	read_file(char *file_name, int *num_lines, int *num_words)
 		str = get_next_line(fd);
 		if (str == NULL)
 			break ;
-		else
-		{
-			*num_lines += 1;
-			*num_words += count_words(str, ' ') - 1;
-		}
+		*num_lines += 1;
+		*num_words += count_words(str, ' ') - 1;
 		free(str);
 	}
 	close(fd);
@@ -63,10 +59,12 @@ void	set_color(t_point *point, char	*str)
 		color = tmp[1];
 		(*point).color = ft_atoi_base(color + 2,
 				"0123456789ABCDEF");
+		if ((*point).color == 0x000000)
+			(*point).color = 0x404040;
 		split_clear(tmp);
 	}
 	else
-		(*point).color = 0xFFFFFF;
+		(*point).color = 0x404040;
 }
 
 void	register_line(int y, char *str, t_meta_data *fdf)
@@ -115,12 +113,9 @@ void	read_map(t_meta_data *fdf, char *file_name)
 		str = get_next_line(fd);
 		if (str == NULL)
 			break ;
-		else
-		{
-			register_line(y, str, fdf);
-			free(str);
-			str = NULL;
-		}
+		register_line(y, str, fdf);
+		free(str);
+		str = NULL;
 		y += 1;
 	}
 	puts("read map succesfully");

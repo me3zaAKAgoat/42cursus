@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:32:19 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/01 20:22:23 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/03 03:54:54 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	put_pixel_img(t_img_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	get_sign(int value) {
+int	get_sign(int value)
+{
 	if (value < 0)
 		return (-1);
 	if (value > 0)
@@ -41,13 +42,14 @@ void	bresenham(t_meta_data *fdf, t_point a, t_point b)
 
 	delta_x = abs(b.x - a.x);
 	delta_y = abs(b.y - a.y);
-	sx = a.x < b.x ? 1 : -1;
-	sy = a.y < b.y ? 1 : -1;
+	sx = get_sign(b.x - a.x);
+	sy = get_sign(b.y - a.y);
 	err = delta_x - delta_y;
 	while (1)
 	{
 		put_pixel_img(&fdf->img, a.x + fdf -> x_translation + WIDTH / 2.5, a.y + fdf-> y_translation + HEIGHT / 4, a.color);
-		if (a.x == b.x && a.y == b.y) break;
+		if (a.x == b.x && a.y == b.y)
+			break ;
 		e2 = 2 * err;
 		if (e2 > -delta_y)
 		{

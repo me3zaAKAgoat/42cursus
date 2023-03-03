@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:45:22 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/01 18:42:22 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:42:19 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	draw_vertical_line(t_meta_data *fdf, int index)
 void	draw_frame(t_meta_data *fdf)
 {
 	int	index;
-	
+
 	mlx_destroy_image(fdf->mlx, fdf->img.img);
 	fdf->img.img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
 	index = 0;
