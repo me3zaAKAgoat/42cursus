@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:34 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/03 03:51:09 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/04 16:53:43 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	read_map(t_meta_data *fdf, char *file_name)
 	char	*str;
 	int		y;
 
+	write(1, LOADING_MAP_MESSAGE, ft_strlen(LOADING_MAP_MESSAGE));
 	str = NULL;
 	alloc_members(fdf, file_name);
 	fd = open(file_name, O_RDONLY);
@@ -118,5 +119,5 @@ void	read_map(t_meta_data *fdf, char *file_name)
 		str = NULL;
 		y += 1;
 	}
-	puts("read map succesfully");
+	write(1, SUCCESSFUL_READ_MESSAGE, ft_strlen(SUCCESSFUL_READ_MESSAGE));
 }

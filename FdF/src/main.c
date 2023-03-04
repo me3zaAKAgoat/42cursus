@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 12:19:10 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/03 01:44:51 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/04 15:46:05 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int ac, char **argv)
 	struct_init(&fdf, argv);
 	set_base_perspective(&fdf);
 	draw_frame(&fdf);
+	mlx_hook(fdf.mlx_win, 17, 0, handle_close_window, &fdf);
 	mlx_hook(fdf.mlx_win, 2, 1L, handle_key_press, &fdf);
 	mlx_mouse_hook(fdf.mlx_win, handle_zoom, &fdf);
 	mlx_loop(fdf.mlx);
