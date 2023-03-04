@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:04:26 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/03 02:03:37 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/03 22:06:51 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct meta_data {
 	int			y_translation;
 }	t_meta_data;
 
+extern void		cleanup_meta_data(t_meta_data *fdf);
 extern void		perr_exit(char *msg);
 extern int		count_words(char const *s, char c);
 extern size_t	ft_strlen(const char *s);
