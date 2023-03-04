@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:32:19 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/03 03:54:54 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/04 17:20:05 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	bresenham(t_meta_data *fdf, t_point a, t_point b)
 	err = delta_x - delta_y;
 	while (1)
 	{
-		put_pixel_img(&fdf->img, a.x + fdf -> x_translation + WIDTH / 2.5, a.y + fdf-> y_translation + HEIGHT / 4, a.color);
+		put_pixel_img(&fdf->img, a.x + fdf -> x_translation + WIDTH / 2.5,
+			a.y + fdf-> y_translation + HEIGHT / 4, a.color);
 		if (a.x == b.x && a.y == b.y)
 			break ;
 		e2 = 2 * err;

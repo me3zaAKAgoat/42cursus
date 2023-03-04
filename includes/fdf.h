@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:04:26 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/03 22:06:51 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/04 17:01:42 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,35 +20,38 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
+// macros
 # define WIDTH 1600
 # define HEIGHT 900
+# define LOADING_MAP_MESSAGE "Reading the map...\n"
+# define SUCCESSFUL_READ_MESSAGE "\033[0;32mSuccessfully read the map\n\033[0;0m"
 
 // //macos
-// # define KEY_LEFT		123
-// # define KEY_RIGHT		124
-// # define KEY_DOWN		125
-// # define KEY_UP			126
-// # define KEY_W			13
-// # define KEY_D			2
-// # define KEY_S			1
-// # define KEY_A			0
-// # define KEY_ESC		53
-// # define KEY_ETR		36
-// # define KEY_T		17
-// # define KEY_Y		16
+# define KEY_LEFT		123
+# define KEY_RIGHT		124
+# define KEY_DOWN		125
+# define KEY_UP			126
+# define KEY_W			13
+# define KEY_D			2
+# define KEY_S			1
+# define KEY_A			0
+# define KEY_ESC		53
+# define KEY_ETR		36
+# define KEY_T		17
+# define KEY_Y		16
 // ubuntu
-# define KEY_UP      65362
-# define KEY_RIGHT   65363
-# define KEY_DOWN    65364
-# define KEY_LEFT    65361
-# define KEY_W 122
-# define KEY_D 100
-# define KEY_S 115
-# define KEY_A 113
-# define KEY_ESC 65307
-# define KEY_ETR 65293
-# define KEY_T 116
-# define KEY_Y 121
+// # define KEY_UP      65362
+// # define KEY_RIGHT   65363
+// # define KEY_DOWN    65364
+// # define KEY_LEFT    65361
+// # define KEY_W 122
+// # define KEY_D 100
+// # define KEY_S 115
+// # define KEY_A 113
+// # define KEY_ESC 65307
+// # define KEY_ETR 65293
+// # define KEY_T 116
+// # define KEY_Y 121
 
 //mouse events
 # define ZOOM_IN    4
@@ -90,7 +93,8 @@ extern void		cleanup_meta_data(t_meta_data *fdf);
 extern void		perr_exit(char *msg);
 extern int		count_words(char const *s, char c);
 extern size_t	ft_strlen(const char *s);
-extern t_point	apply_matrix(t_point old_point, double matrix[]);
+extern t_point	apply_matrix_alpha(t_point old_point, t_meta_data *fdf);
+extern t_point	apply_matrix_beta(t_point old_point, t_meta_data *fdf);
 extern void		put_pixel_img(t_img_data *data, int x, int y, int color);
 extern void		bresenham(t_meta_data *fdf, t_point a, t_point b);
 extern char		*get_next_line(int fd);
@@ -103,6 +107,7 @@ extern char		**ft_split(char const *s, char c);
 extern void		*split_clear(char	**arr);
 extern void		read_map(t_meta_data *fdf, char *file_name);
 extern char		*ft_strchr(const char *s, int c);
+extern int		handle_close_window(t_meta_data *fdf);
 extern void		handle_directional_key_press(int key, double rota_unit,
 					t_meta_data *fdf);
 extern void		handle_translation_key_press(int key, int translation_unit,
