@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   miscellaneous.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 17:40:49 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/02 22:55:32 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/03 22:14:07 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,12 @@ int	count_words(char const *s, char c)
 			index++;
 	}
 	return (count_of_c);
+}
+
+void	cleanup_meta_data(t_meta_data *fdf)
+{
+	free(fdf->y_lengths_arr);
+	free(fdf->points);
+	mlx_destroy_image(fdf->mlx, fdf->img.img);
+	mlx_destroy_window(fdf->mlx, fdf->mlx_win);
 }

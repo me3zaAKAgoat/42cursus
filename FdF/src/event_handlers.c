@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:31:23 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/03 04:07:24 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/03 22:11:51 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	handle_key_press(int key, t_meta_data *fdf)
 	translation_unit = 30;
 	if (key == KEY_ESC)
 	{
-		system("leaks ./a.out");
+		cleanup_meta_data(fdf);
 		exit(0);
 	}
 	if (key == KEY_ETR)
