@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:32:19 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/04 17:20:05 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:01:00 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,36 +31,34 @@ int	get_sign(int value)
 	return (0);
 }
 
+// delta[0] -> x delta[1] -> y
+// sign[0] -> x sign[1] -> y
 void	bresenham(t_meta_data *fdf, t_point a, t_point b)
 {
-	int	delta_x;
-	int	delta_y;
-	int	sx;
-	int	sy;
+	int	delta[2];
+	int	sign[2];
 	int	err;
 	int	e2;
 
-	delta_x = abs(b.x - a.x);
-	delta_y = abs(b.y - a.y);
-	sx = get_sign(b.x - a.x);
-	sy = get_sign(b.y - a.y);
-	err = delta_x - delta_y;
-	while (1)
+	delta[0] = abs(b.x - a.x);
+	delta[1] = abs(b.y - a.y);
+	sign[0] = get_sign(b.x - a.x);
+	sign[1] = get_sign(b.y - a.y);
+	err = delta[0] - delta[1];
+	while (a.x != b.x || a.y != b.y)
 	{
 		put_pixel_img(&fdf->img, a.x + fdf -> x_translation + WIDTH / 2.5,
 			a.y + fdf-> y_translation + HEIGHT / 4, a.color);
-		if (a.x == b.x && a.y == b.y)
-			break ;
 		e2 = 2 * err;
-		if (e2 > -delta_y)
+		if (e2 > -delta[1])
 		{
-			err -= delta_y;
-			a.x += sx;
+			err -= delta[1];
+			a.x += sign[0];
 		}
-		if (e2 < delta_x)
+		if (e2 < delta[0])
 		{
-			err += delta_x;
-			a.y += sy;
+			err += delta[0];
+			a.y += sign[1];
 		}
 	}
 }
