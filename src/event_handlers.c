@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:31:23 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/04 15:44:15 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/21 13:25:58 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,11 @@ int	handle_zoom(int key, int x, int y, t_meta_data *fdf)
 	if (key == ZOOM_OUT)
 	{			
 		if (fdf->plane_scale_factor - unit > 0)
+		{
 			fdf->plane_scale_factor -= unit;
-		if (fdf->z_scale_factor - unit >= fdf->plane_scale_factor)
-			fdf->z_scale_factor -= unit;
+			if (fdf->z_scale_factor - unit >= fdf->plane_scale_factor)
+				fdf->z_scale_factor -= unit;
+		}
 	}
 	else if (key == ZOOM_IN)
 	{
