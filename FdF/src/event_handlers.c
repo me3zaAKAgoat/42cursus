@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:31:23 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/21 13:25:58 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:06:19 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,6 @@ void	handle_translation_key_press(int key, int translation_unit,
 	draw_frame(fdf);
 }
 
-void	handle_z_key_press(int key,
-		t_meta_data *fdf)
-{
-	int	unit;
-
-	unit = 1;
-	if (key == KEY_T)
-		fdf->z_scale_factor -= unit;
-	if (key == KEY_Y)
-		fdf->z_scale_factor += unit;
-	draw_frame(fdf);
-}
-
 int	handle_key_press(int key, t_meta_data *fdf)
 {	
 	double	rota_unit;
@@ -71,8 +58,11 @@ int	handle_key_press(int key, t_meta_data *fdf)
 		handle_directional_key_press(key, rota_unit, fdf);
 	if (key == KEY_W || key == KEY_D || key == KEY_S || key == KEY_A)
 		handle_translation_key_press(key, translation_unit, fdf);
-	if (key == KEY_T || key == KEY_Y)
-		handle_z_key_press(key, fdf);
+	if (key == KEY_T)
+		fdf->z_scale_factor -= 0.5;
+	if (key == KEY_Y)
+		fdf->z_scale_factor += 0.5;
+	draw_frame(fdf);
 	return (0);
 }
 
