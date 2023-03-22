@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:45:22 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/22 14:55:07 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/22 19:22:58 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ void	draw_frame(t_meta_data *fdf)
 
 	mlx_destroy_image(fdf->mlx, fdf->img.img);
 	fdf->img.img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
+	if (fdf->img.img == NULL)
+	{
+		cleanup_meta_data(fdf);
+		perr_exit("an mlx function call has failed");
+	}
 	index = 0;
 	while (index < fdf->nbr_of_points)
 	{
