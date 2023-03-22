@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 15:49:11 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/21 13:26:36 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:57:51 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	draw_angles_menu(t_meta_data *fdf, int *i)
 	free(str);
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20 + 10,
 		(++*i * 30), 0xFFFFFF, "BETA : ");
-	str = ft_dtoa(-fdf->beta, 2);
+	str = ft_dtoa(fdf->beta, 2);
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 80 + 10,
 		(*i * 30), 0x30f21b, str);
 	free(str);

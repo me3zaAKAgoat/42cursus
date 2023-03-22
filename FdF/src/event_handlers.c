@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:31:23 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/22 15:06:19 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:30:49 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	handle_key_press(int key, t_meta_data *fdf)
 	if (key == KEY_T)
 		fdf->z_scale_factor -= 0.5;
 	if (key == KEY_Y)
-		fdf->z_scale_factor += 0.5;
+		fdf->z_scale_factor += 1;
 	draw_frame(fdf);
 	return (0);
 }
