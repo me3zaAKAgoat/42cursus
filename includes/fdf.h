@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:04:26 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/04 17:01:42 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:07:15 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,10 @@ extern void		handle_directional_key_press(int key, double rota_unit,
 					t_meta_data *fdf);
 extern void		handle_translation_key_press(int key, int translation_unit,
 					t_meta_data *fdf);
-extern void		handle_z_key_press(int key, t_meta_data *fdf);
 extern int		handle_key_press(int key, t_meta_data *fdf);
 extern int		handle_zoom(int key, int x, int y, t_meta_data *fdf);
-extern void		draw_horizontal_line(t_meta_data *fdf, int index);
-extern void		draw_vertical_line(t_meta_data *fdf, int index);
+extern void		draw_horizontally_aligned_points(t_meta_data *fdf, int index);
+extern void		draw_vertically_aligned_points(t_meta_data *fdf, int index);
 extern void		draw_frame(t_meta_data *fdf);
 extern void		set_base_perspective(t_meta_data *fdf);
 extern t_point	rotated_point(t_meta_data *fdf, t_point point);
