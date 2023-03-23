@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   miscellaneous_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 21:16:21 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/22 15:03:21 by echoukri         ###   ########.fr       */
+/*   Created: 2023/03/22 19:58:11 by echoukri          #+#    #+#             */
+/*   Updated: 2023/03/22 20:00:42 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100000
-# endif
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
+#include "fdf.h"
 
-extern size_t	ft_strlen(const char *s);
-extern char		*gnl_substr(char const *s, unsigned int start, size_t len);
-extern char		*get_next_line(int fd);
+int	max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
 
-#endif
+void	hacky_void(void)
+{
+	return ;
+}

@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:31:23 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/04 15:44:15 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:30:49 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,6 @@ void	handle_translation_key_press(int key, int translation_unit,
 	draw_frame(fdf);
 }
 
-void	handle_z_key_press(int key,
-		t_meta_data *fdf)
-{
-	int	unit;
-
-	unit = 1;
-	if (key == KEY_T)
-		fdf->z_scale_factor -= unit;
-	if (key == KEY_Y)
-		fdf->z_scale_factor += unit;
-	draw_frame(fdf);
-}
-
 int	handle_key_press(int key, t_meta_data *fdf)
 {	
 	double	rota_unit;
@@ -71,8 +58,11 @@ int	handle_key_press(int key, t_meta_data *fdf)
 		handle_directional_key_press(key, rota_unit, fdf);
 	if (key == KEY_W || key == KEY_D || key == KEY_S || key == KEY_A)
 		handle_translation_key_press(key, translation_unit, fdf);
-	if (key == KEY_T || key == KEY_Y)
-		handle_z_key_press(key, fdf);
+	if (key == KEY_T)
+		fdf->z_scale_factor -= 0.5;
+	if (key == KEY_Y)
+		fdf->z_scale_factor += 1;
+	draw_frame(fdf);
 	return (0);
 }
 
@@ -86,9 +76,11 @@ int	handle_zoom(int key, int x, int y, t_meta_data *fdf)
 	if (key == ZOOM_OUT)
 	{			
 		if (fdf->plane_scale_factor - unit > 0)
+		{
 			fdf->plane_scale_factor -= unit;
-		if (fdf->z_scale_factor - unit >= fdf->plane_scale_factor)
-			fdf->z_scale_factor -= unit;
+			if (fdf->z_scale_factor - unit >= fdf->plane_scale_factor)
+				fdf->z_scale_factor -= unit;
+		}
 	}
 	else if (key == ZOOM_IN)
 	{

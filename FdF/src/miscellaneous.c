@@ -6,12 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 17:40:49 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/04 15:27:11 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/22 19:10:27 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <string.h>
 
 size_t	ft_strlen(const char *s)
 {

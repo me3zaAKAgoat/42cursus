@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:04:26 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/04 17:01:42 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/22 20:01:08 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
-// macros
 # define WIDTH 1600
 # define HEIGHT 900
 # define LOADING_MAP_MESSAGE "Reading the map...\n"
 # define SUCCESSFUL_READ_MESSAGE "\033[0;32mSuccessfully read the map\n\033[0;0m"
 
-// //macos
+// mouse events
+# define ZOOM_IN    4
+# define ZOOM_OUT   5
+
+// macos keyboard events
 # define KEY_LEFT		123
 # define KEY_RIGHT		124
 # define KEY_DOWN		125
@@ -39,7 +42,7 @@
 # define KEY_ETR		36
 # define KEY_T		17
 # define KEY_Y		16
-// ubuntu
+// ubuntu keyboard events
 // # define KEY_UP      65362
 // # define KEY_RIGHT   65363
 // # define KEY_DOWN    65364
@@ -52,12 +55,6 @@
 // # define KEY_ETR 65293
 // # define KEY_T 116
 // # define KEY_Y 121
-
-//mouse events
-# define ZOOM_IN    4
-# define ZOOM_OUT   5
-
-# define BASE_SCALE 20
 
 typedef struct point {
 	int	x;
@@ -87,6 +84,7 @@ typedef struct meta_data {
 	int			*y_lengths_arr;
 	int			x_translation;
 	int			y_translation;
+	int			max_z;
 }	t_meta_data;
 
 extern void		cleanup_meta_data(t_meta_data *fdf);
@@ -100,6 +98,8 @@ extern void		bresenham(t_meta_data *fdf, t_point a, t_point b);
 extern char		*get_next_line(int fd);
 extern char		*ft_itoa(int n);
 extern char		*ft_dtoa(double num, int precision);
+extern int		max(int a, int b);
+extern void		hacky_void(void);
 extern int		ft_atoi_base(char *str, char *base);
 extern char		*ft_substr(char const *s, unsigned int start, size_t len);
 extern size_t	ft_strlcpy(char *dst, const char *src, size_t size);
@@ -112,11 +112,10 @@ extern void		handle_directional_key_press(int key, double rota_unit,
 					t_meta_data *fdf);
 extern void		handle_translation_key_press(int key, int translation_unit,
 					t_meta_data *fdf);
-extern void		handle_z_key_press(int key, t_meta_data *fdf);
 extern int		handle_key_press(int key, t_meta_data *fdf);
 extern int		handle_zoom(int key, int x, int y, t_meta_data *fdf);
-extern void		draw_horizontal_line(t_meta_data *fdf, int index);
-extern void		draw_vertical_line(t_meta_data *fdf, int index);
+extern void		draw_horizontally_aligned_points(t_meta_data *fdf, int index);
+extern void		draw_vertically_aligned_points(t_meta_data *fdf, int index);
 extern void		draw_frame(t_meta_data *fdf);
 extern void		set_base_perspective(t_meta_data *fdf);
 extern t_point	rotated_point(t_meta_data *fdf, t_point point);

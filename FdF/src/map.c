@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:34 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/04 16:53:43 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/22 20:00:14 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void	register_line(int y, char *str, t_meta_data *fdf)
 	{
 		point.x = x * 1;
 		point.y = y * 1;
-		point.z = ft_atoi_base(split_line[x], "0123456789") * 0.8;
+		point.z = ft_atoi_base(split_line[x], "0123456789") * 1;
+		fdf->max_z = max(fdf->max_z, point.z);
 		set_color(&point, split_line[x]);
 		*(fdf->points + fdf->nbr_of_points + x) = point;
 		x++;
@@ -109,6 +110,7 @@ void	read_map(t_meta_data *fdf, char *file_name)
 		perr_exit("cant open map file");
 	y = 0;
 	fdf->nbr_of_points = 0;
+	fdf->max_z = 0;
 	while (1)
 	{
 		str = get_next_line(fd);

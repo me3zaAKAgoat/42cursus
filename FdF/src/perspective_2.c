@@ -6,13 +6,13 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:45:22 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/02 15:42:19 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/22 19:22:58 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_horizontal_line(t_meta_data *fdf, int index)
+void	draw_horizontally_aligned_points(t_meta_data *fdf, int index)
 {
 	int	next_index;
 
@@ -23,7 +23,7 @@ void	draw_horizontal_line(t_meta_data *fdf, int index)
 			rotated_point(fdf, scaled_point(fdf, fdf->points[next_index])));
 }
 
-void	draw_vertical_line(t_meta_data *fdf, int index)
+void	draw_vertically_aligned_points(t_meta_data *fdf, int index)
 {
 	int	next_index;
 
@@ -42,16 +42,21 @@ void	draw_frame(t_meta_data *fdf)
 
 	mlx_destroy_image(fdf->mlx, fdf->img.img);
 	fdf->img.img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
+	if (fdf->img.img == NULL)
+	{
+		cleanup_meta_data(fdf);
+		perr_exit("an mlx function call has failed");
+	}
 	index = 0;
 	while (index < fdf->nbr_of_points)
 	{
-		draw_horizontal_line(fdf, index);
+		draw_horizontally_aligned_points(fdf, index);
 		index++;
 	}
 	index = 0;
 	while (index < fdf->nbr_of_points)
 	{
-		draw_vertical_line(fdf, index);
+		draw_vertically_aligned_points(fdf, index);
 		index++;
 	}
 	mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->img.img, 0, 0);

@@ -6,17 +6,17 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 15:49:11 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/04 15:37:49 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:57:51 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_menu_controls(t_meta_data *fdf)
+void	draw_controls_menu(t_meta_data *fdf)
 {
 	int	i;
 
-	i = HEIGHT / 45;
+	i = HEIGHT / 47;
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20 + 10,
 		(++i * 30), 0xf0453c, "CONTROLS");
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20 + 10,
@@ -30,12 +30,14 @@ void	draw_menu_controls(t_meta_data *fdf)
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20 + 10,
 		(++i * 30), 0xFFFFFF, "ROTATE: ARROW KEYS");
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20 + 10,
-		(++i * 30), 0xFFFFFF, "RESET: ENTER");
+		(++i * 30), 0xFFFFFF, "CHANGE HEIGHT: T Y");
+	mlx_string_put(fdf->mlx, fdf->mlx_win, 20 + 10,
+		(++i * 30), 0xFFFFFF, "RESET SHAPE: ENTER");
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20 + 10,
 		(++i * 30), 0xFFFFFF, "QUIT: ESCAPE");
 }
 
-void	draw_menu_angles(t_meta_data *fdf, int *i)
+void	draw_angles_menu(t_meta_data *fdf, int *i)
 {
 	char	*str;
 
@@ -47,13 +49,13 @@ void	draw_menu_angles(t_meta_data *fdf, int *i)
 	free(str);
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20 + 10,
 		(++*i * 30), 0xFFFFFF, "BETA : ");
-	str = ft_dtoa(-fdf->beta, 2);
+	str = ft_dtoa(fdf->beta, 2);
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 80 + 10,
 		(*i * 30), 0x30f21b, str);
 	free(str);
 }
 
-void	draw_menu_plane_data(t_meta_data *fdf, int *i)
+void	draw_coordinates_menu(t_meta_data *fdf, int *i)
 {
 	char	*str;
 
@@ -67,7 +69,7 @@ void	draw_menu_plane_data(t_meta_data *fdf, int *i)
 	free(str);
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20 + 10,
 		(++*i * 30), 0xFFFFFF, "Y    : ");
-	str = ft_itoa(fdf->y_translation);
+	str = ft_itoa(-fdf->y_translation);
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 80 + 10,
 		(*i * 30), 0x30f21b, str);
 	free(str);
@@ -84,7 +86,7 @@ void	draw_menu(t_meta_data *fdf)
 	int		i;
 
 	i = 0;
-	draw_menu_plane_data(fdf, &i);
-	draw_menu_angles(fdf, &i);
-	draw_menu_controls(fdf);
+	draw_coordinates_menu(fdf, &i);
+	draw_angles_menu(fdf, &i);
+	draw_controls_menu(fdf);
 }
