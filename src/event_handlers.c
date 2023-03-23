@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:31:23 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/22 15:30:49 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/23 14:53:56 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ int	handle_key_press(int key, t_meta_data *fdf)
 	if (key == KEY_W || key == KEY_D || key == KEY_S || key == KEY_A)
 		handle_translation_key_press(key, translation_unit, fdf);
 	if (key == KEY_T)
-		fdf->z_scale_factor -= 0.5;
+		fdf->z_scale_factor -= 0.03;
 	if (key == KEY_Y)
-		fdf->z_scale_factor += 1;
+		fdf->z_scale_factor += 0.03;
 	draw_frame(fdf);
 	return (0);
 }
@@ -74,19 +74,12 @@ int	handle_zoom(int key, int x, int y, t_meta_data *fdf)
 	y += 0;
 	unit = 1;
 	if (key == ZOOM_OUT)
-	{			
+	{
 		if (fdf->plane_scale_factor - unit > 0)
-		{
 			fdf->plane_scale_factor -= unit;
-			if (fdf->z_scale_factor - unit >= fdf->plane_scale_factor)
-				fdf->z_scale_factor -= unit;
-		}
 	}
 	else if (key == ZOOM_IN)
-	{
 		fdf->plane_scale_factor += unit;
-		fdf->z_scale_factor += unit;
-	}
 	draw_frame(fdf);
 	return (0);
 }

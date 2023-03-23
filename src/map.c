@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:34 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/22 20:00:14 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/23 14:55:30 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ void	set_color(t_point *point, char	*str)
 	{
 		tmp = ft_split(str, ',');
 		color = tmp[1];
-		(*point).color = ft_atoi_base(color + 2,
+		point->color = ft_atoi_base(color + 2,
 				"0123456789ABCDEF");
-		if ((*point).color == 0x000000)
-			(*point).color = 0x404040;
+		if (point->color < 0x101010)
+			point->color = 0x404040;
 		split_clear(tmp);
 	}
 	else
-		(*point).color = 0x404040;
+		point->color = 0x404040;
 }
 
 void	register_line(int y, char *str, t_meta_data *fdf)
@@ -87,7 +87,7 @@ void	register_line(int y, char *str, t_meta_data *fdf)
 		point.x = x * 1;
 		point.y = y * 1;
 		point.z = ft_atoi_base(split_line[x], "0123456789") * 1;
-		fdf->max_z = max(fdf->max_z, point.z);
+		record_max_values(fdf, point.x, point.z, point.z);
 		set_color(&point, split_line[x]);
 		*(fdf->points + fdf->nbr_of_points + x) = point;
 		x++;
@@ -103,23 +103,18 @@ void	read_map(t_meta_data *fdf, char *file_name)
 	int		y;
 
 	write(1, LOADING_MAP_MESSAGE, ft_strlen(LOADING_MAP_MESSAGE));
-	str = NULL;
 	alloc_members(fdf, file_name);
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		perr_exit("cant open map file");
 	y = 0;
-	fdf->nbr_of_points = 0;
-	fdf->max_z = 0;
 	while (1)
 	{
 		str = get_next_line(fd);
 		if (str == NULL)
 			break ;
-		register_line(y, str, fdf);
+		register_line(y++, str, fdf);
 		free(str);
-		str = NULL;
-		y += 1;
 	}
 	write(1, SUCCESSFUL_READ_MESSAGE, ft_strlen(SUCCESSFUL_READ_MESSAGE));
 }

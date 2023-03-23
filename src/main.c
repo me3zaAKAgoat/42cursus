@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 12:19:10 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/22 20:00:40 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/23 11:23:27 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	struct_init(t_meta_data *fdf, char **argv)
 {
+	fdf->max_x = 0;
+	fdf->max_y = 0;
+	fdf->max_z = 0;
+	fdf->nbr_of_points = 0;
 	read_map(fdf, argv[1]);
 	fdf->mlx = mlx_init();
 	if (fdf->mlx == NULL)
