@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:04:26 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/23 18:35:15 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:35:01 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 
 # include <mlx.h>
 # include <math.h>
@@ -116,7 +116,12 @@ extern void		*split_clear(char	**arr);
 extern void		read_map(t_meta_data *fdf, char *file_name);
 extern char		*ft_strchr(const char *s, int c);
 extern int		handle_close_window(t_meta_data *fdf);
+extern void		handle_directional_key_press(int key, double rota_unit,
+					t_meta_data *fdf);
+extern void		handle_translation_key_press(int key, int translation_unit,
+					t_meta_data *fdf);
 extern int		handle_key_press(int key, t_meta_data *fdf);
+extern int		handle_zoom(int key, int x, int y, t_meta_data *fdf);
 extern void		draw_horizontally_aligned_points(t_meta_data *fdf, int index);
 extern void		draw_vertically_aligned_points(t_meta_data *fdf, int index);
 extern void		draw_frame(t_meta_data *fdf);
