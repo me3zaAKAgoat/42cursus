@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:31:34 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/22 20:11:41 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:01:08 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,10 @@ t_point	apply_matrix_beta(t_point old_point, t_meta_data *fdf)
 
 void	set_base_perspective(t_meta_data *fdf)
 {
-	fdf->plane_scale_factor = 50;
-	if (fdf->max_z >= 10)
-		fdf->z_scale_factor = 5;
-	else
-		fdf->z_scale_factor = 30;
-	fdf->alpha = 0.95;
-	fdf->beta = -0.19;
+	fdf->plane_scale_factor = 50 / (fdf->max_x * 0.06);
+	fdf->z_scale_factor = 0.25;
+	fdf->alpha = 0.7;
+	fdf->beta = -0.15;
 	fdf->x_translation = 0;
 	fdf->y_translation = 0;
 }
@@ -67,7 +64,7 @@ t_point	scaled_point(t_meta_data *fdf, t_point point)
 
 	new_point.x = point.x * fdf->plane_scale_factor;
 	new_point.y = point.y * fdf->plane_scale_factor;
-	new_point.z = point.z * fdf->z_scale_factor;
+	new_point.z = (point.z * fdf->z_scale_factor) * fdf->plane_scale_factor;
 	new_point.color = point.color;
 	return (new_point);
 }

@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:04:26 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/22 20:01:08 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/23 14:39:02 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,37 +24,38 @@
 # define HEIGHT 900
 # define LOADING_MAP_MESSAGE "Reading the map...\n"
 # define SUCCESSFUL_READ_MESSAGE "\033[0;32mSuccessfully read the map\n\033[0;0m"
+# define BASE_COLOR
 
 // mouse events
 # define ZOOM_IN    4
 # define ZOOM_OUT   5
 
 // macos keyboard events
-# define KEY_LEFT		123
-# define KEY_RIGHT		124
-# define KEY_DOWN		125
-# define KEY_UP			126
-# define KEY_W			13
-# define KEY_D			2
-# define KEY_S			1
-# define KEY_A			0
-# define KEY_ESC		53
-# define KEY_ETR		36
-# define KEY_T		17
-# define KEY_Y		16
+// # define KEY_LEFT		123
+// # define KEY_RIGHT		124
+// # define KEY_DOWN		125
+// # define KEY_UP			126
+// # define KEY_W			13
+// # define KEY_D			2
+// # define KEY_S			1
+// # define KEY_A			0
+// # define KEY_ESC		53
+// # define KEY_ETR		36
+// # define KEY_T		17
+// # define KEY_Y		16
 // ubuntu keyboard events
-// # define KEY_UP      65362
-// # define KEY_RIGHT   65363
-// # define KEY_DOWN    65364
-// # define KEY_LEFT    65361
-// # define KEY_W 122
-// # define KEY_D 100
-// # define KEY_S 115
-// # define KEY_A 113
-// # define KEY_ESC 65307
-// # define KEY_ETR 65293
-// # define KEY_T 116
-// # define KEY_Y 121
+# define KEY_UP      65362
+# define KEY_RIGHT   65363
+# define KEY_DOWN    65364
+# define KEY_LEFT    65361
+# define KEY_W 122
+# define KEY_D 100
+# define KEY_S 115
+# define KEY_A 113
+# define KEY_ESC 65307
+# define KEY_ETR 65293
+# define KEY_T 116
+# define KEY_Y 121
 
 typedef struct point {
 	int	x;
@@ -76,14 +77,16 @@ typedef struct meta_data {
 	int			nbr_of_points;
 	double		alpha;
 	double		beta;
-	int			plane_scale_factor;
-	int			z_scale_factor;
+	double		plane_scale_factor;
+	double		z_scale_factor;
 	t_img_data	img;
 	void		*mlx;
 	void		*mlx_win;
 	int			*y_lengths_arr;
 	int			x_translation;
 	int			y_translation;
+	int			max_x;
+	int			max_y;
 	int			max_z;
 }	t_meta_data;
 
@@ -99,7 +102,12 @@ extern char		*get_next_line(int fd);
 extern char		*ft_itoa(int n);
 extern char		*ft_dtoa(double num, int precision);
 extern int		max(int a, int b);
+extern void		record_max_values(t_meta_data *fdf, int x, int y, int z);
+extern double	compute_progress(int start, int end, int current);
 extern void		hacky_void(void);
+extern int		get_color(t_point current, t_point start,
+					t_point end, int *delta);
+extern int		get_weighed_value(int start, int end, double percentage);
 extern int		ft_atoi_base(char *str, char *base);
 extern char		*ft_substr(char const *s, unsigned int start, size_t len);
 extern size_t	ft_strlcpy(char *dst, const char *src, size_t size);
