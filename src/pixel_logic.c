@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:32:19 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/23 14:30:41 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/24 18:37:49 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	bresenham(t_meta_data *fdf, t_point a, t_point b)
 	current = a;
 	while (current.x != b.x || current.y != b.y)
 	{
-		pxl_to_frame(&fdf->img, current.x + fdf -> x_translation + WIDTH / 4,
-			current.y + fdf-> y_translation + HEIGHT / 4,
+		pxl_to_frame(&fdf->img, current.x + fdf -> x_translation,
+			current.y + fdf-> y_translation,
 			get_color(current, a, b, delta));
 		err[1] = err[0] * 2;
 		check_ex(&current, delta, sign[0], err);
