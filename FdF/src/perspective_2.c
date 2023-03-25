@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:45:22 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/23 14:00:13 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:41:01 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ void	draw_frame(t_meta_data *fdf)
 		index++;
 	}
 	mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->img.img, 0, 0);
+	printf("%f\n", ((fdf->max_z - fdf->min_z) * fdf->z_scale_factor) / (fdf->max_x * fdf->max_y));
 	draw_menu(fdf);
 }

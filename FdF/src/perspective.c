@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:31:34 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/23 15:01:08 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:47:27 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,39 @@ t_point	apply_matrix_beta(t_point old_point, t_meta_data *fdf)
 
 void	set_base_perspective(t_meta_data *fdf)
 {
-	fdf->plane_scale_factor = 50 / (fdf->max_x * 0.06);
-	fdf->z_scale_factor = 0.25;
-	fdf->alpha = 0.7;
-	fdf->beta = -0.15;
-	fdf->x_translation = 0;
-	fdf->y_translation = 0;
+	double window_size_x = WIDTH;
+	double window_size_y = HEIGHT;
+
+	fdf->alpha = 0.8;
+	fdf->beta = 0.3;
+	// Calculate scaling factors
+	fdf->z_scale_factor = 1;
+	while (((fdf->max_z - fdf->min_z) * fdf->z_scale_factor) / (fdf->max_x * fdf->max_x) > 0.2)
+		fdf->z_scale_factor -= 0.01;
+	fdf->plane_scale_factor = 1100 / max(fdf->max_x, fdf->max_y);
+	if (fdf->plane_scale_factor == 1)	
+		fdf->plane_scale_factor = 2;
+
+	while (fdf->max_z * fdf->plane_scale_factor * fdf->z_scale_factor > 600)
+		fdf->plane_scale_factor -= 0.01;
+	fdf->x_translation = window_size_x / 2 - (fdf->max_x * fdf->plane_scale_factor) / 2;
+	fdf->y_translation = window_size_y / 2 - (fdf->max_y * fdf->plane_scale_factor) / 2 + ((fdf->max_z + fdf->min_z) * fdf->plane_scale_factor * fdf->z_scale_factor) * 0.45;
+
+	// fdf->plane_scale_factor = 0;
+	// fdf->z_scale_factor = 1;
+	// while ((fdf->max_x * fdf->plane_scale_factor < 1000
+	// 	&& fdf->max_y * fdf->plane_scale_factor < 1000 && fdf->max_z * fdf->plane_scale_factor * fdf->z_scale_factor < 550) || fdf->plane_scale_factor < 2)
+	// 	fdf->plane_scale_factor += 0.05;
+	// // while ((fdf->z_scale_factor * fdf->max_z) / (fdf->max_x * fdf->max_y) >	 0.02)
+	// // 	fdf->z_scale_factor -= 0.001;
+	// while (fdf->max_z * fdf->plane_scale_factor * fdf->z_scale_factor > 650 && fdf->plane_scale_factor > 2)
+	// 	fdf->plane_scale_factor -= 0.001;
+	// fdf->x_translation = 100000 / (fdf->max_x * fdf->plane_scale_factor) ;
+	// if (fdf->max_z == 0)
+	// 	fdf->y_translation = 50;
+	// else
+	// 	fdf->y_translation = 60 + (fdf->max_z * fdf->plane_scale_factor) * 0.6;
+		
 }
 
 t_point	rotated_point(t_meta_data *fdf, t_point point)

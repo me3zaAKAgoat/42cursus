@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:32:34 by echoukri          #+#    #+#             */
-/*   Updated: 2023/03/23 14:55:30 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/03/24 15:47:24 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	register_line(int y, char *str, t_meta_data *fdf)
 		point.x = x * 1;
 		point.y = y * 1;
 		point.z = ft_atoi_base(split_line[x], "0123456789") * 1;
-		record_max_values(fdf, point.x, point.z, point.z);
+		record_max_min(fdf, point.x, point.y, point.z);
 		set_color(&point, split_line[x]);
 		*(fdf->points + fdf->nbr_of_points + x) = point;
 		x++;
