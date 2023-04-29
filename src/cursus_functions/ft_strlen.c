@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 00:16:43 by echoukri          #+#    #+#             */
-/*   Updated: 2023/04/29 00:31:52 by echoukri         ###   ########.fr       */
+/*   Created: 2022/12/29 05:45:55 by echoukri          #+#    #+#             */
+/*   Updated: 2023/04/29 17:49:50 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "linked_list.h"
+#include "push_swap.h"
 
-t_list_item	*ft_lstnew(void *content)
+size_t	ft_strlen(const char *s)
 {
-	t_list_item	*new_node;
+	size_t	len;
 
-	new_node = malloc(sizeof(t_list_item));
-	if (!new_node)
-		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	return (new_node);
+	if (!s)
+		return (0);
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
 }

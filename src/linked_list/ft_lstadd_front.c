@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 08:13:06 by echoukri          #+#    #+#             */
-/*   Updated: 2023/04/29 00:31:52 by echoukri         ###   ########.fr       */
+/*   Created: 2022/10/27 06:25:17 by echoukri          #+#    #+#             */
+/*   Updated: 2023/04/29 16:54:42 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
 
-void	ft_lstdelone(t_list_item *lst, void (*del)(void	*))
+void	ft_lstadd_front(t_node **p_head, t_node *new)
 {
-	if (del)
-		del(lst->content);
-	free(lst);
+	new->next = *p_head;
+	*p_head = new;
 }
