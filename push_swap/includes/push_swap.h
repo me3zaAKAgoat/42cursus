@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 06:28:28 by echoukri          #+#    #+#             */
-/*   Updated: 2023/04/29 00:31:52 by echoukri         ###   ########.fr       */
+/*   Created: 2023/04/29 16:51:56 by echoukri          #+#    #+#             */
+/*   Updated: 2023/04/29 18:47:25 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "linked_list.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-int	ft_lstsize(t_list_item *lst)
-{
-	int	size;
+# include "linked_list.h"
+# include <unistd.h>
+# include <stdlib.h>
 
-	size = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		size++;
-	}
-	return (size);
-}
+extern char		*ft_substr(char const *s, unsigned int start, size_t len);
+extern size_t	ft_strlen(const char *s);
+extern void		split_clear(char	**arr);
+extern char		**ft_split(char const *s, char c);
+extern int		ft_atoi(const char *str);
+
+#endif
