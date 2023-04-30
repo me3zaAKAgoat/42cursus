@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_lstfilled_w_int.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 12:01:15 by echoukri          #+#    #+#             */
-/*   Updated: 2023/04/30 19:45:41 by echoukri         ###   ########.fr       */
+/*   Created: 2023/04/30 16:16:32 by echoukri          #+#    #+#             */
+/*   Updated: 2023/04/30 19:48:03 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
 
-t_node	*ft_lstmap(t_node	*lst,
-	int	(*f)(void *))
+t_node	*ft_lstfilled_w_int(int	length, int value)
 {
+	int		i;
 	t_node	*head;
-	t_node	*new;
 
-	head = NULL;
-	while (lst)
+	if (length == 0)
+		return (NULL);
+	i = 1;
+	head = ft_lstnew(value);
+	while (i < length)
 	{
-		new = ft_lstnew(f(&lst->value));
-		if (!new)
-		{
-			ft_lstclear(&head);
-			return (NULL);
-		}
-		ft_lstadd_back(&head, new);
-		lst = lst->next;
+		ft_lstlast(head)->next = ft_lstnew(value);
+		i++;
 	}
 	return (head);
 }
