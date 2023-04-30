@@ -18,6 +18,7 @@ function LIS(sequence) {
       }
     }
 
+    console.log(lengths[i], maxLength);
     if (lengths[i] > maxLength) {
       maxLength = lengths[i];
       maxIndex = i;
