@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_lstgetindex.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 06:25:17 by echoukri          #+#    #+#             */
-/*   Updated: 2023/04/29 00:32:56 by echoukri         ###   ########.fr       */
+/*   Created: 2023/04/30 17:41:38 by echoukri          #+#    #+#             */
+/*   Updated: 2023/04/30 17:45:04 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
 
-void	ft_lstadd_front(t_list_item **p_head, t_list_item *new)
+int	ft_lstgetindex(t_node	*head, t_node *node)
 {
-	new->next = *p_head;
-	*p_head = new;
+	int	index;
+
+	index = 0;
+	while (head)
+	{
+		if (head == node)
+			return (index);
+		head = head->next;
+		index++;
+	}
+	return (-1);
 }

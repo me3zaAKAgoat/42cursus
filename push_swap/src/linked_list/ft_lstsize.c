@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 06:33:28 by echoukri          #+#    #+#             */
-/*   Updated: 2023/04/29 00:31:52 by echoukri         ###   ########.fr       */
+/*   Created: 2022/10/27 06:28:28 by echoukri          #+#    #+#             */
+/*   Updated: 2023/04/29 16:54:42 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
 
-t_list_item	*ft_lstlast(t_list_item *lst)
+int	ft_lstsize(t_node *lst)
 {
-	if (!lst)
-		return (NULL);
-	while (lst->next)
+	int	size;
+
+	size = 0;
+	while (lst)
+	{
+		size++;
 		lst = lst->next;
-	return (lst);
+	}
+	return (size);
 }

@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 06:28:28 by echoukri          #+#    #+#             */
-/*   Updated: 2023/04/29 00:31:52 by echoukri         ###   ########.fr       */
+/*   Created: 2022/12/29 05:45:55 by echoukri          #+#    #+#             */
+/*   Updated: 2023/04/29 17:49:50 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "linked_list.h"
+#include "push_swap.h"
 
-int	ft_lstsize(t_list_item *lst)
+size_t	ft_strlen(const char *s)
 {
-	int	size;
+	size_t	len;
 
-	size = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		size++;
-	}
-	return (size);
+	if (!s)
+		return (0);
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
 }

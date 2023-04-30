@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_lstfilled_w_int.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 08:19:47 by echoukri          #+#    #+#             */
-/*   Updated: 2023/04/29 00:31:52 by echoukri         ###   ########.fr       */
+/*   Created: 2023/04/30 16:16:32 by echoukri          #+#    #+#             */
+/*   Updated: 2023/04/30 19:48:03 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
 
-void	ft_lstiter(t_list_item	*lst, void (*f)(void	*))
+t_node	*ft_lstfilled_w_int(int	length, int value)
 {
-	while (lst)
+	int		i;
+	t_node	*head;
+
+	if (length == 0)
+		return (NULL);
+	i = 1;
+	head = ft_lstnew(value);
+	while (i < length)
 	{
-		f(lst->content);
-		lst = lst->next;
+		ft_lstlast(head)->next = ft_lstnew(value);
+		i++;
 	}
+	return (head);
 }

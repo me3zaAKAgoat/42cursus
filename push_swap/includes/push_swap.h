@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 08:07:30 by echoukri          #+#    #+#             */
-/*   Updated: 2023/04/29 00:35:10 by echoukri         ###   ########.fr       */
+/*   Created: 2023/04/29 16:51:56 by echoukri          #+#    #+#             */
+/*   Updated: 2023/04/29 18:47:25 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "linked_list.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-void	ft_lstadd_back(t_list_item **p_head, t_list_item  *new)
-{
-	if (*p_head)
-		ft_lstlast(*p_head)->next = new;
-	else
-		*p_head = new;
-}
+# include "linked_list.h"
+# include <unistd.h>
+# include <stdlib.h>
+
+extern char		*ft_substr(char const *s, unsigned int start, size_t len);
+extern size_t	ft_strlen(const char *s);
+extern void		split_clear(char	**arr);
+extern char		**ft_split(char const *s, char c);
+extern int		ft_atoi(const char *str);
+
+#endif

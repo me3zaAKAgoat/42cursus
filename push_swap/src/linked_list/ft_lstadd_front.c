@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 08:16:19 by echoukri          #+#    #+#             */
-/*   Updated: 2023/04/29 00:32:44 by echoukri         ###   ########.fr       */
+/*   Created: 2022/10/27 06:25:17 by echoukri          #+#    #+#             */
+/*   Updated: 2023/04/29 16:54:42 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
 
-void	ft_lstclear(t_list_item	**lst, void (*del)(void	*))
+void	ft_lstadd_front(t_node **p_head, t_node *new)
 {
-	t_list_item	*tmp;
-
-	while (*lst)
-	{
-		if (del)
-			del((*lst)->content);
-		tmp = (*lst)->next;
-		free(*lst);
-		(*lst) = tmp;
-	}
-	*lst = NULL;
+	new->next = *p_head;
+	*p_head = new;
 }
