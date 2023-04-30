@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   lst_last.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 08:19:47 by echoukri          #+#    #+#             */
-/*   Updated: 2023/04/30 19:45:49 by echoukri         ###   ########.fr       */
+/*   Created: 2022/10/27 06:33:28 by echoukri          #+#    #+#             */
+/*   Updated: 2023/04/29 16:54:42 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
 
-void	ft_lstiter(t_node	*lst, int (f)(void	*))
+t_node	*lst_last(t_node *lst)
 {
-	while (lst)
-	{
-		f(&lst->value);
+	if (!lst)
+		return (NULL);
+	while (lst->next)
 		lst = lst->next;
-	}
+	return (lst);
 }

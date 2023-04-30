@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_lst_iter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 12:01:15 by echoukri          #+#    #+#             */
-/*   Updated: 2023/04/30 19:45:41 by echoukri         ###   ########.fr       */
+/*   Created: 2023/04/30 23:27:23 by echoukri          #+#    #+#             */
+/*   Updated: 2023/04/30 23:27:31 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
 
-t_node	*ft_lstmap(t_node	*lst,
-	int	(*f)(void *))
+void	lst_iter(t_node	*lst, int (f)(void	*))
 {
-	t_node	*head;
-	t_node	*new;
-
-	head = NULL;
 	while (lst)
 	{
-		new = ft_lstnew(f(&lst->value));
-		if (!new)
-		{
-			ft_lstclear(&head);
-			return (NULL);
-		}
-		ft_lstadd_back(&head, new);
+		f(&lst->value);
 		lst = lst->next;
 	}
-	return (head);
 }
