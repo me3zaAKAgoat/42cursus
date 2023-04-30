@@ -1,4 +1,4 @@
-seq = [3, 2, 1, 8, 6, 9, 7, 12, 11, 20, 4, 13, 21];
+seq = [0, 4, 12, 2, 10, 6, 9, 13, 3, 11, 7, 15];
 
 function LIS(sequence) {
   const n = sequence.length;
