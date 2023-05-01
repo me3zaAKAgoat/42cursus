@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_size.c                                         :+:      :+:    :+:   */
+/*   ll_iter.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 01:24:57 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/01 01:24:57 by echoukri         ###   ########.fr       */
+/*   Created: 2023/05/01 01:22:36 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/01 01:31:59 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
 
-int	lst_size(t_node *lst)
+void	ll_iter(t_node	*lst, int (f)(void	*))
 {
-	int	size;
-
-	size = 0;
 	while (lst)
 	{
-		size++;
+		f(&lst->value);
 		lst = lst->next;
 	}
-	return (size);
 }

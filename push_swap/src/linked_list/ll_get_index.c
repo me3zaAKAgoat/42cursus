@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_map.c                                          :+:      :+:    :+:   */
+/*   ll_get_index.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 01:24:21 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/01 01:24:21 by echoukri         ###   ########.fr       */
+/*   Created: 2023/05/01 01:23:31 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/01 01:32:02 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
 
-t_node	*lst_map(t_node	*lst, int (f)(void	*))
+int	ll_get_index(t_node	*head, t_node *node)
 {
-	t_node	*head;
-	t_node	*new;
+	int	index;
 
-	head = NULL;
-	while (lst)
+	index = 0;
+	while (head)
 	{
-		new = lst_new(f(&lst->value));
-		if (!new)
-		{
-			lst_clear(&head);
-			return (NULL);
-		}
-		lst_push(&head, new);
-		lst = lst->next;
+		if (head == node)
+			return (index);
+		head = head->next;
+		index++;
 	}
-	return (head);
+	return (-1);
 }
