@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_atindex.c                                      :+:      :+:    :+:   */
+/*   ll_size.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 01:22:44 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/01 01:32:11 by echoukri         ###   ########.fr       */
+/*   Created: 2023/05/01 01:24:57 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/01 01:24:57 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
 
-t_node	*lst_atindex(t_node *head, int index)
+int	ll_size(t_node *lst)
 {
-	int		iterator;
-	t_node	*current;
+	int	size;
 
-	iterator = 0;
-	current = head;
-	while (iterator < index)
+	size = 0;
+	while (lst)
 	{
-		if (current == NULL)
-			return (NULL);
-		current = current->next;
-		iterator++;
+		size++;
+		lst = lst->next;
 	}
-	return (current);
+	return (size);
 }

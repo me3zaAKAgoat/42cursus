@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_push.c                                         :+:      :+:    :+:   */
+/*   ll_del_one.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 01:24:43 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/01 01:24:47 by echoukri         ###   ########.fr       */
+/*   Created: 2023/05/01 01:23:01 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/01 01:23:02 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
 
-void	lst_push(t_node **p_head, t_node *new)
+void	ll_del_one(t_node *lst)
 {
-	if (*p_head)
-		lst_last(*p_head)->next = new;
-	else
-		*p_head = new;
+	free(lst);
 }

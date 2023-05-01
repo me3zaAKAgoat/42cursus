@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_unshift.c                                      :+:      :+:    :+:   */
+/*   ll_fill_int.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 01:25:03 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/01 01:32:16 by echoukri         ###   ########.fr       */
+/*   Created: 2023/05/01 01:23:11 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/01 01:26:30 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
 
-void	lst_unshift(t_node **p_head, t_node *new)
+t_node	*ll_fill_int(int length, int value)
 {
-	new->next = *p_head;
-	*p_head = new;
+	int		i;
+	t_node	*head;
+
+	if (length == 0)
+		return (NULL);
+	i = 1;
+	head = ll_new(value);
+	while (i < length)
+	{
+		ll_last(head)->next = ll_new(value);
+		i++;
+	}
+	return (head);
 }
