@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_iter.c                                         :+:      :+:    :+:   */
+/*   ll_value_atindex.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 01:22:36 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/01 01:31:59 by echoukri         ###   ########.fr       */
+/*   Created: 2023/05/01 01:25:15 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/01 01:25:16 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
 
-void	lst_iter(t_node	*lst, int (f)(void	*))
+int	ll_value_atindex(t_node *head, int index)
 {
-	while (lst)
-	{
-		f(&lst->value);
-		lst = lst->next;
-	}
+	return (ll_atindex(head, index)->value);
 }
