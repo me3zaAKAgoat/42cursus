@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/04/30 23:29:11 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/01 01:21:42 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,30 @@ t_node	*create_linked_list_from_string(char *str)
 	return (head);
 }
 
+t_node *build_result_list(t_node *seq, t_node *indexes, int max_length, int max_index) {
+    t_node *result;
+    int 	i;
+	
+	result = lst_fill_int(max_length, 0);
+	i = max_index;
+    while (i >= 0) {
+        max_length--;
+        lst_atindex(result, max_length)->value = lst_value_atindex(seq, i);
+        i = lst_value_atindex(indexes, i);
+    }
+    return (result);
+}
+
 t_node	*longest_increasing_subsquence(t_node	*seq)
 {
-	int		sequence_length;
 	int 	i;
 	int 	j;
+	int		sequence_length;
+	int		max_length;
+	int		max_index;
 	t_node	*lengths;
 	t_node	*indexes;
 	t_node	*result;
-	int		max_length;
 	
 	max_length = 0;
 	sequence_length = lst_size(seq);
@@ -56,7 +71,8 @@ t_node	*longest_increasing_subsquence(t_node	*seq)
 		j = 0;
 		while (j < i)
 		{
-			if (lst_value_atindex(seq, j) < lst_value_atindex(seq, i) && lst_value_atindex(lengths, j) + 1 >  lst_value_atindex(lengths, i))
+			if (lst_value_atindex(seq, j) < lst_value_atindex(seq, i)
+				&& lst_value_atindex(lengths, j) + 1 >  lst_value_atindex(lengths, i))
 			{
 				lst_atindex(lengths, i)->value = lst_value_atindex(lengths, j) + 1;
 				lst_atindex(indexes, i)->value = j;
@@ -65,18 +81,17 @@ t_node	*longest_increasing_subsquence(t_node	*seq)
 		}
 		
 		if (lst_value_atindex(lengths, i) > max_length)
+		{
 			max_length = lst_value_atindex(lengths, i);
+			max_index = i;
+		}
 		i++;
 	}
-	i--;
 
-	result = lst_fill_int(max_length, 0);
-	while (i >= 0)
-	{
-		max_length--;
-		lst_atindex(result, max_length)->value = lst_value_atindex(seq, i);
-		i = lst_value_atindex(indexes, i);
-	}
+	result = build_result_list(seq, indexes, max_length, max_index);
+	
+	lst_clear(&indexes);
+	lst_clear(&lengths);
 
 	return (result);
 }
@@ -94,7 +109,7 @@ int	main(int ac, char **av)
 	iterator = lis;
 	while (iterator)
 	{
-		printf("%d\n", iterator->value);
+		printf("%d ", iterator->value);
 		iterator = iterator->next;
 	}
 	// lst_clear(&head);
