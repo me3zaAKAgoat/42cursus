@@ -12,10 +12,10 @@
 
 #include "linked_list.h"
 
-void	ll_push(t_node **p_head, t_node *new)
+void	ll_push(t_node **head_p, t_node *new)
 {
-	if (*p_head)
-		ll_last(*p_head)->next = new;
+	if (*head_p)
+		ll_last(*head_p)->next = new;
 	else
-		*p_head = new;
+		*head_p = new;
 }

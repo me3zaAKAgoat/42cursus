@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ll_last.c                                         :+:      :+:    :+:   */
+/*   rr.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 01:23:48 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/01 01:23:49 by echoukri         ###   ########.fr       */
+/*   Created: 2023/05/02 16:41:43 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/02 16:42:39 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "linked_list.h"
+#include "push_swap.h"
 
-t_node	*ll_last(t_node *head)
+void	rr(t_node	**stack_a_p, t_node	**stack_b_p)
 {
-	if (!head)
-		return (NULL);
-	while (head->next)
-		head = head->next;
-	return (head);
+	ra(stack_a_p);
+	rb(stack_b_p);
 }

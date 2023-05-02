@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ll_last.c                                         :+:      :+:    :+:   */
+/*   ll_shift.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 01:23:48 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/01 01:23:49 by echoukri         ###   ########.fr       */
+/*   Created: 2023/05/02 00:30:36 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/02 17:50:50 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
 
-t_node	*ll_last(t_node *head)
+int	ll_shift(t_node **head_p)
 {
-	if (!head)
-		return (NULL);
-	while (head->next)
-		head = head->next;
-	return (head);
+	t_node	*head;
+	int		value_removed;
+
+	head = *head_p;
+	value_removed = head->value;
+	*head_p = head->next;
+	ll_del_one(head);
+	return (value_removed);
 }
