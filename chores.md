@@ -1,2 +1,0 @@
-- [ ] figure out a proper way to evalute which numbers have to go in which place
-- [ ]
