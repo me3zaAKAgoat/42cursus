@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/02 18:37:06 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/02 23:00:20 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,26 +111,25 @@ t_node	*longest_increasing_subsquence(t_node	*seq)
 
 int	main(int ac, char **av)
 {
-	t_node	*stack_a;
-	t_node	*stack_b;
+	t_meta	meta;
 	t_node	*lis;
 
 	if (ac < 2)
 		exit(1);
-	stack_a = create_ll_from_string(av[1]);
-	lis = longest_increasing_subsquence(stack_a);
-	ll_print(stack_a);
+	meta.stack_a = create_ll_from_string(av[1]);
+	lis = longest_increasing_subsquence(meta.stack_a);
+	ll_print(meta.stack_a);
 	ll_print(lis);
-	stack_b = NULL;
-	pb(&stack_a, &stack_b);
-	pb(&stack_a, &stack_b);
-	ll_print(stack_a);
-	ll_print(stack_b);
-	ra(&stack_a);
-	ll_print(stack_a);
-	rb(&stack_b);
-	ll_print(stack_b);
-	ll_clear(&stack_a);
+	meta.stack_b = NULL;
+	pb(&meta);
+	pb(&meta);
+	ll_print(meta.stack_a);
+	ll_print(meta.stack_b);
+	ra(&meta);
+	ll_print(meta.stack_a);
+	rb(&meta);
+	ll_print(meta.stack_b);
+	ll_clear(&meta.stack_a);
 	ll_clear(&lis);
 	// system("leaks push_swap");
 	exit(0);
