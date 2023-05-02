@@ -12,8 +12,8 @@
 
 #include "linked_list.h"
 
-void	ll_unshift(t_node **p_head, t_node *new)
+void	ll_unshift(t_node **head_p, t_node *new)
 {
-	new->next = *p_head;
-	*p_head = new;
+	new->next = *head_p;
+	*head_p = new;
 }

@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/02 15:21:50 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/02 18:37:06 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,19 @@
 void	del(void *p)
 {
 	free(p);
+}
+
+void	ll_print(t_node	*head)
+{
+	t_node	*iterator;
+	
+	iterator = head;
+	while (iterator)
+	{
+		printf("%d ", iterator->value);
+		iterator = iterator->next;
+	}
+	printf("\n");
 }
 
 t_node	*create_ll_from_string(char *str)
@@ -98,21 +111,26 @@ t_node	*longest_increasing_subsquence(t_node	*seq)
 
 int	main(int ac, char **av)
 {
-	t_node	*head;
-	t_node	*iterator;
+	t_node	*stack_a;
+	t_node	*stack_b;
 	t_node	*lis;
 
 	if (ac < 2)
 		exit(1);
-	head = create_ll_from_string(av[1]);
-	lis = longest_increasing_subsquence(head);
-	ll_clear(&head);
-	iterator = lis;
-	while (iterator)
-	{
-		printf("%d ", iterator->value);
-		iterator = iterator->next;
-	}
+	stack_a = create_ll_from_string(av[1]);
+	lis = longest_increasing_subsquence(stack_a);
+	ll_print(stack_a);
+	ll_print(lis);
+	stack_b = NULL;
+	pb(&stack_a, &stack_b);
+	pb(&stack_a, &stack_b);
+	ll_print(stack_a);
+	ll_print(stack_b);
+	ra(&stack_a);
+	ll_print(stack_a);
+	rb(&stack_b);
+	ll_print(stack_b);
+	ll_clear(&stack_a);
 	ll_clear(&lis);
 	// system("leaks push_swap");
 	exit(0);
