@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/01 19:59:47 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:21:50 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,14 @@ int	main(int ac, char **av)
 		exit(1);
 	head = create_ll_from_string(av[1]);
 	lis = longest_increasing_subsquence(head);
+	ll_clear(&head);
 	iterator = lis;
 	while (iterator)
 	{
 		printf("%d ", iterator->value);
 		iterator = iterator->next;
 	}
-	// ll_clear(&head);
+	ll_clear(&lis);
 	// system("leaks push_swap");
 	exit(0);
 }
