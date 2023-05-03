@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ll_push.c                                         :+:      :+:    :+:   */
+/*   ll_is_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 01:24:43 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/01 01:24:47 by echoukri         ###   ########.fr       */
+/*   Created: 2023/05/03 23:08:21 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/03 23:30:59 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
+#include <stdio.h>
 
-void	ll_push(t_node **head_p, t_node *new)
+int	ll_is_in(t_node	*head, int value)
 {
-	if (*head_p)
+	t_node *iterator;
+	int 	i;
+	
+	i = 0;
+	iterator = head;
+	while (iterator)
 	{
-		ll_last(*head_p)->next = new;
-		ll_last(*head_p)->next = NULL;
+		if (iterator->value == value)
+			return (i);
+		i++;
+		iterator = iterator->next;
 	}
-	else
-		*head_p = new;
+	return (-1);
 }

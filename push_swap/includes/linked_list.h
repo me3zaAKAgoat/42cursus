@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 23:50:37 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/02 22:44:27 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/03 23:11:07 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ extern t_node		*ll_atindex(t_node *head, int index);
 extern int			ll_value_atindex(t_node *head, int index);
 extern int			ll_pop(t_node *head);
 extern int			ll_shift(t_node **head_p);
+extern int			ll_is_in(t_node	*head, int value);
+
 
 #endif
