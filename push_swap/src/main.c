@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/02 23:00:20 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/03 21:50:49 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ int	main(int ac, char **av)
 	ll_print(meta.stack_b);
 	ra(&meta);
 	ll_print(meta.stack_a);
-	rb(&meta);
-	ll_print(meta.stack_b);
+	rra(&meta);
+	ll_print(meta.stack_a);
 	ll_clear(&meta.stack_a);
 	ll_clear(&lis);
 	// system("leaks push_swap");
