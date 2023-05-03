@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:51:56 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/02 23:42:33 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/03 21:49:57 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ extern void		pb(t_meta	*meta);
 extern void		ra(t_meta	*meta);
 extern void		rb(t_meta	*meta);
 extern void		rr(t_meta	*meta);
+extern void		rra(t_meta	*meta);
+extern void		rrb(t_meta	*meta);
+extern void		rrr(t_meta	*meta);
 extern void		sa(t_meta	*meta);
 extern void		sb(t_meta	*meta);
 
