@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/03 23:58:43 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:18:10 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,34 +109,49 @@ t_node	*longest_increasing_subsquence(t_node	*seq)
 	return (result);
 }
 
+void	move_non_lis(t_meta	*meta, t_node	*lis)
+{
+	t_node	*iterator;
+	int		moves;
+
+	iterator = meta->stack_a;
+	while (iterator)
+	{
+		if (ll_is_in(lis, iterator->value) == -1)
+		{
+			moves = ll_size(meta->stack_a) - ll_is_in(meta->stack_a, iterator->value);
+			if (moves > ll_size(meta->stack_a) / 2)
+				while (moves--)
+					ra(meta);
+			else
+				while (moves--)
+					rra(meta);
+			pb(meta);
+			iterator = meta->stack_a;
+		}
+		else
+			iterator = iterator->next;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_meta	meta;
 	t_node	*lis;
-	t_node	*iterator;
-	int		moves[2];
 
 	if (ac < 2)
 		exit(1);
 	meta.stack_b = NULL;
 	meta.stack_a = create_ll_from_string(av[1]);
 	lis = longest_increasing_subsquence(meta.stack_a);
-	iterator = meta.stack_a;
-	while (iterator)
-	{
-		if (ll_is_in(lis, iterator->value) == -1)
-		{
-			if (ll_is_in(meta.stack_a, iterator->value) > (ll_size(meta.stack_a) / 2))
-			{
-				moves
-			}
-			pb(&meta);
-		}
-		iterator = iterator->next;
-	}
 	ll_print(meta.stack_a);
-	ll_print(meta.stack_b);
 	ll_print(lis);
+	ll_print(meta.stack_b);
+	move_non_lis(&meta, lis);
+	ll_print(meta.stack_a);
+	ll_print(lis);
+	ll_print(meta.stack_b);
+	ll_clear(&lis);
 	ll_clear(&meta.stack_a);
 	ll_clear(&meta.stack_b);
 	exit(0);

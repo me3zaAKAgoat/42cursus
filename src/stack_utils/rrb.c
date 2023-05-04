@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:30:01 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/03 22:06:23 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:51:28 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	rrb(t_meta	*meta)
 {
 	int	value_to_bottom;
-	int size;
+	int	size;
 
 	size = ll_size(meta->stack_b);
 	if (size != 1)
