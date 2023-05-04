@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/04 20:36:25 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/05 00:14:51 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,56 +18,54 @@ void	del(void *p)
 	free(p);
 }
 
-int round_float(float x)
-{
-    int rounded;
-	
-	rounded = (int)(x + 0.5);
-    if (x < 0.0) {
-        rounded = (int)(x - 0.5);
-    }
-    return rounded;
-}
-
-void	ra_or_rra(t_meta	*meta, int	value)
+int	ra_or_rra(t_meta	*meta, int	value)
 {
 	int	moves;
 	int index;
+	int	r;
 	
 	index = ll_is_in(meta->stack_a, value);
 	if (index > (ll_size(meta->stack_a) - 1) / 2)
 	{
 		moves = -(index - (ll_size(meta->stack_a) - 1) / 2 + 1);
+		r = -moves;
 		while (moves++)
 			ra(meta);
 	}
 	else
 	{
 		moves = index;
+		r = moves;
 		while (moves--)
 			rra(meta);
 	}
+	return (r);
 }
 
-void	rb_or_rrb(t_meta	*meta, int	value)
+int	rb_or_rrb(t_meta	*meta, int	value)
 {
 	int	moves;
 	int index;
+	int	r;
 	
 	index = ll_is_in(meta->stack_b, value);
 	if (index > (ll_size(meta->stack_b) - 1) / 2)
 	{
-		moves = -(index - (ll_size(meta->stack_b) - 1) / 2);
+		moves = -(index - (ll_size(meta->stack_b) - 1) / 2 + 1);
+		r = -moves;
 		while (moves++)
 			rb(meta);
 	}
 	else
 	{
 		moves = index;
+		r = moves;
 		while (moves--)
 			rrb(meta);
 	}
+	return (r);
 }
+
 void	ll_print(t_node	*head)
 {
 	t_node	*iterator;
@@ -78,7 +76,7 @@ void	ll_print(t_node	*head)
 		printf("%d ", iterator->value);
 		iterator = iterator->next;
 	}
-	printf("\n");
+	printf("(null)\n");
 }
 
 t_node	*create_ll_from_string(char *str)
@@ -90,9 +88,9 @@ t_node	*create_ll_from_string(char *str)
 	i = 1;
 	arr = ft_split(str, ' ');
 	head = ll_new(ft_atoi(*arr));
-	while (*(arr + i))
+	while (arr[i])
 	{
-		ll_push(&head, ll_new(ft_atoi(*(arr + i))));
+		ll_push(&head, ll_new(ft_atoi(arr[i])));
 		i++;
 	}
 	split_clear(arr);
@@ -183,19 +181,20 @@ void	move_non_lis(t_meta	*meta, t_node	*lis)
 info array goes this way
 {number, moves on a, moves on b}
 */
-// int	best_move(t_meta	*meta)
-// {
-// 	int		info[3];
-// 	t_node	*iterator;
+int	best_move(t_meta	*meta)
+{
+	int		info[3];
+	t_node	*iterator;
 
-// 	iterator = meta->stack_b;
-// 	while (iterator)
-// 	{
-// 		info[0] = iterator->value;
-// 		ll_size(meta->stack_b) - ll_is_in(meta->stack_b, );
-// 		iterator = iterator->next;
-// 	}
-// }
+	iterator = meta->stack_b;
+	while (iterator)
+	{
+		info[0] = iterator->value;
+		info[1] = where_at_a(meta, iterator->value);
+		info[2] = ra_or_rra(meta, iterator->value);
+		iterator = iterator->next;
+	}
+}
 
 
 void	smallest_n_first(t_meta	*meta)
@@ -224,8 +223,7 @@ int	main(int ac, char **av)
 		exit(1);
 	meta.stack_b = NULL;
 	meta.stack_a = create_ll_from_string(av[1]);
-	ll_print(meta.stack_a);
-	smallest_n_first(&meta);
+	// smallest_n_first(&meta);
 	lis = longest_increasing_subsquence(meta.stack_a);
 	ll_print(meta.stack_a);
 	ll_print(lis);
