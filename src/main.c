@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/05 00:14:51 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:42:24 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,52 +18,24 @@ void	del(void *p)
 	free(p);
 }
 
-int	ra_or_rra(t_meta	*meta, int	value)
+void	rx_or_rrx(t_node	**stack_x, int	value, void	(rx)(t_node	**stack_x), void	(rrx)(t_node	**stack_x))
 {
 	int	moves;
 	int index;
-	int	r;
-	
-	index = ll_is_in(meta->stack_a, value);
-	if (index > (ll_size(meta->stack_a) - 1) / 2)
-	{
-		moves = -(index - (ll_size(meta->stack_a) - 1) / 2 + 1);
-		r = -moves;
-		while (moves++)
-			ra(meta);
-	}
-	else
-	{
-		moves = index;
-		r = moves;
-		while (moves--)
-			rra(meta);
-	}
-	return (r);
-}
 
-int	rb_or_rrb(t_meta	*meta, int	value)
-{
-	int	moves;
-	int index;
-	int	r;
-	
-	index = ll_is_in(meta->stack_b, value);
-	if (index > (ll_size(meta->stack_b) - 1) / 2)
+	index = ll_is_in(*stack_x, value);
+	if (index > (ll_size(*stack_x) - 1) / 2)
 	{
-		moves = -(index - (ll_size(meta->stack_b) - 1) / 2 + 1);
-		r = -moves;
+		moves = -(index - (ll_size(*stack_x) - 1) / 2 + 1);
 		while (moves++)
-			rb(meta);
+			rx(stack_x);
 	}
 	else
 	{
 		moves = index;
-		r = moves;
 		while (moves--)
-			rrb(meta);
+			rrx(stack_x);
 	}
-	return (r);
 }
 
 void	ll_print(t_node	*head)
@@ -167,8 +139,8 @@ void	move_non_lis(t_meta	*meta, t_node	*lis)
 	{
 		if (ll_is_in(lis, iterator->value) == -1)
 		{
-			ra_or_rra(meta, iterator->value);
-			pb(meta);
+			rx_or_rrx(&meta->stack_a, iterator->value, ra, rra);
+			pb(&meta->stack_a, &meta->stack_b);
 			iterator = meta->stack_a;
 		}
 		else
@@ -176,6 +148,28 @@ void	move_non_lis(t_meta	*meta, t_node	*lis)
 	}
 }
 
+int	moves_a(t_meta	*meta, int	value)
+{
+	int	i;
+
+	if (!(ll_atindex(meta->stack_a, 0) < value &&
+		value < ll_atindex(meta->stack_a, ll_size(meta->stack_a) - 1)))
+		return (-1);
+	
+}
+
+int	moves_b(t_meta	*meta, int	value)
+{
+	int	moves;
+	int index;
+	
+	index = ll_is_in(meta->stack_b, value);
+	if (index > (ll_size(meta->stack_b) - 1) / 2)
+		moves = -(index - (ll_size(meta->stack_b) - 1) / 2 + 1);
+	else
+		moves = index;
+	return (moves);
+}
 
 /*
 info array goes this way
@@ -191,7 +185,7 @@ int	best_move(t_meta	*meta)
 	{
 		info[0] = iterator->value;
 		info[1] = where_at_a(meta, iterator->value);
-		info[2] = ra_or_rra(meta, iterator->value);
+		info[2] = moves_b(meta, iterator->value);
 		iterator = iterator->next;
 	}
 }
@@ -211,7 +205,7 @@ void	smallest_n_first(t_meta	*meta)
 			min = iterator->value;
 		iterator = iterator->next;
 	}
-	ra_or_rra(meta, min);
+	rx_or_rrx(&meta->stack_a, min, ra, rra);
 }
 
 int	main(int ac, char **av)
@@ -223,12 +217,16 @@ int	main(int ac, char **av)
 		exit(1);
 	meta.stack_b = NULL;
 	meta.stack_a = create_ll_from_string(av[1]);
-	// smallest_n_first(&meta);
 	lis = longest_increasing_subsquence(meta.stack_a);
+	ll_print(meta.stack_a);
 	ll_print(meta.stack_a);
 	ll_print(lis);
 	ll_print(meta.stack_b);
 	move_non_lis(&meta, lis);
+	ll_print(meta.stack_a);
+	ll_print(lis);
+	ll_print(meta.stack_b);
+	smallest_n_first(&meta);
 	ll_print(meta.stack_a);
 	ll_print(lis);
 	ll_print(meta.stack_b);
