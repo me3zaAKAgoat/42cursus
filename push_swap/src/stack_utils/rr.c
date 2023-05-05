@@ -6,14 +6,14 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:41:43 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/02 23:02:02 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:58:51 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rr(t_meta	*meta)
+void	rr(t_node	**stack_a, t_node	**stack_b)
 {
-	ra(meta);
-	rb(meta);
+	ra(stack_a);
+	rb(stack_b);
 }
