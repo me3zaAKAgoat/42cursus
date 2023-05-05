@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:30:01 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/05 15:58:09 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/06 00:39:41 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ void	ra(t_node	**stack_a)
 			ll_atindex(*stack_a, size - 2)->next = NULL;
 			ll_unshift(stack_a, ll_new(value_to_top));
 		}
-	}	
+	}
 }

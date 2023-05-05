@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/05 20:08:35 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/06 00:19:38 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int abs(int x)
         return x;
 }
 
-int	moves_to_top(t_node	*stack_x, int	value)
+int	calc_moves_to_top(t_node	*stack_x, int	value)
 {
 	int	moves;
 	int index;
@@ -39,17 +39,22 @@ int	moves_to_top(t_node	*stack_x, int	value)
 	return (moves);
 }
 
-void	rotate_to_top(t_node	**stack_x, int	value, void	(rx)(t_node	**stack_x), void	(rrx)(t_node	**stack_x))
+void	rotate_n_times(t_node	**stack_x, int moves, void	(rx)(t_node	**stack_x), void	(rrx)(t_node	**stack_x))
 {
-	int	moves;
-
-	moves = moves_to_top(*stack_x, value);
 	if (moves < 0)
 		while (moves++)
 			rx(stack_x);
 	else if (moves > 0)
 		while (moves--)
 			rrx(stack_x);
+}
+
+void	rotate_to_top(t_node	**stack_x, int	value, void	(rx)(t_node	**stack_x), void	(rrx)(t_node	**stack_x))
+{
+	int	moves;
+
+	moves = calc_moves_to_top(*stack_x, value);
+	rotate_n_times(stack_x, moves, rx, rrx);
 }
 
 void	ll_print(t_node	*head)
@@ -167,19 +172,19 @@ int	where_at_a(t_meta	*meta, int	value)
 	int	i;
 	int	size;
 
-	if (!(ll_value_atindex(meta->stack_a, 0) < value &&
-		value < ll_value_atindex(meta->stack_a, ll_size(meta->stack_a) - 1)))
-		return (moves_to_top(meta->stack_a, ll_min(meta->stack_a)));
+	if ((ll_min(meta->stack_a) > value ||
+		value > ll_max(meta->stack_a)))
+		return (calc_moves_to_top(meta->stack_a, ll_min(meta->stack_a)));
 	i = 0;
 	size = ll_size(meta->stack_a);
 	while (i < size)
 	{
 		if (ll_value_atindex(meta->stack_a, i) < value &&
-			value < ll_value_atindex(meta->stack_a, i + 1))
+			value < ll_value_atindex(meta->stack_a, (i + 1) % size))
 			break ;
 		i++;
 	}
-	return (moves_to_top(meta->stack_a, ll_value_atindex(meta->stack_a, i + 1)));
+	return (calc_moves_to_top(meta->stack_a, ll_value_atindex(meta->stack_a, (i + 1) % size)));
 }
 
 /*
@@ -195,28 +200,29 @@ int	best_move(t_meta	*meta)
 	iterator = meta->stack_b;
 	info[0] = iterator->value;
 	info[1] = where_at_a(meta, iterator->value);
-	info[2] = moves_to_top(meta->stack_b, iterator->value);
+	info[2] = calc_moves_to_top(meta->stack_b, iterator->value);
 	iterator = iterator->next;
-	printf("%d a: %d b: %d\n", info[0], info[1], info[2]);
 	while (iterator)
 	{
 		tmp[0] = iterator->value;
 		tmp[1] = where_at_a(meta, iterator->value);
-		tmp[2] = moves_to_top(meta->stack_b, iterator->value);
-		printf("%d a: %d b: %d\n", tmp[0], tmp[1], tmp[2]);
+		tmp[2] = calc_moves_to_top(meta->stack_b, iterator->value);
 		if (abs(tmp[1]) + abs(tmp[2]) < abs(info[1]) + abs(info[2]))
 		{
-			tmp[0] = info[0];
-			tmp[1] = info[1];
-			tmp[2] = info[2];
+			info[0] = tmp[0];
+			info[1] = tmp[1];
+			info[2] = tmp[2];
 		}
 		iterator = iterator->next;
 	}
+	rotate_n_times(&meta->stack_a, info[1], ra, rra);
+	rotate_n_times(&meta->stack_b, info[2], rb, rrb);
+	pa(&meta->stack_a, &meta->stack_b);
 	return (info[0]);
 }
 
 
-void	smallest_n_first(t_meta	*meta)
+void	smallest_to_top(t_meta	*meta)
 {
 	int		min;
 
@@ -233,19 +239,23 @@ int	main(int ac, char **av)
 		exit(1);
 	meta.stack_b = NULL;
 	meta.stack_a = create_ll_from_string(av[1]);
+
 	printf("stack a: ");
 	ll_print(meta.stack_a);
+
 	lis = longest_increasing_subsquence(meta.stack_a);
-	printf("LIS: ");
-	ll_print(lis);
+
 	rotate_to_top(&meta.stack_a, 16, rb, rrb);
 	move_non_lis(&meta, lis);
-	smallest_n_first(&meta);
+	// smallest_to_top(&meta);
+
+	while (meta.stack_b)
+		best_move(&meta);
+	
+	smallest_to_top(&meta);
 	printf("stack a: ");
 	ll_print(meta.stack_a);
-	printf("stack b: ");
-	ll_print(meta.stack_b);
-	printf("%d\n", best_move(&meta));
+
 	ll_clear(&lis);
 	ll_clear(&meta.stack_a);
 	ll_clear(&meta.stack_b);
