@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ll_atindex.c                                      :+:      :+:    :+:   */
+/*   ll_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 01:22:44 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/01 01:32:11 by echoukri         ###   ########.fr       */
+/*   Created: 2023/05/05 18:16:34 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/05 18:21:47 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linked_list.h"
 
-t_node	*ll_atindex(t_node *head, int index)
+int	ll_max(t_node	*head)
 {
-	int		i;
-	t_node	*current;
+	int		max;
+	t_node	*iterator;
 
-	i = 0;
-	current = head;
-	while (i < index)
+	iterator = head;
+	max = iterator->value;
+	iterator = iterator->next;
+	while (iterator)
 	{
-		if (current == NULL)
-			return (NULL);
-		current = current->next;
-		i++;
+		if (iterator->value > max)
+			max = iterator->value;
+		iterator = iterator->next;
 	}
-	return (current);
+	return (max);
 }
