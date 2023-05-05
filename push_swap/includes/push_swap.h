@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:51:56 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/03 21:49:57 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:12:16 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ extern size_t	ft_strlen(const char *s);
 extern void		split_clear(char	**arr);
 extern char		**ft_split(char const *s, char c);
 extern int		ft_atoi(const char *str);
-extern void		pa(t_meta	*meta);
-extern void		pb(t_meta	*meta);
-extern void		ra(t_meta	*meta);
-extern void		rb(t_meta	*meta);
-extern void		rr(t_meta	*meta);
-extern void		rra(t_meta	*meta);
-extern void		rrb(t_meta	*meta);
-extern void		rrr(t_meta	*meta);
-extern void		sa(t_meta	*meta);
-extern void		sb(t_meta	*meta);
+extern void		pa(t_node	**stack_a, t_node	**stack_b);
+extern void		pb(t_node	**stack_a, t_node	**stack_b);
+extern void		ra(t_node	**stack_a);
+extern void		rb(t_node	**stack_b);
+extern void		rr(t_node	**stack_a, t_node	**stack_b);
+extern void		rra(t_node	**stack_a);
+extern void		rrb(t_node	**stack_b);
+extern void		rrr(t_node	**stack_a, t_node	**stack_b);
+extern void		sa(t_node	**stack_a);
+extern void		sb(t_node	**stack_b);
 
 #endif

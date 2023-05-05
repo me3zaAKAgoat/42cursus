@@ -14,17 +14,17 @@
 
 t_node	*ll_atindex(t_node *head, int index)
 {
-	int		iterator;
+	int		i;
 	t_node	*current;
 
-	iterator = 0;
+	i = 0;
 	current = head;
-	while (iterator < index)
+	while (i < index)
 	{
 		if (current == NULL)
 			return (NULL);
 		current = current->next;
-		iterator++;
+		i++;
 	}
 	return (current);
 }

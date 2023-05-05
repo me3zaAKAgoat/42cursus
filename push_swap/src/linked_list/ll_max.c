@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rrr.c                                              :+:      :+:    :+:   */
+/*   ll_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 16:41:43 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/05 16:06:06 by echoukri         ###   ########.fr       */
+/*   Created: 2023/05/05 18:16:34 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/05 18:21:47 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "linked_list.h"
 
-void	rrr(t_node	**stack_a, t_node	**stack_b)
+int	ll_max(t_node	*head)
 {
-	rra(stack_a);
-	rrb(stack_b);
+	int		max;
+	t_node	*iterator;
+
+	iterator = head;
+	max = iterator->value;
+	iterator = iterator->next;
+	while (iterator)
+	{
+		if (iterator->value > max)
+			max = iterator->value;
+		iterator = iterator->next;
+	}
+	return (max);
 }
