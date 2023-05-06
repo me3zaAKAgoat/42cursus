@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:41:48 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/05 16:12:30 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/06 01:46:17 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ void	sb(t_node	**stack_b)
 	tmp = ll_atindex(*stack_b, 0)->value;
 	ll_atindex(*stack_b, 0)->value = ll_atindex(*stack_b, 1)->value;
 	ll_atindex(*stack_b, 1)->value = tmp;
+	printf("sb\n");
 }

@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 22:43:20 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/05 16:01:54 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/06 01:46:26 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,5 @@ void	ss(t_node	**stack_a, t_node	**stack_b)
 {
 	sa(stack_a);
 	sb(stack_b);
+	printf("ss\n");
 }
