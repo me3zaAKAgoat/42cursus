@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/06 03:06:55 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/06 20:25:45 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ int	calc_moves_to_top(t_node	*stack_x, int	value)
 	return (moves);
 }
 
-void	rotate_n_times(t_node	**stack_x, int moves, void	(rx)(t_node	**stack_x), void	(rrx)(t_node	**stack_x))
+void	rotate_n_times(t_node	**stack_x, int moves, void	(rx)(t_node	**stack_x, int should_print), void	(rrx)(t_node	**stack_x, int should_print))
 {
 	if (moves < 0)
 		while (moves++)
-			rx(stack_x);
+			rx(stack_x, 1);
 	else if (moves > 0)
 		while (moves--)
-			rrx(stack_x);
+			rrx(stack_x, 1);
 }
 
-void	rotate_to_top(t_node	**stack_x, int	value, void	(rx)(t_node	**stack_x), void	(rrx)(t_node	**stack_x))
+void	rotate_to_top(t_node	**stack_x, int	value, void	(rx)(t_node	**stack_x, int should_print), void	(rrx)(t_node	**stack_x, int should_print))
 {
 	int	moves;
 
@@ -210,6 +210,27 @@ void	execute_best_move(t_meta	*meta, int	info[3])
 	pa(&meta->stack_a, &meta->stack_b);
 }
 
+int	total_moves_needed(int	moves_a, int moves_b)
+{
+	int	count;
+
+	count = 0;
+	while ((moves_a < 0 && moves_b < 0))
+	{
+			moves_a++;	
+			moves_b++;	
+			count++;	
+	}
+	while (moves_a > 0 && moves_b > 0)
+	{
+			moves_a--;	
+			moves_b--;	
+			count++;
+	}
+	count += (abs(moves_a) + abs(moves_b));
+	return (count);
+}
+	
 /*
 info array goes this way
 {number, moves on a, moves on b}
@@ -225,13 +246,16 @@ int	find_best_move(t_meta	*meta)
 	info[1] = where_at_a(meta, iterator->value);
 	info[2] = calc_moves_to_top(meta->stack_b, iterator->value);
 	iterator = iterator->next;
+	// printf("%d b: %d a: %d\n", info[0], info[2], info[1]);
 	while (iterator)
 	{
 		tmp[0] = iterator->value;
 		tmp[1] = where_at_a(meta, iterator->value);
 		tmp[2] = calc_moves_to_top(meta->stack_b, iterator->value);
-		// HAVE A BETTER TEST THAT ACCOUNTS FOR THE CASE 3 2 IS BETTER THAN 4 0
-		if (abs(tmp[1]) + abs(tmp[2]) < abs(info[1]) + abs(info[2]))
+		// printf("%d b: %d a: %d => test %d info %d\n", tmp[0], tmp[2], tmp[1], abs(tmp[1]) + abs(tmp[2]),  abs(info[1]) + abs(info[2]));
+		// if (abs(tmp[1]) + abs(tmp[2]) < abs(info[1]) + abs(info[2]))
+		// printf("%d b: %d a: %d => test %d info %d\n", tmp[0], tmp[2], tmp[1], abs(tmp[1] - tmp[2]),  abs(info[1] - info[2]));
+		if (total_moves_needed(tmp[1], tmp[2]) < total_moves_needed(info[1], info[2]))
 		{
 			info[0] = tmp[0];
 			info[1] = tmp[1];
@@ -239,11 +263,12 @@ int	find_best_move(t_meta	*meta)
 		}
 		iterator = iterator->next;
 	}
+	// printf("best move was %d\n", info[0]);
 	execute_best_move(meta, info);
 	return (info[0]);
 }
 
-void	smallest_to_top(t_node	**stack_x, void	(rx)(t_node	**stack_x), void	(rrx)(t_node	**stack_x))
+void	smallest_to_top(t_node	**stack_x, void	(rx)(t_node	**stack_x, int should_print), void	(rrx)(t_node	**stack_x, int should_print))
 {
 	int		min;
 
@@ -262,16 +287,25 @@ int	main(int ac, char **av)
 	meta.stack_a = create_ll_from_string(av[1]);
 
 	lis = longest_increasing_subsquence(meta.stack_a);
-	// smallest_to_top(&meta.stack_a, ra, rra);
 
-	rotate_to_top(&meta.stack_a, 16, rb, rrb);
+	// ll_print(meta.stack_a);
+	// ll_print(lis);
+	// ll_print(meta.stack_b);
+
+
 	move_non_lis(&meta, lis);
 
+	// ll_print(meta.stack_a);
+	// ll_print(meta.stack_b);
 	while (meta.stack_b)
+	{
 		find_best_move(&meta);
+		// ll_print(meta.stack_a);
+		// ll_print(meta.stack_a);
+	}
 	
 	smallest_to_top(&meta.stack_a, ra, rra);
-	// ll_print(meta.stack_a);
+	ll_print(meta.stack_a);
 
 	ll_clear(&lis);
 	ll_clear(&meta.stack_a);
