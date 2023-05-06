@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/06 02:39:18 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/06 03:06:55 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,7 @@ int	find_best_move(t_meta	*meta)
 		tmp[0] = iterator->value;
 		tmp[1] = where_at_a(meta, iterator->value);
 		tmp[2] = calc_moves_to_top(meta->stack_b, iterator->value);
+		// HAVE A BETTER TEST THAT ACCOUNTS FOR THE CASE 3 2 IS BETTER THAN 4 0
 		if (abs(tmp[1]) + abs(tmp[2]) < abs(info[1]) + abs(info[2]))
 		{
 			info[0] = tmp[0];
@@ -270,7 +271,7 @@ int	main(int ac, char **av)
 		find_best_move(&meta);
 	
 	smallest_to_top(&meta.stack_a, ra, rra);
-	ll_print(meta.stack_a);
+	// ll_print(meta.stack_a);
 
 	ll_clear(&lis);
 	ll_clear(&meta.stack_a);

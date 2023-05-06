@@ -3,3 +3,4 @@
 - spree to reduce duplicated code!!
 - do a check where the program keeps rotating the sequence until it finds the the sequence for which the LIS is maxed out
 - look into checking if there are numbers that could be swapped with sa and sb before pushing to b then back to a
+- Taking up the example in the section above, it goes without saying that 4 0 becomes less convenient than 3 2, as for the first 4 moves are performed while for the second 3 !!!!!!!!!!!!!!
