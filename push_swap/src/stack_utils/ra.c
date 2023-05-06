@@ -6,13 +6,13 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:30:01 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/06 21:51:03 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/06 21:59:22 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra(t_node	**stack_a, int	should_print)
+void	ra(t_node	**stack_a, int should_print)
 {
 	int	value_to_bottom;
 	int	size;

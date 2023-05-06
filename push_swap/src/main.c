@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/06 21:53:15 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/07 00:56:44 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int abs(int x)
 		return x;
 }
 
-int	calc_moves_to_top(t_node	*stack_x, int	value)
+int	moves_needed_to_top(t_node	*stack_x, int	value)
 {
 	int	moves;
 	int index;
@@ -46,10 +46,10 @@ void	rotate_n_times(t_node	**stack_x, int moves, void	(rx)(t_node	**stack_x, int
 
 void	rotate_to_top(t_node	**stack_x, int	value, void	(rx)(t_node	**stack_x, int should_print), void	(rrx)(t_node	**stack_x, int should_print))
 {
-	int	moves;
+	int	n;
 
-	moves = calc_moves_to_top(*stack_x, value);
-	rotate_n_times(stack_x, moves, rx, rrx);
+	n = moves_needed_to_top(*stack_x, value);
+	rotate_n_times(stack_x, n, rx, rrx);
 }
 
 void	ll_print(t_node	*head)
@@ -144,6 +144,110 @@ t_node	*longest_increasing_subsquence(t_node	*seq)
 	return (result);
 }
 
+
+int	where_at_a(t_meta	*meta, int	value)
+{
+	int	i;
+	int	size;
+
+	if ((ll_min(meta->stack_a) > value ||
+		value > ll_max(meta->stack_a)))
+		return (moves_needed_to_top(meta->stack_a, ll_min(meta->stack_a)));
+	i = 0;
+	size = ll_size(meta->stack_a);
+	while (i < size)
+	{
+		if (ll_value_atindex(meta->stack_a, i) < value &&
+			value < ll_value_atindex(meta->stack_a, (i + 1) % size))
+			break ;
+		i++;
+	}
+	return (moves_needed_to_top(meta->stack_a, ll_value_atindex(meta->stack_a, (i + 1) % size)));
+}
+
+void	execute_best_move_to_a(t_meta	*meta, int	bma[3])
+{
+	while (bma[1] < 0 && bma[2] < 0)
+	{
+		rrr(&meta->stack_a, &meta->stack_b);
+		bma[1]++;
+		bma[2]++;
+	}
+	while (bma[1] > 0 && bma[2] > 0)
+	{
+		rr(&meta->stack_a, &meta->stack_b);
+		bma[1]--;
+		bma[2]--;
+	}
+	rotate_n_times(&meta->stack_a, bma[1], ra, rra);
+	rotate_n_times(&meta->stack_b, bma[2], rb, rrb);
+	pa(&meta->stack_a, &meta->stack_b);
+}
+
+int	total_moves_needed(int	moves_a, int moves_b)
+{
+	int	count;
+
+	count = 0;
+	while ((moves_a < 0 && moves_b < 0))
+	{
+		moves_a++;	
+		moves_b++;	
+		count++;	
+	}
+	while (moves_a > 0 && moves_b > 0)
+	{
+		moves_a--;	
+		moves_b--;	
+		count++;
+	}
+	count += (abs(moves_a) + abs(moves_b));
+	return (count);
+}
+	
+
+void	find_best_move_to_a(t_meta	*meta, int bma[3])
+{
+	int		tmp[3];
+	t_node	*iterator;
+
+	iterator = meta->stack_b;
+	bma[0] = iterator->value;
+	bma[1] = where_at_a(meta, iterator->value);
+	bma[2] = moves_needed_to_top(meta->stack_b, iterator->value);
+	iterator = iterator->next;
+	while (iterator)
+	{
+		tmp[0] = iterator->value;
+		tmp[1] = where_at_a(meta, iterator->value);
+		tmp[2] = moves_needed_to_top(meta->stack_b, iterator->value);
+		if (total_moves_needed(tmp[1], tmp[2]) < total_moves_needed(bma[1], bma[2]))
+		{
+			bma[0] = tmp[0];
+			bma[1] = tmp[1];
+			bma[2] = tmp[2];
+		}
+		iterator = iterator->next;
+	}
+}
+
+int	best_move_to_a(t_meta	*meta)
+{
+	int		bma[3];
+
+	find_best_move_to_a(meta, bma);
+	execute_best_move_to_a(meta, bma);
+	return (bma[0]);
+}
+
+void	smallest_to_top(t_node	**stack_x, void	(rx)(t_node	**stack_x, int should_print), void	(rrx)(t_node	**stack_x, int should_print))
+{
+	int		min;
+
+	min = ll_min(*stack_x);
+	rotate_to_top(stack_x, min, rx, rrx);
+}
+
 void	move_non_lis(t_meta	*meta, t_node	*lis)
 {
 	t_node	*iterator;
@@ -162,115 +266,6 @@ void	move_non_lis(t_meta	*meta, t_node	*lis)
 	}
 }
 
-int	where_at_a(t_meta	*meta, int	value)
-{
-	int	i;
-	int	size;
-
-	if ((ll_min(meta->stack_a) > value ||
-		value > ll_max(meta->stack_a)))
-		return (calc_moves_to_top(meta->stack_a, ll_min(meta->stack_a)));
-	i = 0;
-	size = ll_size(meta->stack_a);
-	while (i < size)
-	{
-		if (ll_value_atindex(meta->stack_a, i) < value &&
-			value < ll_value_atindex(meta->stack_a, (i + 1) % size))
-			break ;
-		i++;
-	}
-	return (calc_moves_to_top(meta->stack_a, ll_value_atindex(meta->stack_a, (i + 1) % size)));
-}
-
-void	execute_best_move(t_meta	*meta, int	info[3])
-{
-	while ((info[1] < 0 && info[2] < 0)
-		|| (info[1] > 0 && info[2] > 0))
-	{
-		if (info[1] < 0)
-		{
-			rr(&meta->stack_a, &meta->stack_b);
-			info[1]++;
-			info[2]++;
-		}
-		else
-		{
-			rrr(&meta->stack_a, &meta->stack_b);
-			info[1]--;
-			info[2]--;
-		}
-	}
-	rotate_n_times(&meta->stack_a, info[1], ra, rra);
-	rotate_n_times(&meta->stack_b, info[2], rb, rrb);
-	pa(&meta->stack_a, &meta->stack_b);
-}
-
-int	total_moves_needed(int	moves_a, int moves_b)
-{
-	int	count;
-
-	count = 0;
-	while ((moves_a < 0 && moves_b < 0))
-	{
-			moves_a++;	
-			moves_b++;	
-			count++;	
-	}
-	while (moves_a > 0 && moves_b > 0)
-	{
-			moves_a--;	
-			moves_b--;	
-			count++;
-	}
-	count += (abs(moves_a) + abs(moves_b));
-	return (count);
-}
-	
-/*
-info array goes this way
-{number, moves on a, moves on b}
-*/
-int	find_best_move(t_meta	*meta)
-{
-	int		info[3];
-	int		tmp[3];
-	t_node	*iterator;
-
-	iterator = meta->stack_b;
-	info[0] = iterator->value;
-	info[1] = where_at_a(meta, iterator->value);
-	info[2] = calc_moves_to_top(meta->stack_b, iterator->value);
-	iterator = iterator->next;
-	// printf("%d b: %d a: %d\n", info[0], info[2], info[1]);
-	while (iterator)
-	{
-		tmp[0] = iterator->value;
-		tmp[1] = where_at_a(meta, iterator->value);
-		tmp[2] = calc_moves_to_top(meta->stack_b, iterator->value);
-		// printf("%d b: %d a: %d => test %d info %d\n", tmp[0], tmp[2], tmp[1], abs(tmp[1]) + abs(tmp[2]),  abs(info[1]) + abs(info[2]));
-		// if (abs(tmp[1]) + abs(tmp[2]) < abs(info[1]) + abs(info[2]))
-		// printf("%d b: %d a: %d => test %d info %d\n", tmp[0], tmp[2], tmp[1], abs(tmp[1] - tmp[2]),  abs(info[1] - info[2]));
-		if (total_moves_needed(tmp[1], tmp[2]) < total_moves_needed(info[1], info[2]))
-		{
-			info[0] = tmp[0];
-			info[1] = tmp[1];
-			info[2] = tmp[2];
-		}
-		iterator = iterator->next;
-	}
-	// printf("best move was %d\n", info[0]);
-	execute_best_move(meta, info);
-	return (info[0]);
-}
-
-void	smallest_to_top(t_node	**stack_x, void	(rx)(t_node	**stack_x, int should_print), void	(rrx)(t_node	**stack_x, int should_print))
-{
-	int		min;
-
-	min = ll_min(*stack_x);
-	rotate_to_top(stack_x, min, rx, rrx);
-}
-
 int	main(int ac, char **av)
 {
 	t_meta	meta;
@@ -283,25 +278,15 @@ int	main(int ac, char **av)
 
 	lis = longest_increasing_subsquence(meta.stack_a);
 
-	// ll_print(meta.stack_a);
-	// ll_print(lis);
-	// ll_print(meta.stack_b);
-
-
 	move_non_lis(&meta, lis);
 
-	// ll_print(meta.stack_a);
-	// ll_print(meta.stack_b);
 	while (meta.stack_b)
-	{
-		find_best_move(&meta);
-		// ll_print(meta.stack_a);
-		// ll_print(meta.stack_a);
-	}
+		best_move_to_a(&meta);
 	
 	smallest_to_top(&meta.stack_a, ra, rra);
-	// ll_print(meta.stack_a);
 
+	// ll_print(meta.stack_a);
+	
 	ll_clear(&lis);
 	ll_clear(&meta.stack_a);
 	ll_clear(&meta.stack_b);
