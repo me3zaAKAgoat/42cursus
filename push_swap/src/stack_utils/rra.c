@@ -6,13 +6,13 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:30:01 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/06 01:45:48 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/06 20:25:45 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rra(t_node	**stack_a)
+void	rra(t_node	**stack_a, int should_print)
 {
 	int	value_to_bottom;
 	int	size;
@@ -21,7 +21,10 @@ void	rra(t_node	**stack_a)
 	if (size != 1)
 	{
 		if (size == 2)
-			sa(stack_a);
+		{
+			sa(stack_a, should_print);
+			return ;
+		}
 		else
 		{
 			value_to_bottom = ll_shift(stack_a);
@@ -29,5 +32,6 @@ void	rra(t_node	**stack_a)
 			ll_last(*stack_a)->next = NULL;
 		}
 	}
-	printf("rra\n");
+	if (should_print)
+		printf("rra\n");
 }

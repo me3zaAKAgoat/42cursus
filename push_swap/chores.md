@@ -4,3 +4,5 @@
 - do a check where the program keeps rotating the sequence until it finds the the sequence for which the LIS is maxed out
 - look into checking if there are numbers that could be swapped with sa and sb before pushing to b then back to a
 - Taking up the example in the section above, it goes without saying that 4 0 becomes less convenient than 3 2, as for the first 4 moves are performed while for the second 3 !!!!!!!!!!!!!!
+- there's a fatal error in my output as for every rrr and rr i print ra rb rr and rra rrb rrr
+- have a find best move function for kicking elements that dont belong to LIS from A to B but efficiently
