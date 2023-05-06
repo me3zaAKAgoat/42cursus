@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:51:56 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/05 16:12:16 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/06 01:46:46 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "linked_list.h"
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 typedef struct s_meta {
 	t_node	*stack_a;

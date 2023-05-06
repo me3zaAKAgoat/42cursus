@@ -2,3 +2,4 @@
 - I am not so sure we need to set the smallest number at the first index before we check for the longest increasing subsquence (need testing)
 - spree to reduce duplicated code!!
 - do a check where the program keeps rotating the sequence until it finds the the sequence for which the LIS is maxed out
+- look into checking if there are numbers that could be swapped with sa and sb before pushing to b then back to a

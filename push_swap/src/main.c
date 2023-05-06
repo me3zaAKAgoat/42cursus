@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/06 00:19:38 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/06 02:39:18 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	del(void *p)
 
 int abs(int x)
 {
-    if (x < 0)
-        return -x;
-    else
-        return x;
+	if (x < 0)
+		return -x;
+	else
+		return x;
 }
 
 int	calc_moves_to_top(t_node	*stack_x, int	value)
@@ -90,17 +90,17 @@ t_node	*create_ll_from_string(char *str)
 
 t_node *build_result_list(t_node *seq, t_node *indexes, int max_length, int max_index)
 {
-    t_node *result;
-    int 	i;
+	t_node *result;
+	int 	i;
 	
 	result = ll_fill_int(max_length, 0);
 	i = max_index;
-    while (i >= 0) {
-        max_length--;
-        ll_atindex(result, max_length)->value = ll_value_atindex(seq, i);
-        i = ll_value_atindex(indexes, i);
-    }
-    return (result);
+	while (i >= 0) {
+		max_length--;
+		ll_atindex(result, max_length)->value = ll_value_atindex(seq, i);
+		i = ll_value_atindex(indexes, i);
+	}
+	return (result);
 }
 
 t_node	*longest_increasing_subsquence(t_node	*seq)
@@ -187,11 +187,34 @@ int	where_at_a(t_meta	*meta, int	value)
 	return (calc_moves_to_top(meta->stack_a, ll_value_atindex(meta->stack_a, (i + 1) % size)));
 }
 
+void	execute_best_move(t_meta	*meta, int	info[3])
+{
+	while ((info[1] < 0 && info[2] < 0)
+		|| (info[1] > 0 && info[2] > 0))
+	{
+		if (info[1] < 0)
+		{
+			rr(&meta->stack_a, &meta->stack_b);
+			info[1]++;
+			info[2]++;
+		}
+		else
+		{
+			rrr(&meta->stack_a, &meta->stack_b);
+			info[1]--;
+			info[2]--;
+		}
+	}
+	rotate_n_times(&meta->stack_a, info[1], ra, rra);
+	rotate_n_times(&meta->stack_b, info[2], rb, rrb);
+	pa(&meta->stack_a, &meta->stack_b);
+}
+
 /*
 info array goes this way
 {number, moves on a, moves on b}
 */
-int	best_move(t_meta	*meta)
+int	find_best_move(t_meta	*meta)
 {
 	int		info[3];
 	int		tmp[3];
@@ -215,19 +238,16 @@ int	best_move(t_meta	*meta)
 		}
 		iterator = iterator->next;
 	}
-	rotate_n_times(&meta->stack_a, info[1], ra, rra);
-	rotate_n_times(&meta->stack_b, info[2], rb, rrb);
-	pa(&meta->stack_a, &meta->stack_b);
+	execute_best_move(meta, info);
 	return (info[0]);
 }
 
-
-void	smallest_to_top(t_meta	*meta)
+void	smallest_to_top(t_node	**stack_x, void	(rx)(t_node	**stack_x), void	(rrx)(t_node	**stack_x))
 {
 	int		min;
 
-	min = ll_min(meta->stack_a);
-	rotate_to_top(&meta->stack_a, min, ra, rra);
+	min = ll_min(*stack_x);
+	rotate_to_top(stack_x, min, rx, rrx);
 }
 
 int	main(int ac, char **av)
@@ -240,20 +260,16 @@ int	main(int ac, char **av)
 	meta.stack_b = NULL;
 	meta.stack_a = create_ll_from_string(av[1]);
 
-	printf("stack a: ");
-	ll_print(meta.stack_a);
-
 	lis = longest_increasing_subsquence(meta.stack_a);
+	// smallest_to_top(&meta.stack_a, ra, rra);
 
 	rotate_to_top(&meta.stack_a, 16, rb, rrb);
 	move_non_lis(&meta, lis);
-	// smallest_to_top(&meta);
 
 	while (meta.stack_b)
-		best_move(&meta);
+		find_best_move(&meta);
 	
-	smallest_to_top(&meta);
-	printf("stack a: ");
+	smallest_to_top(&meta.stack_a, ra, rra);
 	ll_print(meta.stack_a);
 
 	ll_clear(&lis);

@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:30:01 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/06 00:39:41 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/06 02:00:54 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ void	ra(t_node	**stack_a)
 	if (size != 1)
 	{
 		if (size == 2)
+		{
 			sa(stack_a);
+			printf("sa\n");
+			return ;
+		}
 		else
 		{
 			value_to_top = ll_pop(*stack_a);
@@ -29,4 +33,5 @@ void	ra(t_node	**stack_a)
 			ll_unshift(stack_a, ll_new(value_to_top));
 		}
 	}
+	printf("ra\n");
 }

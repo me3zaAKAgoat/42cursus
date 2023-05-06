@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:30:01 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/05 16:01:09 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/06 01:45:56 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	rrb(t_node	**stack_b)
 			ll_push(stack_b, ll_new(value_to_bottom));
 			ll_last(*stack_b)->next = NULL;
 		}
-	}	
+	}
+	printf("rrb\n");
 }
