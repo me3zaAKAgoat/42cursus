@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:30:01 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/06 20:25:45 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/06 21:51:03 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ra(t_node	**stack_a, int	should_print)
 {
-	int	value_to_top;
+	int	value_to_bottom;
 	int	size;
 
 	size = ll_size(*stack_a);
@@ -27,9 +27,9 @@ void	ra(t_node	**stack_a, int	should_print)
 		}
 		else
 		{
-			value_to_top = ll_pop(*stack_a);
-			ll_atindex(*stack_a, size - 2)->next = NULL;
-			ll_unshift(stack_a, ll_new(value_to_top));
+			value_to_bottom = ll_shift(stack_a);
+			ll_push(stack_a, ll_new(value_to_bottom));
+			ll_last(*stack_a)->next = NULL;
 		}
 	}
 	if (should_print)

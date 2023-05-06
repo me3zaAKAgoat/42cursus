@@ -6,17 +6,12 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/06 20:25:45 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/06 21:53:15 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
-
-void	del(void *p)
-{
-	free(p);
-}
 
 int abs(int x)
 {
@@ -43,10 +38,10 @@ void	rotate_n_times(t_node	**stack_x, int moves, void	(rx)(t_node	**stack_x, int
 {
 	if (moves < 0)
 		while (moves++)
-			rx(stack_x, 1);
+			rrx(stack_x, 1);
 	else if (moves > 0)
 		while (moves--)
-			rrx(stack_x, 1);
+			rx(stack_x, 1);
 }
 
 void	rotate_to_top(t_node	**stack_x, int	value, void	(rx)(t_node	**stack_x, int should_print), void	(rrx)(t_node	**stack_x, int should_print))
@@ -305,7 +300,7 @@ int	main(int ac, char **av)
 	}
 	
 	smallest_to_top(&meta.stack_a, ra, rra);
-	ll_print(meta.stack_a);
+	// ll_print(meta.stack_a);
 
 	ll_clear(&lis);
 	ll_clear(&meta.stack_a);
