@@ -7,3 +7,9 @@
 - there's a fatal error in my output as for every rrr and rr i print ra rb rr and rra rrb rrr
 - have a find best move function for kicking elements that dont belong to LIS from A to B but efficiently
   - check what's the issue with the best move to b function? it all cases its more costly than iterating and kicking with no optimization.
+- handle parsing
+  - some arguments aren't integers
+  - check for numbers bigger than max int or smaller than min int
+  - check for duplicates
+  - join all arguments before splittting them again and giving them to ll_to_string (FREE STRJOIN STR!!)
+- norminette the lis module
