@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 13:23:36 by echoukri          #+#    #+#             */
-/*   Updated: 2022/10/25 18:55:20 by echoukri         ###   ########.fr       */
+/*   Created: 2022/10/12 18:32:20 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/08 16:43:56 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	char	*ptr;
-	int		i;
-	int		j;
+	size_t			srcl;
 
-	if (!s1 || !s2)
-		return (NULL);
-	ptr = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!ptr)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i])
+	srcl = ft_strlen(src);
+	if (srcl < size)
+		ft_memcpy(dst, src, srcl + 1);
+	else if (size != 0)
 	{
-		ptr[i] = s1[i];
-		i++;
+		ft_memcpy(dst, src, size - 1);
+		dst[size - 1] = '\0';
 	}
-	while (s2[j])
-		ptr[i++] = s2[j++];
-	ptr[i] = '\0';
-	return (ptr);
+	return (srcl);
 }

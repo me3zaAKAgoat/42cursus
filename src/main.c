@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/07 20:10:15 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:26:12 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,22 @@ void	ll_print(t_node	*head)
 
 int	main(int ac, char **av)
 {
-	t_meta	meta;
-	t_node	*lis;
+	t_stacks	stacks;
+	t_node		*lis;
 
-	meta.stack_a = parse_input(ac, av);
-	meta.stack_b = NULL;
-	lis = longest_increasing_subsquence(meta.stack_a);
-	move_non_lis(&meta, lis);
-	while (meta.stack_b)
-		best_move_to_a(&meta);
-	smallest_to_top(&meta.stack_a, ra, rra);
+	stacks.stack_a = parse_input(ac, av);
+	stacks.stack_b = NULL;
+	if (ll_value_atindex(stacks.stack_a, 0)
+		> ll_value_atindex(stacks.stack_a, 1))
+		sa(&stacks.stack_a, 1);
+	smallest_to_top(&stacks.stack_a, ra, rra);
+	lis = longest_increasing_subsquence(stacks.stack_a);
+	move_non_lis(&stacks, lis);
+	while (stacks.stack_b)
+		best_move_to_a(&stacks);
+	smallest_to_top(&stacks.stack_a, ra, rra);
 	ll_clear(&lis);
-	ll_clear(&meta.stack_a);
-	ll_clear(&meta.stack_b);
+	ll_clear(&stacks.stack_a);
+	ll_clear(&stacks.stack_b);
 	exit(0);
 }
