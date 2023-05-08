@@ -13,3 +13,6 @@
   - check for duplicates
   - join all arguments before splittting them again and giving them to ll_to_string (FREE STRJOIN STR!!)
 - norminette the lis module
+- for checker job is basically:
+  - use the parsing module of mandatory
+  - make a function that checks if the stack is sorted (maybe use LIS and check if lis length is the same length of the resulting stack)
