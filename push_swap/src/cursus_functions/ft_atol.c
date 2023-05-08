@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sb.c                                               :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 18:41:48 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/08 20:23:47 by echoukri         ###   ########.fr       */
+/*   Created: 2022/10/14 12:12:33 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/07 16:10:09 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sb(t_node	**stack_b, int should_print)
+long	ft_atol(const char *str)
 {
-	int	tmp;
+	long	return_number;
+	int		i;
+	int		sign;
 
-	if (ll_size(*stack_b) < 2)
-		return ;
-	tmp = (*ll_atindex(*stack_b, 0)).value;
-	(*ll_atindex(*stack_b, 0)).value = (*ll_atindex(*stack_b, 1)).value;
-	(*ll_atindex(*stack_b, 1)).value = tmp;
-	if (should_print)
-		printf("sb\n");
+	i = 0;
+	return_number = 0;
+	sign = 1;
+	while ((str[i] <= 13 && 9 <= str[i]) || str[i] == 32)
+		i++;
+	if (str[i] == '-')
+	{
+		sign *= -1;
+		i++;
+	}
+	else if (str[i] == '+')
+		i++;
+	while ('0' <= str[i] && str[i] <= '9')
+		return_number = return_number * 10 + (str[i++] - 48);
+	return (sign * return_number);
 }

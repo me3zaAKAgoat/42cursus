@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sb.c                                               :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 18:41:48 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/08 20:23:47 by echoukri         ###   ########.fr       */
+/*   Created: 2023/05/08 16:45:21 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/08 16:45:32 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sb(t_node	**stack_b, int should_print)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	int	tmp;
+	size_t	index;
 
-	if (ll_size(*stack_b) < 2)
-		return ;
-	tmp = (*ll_atindex(*stack_b, 0)).value;
-	(*ll_atindex(*stack_b, 0)).value = (*ll_atindex(*stack_b, 1)).value;
-	(*ll_atindex(*stack_b, 1)).value = tmp;
-	if (should_print)
-		printf("sb\n");
+	if (!dst && !src)
+		return (NULL);
+	index = 0;
+	while (index < n)
+	{
+		*((char *)dst + index) = *((const char *)src + index);
+		index++;
+	}
+	return (dst);
 }
