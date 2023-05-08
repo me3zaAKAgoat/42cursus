@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:23:19 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/07 20:15:20 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:09:06 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	quit_parsing(char	**arr)
 {
 	split_clear(arr);
-	wrexit("Error\n", 1);
+	wrexit("Error\n");
 }
 
 t_node	*create_ll_from_string(char *str)
@@ -28,7 +28,7 @@ t_node	*create_ll_from_string(char *str)
 	i = 0;
 	arr = ft_split(str, ' ');
 	if (!arr)
-		wrexit("Error\n", 1);
+		wrexit("Error\n");
 	head = NULL;
 	while (arr[i])
 	{
@@ -47,12 +47,48 @@ t_node	*create_ll_from_string(char *str)
 	return (head);
 }
 
+char	*join_words(char **words, char *sep)
+{
+	int		i;
+	int		result_len;
+	char	*result;
+	char	*builder;
+
+	i = 0;
+	result_len = 0;
+	while (words[i])
+		result_len += ft_strlen(words[i++]);
+	result_len += (i - 1) * ft_strlen(sep) + 1;
+	result = malloc(result_len);
+	if (!result)
+		return (NULL);
+	builder = result;
+	i = 0;
+	while (words[i])
+	{
+		if (i != 0)
+			builder += ft_strlcpy(builder, sep, result_len + 1);
+		builder += ft_strlcpy(builder, words[i], result_len + 1);
+		i++;
+	}
+	result[result_len] = 0;
+	return (result);
+}
+
 t_node	*parse_input(int ac, char **av)
 {
 	t_node	*stack_a;
+	char	*nbrs_str;
 
 	if (ac < 2)
-		wrexit("Error\n", 1);
-	stack_a = create_ll_from_string(av[1]);
+		exit(0);
+	if (ac == 2)
+		stack_a = create_ll_from_string(av[1]);
+	else
+	{
+		nbrs_str = join_words(++av, " ");
+		stack_a = create_ll_from_string(nbrs_str);
+		free(nbrs_str);
+	}
 	return (stack_a);
 }

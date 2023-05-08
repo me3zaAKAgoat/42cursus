@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 01:08:12 by echoukri          #+#    #+#             */
-/*   Updated: 2023/04/29 17:49:53 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/08 16:45:50 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,37 +19,6 @@ one should not allocate the full len but only what can be cut
 thus the formula (len <= slen - start) * len
 				+ (slen - start) * (slen - start < len) + 1
 */
-
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	size_t	index;
-
-	if (!dst && !src)
-		return (NULL);
-	index = 0;
-	while (index < n)
-	{
-		*((char *)dst + index) = *((const char *)src + index);
-		index++;
-	}
-	return (dst);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t			srcl;
-
-	srcl = ft_strlen(src);
-	if (srcl < size)
-		ft_memcpy(dst, src, srcl + 1);
-	else if (size != 0)
-	{
-		ft_memcpy(dst, src, size - 1);
-		dst[size - 1] = '\0';
-	}
-	return (srcl);
-}
-
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char		*ptr;

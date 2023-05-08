@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:24:29 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/07 15:37:04 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:25:47 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,18 @@ t_node	*longest_increasing_subsquence(t_node	*seq)
 	return (result);
 }
 
-void	move_non_lis(t_meta	*meta, t_node	*lis)
+void	move_non_lis(t_stacks	*stacks, t_node	*lis)
 {
 	t_node	*iterator;
 
-	iterator = meta->stack_a;
+	iterator = stacks->stack_a;
 	while (iterator)
 	{
 		if (ll_is_in(lis, iterator->value) == -1)
 		{
-			rotate_to_top(&meta->stack_a, iterator->value, ra, rra);
-			pb(&meta->stack_a, &meta->stack_b);
-			iterator = meta->stack_a;
+			rotate_to_top(&stacks->stack_a, iterator->value, ra, rra);
+			pb(&stacks->stack_a, &stacks->stack_b);
+			iterator = stacks->stack_a;
 		}
 		else
 			iterator = iterator->next;
