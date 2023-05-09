@@ -17,3 +17,4 @@
   - use the parsing module of mandatory
   - make a function that checks if the stack is sorted (maybe use LIS and check if lis length is the same length of the resulting stack)
 - remove printf and change it to ft_printf
+- read instructions and apply them to stack_a and do the lis sort check
