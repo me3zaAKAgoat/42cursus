@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pb.c                                               :+:      :+:    :+:   */
+/*   ss.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 16:15:29 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/06 01:45:16 by echoukri         ###   ########.fr       */
+/*   Created: 2023/05/02 22:43:20 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/09 20:18:21 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	pb(t_node	**stack_a, t_node	**stack_b)
+void	ss(t_node	**stack_a, t_node	**stack_b, int should_print)
 {
-	int	value_to_push;
-
-	value_to_push = ll_shift(stack_a);
-	ll_unshift(stack_b, ll_new(value_to_push));
-	printf("pb\n");
+	sa(stack_a, 0);
+	sb(stack_b, 0);
+	if (should_print)
+		printf("ss\n");
 }
