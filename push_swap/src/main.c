@@ -6,24 +6,24 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/08 19:26:12 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/09 21:45:48 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ll_print(t_node	*head)
-{
-	t_node	*iterator;
+// void	ll_print(t_node	*head)
+// {
+// 	t_node	*iterator;
 
-	iterator = head;
-	while (iterator)
-	{
-		printf("%d ", iterator->value);
-		iterator = iterator->next;
-	}
-	printf("(null)\n");
-}
+// 	iterator = head;
+// 	while (iterator)
+// 	{
+// 		printf("%d ", iterator->value);
+// 		iterator = iterator->next;
+// 	}
+// 	printf("(null)\n");
+// }
 
 int	main(int ac, char **av)
 {

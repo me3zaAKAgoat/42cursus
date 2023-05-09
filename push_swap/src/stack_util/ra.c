@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:30:01 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/06 21:59:22 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/09 21:41:28 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void	ra(t_node	**stack_a, int should_print)
 		}
 	}
 	if (should_print)
-		printf("ra\n");
+		write(1, "ra\n", ft_strlen("ra\n"));
 }

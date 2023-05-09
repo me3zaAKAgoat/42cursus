@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 00:53:40 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/09 21:13:04 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/09 21:45:27 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,6 @@ int	execute_instruction(t_stacks *stacks, char *instruction)
 		return (0);
 }
 
-void	ll_print(t_node	*head)
-{
-	t_node	*iterator;
-
-	iterator = head;
-	while (iterator)
-	{
-		printf("%d ", iterator->value);
-		iterator = iterator->next;
-	}
-	printf("(null)\n");
-}
-
 void	handle_user_instructions(t_stacks *stacks)
 {
 	char	*move;
@@ -78,8 +65,8 @@ int	main(int ac, char **av)
 	handle_user_instructions(&stacks);
 	lis = longest_increasing_subsquence(stacks.stack_a);
 	if (ll_size(lis) == ll_size(stacks.stack_a))
-		printf("OK\n");
+		write(1, "OK\n", ft_strlen("OK\n"));
 	else
-		printf("KO\n");
+		write(1, "KO\n", ft_strlen("KO\n"));
 	exit(0);
 }
