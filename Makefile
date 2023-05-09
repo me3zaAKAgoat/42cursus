@@ -1,6 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = push_swap
+BONUS_NAME = checker
 
 HEADERS = ./includes/linked_list.h ./includes/push_swap.h
 

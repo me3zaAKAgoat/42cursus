@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 00:53:40 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/09 01:45:52 by echoukri         ###   ########.fr       */
+/*   Created: 2022/10/29 21:16:21 by echoukri          #+#    #+#             */
+/*   Updated: 2023/01/17 02:05:31 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 300
+# endif
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
 
-int	main(int ac, char **av)
-{
-	t_stacks	stacks;
-	t_node		*lis;
+size_t	gnl_strlen(const char *s);
+char	*gnl_substr(char const *s, unsigned int start, size_t len);
+char	*get_next_line(int fd);
 
-	stacks.stack_a = parse_input(ac, av);
-	lis = longest_increasing_subsquence(stacks.stack_a);
-	if (ll_size(lis) == ll_size(stacks.stack_a))
-		printf("OK\n");
-	else
-		printf("KO\n");
-	exit(0);
-}
+#endif
