@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:27:26 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/08 19:25:47 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/09 20:22:36 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ void	execute_best_move_to_a(t_stacks *stacks, int bma[3])
 {
 	while (bma[1] < 0 && bma[2] < 0)
 	{
-		rrr(&stacks->stack_a, &stacks->stack_b);
+		rrr(&stacks->stack_a, &stacks->stack_b, 1);
 		bma[1]++;
 		bma[2]++;
 	}
 	while (bma[1] > 0 && bma[2] > 0)
 	{
-		rr(&stacks->stack_a, &stacks->stack_b);
+		rr(&stacks->stack_a, &stacks->stack_b, 1);
 		bma[1]--;
 		bma[2]--;
 	}
 	rotate_n_times(&stacks->stack_a, bma[1], ra, rra);
 	rotate_n_times(&stacks->stack_b, bma[2], rb, rrb);
-	pa(&stacks->stack_a, &stacks->stack_b);
+	pa(&stacks->stack_a, &stacks->stack_b, 1);
 }
 
 int	total_moves_needed(int moves_a, int moves_b)

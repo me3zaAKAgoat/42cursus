@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:24:29 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/08 21:22:20 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/09 20:36:53 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	move_non_lis(t_stacks	*stacks, t_node	*lis)
 		if (ll_is_in(lis, iterator->value) == -1)
 		{
 			rotate_to_top(&stacks->stack_a, iterator->value, ra, rra);
-			pb(&stacks->stack_a, &stacks->stack_b);
+			pb(&stacks->stack_a, &stacks->stack_b, 1);
 			iterator = stacks->stack_a;
 		}
 		else

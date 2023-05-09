@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rrr.c                                              :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 16:41:43 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/06 18:13:12 by echoukri         ###   ########.fr       */
+/*   Created: 2023/05/09 20:09:07 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/09 20:09:15 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rrr(t_node	**stack_a, t_node	**stack_b)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	rra(stack_a, 0);
-	rrb(stack_b, 0);
-	printf("rrr\n");
+	unsigned int	i;
+
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (s1[i] && s1[i] == s2[i] && i < n - 1)
+		i++;
+	return ((unsigned char) s1[i] - (unsigned char)s2[i]);
 }

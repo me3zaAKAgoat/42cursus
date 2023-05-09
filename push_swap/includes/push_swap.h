@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:51:56 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/08 19:25:47 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/09 20:19:26 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,20 @@ extern size_t	ft_strlen(const char *s);
 extern void		split_clear(char	**arr);
 extern char		**ft_split(char const *s, char c);
 extern long		ft_atol(const char *str);
+extern int		ft_strncmp(const char *s1, const char *s2, size_t n);
 extern void		*ft_memcpy(void *dst, const void *src, size_t n);
 extern size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-extern void		pa(t_node	**stack_a, t_node	**stack_b);
-extern void		pb(t_node	**stack_a, t_node	**stack_b);
+extern void		pa(t_node	**stack_a, t_node	**stack_b, int should_print);
+extern void		pb(t_node	**stack_a, t_node	**stack_b, int should_print);
 extern void		ra(t_node	**stack_a, int should_print);
 extern void		rb(t_node	**stack_b, int should_print);
-extern void		rr(t_node	**stack_a, t_node	**stack_b);
+extern void		rr(t_node	**stack_a, t_node	**stack_b, int should_print);
 extern void		rra(t_node	**stack_a, int should_print);
 extern void		rrb(t_node	**stack_b, int should_print);
-extern void		rrr(t_node	**stack_a, t_node	**stack_b);
+extern void		rrr(t_node	**stack_a, t_node	**stack_b, int should_print);
 extern void		sa(t_node	**stack_a, int should_print);
 extern void		sb(t_node	**stack_b, int should_print);
-extern void		ss(t_node	**stack_a, t_node	**stack_b);
+extern void		ss(t_node	**stack_a, t_node	**stack_b, int should_print);
 extern int		moves_needed_to_top(t_node *stack_x, int value);
 extern void		rotate_n_times(t_node **stack_x, int moves,
 					void (rx)(t_node **stack_x, int should_print),
