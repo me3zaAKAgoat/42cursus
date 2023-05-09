@@ -1,20 +1,20 @@
-- add another check for when the two first numbers (or last and first) should be swapped to avoid pushing to b and pushing back to a instead of a simple swap
-- I am not so sure we need to set the smallest number at the first index before we check for the longest increasing subsquence (need testing)
-- spree to reduce duplicated code!!
-- do a check where the program keeps rotating the sequence until it finds the the sequence for which the LIS is maxed out
-- look into checking if there are numbers that could be swapped with sa and sb before pushing to b then back to a
-- Taking up the example in the section above, it goes without saying that 4 0 becomes less convenient than 3 2, as for the first 4 moves are performed while for the second 3 !!!!!!!!!!!!!!
-- there's a fatal error in my output as for every rrr and rr i print ra rb rr and rra rrb rrr
-- have a find best move function for kicking elements that dont belong to LIS from A to B but efficiently
-  - check what's the issue with the best move to b function? it all cases its more costly than iterating and kicking with no optimization.
-- handle parsing
-  - some arguments aren't integers
-  - check for numbers bigger than max int or smaller than min int
-  - check for duplicates
-  - join all arguments before splittting them again and giving them to ll_to_string (FREE STRJOIN STR!!)
-- norminette the lis module
-- for checker job is basically:
-  - use the parsing module of mandatory
-  - make a function that checks if the stack is sorted (maybe use LIS and check if lis length is the same length of the resulting stack)
-- remove printf and change it to ft_printf
-- read instructions and apply them to stack_a and do the lis sort check
+- [x] add another check for when the two first numbers (or last and first) should be swapped to avoid pushing to b and pushing back to a instead of a simple swap
+- [x] I am not so sure we need to set the smallest number at the first index before we check for the longest increasing subsquence (need testing)
+- [x] spree to reduce duplicated code!!
+- [x] do a check where the program keeps rotating the sequence until it finds the the sequence for which the LIS is maxed out
+- [x] look into checking if there are numbers that could be swapped with sa and sb before pushing to b then back to a
+- [x] Taking up the example in the section above, it goes without saying that 4 0 becomes less convenient than 3 2, as for the first 4 moves are performed while for the second 3 !!!!!!!!!!!!!!
+- [x] there's a fatal error in my output as for every rrr and rr i print ra rb rr and rra rrb rrr
+- [x] have a find best move function for kicking elements that dont belong to LIS from A to B but efficiently
+- [x] check what's the issue with the best move to b function? it all cases its more costly than iterating and kicking with no optimization.
+- [x] handle parsing
+- [x] some arguments aren't integers
+- [x] check for numbers bigger than max int or smaller than min int
+- [x] check for duplicates
+- [x] join all arguments before splittting them again and giving them to ll_to_string (FREE STRJOIN STR!!)
+- [x] norminette the lis module
+- [x] for checker job is basically:
+- [x] use the parsing module of mandatory
+- [x] make a function that checks if the stack is sorted (maybe use LIS and check if lis length is the same length of the resulting stack)
+- [ ] remove printf and change it to ft_printf
+- [x] read instructions and apply them to stack_a and do the lis sort check
