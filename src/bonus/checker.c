@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 00:53:40 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/09 21:45:27 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:51:39 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,8 @@ int	main(int ac, char **av)
 		write(1, "OK\n", ft_strlen("OK\n"));
 	else
 		write(1, "KO\n", ft_strlen("KO\n"));
+	ll_clear(&lis);
+	ll_clear(&stacks.stack_b);
+	ll_clear(&stacks.stack_a);
 	exit(0);
 }
