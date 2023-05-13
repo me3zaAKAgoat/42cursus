@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/13 17:16:48 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/13 18:44:02 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	main(int ac, char **av)
 
 	stacks.stack_a = parse_input(ac, av);
 	stacks.stack_b = NULL;
+	if (!stacks.stack_a)
+		exit(0);
 	if (ll_size(stacks.stack_a) >= 2)
 		if (ll_value_atindex(stacks.stack_a, 0)
 			> ll_value_atindex(stacks.stack_a, 1))
