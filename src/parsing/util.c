@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:03:11 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/07 16:07:26 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/13 18:46:33 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ int	is_number(char *str)
 	int	i;
 
 	i = 0;
-	if (str[i] == '-')
+	if (str[i] == '-' | str[i] == '+')
 		i++;
+	if (!str[i])
+		return (0);
 	while (str[i])
 	{
 		if (!(48 <= str[i] && str[i] <= 57))
