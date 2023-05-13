@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/09 21:45:48 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/13 17:16:48 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ int	main(int ac, char **av)
 
 	stacks.stack_a = parse_input(ac, av);
 	stacks.stack_b = NULL;
-	if (ll_value_atindex(stacks.stack_a, 0)
-		> ll_value_atindex(stacks.stack_a, 1))
-		sa(&stacks.stack_a, 1);
+	if (ll_size(stacks.stack_a) >= 2)
+		if (ll_value_atindex(stacks.stack_a, 0)
+			> ll_value_atindex(stacks.stack_a, 1))
+			sa(&stacks.stack_a, 1);
 	smallest_to_top(&stacks.stack_a, ra, rra);
 	lis = longest_increasing_subsquence(stacks.stack_a);
 	move_non_lis(&stacks, lis);

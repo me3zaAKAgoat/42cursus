@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:30:23 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/09 21:45:40 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/13 17:15:59 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,3 @@ char	*get_next_line(int fd)
 	}
 	return (free(read_str), cut_and_return(&static_str));
 }
-
