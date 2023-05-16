@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:30:01 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/09 21:42:16 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:57:46 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	rra(t_node	**stack_a, int should_print)
 	int	size;
 
 	size = ll_size(*stack_a);
-	if (size != 1)
+	if (size > 1)
 	{
 		if (size == 2)
 		{

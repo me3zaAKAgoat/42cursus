@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:41 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/14 09:46:47 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:59:13 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_philosopher
 	pthread_mutex_t	fork;
 	unsigned long	last_ate;
 	int				meals_count;
+	int				finished;
 }	t_philosopher;
 
 typedef struct s_meta
@@ -46,6 +47,13 @@ typedef struct s_thread_args
 	int		philo_id;
 }	t_thread_args;
 
-extern int	ft_atoi(const char *str);
+extern int				ft_atoi(const char *str);
+extern t_msecond		get_time(void);
+extern t_msecond		timestamp(t_meta	*meta);
+extern void				*routine(void	*ptr);
+extern t_philosopher	*init_philosophers(t_meta *meta);
+extern void				init_meta(t_meta *meta, int ac, char **av);
+extern void				wait_philosophers(t_meta *meta);
+extern void				wrexit(char *str);
 
 #endif
