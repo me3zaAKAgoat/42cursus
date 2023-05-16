@@ -1,3 +1,0 @@
-- have a check function that loops until
-  - all philosophers ate more than threshold amount of meals
-  - all philosophers have died
