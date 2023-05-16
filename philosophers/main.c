@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:45 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/16 18:01:41 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/16 21:22:47 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,13 @@ int	main(int ac, char **av)
 	int				i;
 
 	init_meta(&meta, ac, av);
-	i = 0;
 	thread_args = malloc(meta.nbr_philosophers * sizeof(thread_args));
 	if (!thread_args)
 	{
-		free(thread_args);
-		wrexit("was not able to allocated needed memory space!");
+		free(meta.philosophers);
+		wrexit("was not able to allocate needed memory space!");
 	}
+	i = 0;
 	while (i < meta.nbr_philosophers)
 	{
 		thread_args[i].philo_id = i;
