@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:23:19 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/08 19:09:06 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:47:28 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_node	*create_ll_from_string(char *str)
 	i = 0;
 	arr = ft_split(str, ' ');
 	if (!arr)
-		wrexit("Error\n");
+		wrexit("A malloc failed\n");
 	head = NULL;
 	while (arr[i])
 	{
@@ -83,7 +83,11 @@ t_node	*parse_input(int ac, char **av)
 	if (ac < 2)
 		exit(0);
 	if (ac == 2)
+	{
 		stack_a = create_ll_from_string(av[1]);
+		if (!stack_a)
+			exit(0);
+	}
 	else
 	{
 		nbrs_str = join_words(++av, " ");

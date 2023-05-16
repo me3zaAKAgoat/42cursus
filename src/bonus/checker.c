@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 00:53:40 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/10 17:51:39 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:22:05 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int ac, char **av)
 	stacks.stack_b = NULL;
 	handle_user_instructions(&stacks);
 	lis = longest_increasing_subsquence(stacks.stack_a);
-	if (ll_size(lis) == ll_size(stacks.stack_a))
+	if (ll_size(lis) == ll_size(stacks.stack_a) && ll_size(stacks.stack_b) == 0)
 		write(1, "OK\n", ft_strlen("OK\n"));
 	else
 		write(1, "KO\n", ft_strlen("KO\n"));
