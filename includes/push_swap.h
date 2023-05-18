@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:51:56 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/09 21:45:59 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:52:26 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ extern t_node	*build_result_list(t_node *seq, t_node *indexes,
 					int max_length, int max_index);
 extern t_node	*longest_increasing_subsquence(t_node	*seq);
 extern void		move_non_lis(t_stacks	*stacks, t_node	*lis);
+extern int		is_sorted(t_node *stack);
+extern void		sort_3(t_stacks	*stacks);
+extern void		sort_5(t_stacks	*stacks);
+extern void		cheesy_swap(t_stacks *stacks);
+extern void		exit_gracefully(t_stacks *stacks);
 extern int		abs(int x);
 extern t_node	*create_ll_from_string(char *str);
 extern int		is_number(char *str);
