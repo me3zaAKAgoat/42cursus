@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ll_is_in.c                                         :+:      :+:    :+:   */
+/*   check_sorted.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/03 23:08:21 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/18 14:03:10 by echoukri         ###   ########.fr       */
+/*   Created: 2023/05/18 14:14:20 by echoukri          #+#    #+#             */
+/*   Updated: 2023/05/18 14:29:41 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "linked_list.h"
-#include <stdio.h>
+#include "push_swap.h"
 
-int	ll_is_in(t_node	*head, int value)
+int	is_sorted(t_node *stack)
 {
-	t_node	*iterator;
-	int		index;
+	t_node	*lis;
 
-	index = 0;
-	iterator = head;
-	while (iterator)
-	{
-		if (iterator->value == value)
-			return (index);
-		index++;
-		iterator = iterator->next;
-	}
-	return (-1);
+	lis = longest_increasing_subsquence(stack);
+	if (ll_size(lis) == ll_size(stack))
+		return (free(lis), 1);
+	return (free(lis), 0);
 }
