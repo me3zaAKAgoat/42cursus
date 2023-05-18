@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:41 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/17 01:49:13 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/17 02:57:35 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 # include <unistd.h>
 # include <stdio.h>
 
-typedef unsigned long	t_msecond;
+typedef long long	t_msecond;
 
 typedef struct s_philosopher
 {
 	int				philo_id;
 	pthread_t		thread_id;
 	pthread_mutex_t	fork;
-	unsigned long	last_ate;
+	t_msecond		last_ate;
 	int				meals_count;
 	int				finished;
 }	t_philosopher;
@@ -55,5 +55,6 @@ extern t_philosopher	*init_philosophers(t_meta *meta);
 extern void				init_meta(t_meta *meta, int ac, char **av);
 extern void				wait_philosophers(t_meta *meta);
 extern void				wrexit(char *str);
+extern size_t			ft_strlen(const char *s);
 
 #endif

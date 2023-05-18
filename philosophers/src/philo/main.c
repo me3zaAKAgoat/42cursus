@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:45 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/16 21:22:47 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/18 02:20:42 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ void	*routine(void	*ptr)
 	while (1)
 	{
 		pthread_mutex_lock(&meta->philosophers[philo_id].fork);
-		printf("%lu: %d has taken fork\n", timestamp(meta), philo_id + 1);
+		printf("%llu: %d has taken fork\n", timestamp(meta), philo_id + 1);
 		pthread_mutex_lock(&meta->philosophers[(philo_id + 1) % meta->nbr_philosophers].fork);
-		printf("%lu: %d has taken fork\n", timestamp(meta), philo_id + 1);
-		printf("%lu: %d is eating\n", timestamp(meta), philo_id + 1);
+		printf("%llu: %d has taken fork\n", timestamp(meta), philo_id + 1);
+		printf("%llu: %d is eating\n", timestamp(meta), philo_id + 1);
 		usleep(meta->time_eat * 1000);
 		meta->philosophers[philo_id].last_ate = get_time();
 		meta->philosophers[philo_id].meals_count++;
 		pthread_mutex_unlock(&meta->philosophers[philo_id].fork);
 		pthread_mutex_unlock(&meta->philosophers[(philo_id + 1) % meta->nbr_philosophers].fork);
 		if (meta->meal_threshold != -1 && meta->philosophers[philo_id].meals_count >= meta->meal_threshold)
-			return (meta->philosophers[philo_id].finished = 1, printf("%lu: %d is finished\n", timestamp(meta), philo_id + 1), NULL);
-		printf("%lu: %d is sleeping\n", timestamp(meta), philo_id + 1);
+			return (meta->philosophers[philo_id].finished = 1, printf("%llu: %d is finished\n", timestamp(meta), philo_id + 1), NULL);
+		printf("%llu: %d is sleeping\n", timestamp(meta), philo_id + 1);
 		usleep(meta->time_sleep * 1000);
-		printf("%lu: %d is thinking\n", timestamp(meta), philo_id + 1);
+		printf("%llu: %d is thinking\n", timestamp(meta), philo_id + 1);
 	}
 	return (NULL);
 }
@@ -100,7 +100,7 @@ void	wait_philosophers(t_meta *meta)
 			if (!meta->philosophers[i].finished
 				&& get_time() - meta->philosophers[i].last_ate > meta->time_die)
 			{
-				printf("%lu: %d died\n", timestamp(meta), i + 1);
+				printf("%llu: %d died\n", timestamp(meta), i + 1);
 				return ;
 			}
 			if (!meta->philosophers[i].finished)

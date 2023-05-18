@@ -1,0 +1,3 @@
+- think through t the case where time to die or philo count is 0
+- read about semaphores
+- make my own usleep function that is more accurate
