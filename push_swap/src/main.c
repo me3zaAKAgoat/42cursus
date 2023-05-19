@@ -6,12 +6,13 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:08:35 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/16 19:45:55 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:52:10 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+// #include <stdio.h>
 // void	ll_print(t_node	*head)
 // {
 // 	t_node	*iterator;
@@ -32,10 +33,11 @@ int	main(int ac, char **av)
 
 	stacks.stack_a = parse_input(ac, av);
 	stacks.stack_b = NULL;
-	if (ll_size(stacks.stack_a) >= 2)
-		if (ll_value_atindex(stacks.stack_a, 0)
-			> ll_value_atindex(stacks.stack_a, 1))
-			sa(&stacks.stack_a, 1);
+	if (ll_size(stacks.stack_a) == 3)
+		sort_3(&stacks);
+	if (ll_size(stacks.stack_a) == 5)
+		sort_5(&stacks);
+	cheesy_swap(&stacks);
 	smallest_to_top(&stacks.stack_a, ra, rra);
 	lis = longest_increasing_subsquence(stacks.stack_a);
 	move_non_lis(&stacks, lis);

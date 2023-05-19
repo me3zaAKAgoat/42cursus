@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 00:53:40 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/16 19:22:05 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/18 14:18:03 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,14 @@ void	handle_user_instructions(t_stacks *stacks)
 int	main(int ac, char **av)
 {
 	t_stacks	stacks;
-	t_node		*lis;
 
 	stacks.stack_a = parse_input(ac, av);
 	stacks.stack_b = NULL;
 	handle_user_instructions(&stacks);
-	lis = longest_increasing_subsquence(stacks.stack_a);
-	if (ll_size(lis) == ll_size(stacks.stack_a) && ll_size(stacks.stack_b) == 0)
+	if (is_sorted(stacks.stack_a) && ll_size(stacks.stack_b) == 0)
 		write(1, "OK\n", ft_strlen("OK\n"));
 	else
 		write(1, "KO\n", ft_strlen("KO\n"));
-	ll_clear(&lis);
 	ll_clear(&stacks.stack_b);
 	ll_clear(&stacks.stack_a);
 	exit(0);
