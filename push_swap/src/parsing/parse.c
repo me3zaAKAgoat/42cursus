@@ -6,19 +6,22 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:23:19 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/16 19:47:28 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/20 01:39:43 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	quit_parsing(char	**arr)
+void	quit_parsing(char	**arr, t_node	**head, char *str, int is_heap)
 {
+	if (is_heap)
+		free(str);
 	split_clear(arr);
+	ll_clear(head);
 	wrexit("Error\n");
 }
 
-t_node	*create_ll_from_string(char *str)
+t_node	*create_ll_from_string(char *str, int is_heap)
 {
 	t_node	*head;
 	char	**arr;
@@ -33,14 +36,11 @@ t_node	*create_ll_from_string(char *str)
 	while (arr[i])
 	{
 		tmp = ft_atol(arr[i]);
-		if (is_number(arr[i]) && INT_MIN < tmp && tmp < INT_MAX)
-		{
-			if (ll_is_in(head, tmp) != -1)
-				quit_parsing(arr);
+		if (is_number(arr[i]) && INT_MIN <= tmp && tmp <= INT_MAX
+			&& (ll_is_in(head, tmp) == -1))
 			ll_push(&head, ll_new(tmp));
-		}
 		else
-			quit_parsing(arr);
+			quit_parsing(arr, &head, str, is_heap);
 		i++;
 	}
 	split_clear(arr);
@@ -59,7 +59,7 @@ char	*join_words(char **words, char *sep)
 	while (words[i])
 		result_len += ft_strlen(words[i++]);
 	result_len += (i - 1) * ft_strlen(sep) + 1;
-	result = malloc(result_len);
+	result = malloc(result_len * sizeof(char));
 	if (!result)
 		return (NULL);
 	builder = result;
@@ -84,14 +84,14 @@ t_node	*parse_input(int ac, char **av)
 		exit(0);
 	if (ac == 2)
 	{
-		stack_a = create_ll_from_string(av[1]);
+		stack_a = create_ll_from_string(av[1], 0);
 		if (!stack_a)
 			exit(0);
 	}
 	else
 	{
 		nbrs_str = join_words(++av, " ");
-		stack_a = create_ll_from_string(nbrs_str);
+		stack_a = create_ll_from_string(nbrs_str, 1);
 		free(nbrs_str);
 	}
 	return (stack_a);
