@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:51:56 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/18 15:52:26 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/20 01:33:53 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ extern void		sort_5(t_stacks	*stacks);
 extern void		cheesy_swap(t_stacks *stacks);
 extern void		exit_gracefully(t_stacks *stacks);
 extern int		abs(int x);
-extern t_node	*create_ll_from_string(char *str);
+extern t_node	*create_ll_from_string(char *str, int is_heap);
 extern int		is_number(char *str);
 extern void		wrexit(char *str);
 extern t_node	*parse_input(int ac, char **av);
