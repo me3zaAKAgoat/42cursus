@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:45 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/18 02:20:42 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/21 01:45:20 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,73 +20,29 @@ void	*routine(void	*ptr)
 	meta = ((t_thread_args *) ptr)->meta;
 	philo_id = ((t_thread_args *) ptr)->philo_id;
 	if (philo_id % 2 == 0)
-		usleep((meta->time_eat / 2) * 1000);
-	while (1)
+		msleep(meta->time_eat / 2);
+	while (!meta->philos[philo_id].dead)
 	{
-		pthread_mutex_lock(&meta->philosophers[philo_id].fork);
-		printf("%llu: %d has taken fork\n", timestamp(meta), philo_id + 1);
-		pthread_mutex_lock(&meta->philosophers[(philo_id + 1) % meta->nbr_philosophers].fork);
-		printf("%llu: %d has taken fork\n", timestamp(meta), philo_id + 1);
-		printf("%llu: %d is eating\n", timestamp(meta), philo_id + 1);
-		usleep(meta->time_eat * 1000);
-		meta->philosophers[philo_id].last_ate = get_time();
-		meta->philosophers[philo_id].meals_count++;
-		pthread_mutex_unlock(&meta->philosophers[philo_id].fork);
-		pthread_mutex_unlock(&meta->philosophers[(philo_id + 1) % meta->nbr_philosophers].fork);
-		if (meta->meal_threshold != -1 && meta->philosophers[philo_id].meals_count >= meta->meal_threshold)
-			return (meta->philosophers[philo_id].finished = 1, printf("%llu: %d is finished\n", timestamp(meta), philo_id + 1), NULL);
-		printf("%llu: %d is sleeping\n", timestamp(meta), philo_id + 1);
-		usleep(meta->time_sleep * 1000);
-		printf("%llu: %d is thinking\n", timestamp(meta), philo_id + 1);
+		pthread_mutex_lock(&meta->philos[philo_id].fork);
+		inform_state(meta, TAKING_FORK, philo_id);
+		pthread_mutex_lock(&meta->philos[(philo_id + 1) % meta->nbr_philos].fork);
+		inform_state(meta, TAKING_FORK, philo_id);
+		inform_state(meta, EATING, philo_id);
+		msleep(meta->time_eat);
+		meta->philos[philo_id].last_ate_at = get_time();
+		meta->philos[philo_id].meals_count++;
+		pthread_mutex_unlock(&meta->philos[philo_id].fork);
+		pthread_mutex_unlock(&meta->philos[(philo_id + 1) % meta->nbr_philos].fork);
+		if (meta->meal_threshold != -1 && meta->philos[philo_id].meals_count >= meta->meal_threshold)
+			return (meta->philos[philo_id].finished = 1, inform_state(meta, FINISHED, philo_id), NULL);
+		inform_state(meta, SLEEPING, philo_id);
+		msleep(meta->time_sleep);
+		inform_state(meta, THINKING, philo_id);
 	}
 	return (NULL);
 }
 
-/* wait_philosophers wether mutex init can fail*/
-t_philosopher	*init_philosophers(t_meta *meta)
-{
-	int				i;
-	t_philosopher	*philosophers;
-
-	i = 0;
-	philosophers = malloc(meta->nbr_philosophers * sizeof(t_philosopher));
-	if (!philosophers)
-		wrexit("was not able to allocated needed memory space!");
-	while (i < meta->nbr_philosophers)
-	{
-		pthread_mutex_init(&philosophers[i].fork, NULL);
-		philosophers[i].last_ate = get_time();
-		philosophers[i].meals_count = 0;
-		philosophers[i].philo_id = i;
-		philosophers[i].finished = 0;
-		i++;
-	}
-	return (philosophers);
-}
-
-void	init_meta(t_meta *meta, int ac, char **av)
-{
-	meta->program_start = get_time();
-	meta->nbr_philosophers = ft_atoi(av[1]);
-	meta->time_die = ft_atoi(av[2]);
-	meta->time_eat = ft_atoi(av[3]);
-	meta->time_sleep = ft_atoi(av[4]);
-	if (ac == 6)
-	{
-		meta->meal_threshold = ft_atoi(av[5]);
-		if (meta->nbr_philosophers * meta->time_die * meta->meal_threshold < 0)
-			wrexit("abnormal input was given!");
-	}
-	else
-	{
-		meta->meal_threshold = -1;
-		if (meta->nbr_philosophers * meta->time_die < 0)
-			wrexit("abnormal input was given!");
-	}
-	meta->philosophers = init_philosophers(meta);
-}
-
-void	wait_philosophers(t_meta *meta)
+void	monitor_threads(t_meta *meta)
 {
 	int	i;
 	int	all_finished;
@@ -95,15 +51,16 @@ void	wait_philosophers(t_meta *meta)
 	{
 		i = 0;
 		all_finished = 1;
-		while (i < meta->nbr_philosophers)
+		while (i < meta->nbr_philos)
 		{
-			if (!meta->philosophers[i].finished
-				&& get_time() - meta->philosophers[i].last_ate > meta->time_die)
+			if (!meta->philos[i].finished
+				&& get_time() - meta->philos[i].last_ate_at > meta->time_die)
 			{
-				printf("%llu: %d died\n", timestamp(meta), i + 1);
-				return ;
+				meta->philos[i].dead = 1;
+				inform_state(meta, DIED, i);
+				return ;	
 			}
-			if (!meta->philosophers[i].finished)
+			if (!meta->philos[i].finished)
 				all_finished = 0;
 			i++;
 		}
@@ -119,26 +76,26 @@ int	main(int ac, char **av)
 	int				i;
 
 	init_meta(&meta, ac, av);
-	thread_args = malloc(meta.nbr_philosophers * sizeof(thread_args));
+	thread_args = malloc(meta.nbr_philos * sizeof(thread_args));
 	if (!thread_args)
 	{
-		free(meta.philosophers);
+		free(meta.philos);
 		wrexit("was not able to allocate needed memory space!");
 	}
 	i = 0;
-	while (i < meta.nbr_philosophers)
+	while (i < meta.nbr_philos)
 	{
 		thread_args[i].philo_id = i;
 		thread_args[i].meta = &meta;
-		pthread_create(&meta.philosophers[i].thread_id,
+		pthread_create(&meta.philos[i].thread_id,
 			NULL, routine, thread_args + i);
-		pthread_detach(meta.philosophers[i].thread_id);
+		pthread_detach(meta.philos[i].thread_id);
 		i++;
 	}
+	monitor_threads(&meta);
 	free(thread_args);
-	wait_philosophers(&meta);
 	while (i--)
-		pthread_mutex_destroy(&meta.philosophers[i].fork);
-	free(meta.philosophers);
+		pthread_mutex_destroy(&meta.philos[i].fork);
+	free(meta.philos);
 	exit(0);
 }

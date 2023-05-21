@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:25:42 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/16 17:58:58 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/21 01:14:33 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,32 @@ t_msecond	get_time(void)
 
 	gettimeofday(&current_time, NULL);
 	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
+}
+
+void	msleep(t_msecond wait_time)
+{
+	t_msecond	start;
+
+	start = get_time();
+	usleep(wait_time * 1000 * 0.95);
+	while (get_time() - start < wait_time)
+		usleep(85);
+}
+
+void	inform_state(t_meta	*meta, t_state state, int philo_id)
+{
+	if (state == TAKING_FORK)
+		printf("%llu: %d has taken fork\n", timestamp(meta), philo_id + 1);
+	if (state == EATING)
+		printf("%llu: %d is eating\n", timestamp(meta), philo_id + 1);
+	if (state == SLEEPING)
+		printf("%llu: %d is sleeping\n", timestamp(meta), philo_id + 1);
+	if (state == THINKING)
+		printf("%llu: %d is thinking\n", timestamp(meta), philo_id + 1);
+	if (state == FINISHED)
+		printf("%llu: %d is finished\n", timestamp(meta), philo_id + 1);
+	if (state == DIED)
+		printf("%llu: %d has died\n", timestamp(meta), philo_id + 1);
 }
 
 void	wrexit(char *str)
