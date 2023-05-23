@@ -1,0 +1,1 @@
+- protect all functions that can fail!

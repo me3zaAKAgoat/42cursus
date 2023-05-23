@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:45 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/23 04:20:10 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/23 02:52:33 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	mutex_clear(t_meta *meta)
 	pthread_mutex_destroy(&meta->death_lock);
 }
 
-void	setup_args(t_meta *meta, t_thread_args **thread_args_p)
+t_thread_args	*setup_args(t_meta *meta, t_thread_args **thread_args_p)
 {
 	*thread_args_p = malloc(meta->nbr_philos * sizeof(*thread_args_p));
 	if (!*thread_args_p)

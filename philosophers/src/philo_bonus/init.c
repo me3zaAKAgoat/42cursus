@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 t_philosopher	*init_philos(t_meta *meta)
 {
@@ -23,11 +23,11 @@ t_philosopher	*init_philos(t_meta *meta)
 		wrexit("was not able to allocated needed memory space!");
 	while (i < meta->nbr_philos)
 	{
-		pthread_mutex_init(&philos[i].fork, NULL);
+		sem_open();
 		philos[i].last_ate_at = get_time();
 		philos[i].meals_count = 0;
 		philos[i].philo_id = i;
-		philos[i].finished = 0;
+		philos[i].finished = 0;	
 		i++;
 	}
 	return (philos);
