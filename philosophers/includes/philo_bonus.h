@@ -6,18 +6,18 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:41 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/23 02:30:11 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:40:47 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
+# include <pthread.h>
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <semaphore.h>
-
 typedef long long	t_msecond;
 
 typedef enum state {TAKING_FORK, EATING,
@@ -27,11 +27,9 @@ typedef struct s_philosopher
 {
 	int				philo_id;
 	pid_t			pid;
-	sem_t			fork;
 	t_msecond		last_ate_at;
 	int				meals_count;
 	int				finished;
-	int				dead;
 }	t_philosopher;
 
 typedef struct s_meta
@@ -43,6 +41,8 @@ typedef struct s_meta
 	int				meal_threshold;
 	t_msecond		program_start;
 	t_philosopher	*philos;
+	sem_t			forks;
+	sem_t			death_lock;
 }	t_meta;
 
 typedef struct s_thread_args

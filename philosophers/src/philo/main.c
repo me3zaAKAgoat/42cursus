@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:45 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/23 04:20:10 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:22:43 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*routine(void	*ptr)
 	meta = ((t_thread_args *) ptr)->meta;
 	philo_id = ((t_thread_args *) ptr)->philo_id;
 	if (philo_id % 2 == 0)
-		msleep(meta->time_eat / 2);
+		msleep(20);
 	while (1)
 	{
 		pthread_mutex_lock(&meta->philos[philo_id].fork);
@@ -75,12 +75,7 @@ void	mutex_clear(t_meta *meta)
 
 	i = 0;
 	while (i < meta->nbr_philos)
-	{
-		pthread_mutex_unlock(&meta->philos[i].fork);
-		pthread_mutex_destroy(&meta->philos[i].fork);
-		i++;
-	}
-	pthread_mutex_unlock(&meta->death_lock);
+		pthread_mutex_destroy(&meta->philos[i++].fork);
 	pthread_mutex_destroy(&meta->death_lock);
 }
 

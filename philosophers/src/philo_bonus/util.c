@@ -6,11 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:25:42 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/23 02:52:33 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:50:13 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 t_msecond	timestamp(t_meta	*meta)
 {
@@ -37,7 +37,7 @@ void	msleep(t_msecond wait_time)
 
 void	inform_state(t_meta	*meta, t_state state, int philo_id)
 {
-	pthread_mutex_lock(&meta->death_lock);
+	sem_wait(meta->death_lock);
 	if (state == TAKING_FORK)
 		printf("%llu: %d has taken fork\n", timestamp(meta), philo_id + 1);
 	if (state == EATING)
@@ -50,7 +50,7 @@ void	inform_state(t_meta	*meta, t_state state, int philo_id)
 		printf("%llu: %d is finished\n", timestamp(meta), philo_id + 1);
 	if (state == DIED)
 		printf("%llu: %d has died\n", timestamp(meta), philo_id + 1);
-	pthread_mutex_unlock(&meta->death_lock);
+	sem_post(meta->death_lock);
 }
 
 void	wrexit(char *str)
