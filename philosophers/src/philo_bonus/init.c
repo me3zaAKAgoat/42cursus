@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:51:57 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/23 02:52:33 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:50:18 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_philosopher	*init_philos(t_meta *meta)
 		wrexit("was not able to allocated needed memory space!");
 	while (i < meta->nbr_philos)
 	{
-		sem_open();
 		philos[i].last_ate_at = get_time();
 		philos[i].meals_count = 0;
 		philos[i].philo_id = i;
@@ -42,7 +41,10 @@ void	init_meta(t_meta *meta, int ac, char **av)
 	meta->time_die = ft_atoi(av[2]);
 	meta->time_eat = ft_atoi(av[3]);
 	meta->time_sleep = ft_atoi(av[4]);
-	pthread_mutex_init(&meta->death_lock, NULL);
+	sem_unlink("/forks");
+	sem_unlink("/death_lock");
+	meta->forks = sem_open("/forks", O_CREAT);
+	meta->death_lock = sem_open("/death_lock", O_CREAT);
 	if (ac == 6)
 	{
 		meta->meal_threshold = ft_atoi(av[5]);

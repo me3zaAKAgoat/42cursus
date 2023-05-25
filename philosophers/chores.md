@@ -1,1 +1,2 @@
 - protect all functions that can fail!
+- remove exit function from mandatory
