@@ -19,8 +19,8 @@ MANDATORY_OBJECTS = $(MANDATORY_SOURCES:.c=.o)
 
 BONUS_OBJECTS = $(BONUS_SOURCES:.c=.o)
 
-# LDLIBRARIES = -Imlx -lmlx -framework OpenGL -framework AppKit
-LDLIBRARIES = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+LDLIBRARIES = -Imlx -lmlx -framework OpenGL -framework AppKit
+# LDLIBRARIES = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 all : $(NAME)
 
