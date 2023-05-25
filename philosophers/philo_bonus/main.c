@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:45 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/25 12:51:49 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/25 22:19:45 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,16 @@ int	main(int ac, char **av)
 {
 	t_meta			meta;
 	int				i;
+	int				monitor_pid;
 
 	init_meta(&meta, ac, av);
 	i = 0;
+	monitor_pid = fork();
+	if (!monitor_pid)
+	{		
+		monitor_threads(&meta);
+		exit(0);
+	}
 	while (i < meta.nbr_philos)
 	{
 		meta.philos[i].pid = fork();
@@ -91,8 +98,7 @@ int	main(int ac, char **av)
 		}
 		i++;
 	}
-	while (wait(NULL) > 0) continue;
-	monitor_threads(&meta);
+	waitpid(monitor_pid, NULL, WNOHANG);
 	sem_clear(&meta);
 	free(meta.philos);
 	exit(0);
