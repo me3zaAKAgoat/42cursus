@@ -6,11 +6,16 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:45 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/23 16:14:55 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:51:49 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+void cheesy_void(void)
+{
+	return ;
+}
 
 void	routine(int philo_id, t_meta *meta)
 {
@@ -29,12 +34,11 @@ void	routine(int philo_id, t_meta *meta)
 		sem_post(meta->forks);
 		sem_post(meta->forks);
 		if (meta->meal_threshold != -1 && meta->philos[philo_id].meals_count >= meta->meal_threshold)
-			return (meta->philos[philo_id].finished = 1, inform_state(meta, FINISHED, philo_id), NULL);
+			return (meta->philos[philo_id].finished = 1, inform_state(meta, FINISHED, philo_id), cheesy_void());
 		inform_state(meta, SLEEPING, philo_id);
 		msleep(meta->time_sleep);
 		inform_state(meta, THINKING, philo_id);
 	}
-	return (NULL);
 }
 
 void	monitor_threads(t_meta *meta)
@@ -81,10 +85,13 @@ int	main(int ac, char **av)
 	{
 		meta.philos[i].pid = fork();
 		if (!meta.philos[i].pid)
-			routine(i, meta);
+		{
+			routine(i, &meta);
+			exit(0);
+		}
 		i++;
 	}
-	while (wait())
+	while (wait(NULL) > 0) continue;
 	monitor_threads(&meta);
 	sem_clear(&meta);
 	free(meta.philos);

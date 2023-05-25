@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:41 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/23 13:40:47 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:42:01 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 # define PHILO_H
 # include <pthread.h>
 # include <stdlib.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <sys/time.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include <semaphore.h>
 typedef long long	t_msecond;
 
@@ -41,8 +44,8 @@ typedef struct s_meta
 	int				meal_threshold;
 	t_msecond		program_start;
 	t_philosopher	*philos;
-	sem_t			forks;
-	sem_t			death_lock;
+	sem_t			*forks;
+	sem_t			*death_lock;
 }	t_meta;
 
 typedef struct s_thread_args
@@ -54,7 +57,6 @@ typedef struct s_thread_args
 extern int				ft_atoi(const char *str);
 extern t_msecond		get_time(void);
 extern t_msecond		timestamp(t_meta	*meta);
-extern void				*routine(void	*ptr);
 extern t_philosopher	*init_philos(t_meta *meta);
 extern void				init_meta(t_meta *meta, int ac, char **av);
 extern void				wrexit(char *str);
