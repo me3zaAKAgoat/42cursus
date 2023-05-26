@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:35:29 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/26 19:49:41 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/26 22:09:34 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ int	reached_meal_threshold(t_meta *meta, int philo_id)
 void	routine(int philo_id, t_meta *meta)
 {
 	sem_wait(meta->sync);
+	meta->program_start = get_time();
 	if (philo_id % 2 == 0)
-		msleep(10);
+		msleep(1);
 	while (1)
 	{
 		take_forks(meta, philo_id);
