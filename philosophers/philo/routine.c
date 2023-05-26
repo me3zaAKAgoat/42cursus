@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:35:29 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/26 17:43:02 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/26 19:25:32 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*routine(void	*ptr)
 	meta = ((t_thread_args *)ptr)->meta;
 	philo_id = ((t_thread_args *)ptr)->philo_id;
 	if (philo_id % 2 == 0)
-		msleep(20);
+		msleep(2);
 	while (1)
 	{
 		take_forks(meta, philo_id);
