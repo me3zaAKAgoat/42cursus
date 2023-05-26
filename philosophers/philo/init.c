@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:51:57 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/26 17:21:20 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/26 23:29:43 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	init_meta(t_meta *meta, int ac, char **av)
 			msg_quit("abnormal input was given!");
 	}
 	meta->philos = init_philos(meta);
-	if (meta->philos)
+	if (!meta->philos)
 		msg_quit("was not able to allocate needed memory space!");
 	return (0);
 }

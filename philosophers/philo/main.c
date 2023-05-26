@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:45 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/26 17:43:46 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/26 23:28:43 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,14 @@ void	mutex_clear(t_meta *meta)
 	pthread_mutex_destroy(&meta->death_lock);
 }
 
-int	setup_args(t_meta *meta, t_thread_args **thread_args_p)
+t_thread_args	*setup_args(t_meta *meta)
 {
-	*thread_args_p = malloc(meta->nbr_philos * sizeof(*thread_args_p));
-	if (!*thread_args_p)
-	{
+	t_thread_args	*thread_args;
+
+	thread_args = malloc(meta->nbr_philos * sizeof(thread_args));
+	if (!thread_args)
 		free(meta->philos);
-		msg_quit("was not able to allocate needed memory space!");
-	}
-	return (0);
+	return (thread_args);
 }
 
 int	main(int ac, char **av)
@@ -68,8 +67,9 @@ int	main(int ac, char **av)
 
 	if (init_meta(&meta, ac, av))
 		return (1);
-	if (setup_args(&meta, &thread_args))
-		return (1);
+	thread_args = setup_args(&meta);
+	if (!thread_args)
+		msg_quit("was not able to allocate needed memory space!");
 	i = 0;
 	while (i < meta.nbr_philos)
 	{
