@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:45 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/26 23:28:43 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/27 05:41:07 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_thread_args	*setup_args(t_meta *meta)
 {
 	t_thread_args	*thread_args;
 
-	thread_args = malloc(meta->nbr_philos * sizeof(thread_args));
+	thread_args = malloc(meta->nbr_philos * sizeof(t_thread_args));
 	if (!thread_args)
 		free(meta->philos);
 	return (thread_args);
