@@ -6,53 +6,11 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:45 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/26 22:11:38 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/27 05:24:38 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-
-void	cheesy_void(void)
-{
-	return ;
-}
-
-int	finished_routine(pid_t	pid)
-{
-	return (waitpid(pid, NULL, WNOHANG) == -1);
-}
-
-void	monitor_threads(t_meta *meta)
-{
-	int	i;
-	int	all_finished;
-
-	i = 0;
-	meta->program_start = get_time();
-	while (i++ < meta->nbr_philos)
-		sem_post(meta->sync);
-	while (1)
-	{
-		i = 0;
-		all_finished = 1;
-		while (i < meta->nbr_philos)
-		{
-			if (!finished_routine(meta->philos[i].pid)
-				&& get_time() - meta->philos[i].last_ate_at > meta->time_die)
-			{
-				inform_state(meta, DIED, i);
-				sem_wait(meta->death_lock);
-				kill_children(meta);
-				return ;
-			}
-			if (!finished_routine(meta->philos[i].pid))
-				all_finished = 0;
-			i++;
-		}
-		if (all_finished)
-			return ;
-	}
-}
 
 void	sem_clear(t_meta *meta)
 {
@@ -61,25 +19,57 @@ void	sem_clear(t_meta *meta)
 	sem_close(meta->sync);
 }
 
+void	wait_children(t_meta *meta)
+{
+	int	state;
+	int	i;
+	int	all_finished;
+
+	while (1)
+	{
+		i = 0;
+		all_finished = 1;
+		while (i < meta->nbr_philos)
+		{
+			if (waitpid(meta->philos[i].pid, &state, WNOHANG) == 0)
+				all_finished = 0;
+			if (WIFEXITED(state) && WEXITSTATUS(state) == DEATH_EXIT)
+			{
+				kill_children(meta);
+				return ;
+			}
+			i++;
+		}
+		if (all_finished)
+			return ;
+	}
+}
+
+t_thread_args	*setup_args(t_meta *meta)
+{
+	t_thread_args	*args;
+
+	args = malloc(meta->nbr_philos * sizeof(args));
+	if (!args)
+	{
+		free(meta->philos);
+		wrexit("was not able to allocate needed memory space!");
+	}
+	return (args);
+}
+
 int	main(int ac, char **av)
 {
 	t_meta			meta;
-	int				i;
+	t_thread_args	*args;
 
 	init_meta(&meta, ac, av);
-	i = 0;
-	while (i < meta.nbr_philos)
-	{
-		meta.philos[i].pid = fork();
-		if (!meta.philos[i].pid)
-		{
-			routine(i, &meta);
-			exit(0);
-		}
-		i++;
-	}
-	monitor_threads(&meta);
+	args = setup_args(&meta);
+	setup_forks(&meta, args);
+	launch_children(&meta);
+	wait_children(&meta);
 	sem_clear(&meta);
 	free(meta.philos);
+	free(args);
 	exit(0);
 }

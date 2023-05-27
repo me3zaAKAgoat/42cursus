@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:41 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/26 19:49:56 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/27 05:22:54 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <semaphore.h>
 # include <signal.h>
 
+
+# define DEATH_EXIT 42
+
 typedef long long	t_msecond;
 
 typedef enum state {TAKING_FORK, EATING,\
@@ -31,6 +34,7 @@ typedef enum state {TAKING_FORK, EATING,\
 typedef struct s_philosopher
 {
 	int				philo_id;
+	pthread_t		thread_id;
 	pid_t			pid;
 	t_msecond		last_ate_at;
 	int				meals_count;
@@ -68,6 +72,8 @@ extern void				msleep(t_msecond wait_time);
 extern void				inform_state(t_meta	*meta, t_state state, int philo_id);
 extern t_philosopher	*init_philos(t_meta *meta);
 extern void				kill_children(t_meta *meta);
-extern void				routine(int philo_id, t_meta *meta);
+extern void				*routine(void *ptr);
+extern void				setup_forks(t_meta *meta, t_thread_args *args);
+extern void				launch_children(t_meta *meta);
 
 #endif

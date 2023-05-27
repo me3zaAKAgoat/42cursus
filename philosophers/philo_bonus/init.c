@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:51:57 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/26 19:40:08 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/27 03:43:56 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ t_philosopher	*init_philos(t_meta *meta)
 	return (philos);
 }
 
+void	init_sems(t_meta *meta)
+{
+	sem_unlink("/forks");
+	sem_unlink("/death_lock");
+	sem_unlink("/sync");
+	meta->forks = sem_open("/forks", O_CREAT, 777, meta->nbr_philos);
+	meta->death_lock = sem_open("/death_lock", O_CREAT, 777, 1);
+	meta->sync = sem_open("/sync", O_CREAT, 777, 0);
+}
+
 void	init_meta(t_meta *meta, int ac, char **av)
 {
 	if (ac < 5 || ac > 6)
@@ -41,12 +51,7 @@ void	init_meta(t_meta *meta, int ac, char **av)
 	meta->time_die = ft_atoi(av[2]);
 	meta->time_eat = ft_atoi(av[3]);
 	meta->time_sleep = ft_atoi(av[4]);
-	sem_unlink("/forks");
-	sem_unlink("/death_lock");
-	sem_unlink("/sync");
-	meta->forks = sem_open("/forks", O_CREAT, 777, meta->nbr_philos);
-	meta->death_lock = sem_open("/death_lock", O_CREAT, 777, 1);
-	meta->sync = sem_open("/sync", O_CREAT, 777, 0);
+	init_sems(meta);
 	if (ac == 6)
 	{
 		meta->meal_threshold = ft_atoi(av[5]);
@@ -60,4 +65,6 @@ void	init_meta(t_meta *meta, int ac, char **av)
 			wrexit("abnormal input was given!");
 	}
 	meta->philos = init_philos(meta);
+	if (!meta->philos)
+		wrexit("could not allocate needed memory space");
 }
