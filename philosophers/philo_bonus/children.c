@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:56:17 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/27 05:34:11 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/27 05:47:14 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	setup_forks(t_meta *meta, t_thread_args *args)
 		meta->philos[i].pid = fork();
 		if (!meta->philos[i].pid)
 		{
-			if (pthread_create(&meta->philos[i].thread_id, NULL, routine, args + i))
+			if (pthread_create(&meta->philos[i].thread_id,
+					NULL, routine, args + i))
 				wrexit("thread creation failed");
 			if (pthread_detach(meta->philos[i].thread_id))
 				wrexit("thread detachement failed");

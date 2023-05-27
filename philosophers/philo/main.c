@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:45 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/27 05:41:07 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/27 05:46:02 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,31 +59,39 @@ t_thread_args	*setup_args(t_meta *meta)
 	return (thread_args);
 }
 
-int	main(int ac, char **av)
+int	setup_threads(t_meta *meta, t_thread_args *args)
 {
-	t_meta			meta;
-	t_thread_args	*thread_args;
-	int				i;
+	int	i;
 
-	if (init_meta(&meta, ac, av))
-		return (1);
-	thread_args = setup_args(&meta);
-	if (!thread_args)
-		msg_quit("was not able to allocate needed memory space!");
 	i = 0;
-	while (i < meta.nbr_philos)
+	while (i < meta->nbr_philos)
 	{
-		thread_args[i].philo_id = i;
-		thread_args[i].meta = &meta;
-		if (pthread_create(&meta.philos[i].thread_id,
-				NULL, routine, thread_args + i))
+		args[i].philo_id = i;
+		args[i].meta = meta;
+		if (pthread_create(&meta->philos[i].thread_id,
+				NULL, routine, args + i))
 			msg_quit("creation of a thread failed");
-		if (pthread_detach(meta.philos[i].thread_id))
+		if (pthread_detach(meta->philos[i].thread_id))
 			msg_quit("detachement of a thread failed");
 		i++;
 	}
+	return (0);
+}
+
+int	main(int ac, char **av)
+{
+	t_meta			meta;
+	t_thread_args	*args;
+
+	if (init_meta(&meta, ac, av))
+		return (1);
+	args = setup_args(&meta);
+	if (!args)
+		msg_quit("was not able to allocate needed memory space!");
+	if (setup_threads(&meta, args))
+		return (1);
 	monitor_threads(&meta);
-	free(thread_args);
+	free(args);
 	mutex_clear(&meta);
 	free(meta.philos);
 	return (0);

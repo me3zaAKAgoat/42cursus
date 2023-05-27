@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:41 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/27 05:22:54 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/27 05:46:29 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <fcntl.h>
 # include <semaphore.h>
 # include <signal.h>
-
 
 # define DEATH_EXIT 42
 
