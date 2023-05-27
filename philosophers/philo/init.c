@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:51:57 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/23 02:52:33 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/26 23:29:43 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_philosopher	*init_philos(t_meta *meta)
 	i = 0;
 	philos = malloc(meta->nbr_philos * sizeof(t_philosopher));
 	if (!philos)
-		wrexit("was not able to allocated needed memory space!");
+		return (NULL);
 	while (i < meta->nbr_philos)
 	{
 		pthread_mutex_init(&philos[i].fork, NULL);
@@ -33,10 +33,10 @@ t_philosopher	*init_philos(t_meta *meta)
 	return (philos);
 }
 
-void	init_meta(t_meta *meta, int ac, char **av)
+int	init_meta(t_meta *meta, int ac, char **av)
 {
 	if (ac < 5 || ac > 6)
-		wrexit("abnormal input was given!");
+		msg_quit("abnormal input was given!");
 	meta->program_start = get_time();
 	meta->nbr_philos = ft_atoi(av[1]);
 	meta->time_die = ft_atoi(av[2]);
@@ -47,13 +47,16 @@ void	init_meta(t_meta *meta, int ac, char **av)
 	{
 		meta->meal_threshold = ft_atoi(av[5]);
 		if (meta->nbr_philos * meta->time_die * meta->meal_threshold < 0)
-			wrexit("abnormal input was given!");
+			msg_quit("abnormal input was given!");
 	}
 	else
 	{
 		meta->meal_threshold = -1;
 		if (meta->nbr_philos * meta->time_die < 0)
-			wrexit("abnormal input was given!");
+			msg_quit("abnormal input was given!");
 	}
 	meta->philos = init_philos(meta);
+	if (!meta->philos)
+		msg_quit("was not able to allocate needed memory space!");
+	return (0);
 }

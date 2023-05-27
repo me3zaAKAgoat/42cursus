@@ -1,2 +1,3 @@
 - protect all functions that can fail!
-- remove exit function from mandatory
+- handle failure of sem functions
+- fix -fsanitize issues and warnings in mandatory

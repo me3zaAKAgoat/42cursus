@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:25:42 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/23 02:52:33 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:16:29 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	inform_state(t_meta	*meta, t_state state, int philo_id)
 	pthread_mutex_unlock(&meta->death_lock);
 }
 
-void	wrexit(char *str)
+int	msg_quit(char *str)
 {
 	write(2, str, ft_strlen(str));
-	exit(1);
+	return (1);
 }
