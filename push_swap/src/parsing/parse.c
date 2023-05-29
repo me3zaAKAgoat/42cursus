@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:23:19 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/20 01:39:43 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/29 08:45:23 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ char	*join_words(char **words, char *sep)
 	while (words[i])
 	{
 		if (i != 0)
-			builder += ft_strlcpy(builder, sep, result_len + 1);
-		builder += ft_strlcpy(builder, words[i], result_len + 1);
+			builder += ft_strlcpy(builder, sep, result_len);
+		builder += ft_strlcpy(builder, words[i], result_len);
 		i++;
 	}
-	result[result_len] = 0;
+	*builder = 0;
 	return (result);
 }
 
