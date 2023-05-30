@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:35:29 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/30 13:17:25 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:24:19 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ int	reached_meal_threshold(t_meta *meta, int philo_id)
 		&& meta->philos[philo_id].meals_count >= meta->meal_threshold);
 }
 
+void	set_finished(t_meta *meta, int philo_id)
+{
+	pthread_mutex_lock(&meta->sync);
+	meta->philos[philo_id].finished = 1;
+	pthread_mutex_unlock(&meta->sync);
+}
 void	*routine(void	*ptr)
 {
 	t_meta	*meta;
@@ -45,11 +51,9 @@ void	*routine(void	*ptr)
 		pthread_mutex_unlock(&meta->philos[philo_id].fork);
 		pthread_mutex_unlock(
 			&meta->philos[(philo_id + 1) % meta->nbr_philos].fork);
-		pthread_mutex_lock(&meta->sync);
 		if (reached_meal_threshold(meta, philo_id))
-			return (meta->philos[philo_id].finished = 1,
+			return (set_finished(meta, philo_id),
 				inform_state(meta, FINISHED, philo_id), NULL);
-		pthread_mutex_unlock(&meta->sync);
 		inform_state(meta, SLEEPING, philo_id);
 		msleep(meta->time_sleep);
 		inform_state(meta, THINKING, philo_id);
