@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:35:29 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/26 23:29:33 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:17:25 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,17 @@ void	*routine(void	*ptr)
 	{
 		take_forks(meta, philo_id);
 		inform_state(meta, EATING, philo_id);
-		msleep(meta->time_eat);
 		meta->philos[philo_id].last_ate_at = get_time();
+		msleep(meta->time_eat);
 		meta->philos[philo_id].meals_count++;
 		pthread_mutex_unlock(&meta->philos[philo_id].fork);
 		pthread_mutex_unlock(
 			&meta->philos[(philo_id + 1) % meta->nbr_philos].fork);
+		pthread_mutex_lock(&meta->sync);
 		if (reached_meal_threshold(meta, philo_id))
 			return (meta->philos[philo_id].finished = 1,
 				inform_state(meta, FINISHED, philo_id), NULL);
+		pthread_mutex_unlock(&meta->sync);
 		inform_state(meta, SLEEPING, philo_id);
 		msleep(meta->time_sleep);
 		inform_state(meta, THINKING, philo_id);
