@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:51:57 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/26 23:29:43 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:15:09 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	init_meta(t_meta *meta, int ac, char **av)
 	meta->time_eat = ft_atoi(av[3]);
 	meta->time_sleep = ft_atoi(av[4]);
 	pthread_mutex_init(&meta->death_lock, NULL);
+	pthread_mutex_init(&meta->sync, NULL);
 	if (ac == 6)
 	{
 		meta->meal_threshold = ft_atoi(av[5]);

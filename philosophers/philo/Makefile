@@ -1,6 +1,6 @@
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+# CFLAGS = -Wall -Wextra -Werror
 NAME = philo
 
 HEADERS = philo.h

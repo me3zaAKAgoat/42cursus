@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:41 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/26 17:35:56 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:11:23 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_meta
 	t_msecond		program_start;
 	t_philosopher	*philos;
 	pthread_mutex_t	death_lock;
+	pthread_mutex_t	sync;
 }	t_meta;
 
 typedef struct s_thread_args
