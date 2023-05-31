@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:23:19 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/29 08:45:23 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/29 08:49:53 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,25 @@ t_node	*create_ll_from_string(char *str, int is_heap)
 char	*join_words(char **words, char *sep)
 {
 	int		i;
-	int		result_len;
+	int		result_size;
 	char	*result;
 	char	*builder;
 
 	i = 0;
-	result_len = 0;
+	result_size = 0;
 	while (words[i])
-		result_len += ft_strlen(words[i++]);
-	result_len += (i - 1) * ft_strlen(sep) + 1;
-	result = malloc(result_len * sizeof(char));
+		result_size += ft_strlen(words[i++]);
+	result_size += (i - 1) * ft_strlen(sep) + 1;
+	result = malloc(result_size * sizeof(char));
 	if (!result)
 		return (NULL);
 	builder = result;
 	i = 0;
 	while (words[i])
 	{
-		if (i != 0)
-			builder += ft_strlcpy(builder, sep, result_len);
-		builder += ft_strlcpy(builder, words[i], result_len);
+		if (i > 0)
+			builder += ft_strlcpy(builder, sep, result_size);
+		builder += ft_strlcpy(builder, words[i], result_size);
 		i++;
 	}
 	*builder = 0;

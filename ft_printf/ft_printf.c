@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:44:20 by echoukri          #+#    #+#             */
-/*   Updated: 2022/11/21 15:04:01 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/29 02:47:51 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,3 @@ int	ft_printf(const char *s, ...)
 	va_end(args);
 	return (charprint_count);
 }
-
-// int	main()
-// {
-// 	char *ptr = "trollege";
-// 	int		i = -53;
-// 	unsigned int ui = 4294967295;
-// 	int x = ;
-
-// 	printf("character: %c pointer in hexa: %p string pointed to:
-//  %s decimal: %d %i unsigned decimal: %u hexadecimal 
-//  : %x heXadecimal : %X\n", 'X', ptr, ptr, i, i, ui, x, x);
-// // 	ft_printf("character: %c pointer in hexa: %p 
-// string pointed to: %s decimal: %d %i unsigned decimal: %u 
-// hexadecimal : %x heXadecimal : %X\n", 'X', ptr, ptr, i, i, ui, x, x);
-
-// 	return 0;
-// }
