@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:41 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/27 05:46:29 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:38:26 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct s_meta
 	t_msecond		program_start;
 	t_philosopher	*philos;
 	sem_t			*forks;
-	sem_t			*death_lock;
 	sem_t			*sync;
+	sem_t			*death_lock;
 }	t_meta;
 
 typedef struct s_thread_args
@@ -60,6 +60,7 @@ typedef struct s_thread_args
 	int		philo_id;
 }	t_thread_args;
 
+extern int				is_alive(pid_t pid, int	*state_p);
 extern int				ft_atoi(const char *str);
 extern t_msecond		get_time(void);
 extern t_msecond		timestamp(t_meta	*meta);

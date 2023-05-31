@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:35:29 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/27 03:47:34 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:35:17 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@ int	reached_meal_threshold(t_meta *meta, int philo_id)
 		&& meta->philos[philo_id].meals_count >= meta->meal_threshold);
 }
 
-void	sync_setup(t_meta *meta, int philo_id)
+void	set_finished(t_meta *meta, int philo_id)
 {
 	sem_wait(meta->sync);
-	meta->program_start = get_time();
-	if (philo_id % 2 == 0)
-		msleep(1);
-	meta->philos[philo_id].last_ate_at = get_time();
+	meta->philos[philo_id].finished = 1;
+	sem_post(meta->sync);
 }
 
 void	*routine(void *ptr)
@@ -42,7 +40,9 @@ void	*routine(void *ptr)
 
 	meta = ((t_thread_args *)ptr)->meta;
 	philo_id = ((t_thread_args *)ptr)->philo_id;
-	sync_setup(meta, philo_id);
+	if (philo_id % 2 == 0)
+		msleep(1);
+	meta->philos[philo_id].last_ate_at = get_time();
 	while (1)
 	{
 		take_forks(meta, philo_id);
@@ -53,7 +53,7 @@ void	*routine(void *ptr)
 		sem_post(meta->forks);
 		sem_post(meta->forks);
 		if (reached_meal_threshold(meta, philo_id))
-			return (meta->philos[philo_id].finished = 1,
+			return (set_finished(meta, philo_id),
 				inform_state(meta, FINISHED, philo_id), NULL);
 		inform_state(meta, SLEEPING, philo_id);
 		msleep(meta->time_sleep);

@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:51:57 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/27 03:43:56 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:45:09 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	init_sems(t_meta *meta)
 	sem_unlink("/sync");
 	meta->forks = sem_open("/forks", O_CREAT, 777, meta->nbr_philos);
 	meta->death_lock = sem_open("/death_lock", O_CREAT, 777, 1);
-	meta->sync = sem_open("/sync", O_CREAT, 777, 0);
+	meta->sync = sem_open("/sync", O_CREAT, 777, 1);
 }
 
 void	init_meta(t_meta *meta, int ac, char **av)

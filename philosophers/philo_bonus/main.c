@@ -6,17 +6,19 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:45 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/27 05:40:20 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:45:34 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	sem_clear(t_meta *meta)
+void	clean_up(t_meta *meta, t_thread_args *args)
 {
 	sem_close(meta->forks);
 	sem_close(meta->death_lock);
 	sem_close(meta->sync);
+	free(meta->philos);
+	free(args);
 }
 
 void	wait_children(t_meta *meta)
@@ -31,7 +33,7 @@ void	wait_children(t_meta *meta)
 		all_finished = 1;
 		while (i < meta->nbr_philos)
 		{
-			if (waitpid(meta->philos[i].pid, &state, WNOHANG) == 0)
+			if (is_alive(meta->philos[i].pid, &state))
 				all_finished = 0;
 			if (WIFEXITED(state) && WEXITSTATUS(state) == DEATH_EXIT)
 			{
@@ -66,10 +68,7 @@ int	main(int ac, char **av)
 	init_meta(&meta, ac, av);
 	args = setup_args(&meta);
 	setup_forks(&meta, args);
-	launch_children(&meta);
 	wait_children(&meta);
-	sem_clear(&meta);
-	free(meta.philos);
-	free(args);
+	clean_up(&meta, args);
 	exit(0);
 }
