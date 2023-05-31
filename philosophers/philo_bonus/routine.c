@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:35:29 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/31 18:35:17 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/31 19:51:30 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,17 @@ void	*routine(void *ptr)
 	philo_id = ((t_thread_args *)ptr)->philo_id;
 	if (philo_id % 2 == 0)
 		msleep(1);
+	sem_wait(meta->sync);
 	meta->philos[philo_id].last_ate_at = get_time();
+	sem_post(meta->sync);
 	while (1)
 	{
 		take_forks(meta, philo_id);
 		inform_state(meta, EATING, philo_id);
-		msleep(meta->time_eat);
+		sem_wait(meta->sync);
 		meta->philos[philo_id].last_ate_at = get_time();
+		sem_post(meta->sync);
+		msleep(meta->time_eat);
 		meta->philos[philo_id].meals_count++;
 		sem_post(meta->forks);
 		sem_post(meta->forks);

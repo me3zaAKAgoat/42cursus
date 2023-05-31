@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:35:29 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/30 13:24:19 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:34:11 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	set_finished(t_meta *meta, int philo_id)
 	meta->philos[philo_id].finished = 1;
 	pthread_mutex_unlock(&meta->sync);
 }
+
 void	*routine(void	*ptr)
 {
 	t_meta	*meta;

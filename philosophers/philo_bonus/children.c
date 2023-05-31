@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:56:17 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/31 18:36:15 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/05/31 19:44:55 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@ int	is_alive(pid_t pid, int	*state_p)
 	return (waitpid(pid, state_p, WNOHANG) == 0);
 }
 
-void	kill_children(t_meta *meta)
-{
-	int	i;
-
-	i = 0;
-	while (i < meta->nbr_philos)
-		kill(meta->philos[i++].pid, SIGKILL);
-}
-
 int	is_finished(t_meta *meta, int philo_id)
 {
 	sem_wait(meta->sync);
@@ -34,11 +25,20 @@ int	is_finished(t_meta *meta, int philo_id)
 	return (sem_post(meta->sync), 0);
 }
 
+int	is_dead(t_meta *meta, int philo_id)
+{
+	sem_wait(meta->sync);
+	if (get_time() - meta->philos[philo_id].last_ate_at > meta->time_die)
+		return (sem_post(meta->sync), 1);
+	return (sem_post(meta->sync), 0);
+	
+}
+
 void	monitor_thread(t_meta *meta, int philo_id)
 {
 	while (!is_finished(meta, philo_id))
 	{
-		if (get_time() - meta->philos[philo_id].last_ate_at > meta->time_die)
+		if (is_dead(meta, philo_id))
 		{
 			inform_state(meta, DIED, philo_id);
 			sem_wait(meta->death_lock);
