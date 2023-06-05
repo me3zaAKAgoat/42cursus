@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:45 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/31 18:43:25 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/06/05 09:14:30 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	monitor_threads(t_meta *meta)
 	int	i;
 	int	all_finished;
 
-	while (1)
+	all_finished = 0;
+	while (!all_finished)
 	{
 		i = 0;
 		all_finished = 1;
@@ -30,15 +31,13 @@ void	monitor_threads(t_meta *meta)
 				&& get_time() - meta->philos[i].last_ate_at > meta->time_die)
 			{
 				inform_state(meta, DIED, i);
-				pthread_mutex_unlock(&meta->sync);
 				pthread_mutex_lock(&meta->death_lock);
+				pthread_mutex_unlock(&meta->sync);
 				return ;
 			}
 			pthread_mutex_unlock(&meta->sync);
 			i++;
 		}
-		if (all_finished)
-			return ;
 	}
 }
 

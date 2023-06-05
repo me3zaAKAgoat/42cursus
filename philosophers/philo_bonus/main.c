@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:45 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/31 18:45:34 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/06/05 09:17:55 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	wait_children(t_meta *meta)
 	int	i;
 	int	all_finished;
 
-	while (1)
+	all_finished = 0;
+	while (!all_finished)
 	{
 		i = 0;
 		all_finished = 1;
@@ -36,14 +37,9 @@ void	wait_children(t_meta *meta)
 			if (is_alive(meta->philos[i].pid, &state))
 				all_finished = 0;
 			if (WIFEXITED(state) && WEXITSTATUS(state) == DEATH_EXIT)
-			{
-				kill_children(meta);
-				return ;
-			}
+				return (kill_children(meta));
 			i++;
 		}
-		if (all_finished)
-			return ;
 	}
 }
 
