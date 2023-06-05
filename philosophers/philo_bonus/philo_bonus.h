@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:41 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/31 18:38:26 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:10:01 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ extern void				kill_children(t_meta *meta);
 extern void				*routine(void *ptr);
 extern void				setup_forks(t_meta *meta, t_thread_args *args);
 extern void				launch_children(t_meta *meta);
+extern void				init_sems(t_meta *meta);
 
 #endif

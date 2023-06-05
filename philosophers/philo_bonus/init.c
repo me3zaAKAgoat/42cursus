@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:51:57 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/31 18:45:09 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:09:21 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,38 +32,65 @@ t_philosopher	*init_philos(t_meta *meta)
 	return (philos);
 }
 
-void	init_sems(t_meta *meta)
+int	is_number(char *str)
 {
-	sem_unlink("/forks");
-	sem_unlink("/death_lock");
-	sem_unlink("/sync");
-	meta->forks = sem_open("/forks", O_CREAT, 777, meta->nbr_philos);
-	meta->death_lock = sem_open("/death_lock", O_CREAT, 777, 1);
-	meta->sync = sem_open("/sync", O_CREAT, 777, 1);
+	int	i;
+
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	if (!str[i])
+		return (0);
+	while (str[i])
+	{
+		if (!(48 <= str[i] && str[i] <= 57))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	set_values(t_meta *meta, char **av)
+{
+	meta->program_start = get_time();
+	meta->nbr_philos = ft_atoi(av[1]);
+	meta->time_die = ft_atoi(av[2]);
+	meta->time_eat = ft_atoi(av[3]);
+	meta->time_sleep = ft_atoi(av[4]);
+}
+
+int	invalid_values(t_meta *meta, int ac)
+{
+	if (ac == 6)
+	{
+		if (meta->nbr_philos * meta->meal_threshold * meta->time_die
+			* meta->time_sleep * meta->time_eat <= 0)
+			return (1);
+	}
+	else
+	{
+		if (meta->nbr_philos * meta->time_die
+			* meta->time_sleep * meta->time_eat <= 0)
+			return (1);
+	}
+	return (0);
 }
 
 void	init_meta(t_meta *meta, int ac, char **av)
 {
 	if (ac < 5 || ac > 6)
 		wrexit("abnormal input was given!");
-	meta->program_start = get_time();
-	meta->nbr_philos = ft_atoi(av[1]);
-	meta->time_die = ft_atoi(av[2]);
-	meta->time_eat = ft_atoi(av[3]);
-	meta->time_sleep = ft_atoi(av[4]);
+	if (!is_number(av[1]) || !is_number(av[2])
+		|| !is_number(av[3]) || !is_number(av[4]))
+		wrexit("abnormal input was given!");
+	set_values(meta, av);
 	init_sems(meta);
 	if (ac == 6)
-	{
 		meta->meal_threshold = ft_atoi(av[5]);
-		if (meta->nbr_philos * meta->time_die * meta->meal_threshold < 0)
-			wrexit("abnormal input was given!");
-	}
 	else
-	{
 		meta->meal_threshold = -1;
-		if (meta->nbr_philos * meta->time_die < 0)
-			wrexit("abnormal input was given!");
-	}
+	if (invalid_values(meta, ac))
+		wrexit("abnormal input was given!");
 	meta->philos = init_philos(meta);
 	if (!meta->philos)
 		wrexit("could not allocate needed memory space");
