@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:56:17 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/31 19:44:55 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/06/05 09:11:30 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	is_dead(t_meta *meta, int philo_id)
 	if (get_time() - meta->philos[philo_id].last_ate_at > meta->time_die)
 		return (sem_post(meta->sync), 1);
 	return (sem_post(meta->sync), 0);
-	
 }
 
 void	monitor_thread(t_meta *meta, int philo_id)

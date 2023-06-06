@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:35:29 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/31 19:51:30 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/06/05 09:11:19 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ void	set_finished(t_meta *meta, int philo_id)
 	sem_post(meta->sync);
 }
 
+void	routine_init(t_meta *meta, int philo_id)
+{
+	if (philo_id % 2 == 0)
+		msleep(1);
+	sem_wait(meta->sync);
+	meta->philos[philo_id].last_ate_at = get_time();
+	sem_post(meta->sync);
+}
+
 void	*routine(void *ptr)
 {
 	t_meta	*meta;
@@ -40,11 +49,7 @@ void	*routine(void *ptr)
 
 	meta = ((t_thread_args *)ptr)->meta;
 	philo_id = ((t_thread_args *)ptr)->philo_id;
-	if (philo_id % 2 == 0)
-		msleep(1);
-	sem_wait(meta->sync);
-	meta->philos[philo_id].last_ate_at = get_time();
-	sem_post(meta->sync);
+	routine_init(meta, philo_id);
 	while (1)
 	{
 		take_forks(meta, philo_id);
