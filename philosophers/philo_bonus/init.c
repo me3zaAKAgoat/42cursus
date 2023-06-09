@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:51:57 by echoukri          #+#    #+#             */
-/*   Updated: 2023/06/05 16:09:21 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/06/09 06:52:37 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ int	invalid_values(t_meta *meta, int ac)
 {
 	if (ac == 6)
 	{
-		if (meta->nbr_philos * meta->meal_threshold * meta->time_die
-			* meta->time_sleep * meta->time_eat <= 0)
+		if (meta->nbr_philos <= 0 || meta->meal_threshold <= 0 || meta->time_die
+			<= 0 || meta->time_sleep <= 0 || meta->time_eat <= 0)
 			return (1);
 	}
 	else
 	{
-		if (meta->nbr_philos * meta->time_die
-			* meta->time_sleep * meta->time_eat <= 0)
+		if (meta->nbr_philos <= 0 || meta->time_die
+			<= 0 || meta->time_sleep <= 0 || meta->time_eat <= 0)
 			return (1);
 	}
 	return (0);
