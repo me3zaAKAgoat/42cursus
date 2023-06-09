@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:45 by echoukri          #+#    #+#             */
-/*   Updated: 2023/06/05 09:14:30 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:49:34 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,15 @@ void	monitor_threads(t_meta *meta)
 		all_finished = 1;
 		while (i < meta->nbr_philos)
 		{
-			pthread_mutex_lock(&meta->sync);
-			if (!meta->philos[i].finished)
+			if (!is_finished(meta, i))
 				all_finished = 0;
-			if (!meta->philos[i].finished
-				&& get_time() - meta->philos[i].last_ate_at > meta->time_die)
+			if (!is_finished(meta, i)
+				&& is_dead(meta, i))
 			{
 				inform_state(meta, DIED, i);
 				pthread_mutex_lock(&meta->death_lock);
-				pthread_mutex_unlock(&meta->sync);
 				return ;
 			}
-			pthread_mutex_unlock(&meta->sync);
 			i++;
 		}
 	}

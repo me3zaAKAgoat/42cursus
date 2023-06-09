@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:41 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/30 13:11:23 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:47:17 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_philosopher
 	int				philo_id;
 	pthread_t		thread_id;
 	pthread_mutex_t	fork;
+	pthread_mutex_t	last_ate_lock;
+	pthread_mutex_t	finished_lock;
 	t_msecond		last_ate_at;
 	int				meals_count;
 	int				finished;
@@ -43,7 +45,6 @@ typedef struct s_meta
 	t_msecond		program_start;
 	t_philosopher	*philos;
 	pthread_mutex_t	death_lock;
-	pthread_mutex_t	sync;
 }	t_meta;
 
 typedef struct s_thread_args
@@ -64,5 +65,7 @@ extern void				msleep(t_msecond wait_time);
 extern void				inform_state(t_meta	*meta, t_state state, int philo_id);
 extern t_philosopher	*init_philos(t_meta *meta);
 extern void				*routine(void	*ptr);
+extern int				is_finished(t_meta *meta, int philo_id);
+extern int				is_dead(t_meta *meta, int philo_id);
 
 #endif
