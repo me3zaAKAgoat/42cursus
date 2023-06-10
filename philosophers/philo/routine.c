@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:35:29 by echoukri          #+#    #+#             */
-/*   Updated: 2023/05/31 18:34:11 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:37:04 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,16 @@ int	reached_meal_threshold(t_meta *meta, int philo_id)
 
 void	set_finished(t_meta *meta, int philo_id)
 {
-	pthread_mutex_lock(&meta->sync);
+	pthread_mutex_lock(&meta->philos[philo_id].finished_lock);
 	meta->philos[philo_id].finished = 1;
-	pthread_mutex_unlock(&meta->sync);
+	pthread_mutex_unlock(&meta->philos[philo_id].finished_lock);
+}
+
+void	set_last_ate(t_meta *meta, int philo_id)
+{
+	pthread_mutex_lock(&meta->philos[philo_id].last_ate_lock);
+	meta->philos[philo_id].last_ate_at = get_time();
+	pthread_mutex_unlock(&meta->philos[philo_id].last_ate_lock);
 }
 
 void	*routine(void	*ptr)
@@ -46,7 +53,7 @@ void	*routine(void	*ptr)
 	{
 		take_forks(meta, philo_id);
 		inform_state(meta, EATING, philo_id);
-		meta->philos[philo_id].last_ate_at = get_time();
+		set_last_ate(meta, philo_id);
 		msleep(meta->time_eat);
 		meta->philos[philo_id].meals_count++;
 		pthread_mutex_unlock(&meta->philos[philo_id].fork);

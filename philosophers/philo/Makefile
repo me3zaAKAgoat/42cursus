@@ -1,11 +1,11 @@
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g
+# CFLAGS = -Wall -Wextra -Werror
 NAME = philo
 
 HEADERS = philo.h
 
-SOURCES = main.c ft_atoi.c util.c ft_strlen.c init.c routine.c
+SOURCES = main.c ft_atoi.c util.c  util2.c ft_strlen.c init.c routine.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

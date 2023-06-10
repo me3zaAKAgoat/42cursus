@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:51:57 by echoukri          #+#    #+#             */
-/*   Updated: 2023/06/09 06:51:57 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:34:44 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_philosopher	*init_philos(t_meta *meta)
 	while (i < meta->nbr_philos)
 	{
 		pthread_mutex_init(&philos[i].fork, NULL);
+		pthread_mutex_init(&philos[i].finished_lock, NULL);
+		pthread_mutex_init(&philos[i].last_ate_lock, NULL);
 		philos[i].last_ate_at = get_time();
 		philos[i].meals_count = 0;
 		philos[i].philo_id = i;
@@ -86,7 +88,6 @@ int	init_meta(t_meta *meta, int ac, char **av)
 		return (msg_quit("abnormal input was given!"), 1);
 	set_values(meta, av);
 	pthread_mutex_init(&meta->death_lock, NULL);
-	pthread_mutex_init(&meta->sync, NULL);
 	if (ac == 6)
 		meta->meal_threshold = ft_atoi(av[5]);
 	else
