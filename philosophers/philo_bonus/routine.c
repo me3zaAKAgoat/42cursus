@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:35:29 by echoukri          #+#    #+#             */
-/*   Updated: 2023/06/05 09:11:19 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/06/10 10:19:04 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@ int	reached_meal_threshold(t_meta *meta, int philo_id)
 
 void	set_finished(t_meta *meta, int philo_id)
 {
-	sem_wait(meta->sync);
+	 
 	meta->philos[philo_id].finished = 1;
-	sem_post(meta->sync);
+	 
 }
 
 void	routine_init(t_meta *meta, int philo_id)
 {
 	if (philo_id % 2 == 0)
 		msleep(1);
-	sem_wait(meta->sync);
+	 
 	meta->philos[philo_id].last_ate_at = get_time();
-	sem_post(meta->sync);
+	 
 }
 
 void	*routine(void *ptr)
@@ -54,9 +54,9 @@ void	*routine(void *ptr)
 	{
 		take_forks(meta, philo_id);
 		inform_state(meta, EATING, philo_id);
-		sem_wait(meta->sync);
+		 
 		meta->philos[philo_id].last_ate_at = get_time();
-		sem_post(meta->sync);
+		 
 		msleep(meta->time_eat);
 		meta->philos[philo_id].meals_count++;
 		sem_post(meta->forks);

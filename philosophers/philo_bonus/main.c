@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:45 by echoukri          #+#    #+#             */
-/*   Updated: 2023/06/05 09:17:55 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/06/10 10:19:54 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	clean_up(t_meta *meta, t_thread_args *args)
 {
 	sem_close(meta->forks);
 	sem_close(meta->death_lock);
-	sem_close(meta->sync);
 	free(meta->philos);
 	free(args);
 }
