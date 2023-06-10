@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:35:29 by echoukri          #+#    #+#             */
-/*   Updated: 2023/06/09 14:37:04 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/06/10 10:42:37 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ void	*routine(void	*ptr)
 		pthread_mutex_unlock(
 			&meta->philos[(philo_id + 1) % meta->nbr_philos].fork);
 		if (reached_meal_threshold(meta, philo_id))
-			return (set_finished(meta, philo_id),
-				inform_state(meta, FINISHED, philo_id), NULL);
+			return (set_finished(meta, philo_id), NULL);
 		inform_state(meta, SLEEPING, philo_id);
 		msleep(meta->time_sleep);
 		inform_state(meta, THINKING, philo_id);

@@ -6,7 +6,7 @@
 /*   By: echoukri <echoukri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:21:41 by echoukri          #+#    #+#             */
-/*   Updated: 2023/06/09 14:47:17 by echoukri         ###   ########.fr       */
+/*   Updated: 2023/06/10 10:42:13 by echoukri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 typedef long long	t_msecond;
 
 typedef enum state {TAKING_FORK, EATING,\
-		SLEEPING, THINKING, FINISHED, DIED}	t_state;
+		SLEEPING, THINKING, DIED}	t_state;
 
 typedef struct s_philosopher
 {
